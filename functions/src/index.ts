@@ -63,7 +63,7 @@ exports.processSignUp = functions.auth.user().onCreate(async user => {
   
   const mutation = `
     mutation($id: String!, $email: String) {
-      insert_Users(objects: [{
+      insert_users(objects: [{
         id: $id,
         email: $email,
       }]) {
@@ -86,7 +86,7 @@ exports.processSignUp = functions.auth.user().onCreate(async user => {
 exports.processDelete = functions.auth.user().onDelete(async (user) => {
   const mutation = `
     mutation($id: String!) {
-      delete_Users(where: {id: {_eq: $id}}) {
+      delete_users(where: {id: {_eq: $id}}) {
         affected_rows
       }
     }
