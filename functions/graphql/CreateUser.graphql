@@ -1,0 +1,5 @@
+mutation CreateUser($id: String!, $email: String) {
+  insert_users(objects: [{ id: $id, email: $email }]) {
+    affected_rows
+  }
+}
