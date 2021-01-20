@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
-
-import { client } from './index';
+import { client } from './client';
+import { User_Achievement_Insert_Input } from './types';
 
 /**
  * JSON payload
@@ -24,58 +24,46 @@ import { client } from './index';
   }
 }
  */
-exports.achievementValidation =  functions.https.onRequest(async (req, res) => {
 
-  const { event: {op, data}, table } = req.body;
+type User_Achievement_InputType = {
+  achievement_id: number;
+  user_id: string;
+};
+
+exports.achievementValidation = functions.https.onRequest(async (req, res) => {
+  const {
+    event: { op, data },
+    table,
+  } = req.body;
   console.log('[AchievementTrigger]', req.body);
   if (op === 'INSERT' && table.name === 'activities' && table.schema === 'public') {
     const { user_id } = data.new;
 
-    // query 
-    const userQuery =  `
-    query($user_id: String!) {
-      users(where: {id: {_eq: $user_id}}) {
-        id
-        user_achievments {
-          achievment_id
-        }
-        activities {
-          activity_id
-          geofence {
-            id
-            category
-          }
-        }
-      }
-    }`;
+    // query
+    const queryData = await client.GetUserAndAchievements({ user_id });
+    const userAchievmentsArray: number[] = queryData.user_achievement.map((item) => item.achievement_id);
 
-    const user = await client.request(userQuery, { user_id });
+    //const achievmentsArray: User_Achievement_InputType[] =
 
-    // validation logic
-    console.log('[user]:', user);
-    // iterate on user acheievments
+    const unobtainedAchievments: User_Achievement_InputType[] = queryData.achievement
+      .map<User_Achievement_InputType>(({ id }) => {
+        return { achievement_id: id, user_id };
+      })
+      .filter(({ achievement_id }) => !userAchievmentsArray.includes(achievement_id));
 
-    const  achievment_id = 3;
-    
-    // do mutation
-    const userAchievmentMutation = `
-      mutation($achievment_id: Int!, $user_id: String!) {
-        insert_user_achievment(objects: [{
-          achievment_id: $achievment_id, 
-          user_id: $user_id
-        }]) {
-          affected_rows
-        }
-      }
-    `;
-    
-    await client.request(userAchievmentMutation, { achievment_id, user_id })     
-    .then((response) => {
-       console.log('[mutationResponse]:', response);
-    })
-    .catch((e) => {
-      throw new functions.https.HttpsError('invalid-argument', e.message)
-      }
-    );
+    // TODO validation logic
+
+    const objects: User_Achievement_Insert_Input[] = unobtainedAchievments;
+    console.log('[New Achievments]:', objects);
+    await client
+      .AddAchievement({ objects })
+      .then((response) => {
+        console.log('[mutationResponse]:', response);
+        return response;
+      })
+      .catch((e) => {
+        throw new functions.https.HttpsError('invalid-argument', e.message);
+      });
+    return;
   }
 });
