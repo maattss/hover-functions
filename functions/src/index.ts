@@ -49,7 +49,7 @@ exports.registerUser = functions.https.onCall(async (data) => {
 
 // Make sure you update the endpoint and the secret
 // You can find both these values on the Graphql tab in Hasura
-const client = new GraphQLClient( functions.config().hasura.graphql_api, {
+export const client = new GraphQLClient( functions.config().hasura.graphql_api, {
   headers: {
     "content-type": "application/json",
     "x-hasura-admin-secret": functions.config().hasura.graphql_admin_secret,
@@ -102,3 +102,5 @@ exports.processDelete = functions.auth.user().onDelete(async (user) => {
     }
   );
 });
+
+exports.triggers = require('./triggers');
