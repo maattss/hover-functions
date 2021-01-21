@@ -1,0 +1,27 @@
+overwrite: true
+schema: "./schema.json"
+documents: graphql/*.graphql
+hooks: 
+  - afterOneFileWrite: 'prettier --write'
+  - afterAllFileWrite: 'prettier --write'
+generates:
+  src/types.ts: 
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - 'typescript'
+      - 'typescript-graphql-request'
+      - "typescript-resolvers"
+      - "typescript-document-nodes"
+      - "typescript-operations"
+    config:
+      - skipTypename: true
+      - withHooks: true
+      - withHOC: false
+      - withComponent: false
+      - nonOptionalTypename: true
+      - withMutationFn: true
+      - withResultType: true
+      - withMutationOptionsType: true
+
+

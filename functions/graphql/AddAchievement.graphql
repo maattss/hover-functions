@@ -1,0 +1,5 @@
+mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
+  insert_user_achievement(objects: $objects) {
+    affected_rows
+  }
+}
