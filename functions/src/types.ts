@@ -16,6 +16,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   float8: any;
+  interval: any;
   timestamp: any;
   timestamptz: any;
 };
@@ -343,6 +344,7 @@ export type Activities = {
   /** An aggregated array relationship */
   comments_aggregate: Comments_Aggregate;
   created_at?: Maybe<Scalars['timestamptz']>;
+  duration: Scalars['interval'];
   /** An object relationship */
   geofence: Geofences;
   geofence_id: Scalars['Int'];
@@ -350,6 +352,10 @@ export type Activities = {
   likes: Array<Likes>;
   /** An aggregated array relationship */
   likes_aggregate: Likes_Aggregate;
+  score?: Maybe<Scalars['Int']>;
+  started_at: Scalars['timestamptz'];
+  /** A computed field, executes function "stopped_at" */
+  stopped_at?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   /** An object relationship */
   user: Users;
@@ -452,12 +458,14 @@ export type Activities_Avg_Fields = {
   __typename?: 'activities_avg_fields';
   activity_id?: Maybe<Scalars['Float']>;
   geofence_id?: Maybe<Scalars['Float']>;
+  score?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "activities" */
 export type Activities_Avg_Order_By = {
   activity_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "activities". All fields are combined with a logical 'AND'. */
@@ -469,9 +477,12 @@ export type Activities_Bool_Exp = {
   caption?: Maybe<String_Comparison_Exp>;
   comments?: Maybe<Comments_Bool_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  duration?: Maybe<Interval_Comparison_Exp>;
   geofence?: Maybe<Geofences_Bool_Exp>;
   geofence_id?: Maybe<Int_Comparison_Exp>;
   likes?: Maybe<Likes_Bool_Exp>;
+  score?: Maybe<Int_Comparison_Exp>;
+  started_at?: Maybe<Timestamptz_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
@@ -487,6 +498,7 @@ export enum Activities_Constraint {
 export type Activities_Inc_Input = {
   activity_id?: Maybe<Scalars['Int']>;
   geofence_id?: Maybe<Scalars['Int']>;
+  score?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "activities" */
@@ -495,9 +507,12 @@ export type Activities_Insert_Input = {
   caption?: Maybe<Scalars['String']>;
   comments?: Maybe<Comments_Arr_Rel_Insert_Input>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  duration?: Maybe<Scalars['interval']>;
   geofence?: Maybe<Geofences_Obj_Rel_Insert_Input>;
   geofence_id?: Maybe<Scalars['Int']>;
   likes?: Maybe<Likes_Arr_Rel_Insert_Input>;
+  score?: Maybe<Scalars['Int']>;
+  started_at?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
@@ -510,6 +525,8 @@ export type Activities_Max_Fields = {
   caption?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   geofence_id?: Maybe<Scalars['Int']>;
+  score?: Maybe<Scalars['Int']>;
+  started_at?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -520,6 +537,8 @@ export type Activities_Max_Order_By = {
   caption?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
+  started_at?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -531,6 +550,8 @@ export type Activities_Min_Fields = {
   caption?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   geofence_id?: Maybe<Scalars['Int']>;
+  score?: Maybe<Scalars['Int']>;
+  started_at?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -541,6 +562,8 @@ export type Activities_Min_Order_By = {
   caption?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
+  started_at?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -573,9 +596,12 @@ export type Activities_Order_By = {
   caption?: Maybe<Order_By>;
   comments_aggregate?: Maybe<Comments_Aggregate_Order_By>;
   created_at?: Maybe<Order_By>;
+  duration?: Maybe<Order_By>;
   geofence?: Maybe<Geofences_Order_By>;
   geofence_id?: Maybe<Order_By>;
   likes_aggregate?: Maybe<Likes_Aggregate_Order_By>;
+  score?: Maybe<Order_By>;
+  started_at?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user?: Maybe<Users_Order_By>;
   user_id?: Maybe<Order_By>;
@@ -595,7 +621,13 @@ export enum Activities_Select_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
+  Duration = 'duration',
+  /** column name */
   GeofenceId = 'geofence_id',
+  /** column name */
+  Score = 'score',
+  /** column name */
+  StartedAt = 'started_at',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -607,7 +639,10 @@ export type Activities_Set_Input = {
   activity_id?: Maybe<Scalars['Int']>;
   caption?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  duration?: Maybe<Scalars['interval']>;
   geofence_id?: Maybe<Scalars['Int']>;
+  score?: Maybe<Scalars['Int']>;
+  started_at?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -617,12 +652,14 @@ export type Activities_Stddev_Fields = {
   __typename?: 'activities_stddev_fields';
   activity_id?: Maybe<Scalars['Float']>;
   geofence_id?: Maybe<Scalars['Float']>;
+  score?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "activities" */
 export type Activities_Stddev_Order_By = {
   activity_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -630,12 +667,14 @@ export type Activities_Stddev_Pop_Fields = {
   __typename?: 'activities_stddev_pop_fields';
   activity_id?: Maybe<Scalars['Float']>;
   geofence_id?: Maybe<Scalars['Float']>;
+  score?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "activities" */
 export type Activities_Stddev_Pop_Order_By = {
   activity_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -643,12 +682,14 @@ export type Activities_Stddev_Samp_Fields = {
   __typename?: 'activities_stddev_samp_fields';
   activity_id?: Maybe<Scalars['Float']>;
   geofence_id?: Maybe<Scalars['Float']>;
+  score?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "activities" */
 export type Activities_Stddev_Samp_Order_By = {
   activity_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -656,12 +697,14 @@ export type Activities_Sum_Fields = {
   __typename?: 'activities_sum_fields';
   activity_id?: Maybe<Scalars['Int']>;
   geofence_id?: Maybe<Scalars['Int']>;
+  score?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "activities" */
 export type Activities_Sum_Order_By = {
   activity_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
 };
 
 /** update columns of table "activities" */
@@ -673,7 +716,13 @@ export enum Activities_Update_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
+  Duration = 'duration',
+  /** column name */
   GeofenceId = 'geofence_id',
+  /** column name */
+  Score = 'score',
+  /** column name */
+  StartedAt = 'started_at',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -685,12 +734,14 @@ export type Activities_Var_Pop_Fields = {
   __typename?: 'activities_var_pop_fields';
   activity_id?: Maybe<Scalars['Float']>;
   geofence_id?: Maybe<Scalars['Float']>;
+  score?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "activities" */
 export type Activities_Var_Pop_Order_By = {
   activity_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -698,12 +749,14 @@ export type Activities_Var_Samp_Fields = {
   __typename?: 'activities_var_samp_fields';
   activity_id?: Maybe<Scalars['Float']>;
   geofence_id?: Maybe<Scalars['Float']>;
+  score?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "activities" */
 export type Activities_Var_Samp_Order_By = {
   activity_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -711,12 +764,14 @@ export type Activities_Variance_Fields = {
   __typename?: 'activities_variance_fields';
   activity_id?: Maybe<Scalars['Float']>;
   geofence_id?: Maybe<Scalars['Float']>;
+  score?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "activities" */
 export type Activities_Variance_Order_By = {
   activity_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
+  score?: Maybe<Order_By>;
 };
 
 /** columns and relationships of "categories" */
@@ -724,6 +779,7 @@ export type Categories = {
   __typename?: 'categories';
   description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  points_per_minute: Scalars['Int'];
 };
 
 /** aggregated selection of "categories" */
@@ -736,9 +792,17 @@ export type Categories_Aggregate = {
 /** aggregate fields of "categories" */
 export type Categories_Aggregate_Fields = {
   __typename?: 'categories_aggregate_fields';
+  avg?: Maybe<Categories_Avg_Fields>;
   count?: Maybe<Scalars['Int']>;
   max?: Maybe<Categories_Max_Fields>;
   min?: Maybe<Categories_Min_Fields>;
+  stddev?: Maybe<Categories_Stddev_Fields>;
+  stddev_pop?: Maybe<Categories_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Categories_Stddev_Samp_Fields>;
+  sum?: Maybe<Categories_Sum_Fields>;
+  var_pop?: Maybe<Categories_Var_Pop_Fields>;
+  var_samp?: Maybe<Categories_Var_Samp_Fields>;
+  variance?: Maybe<Categories_Variance_Fields>;
 };
 
 
@@ -750,15 +814,34 @@ export type Categories_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "categories" */
 export type Categories_Aggregate_Order_By = {
+  avg?: Maybe<Categories_Avg_Order_By>;
   count?: Maybe<Order_By>;
   max?: Maybe<Categories_Max_Order_By>;
   min?: Maybe<Categories_Min_Order_By>;
+  stddev?: Maybe<Categories_Stddev_Order_By>;
+  stddev_pop?: Maybe<Categories_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Categories_Stddev_Samp_Order_By>;
+  sum?: Maybe<Categories_Sum_Order_By>;
+  var_pop?: Maybe<Categories_Var_Pop_Order_By>;
+  var_samp?: Maybe<Categories_Var_Samp_Order_By>;
+  variance?: Maybe<Categories_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "categories" */
 export type Categories_Arr_Rel_Insert_Input = {
   data: Array<Categories_Insert_Input>;
   on_conflict?: Maybe<Categories_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Categories_Avg_Fields = {
+  __typename?: 'categories_avg_fields';
+  points_per_minute?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "categories" */
+export type Categories_Avg_Order_By = {
+  points_per_minute?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "categories". All fields are combined with a logical 'AND'. */
@@ -768,6 +851,7 @@ export type Categories_Bool_Exp = {
   _or?: Maybe<Array<Maybe<Categories_Bool_Exp>>>;
   description?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  points_per_minute?: Maybe<Int_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "categories" */
@@ -778,30 +862,16 @@ export enum Categories_Constraint {
   CategoriesPkey = 'categories_pkey'
 }
 
-export enum Categories_Enum {
-  /** The culture category */
-  Culture = 'CULTURE',
-  /** The education category */
-  Education = 'EDUCATION',
-  /** The exercise category */
-  Exercise = 'EXERCISE',
-  /** The social category */
-  Social = 'SOCIAL'
-}
-
-/** expression to compare columns of type categories_enum. All fields are combined with logical 'AND'. */
-export type Categories_Enum_Comparison_Exp = {
-  _eq?: Maybe<Categories_Enum>;
-  _in?: Maybe<Array<Categories_Enum>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Categories_Enum>;
-  _nin?: Maybe<Array<Categories_Enum>>;
+/** input type for incrementing integer column in table "categories" */
+export type Categories_Inc_Input = {
+  points_per_minute?: Maybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "categories" */
 export type Categories_Insert_Input = {
   description?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  points_per_minute?: Maybe<Scalars['Int']>;
 };
 
 /** aggregate max on columns */
@@ -809,12 +879,14 @@ export type Categories_Max_Fields = {
   __typename?: 'categories_max_fields';
   description?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  points_per_minute?: Maybe<Scalars['Int']>;
 };
 
 /** order by max() on columns of table "categories" */
 export type Categories_Max_Order_By = {
   description?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  points_per_minute?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -822,12 +894,14 @@ export type Categories_Min_Fields = {
   __typename?: 'categories_min_fields';
   description?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  points_per_minute?: Maybe<Scalars['Int']>;
 };
 
 /** order by min() on columns of table "categories" */
 export type Categories_Min_Order_By = {
   description?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  points_per_minute?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "categories" */
@@ -856,6 +930,7 @@ export type Categories_On_Conflict = {
 export type Categories_Order_By = {
   description?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  points_per_minute?: Maybe<Order_By>;
 };
 
 /** primary key columns input for table: "categories" */
@@ -868,13 +943,60 @@ export enum Categories_Select_Column {
   /** column name */
   Description = 'description',
   /** column name */
-  Name = 'name'
+  Name = 'name',
+  /** column name */
+  PointsPerMinute = 'points_per_minute'
 }
 
 /** input type for updating data in table "categories" */
 export type Categories_Set_Input = {
   description?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  points_per_minute?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Categories_Stddev_Fields = {
+  __typename?: 'categories_stddev_fields';
+  points_per_minute?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "categories" */
+export type Categories_Stddev_Order_By = {
+  points_per_minute?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Categories_Stddev_Pop_Fields = {
+  __typename?: 'categories_stddev_pop_fields';
+  points_per_minute?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "categories" */
+export type Categories_Stddev_Pop_Order_By = {
+  points_per_minute?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Categories_Stddev_Samp_Fields = {
+  __typename?: 'categories_stddev_samp_fields';
+  points_per_minute?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "categories" */
+export type Categories_Stddev_Samp_Order_By = {
+  points_per_minute?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Categories_Sum_Fields = {
+  __typename?: 'categories_sum_fields';
+  points_per_minute?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "categories" */
+export type Categories_Sum_Order_By = {
+  points_per_minute?: Maybe<Order_By>;
 };
 
 /** update columns of table "categories" */
@@ -882,8 +1004,43 @@ export enum Categories_Update_Column {
   /** column name */
   Description = 'description',
   /** column name */
-  Name = 'name'
+  Name = 'name',
+  /** column name */
+  PointsPerMinute = 'points_per_minute'
 }
+
+/** aggregate var_pop on columns */
+export type Categories_Var_Pop_Fields = {
+  __typename?: 'categories_var_pop_fields';
+  points_per_minute?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "categories" */
+export type Categories_Var_Pop_Order_By = {
+  points_per_minute?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Categories_Var_Samp_Fields = {
+  __typename?: 'categories_var_samp_fields';
+  points_per_minute?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "categories" */
+export type Categories_Var_Samp_Order_By = {
+  points_per_minute?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Categories_Variance_Fields = {
+  __typename?: 'categories_variance_fields';
+  points_per_minute?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "categories" */
+export type Categories_Variance_Order_By = {
+  points_per_minute?: Maybe<Order_By>;
+};
 
 /** columns and relationships of "comments" */
 export type Comments = {
@@ -1606,7 +1763,7 @@ export type Geofences = {
   activities: Array<Activities>;
   /** An aggregated array relationship */
   activities_aggregate: Activities_Aggregate;
-  category: Categories_Enum;
+  category: Scalars['String'];
   /** Only for polygons */
   coordinates?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
@@ -1718,7 +1875,7 @@ export type Geofences_Bool_Exp = {
   _not?: Maybe<Geofences_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Geofences_Bool_Exp>>>;
   activities?: Maybe<Activities_Bool_Exp>;
-  category?: Maybe<Categories_Enum_Comparison_Exp>;
+  category?: Maybe<String_Comparison_Exp>;
   coordinates?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
@@ -1750,7 +1907,7 @@ export type Geofences_Inc_Input = {
 /** input type for inserting data into table "geofences" */
 export type Geofences_Insert_Input = {
   activities?: Maybe<Activities_Arr_Rel_Insert_Input>;
-  category?: Maybe<Categories_Enum>;
+  category?: Maybe<Scalars['String']>;
   coordinates?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
@@ -1768,6 +1925,7 @@ export type Geofences_Insert_Input = {
 /** aggregate max on columns */
 export type Geofences_Max_Fields = {
   __typename?: 'geofences_max_fields';
+  category?: Maybe<Scalars['String']>;
   coordinates?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
@@ -1781,6 +1939,7 @@ export type Geofences_Max_Fields = {
 
 /** order by max() on columns of table "geofences" */
 export type Geofences_Max_Order_By = {
+  category?: Maybe<Order_By>;
   coordinates?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
@@ -1795,6 +1954,7 @@ export type Geofences_Max_Order_By = {
 /** aggregate min on columns */
 export type Geofences_Min_Fields = {
   __typename?: 'geofences_min_fields';
+  category?: Maybe<Scalars['String']>;
   coordinates?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
@@ -1808,6 +1968,7 @@ export type Geofences_Min_Fields = {
 
 /** order by min() on columns of table "geofences" */
 export type Geofences_Min_Order_By = {
+  category?: Maybe<Order_By>;
   coordinates?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
@@ -1892,7 +2053,7 @@ export enum Geofences_Select_Column {
 
 /** input type for updating data in table "geofences" */
 export type Geofences_Set_Input = {
-  category?: Maybe<Categories_Enum>;
+  category?: Maybe<Scalars['String']>;
   coordinates?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
@@ -2048,6 +2209,20 @@ export type Geofences_Variance_Order_By = {
   latitude?: Maybe<Order_By>;
   longitude?: Maybe<Order_By>;
   radius?: Maybe<Order_By>;
+};
+
+
+/** expression to compare columns of type interval. All fields are combined with logical 'AND'. */
+export type Interval_Comparison_Exp = {
+  _eq?: Maybe<Scalars['interval']>;
+  _gt?: Maybe<Scalars['interval']>;
+  _gte?: Maybe<Scalars['interval']>;
+  _in?: Maybe<Array<Scalars['interval']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['interval']>;
+  _lte?: Maybe<Scalars['interval']>;
+  _neq?: Maybe<Scalars['interval']>;
+  _nin?: Maybe<Array<Scalars['interval']>>;
 };
 
 /** columns and relationships of "likes" */
@@ -2765,6 +2940,7 @@ export type Mutation_RootUpdate_Activities_By_PkArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_CategoriesArgs = {
+  _inc?: Maybe<Categories_Inc_Input>;
   _set?: Maybe<Categories_Set_Input>;
   where: Categories_Bool_Exp;
 };
@@ -2772,6 +2948,7 @@ export type Mutation_RootUpdate_CategoriesArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Categories_By_PkArgs = {
+  _inc?: Maybe<Categories_Inc_Input>;
   _set?: Maybe<Categories_Set_Input>;
   pk_columns: Categories_Pk_Columns_Input;
 };
@@ -4190,16 +4367,16 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    GetUserAndAchievements(variables: GetUserAndAchievementsQueryVariables, requestHeaders?: Headers): Promise<GetUserAndAchievementsQuery> {
+    GetUserAndAchievements(variables: GetUserAndAchievementsQueryVariables): Promise<GetUserAndAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndAchievementsQuery>(print(GetUserAndAchievementsDocument), variables));
     },
-    AddAchievement(variables: AddAchievementMutationVariables, requestHeaders?: Headers): Promise<AddAchievementMutation> {
+    AddAchievement(variables: AddAchievementMutationVariables): Promise<AddAchievementMutation> {
       return withWrapper(() => client.request<AddAchievementMutation>(print(AddAchievementDocument), variables));
     },
-    CreateUser(variables: CreateUserMutationVariables, requestHeaders?: Headers): Promise<CreateUserMutation> {
+    CreateUser(variables: CreateUserMutationVariables): Promise<CreateUserMutation> {
       return withWrapper(() => client.request<CreateUserMutation>(print(CreateUserDocument), variables));
     },
-    DeleteUser(variables: DeleteUserMutationVariables, requestHeaders?: Headers): Promise<DeleteUserMutation> {
+    DeleteUser(variables: DeleteUserMutationVariables): Promise<DeleteUserMutation> {
       return withWrapper(() => client.request<DeleteUserMutation>(print(DeleteUserDocument), variables));
     }
   };
@@ -4368,10 +4545,11 @@ export type ResolversTypes = {
   categories_aggregate_fields: ResolverTypeWrapper<Categories_Aggregate_Fields>;
   categories_aggregate_order_by: Categories_Aggregate_Order_By;
   categories_arr_rel_insert_input: Categories_Arr_Rel_Insert_Input;
+  categories_avg_fields: ResolverTypeWrapper<Categories_Avg_Fields>;
+  categories_avg_order_by: Categories_Avg_Order_By;
   categories_bool_exp: Categories_Bool_Exp;
   categories_constraint: Categories_Constraint;
-  categories_enum: Categories_Enum;
-  categories_enum_comparison_exp: Categories_Enum_Comparison_Exp;
+  categories_inc_input: Categories_Inc_Input;
   categories_insert_input: Categories_Insert_Input;
   categories_max_fields: ResolverTypeWrapper<Categories_Max_Fields>;
   categories_max_order_by: Categories_Max_Order_By;
@@ -4384,7 +4562,21 @@ export type ResolversTypes = {
   categories_pk_columns_input: Categories_Pk_Columns_Input;
   categories_select_column: Categories_Select_Column;
   categories_set_input: Categories_Set_Input;
+  categories_stddev_fields: ResolverTypeWrapper<Categories_Stddev_Fields>;
+  categories_stddev_order_by: Categories_Stddev_Order_By;
+  categories_stddev_pop_fields: ResolverTypeWrapper<Categories_Stddev_Pop_Fields>;
+  categories_stddev_pop_order_by: Categories_Stddev_Pop_Order_By;
+  categories_stddev_samp_fields: ResolverTypeWrapper<Categories_Stddev_Samp_Fields>;
+  categories_stddev_samp_order_by: Categories_Stddev_Samp_Order_By;
+  categories_sum_fields: ResolverTypeWrapper<Categories_Sum_Fields>;
+  categories_sum_order_by: Categories_Sum_Order_By;
   categories_update_column: Categories_Update_Column;
+  categories_var_pop_fields: ResolverTypeWrapper<Categories_Var_Pop_Fields>;
+  categories_var_pop_order_by: Categories_Var_Pop_Order_By;
+  categories_var_samp_fields: ResolverTypeWrapper<Categories_Var_Samp_Fields>;
+  categories_var_samp_order_by: Categories_Var_Samp_Order_By;
+  categories_variance_fields: ResolverTypeWrapper<Categories_Variance_Fields>;
+  categories_variance_order_by: Categories_Variance_Order_By;
   comments: ResolverTypeWrapper<Comments>;
   comments_aggregate: ResolverTypeWrapper<Comments_Aggregate>;
   comments_aggregate_fields: ResolverTypeWrapper<Comments_Aggregate_Fields>;
@@ -4503,6 +4695,8 @@ export type ResolversTypes = {
   geofences_var_samp_order_by: Geofences_Var_Samp_Order_By;
   geofences_variance_fields: ResolverTypeWrapper<Geofences_Variance_Fields>;
   geofences_variance_order_by: Geofences_Variance_Order_By;
+  interval: ResolverTypeWrapper<Scalars['interval']>;
+  interval_comparison_exp: Interval_Comparison_Exp;
   likes: ResolverTypeWrapper<Likes>;
   likes_aggregate: ResolverTypeWrapper<Likes_Aggregate>;
   likes_aggregate_fields: ResolverTypeWrapper<Likes_Aggregate_Fields>;
@@ -4688,8 +4882,10 @@ export type ResolversParentTypes = {
   categories_aggregate_fields: Categories_Aggregate_Fields;
   categories_aggregate_order_by: Categories_Aggregate_Order_By;
   categories_arr_rel_insert_input: Categories_Arr_Rel_Insert_Input;
+  categories_avg_fields: Categories_Avg_Fields;
+  categories_avg_order_by: Categories_Avg_Order_By;
   categories_bool_exp: Categories_Bool_Exp;
-  categories_enum_comparison_exp: Categories_Enum_Comparison_Exp;
+  categories_inc_input: Categories_Inc_Input;
   categories_insert_input: Categories_Insert_Input;
   categories_max_fields: Categories_Max_Fields;
   categories_max_order_by: Categories_Max_Order_By;
@@ -4701,6 +4897,20 @@ export type ResolversParentTypes = {
   categories_order_by: Categories_Order_By;
   categories_pk_columns_input: Categories_Pk_Columns_Input;
   categories_set_input: Categories_Set_Input;
+  categories_stddev_fields: Categories_Stddev_Fields;
+  categories_stddev_order_by: Categories_Stddev_Order_By;
+  categories_stddev_pop_fields: Categories_Stddev_Pop_Fields;
+  categories_stddev_pop_order_by: Categories_Stddev_Pop_Order_By;
+  categories_stddev_samp_fields: Categories_Stddev_Samp_Fields;
+  categories_stddev_samp_order_by: Categories_Stddev_Samp_Order_By;
+  categories_sum_fields: Categories_Sum_Fields;
+  categories_sum_order_by: Categories_Sum_Order_By;
+  categories_var_pop_fields: Categories_Var_Pop_Fields;
+  categories_var_pop_order_by: Categories_Var_Pop_Order_By;
+  categories_var_samp_fields: Categories_Var_Samp_Fields;
+  categories_var_samp_order_by: Categories_Var_Samp_Order_By;
+  categories_variance_fields: Categories_Variance_Fields;
+  categories_variance_order_by: Categories_Variance_Order_By;
   comments: Comments;
   comments_aggregate: Comments_Aggregate;
   comments_aggregate_fields: Comments_Aggregate_Fields;
@@ -4806,6 +5016,8 @@ export type ResolversParentTypes = {
   geofences_var_samp_order_by: Geofences_Var_Samp_Order_By;
   geofences_variance_fields: Geofences_Variance_Fields;
   geofences_variance_order_by: Geofences_Variance_Order_By;
+  interval: Scalars['interval'];
+  interval_comparison_exp: Interval_Comparison_Exp;
   likes: Likes;
   likes_aggregate: Likes_Aggregate;
   likes_aggregate_fields: Likes_Aggregate_Fields;
@@ -4997,10 +5209,14 @@ export type ActivitiesResolvers<ContextType = any, ParentType extends ResolversP
   comments?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<ActivitiesCommentsArgs, never>>;
   comments_aggregate?: Resolver<ResolversTypes['comments_aggregate'], ParentType, ContextType, RequireFields<ActivitiesComments_AggregateArgs, never>>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  duration?: Resolver<ResolversTypes['interval'], ParentType, ContextType>;
   geofence?: Resolver<ResolversTypes['geofences'], ParentType, ContextType>;
   geofence_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   likes?: Resolver<Array<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<ActivitiesLikesArgs, never>>;
   likes_aggregate?: Resolver<ResolversTypes['likes_aggregate'], ParentType, ContextType, RequireFields<ActivitiesLikes_AggregateArgs, never>>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  started_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
+  stopped_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
   user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -5031,6 +5247,7 @@ export type Activities_Aggregate_FieldsResolvers<ContextType = any, ParentType e
 export type Activities_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_avg_fields'] = ResolversParentTypes['activities_avg_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5039,6 +5256,8 @@ export type Activities_Max_FieldsResolvers<ContextType = any, ParentType extends
   caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  started_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -5049,6 +5268,8 @@ export type Activities_Min_FieldsResolvers<ContextType = any, ParentType extends
   caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  started_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -5063,48 +5284,56 @@ export type Activities_Mutation_ResponseResolvers<ContextType = any, ParentType 
 export type Activities_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_fields'] = ResolversParentTypes['activities_stddev_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_pop_fields'] = ResolversParentTypes['activities_stddev_pop_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_samp_fields'] = ResolversParentTypes['activities_stddev_samp_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_sum_fields'] = ResolversParentTypes['activities_sum_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_var_pop_fields'] = ResolversParentTypes['activities_var_pop_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_var_samp_fields'] = ResolversParentTypes['activities_var_samp_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_variance_fields'] = ResolversParentTypes['activities_variance_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type CategoriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories'] = ResolversParentTypes['categories']> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  points_per_minute?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5115,27 +5344,77 @@ export type Categories_AggregateResolvers<ContextType = any, ParentType extends 
 };
 
 export type Categories_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_aggregate_fields'] = ResolversParentTypes['categories_aggregate_fields']> = {
+  avg?: Resolver<Maybe<ResolversTypes['categories_avg_fields']>, ParentType, ContextType>;
   count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Categories_Aggregate_FieldsCountArgs, never>>;
   max?: Resolver<Maybe<ResolversTypes['categories_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['categories_min_fields']>, ParentType, ContextType>;
+  stddev?: Resolver<Maybe<ResolversTypes['categories_stddev_fields']>, ParentType, ContextType>;
+  stddev_pop?: Resolver<Maybe<ResolversTypes['categories_stddev_pop_fields']>, ParentType, ContextType>;
+  stddev_samp?: Resolver<Maybe<ResolversTypes['categories_stddev_samp_fields']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['categories_sum_fields']>, ParentType, ContextType>;
+  var_pop?: Resolver<Maybe<ResolversTypes['categories_var_pop_fields']>, ParentType, ContextType>;
+  var_samp?: Resolver<Maybe<ResolversTypes['categories_var_samp_fields']>, ParentType, ContextType>;
+  variance?: Resolver<Maybe<ResolversTypes['categories_variance_fields']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Categories_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_avg_fields'] = ResolversParentTypes['categories_avg_fields']> = {
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Categories_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_max_fields'] = ResolversParentTypes['categories_max_fields']> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Categories_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_min_fields'] = ResolversParentTypes['categories_min_fields']> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Categories_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_mutation_response'] = ResolversParentTypes['categories_mutation_response']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['categories']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Categories_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_stddev_fields'] = ResolversParentTypes['categories_stddev_fields']> = {
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Categories_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_stddev_pop_fields'] = ResolversParentTypes['categories_stddev_pop_fields']> = {
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Categories_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_stddev_samp_fields'] = ResolversParentTypes['categories_stddev_samp_fields']> = {
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Categories_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_sum_fields'] = ResolversParentTypes['categories_sum_fields']> = {
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Categories_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_var_pop_fields'] = ResolversParentTypes['categories_var_pop_fields']> = {
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Categories_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_var_samp_fields'] = ResolversParentTypes['categories_var_samp_fields']> = {
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Categories_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_variance_fields'] = ResolversParentTypes['categories_variance_fields']> = {
+  points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5337,7 +5616,7 @@ export type Geofence_Variants_Mutation_ResponseResolvers<ContextType = any, Pare
 export type GeofencesResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences'] = ResolversParentTypes['geofences']> = {
   activities?: Resolver<Array<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<GeofencesActivitiesArgs, never>>;
   activities_aggregate?: Resolver<ResolversTypes['activities_aggregate'], ParentType, ContextType, RequireFields<GeofencesActivities_AggregateArgs, never>>;
-  category?: Resolver<ResolversTypes['categories_enum'], ParentType, ContextType>;
+  category?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   coordinates?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -5383,6 +5662,7 @@ export type Geofences_Avg_FieldsResolvers<ContextType = any, ParentType extends 
 };
 
 export type Geofences_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_max_fields'] = ResolversParentTypes['geofences_max_fields']> = {
+  category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   coordinates?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -5396,6 +5676,7 @@ export type Geofences_Max_FieldsResolvers<ContextType = any, ParentType extends 
 };
 
 export type Geofences_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_min_fields'] = ResolversParentTypes['geofences_min_fields']> = {
+  category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   coordinates?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -5469,6 +5750,10 @@ export type Geofences_Variance_FieldsResolvers<ContextType = any, ParentType ext
   radius?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
+
+export interface IntervalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['interval'], any> {
+  name: 'interval';
+}
 
 export type LikesResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes'] = ResolversParentTypes['likes']> = {
   activity?: Resolver<ResolversTypes['activities'], ParentType, ContextType>;
@@ -5874,9 +6159,17 @@ export type Resolvers<ContextType = any> = {
   categories?: CategoriesResolvers<ContextType>;
   categories_aggregate?: Categories_AggregateResolvers<ContextType>;
   categories_aggregate_fields?: Categories_Aggregate_FieldsResolvers<ContextType>;
+  categories_avg_fields?: Categories_Avg_FieldsResolvers<ContextType>;
   categories_max_fields?: Categories_Max_FieldsResolvers<ContextType>;
   categories_min_fields?: Categories_Min_FieldsResolvers<ContextType>;
   categories_mutation_response?: Categories_Mutation_ResponseResolvers<ContextType>;
+  categories_stddev_fields?: Categories_Stddev_FieldsResolvers<ContextType>;
+  categories_stddev_pop_fields?: Categories_Stddev_Pop_FieldsResolvers<ContextType>;
+  categories_stddev_samp_fields?: Categories_Stddev_Samp_FieldsResolvers<ContextType>;
+  categories_sum_fields?: Categories_Sum_FieldsResolvers<ContextType>;
+  categories_var_pop_fields?: Categories_Var_Pop_FieldsResolvers<ContextType>;
+  categories_var_samp_fields?: Categories_Var_Samp_FieldsResolvers<ContextType>;
+  categories_variance_fields?: Categories_Variance_FieldsResolvers<ContextType>;
   comments?: CommentsResolvers<ContextType>;
   comments_aggregate?: Comments_AggregateResolvers<ContextType>;
   comments_aggregate_fields?: Comments_Aggregate_FieldsResolvers<ContextType>;
@@ -5918,6 +6211,7 @@ export type Resolvers<ContextType = any> = {
   geofences_var_pop_fields?: Geofences_Var_Pop_FieldsResolvers<ContextType>;
   geofences_var_samp_fields?: Geofences_Var_Samp_FieldsResolvers<ContextType>;
   geofences_variance_fields?: Geofences_Variance_FieldsResolvers<ContextType>;
+  interval?: GraphQLScalarType;
   likes?: LikesResolvers<ContextType>;
   likes_aggregate?: Likes_AggregateResolvers<ContextType>;
   likes_aggregate_fields?: Likes_Aggregate_FieldsResolvers<ContextType>;
