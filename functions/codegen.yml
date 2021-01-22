@@ -1,5 +1,5 @@
 overwrite: true
-schema: "./schema.json"
+schema: "./schema.graphql"
 documents: graphql/*.graphql
 hooks: 
   - afterOneFileWrite: 'prettier --write'
@@ -9,6 +9,7 @@ generates:
     plugins:
       - add:
           content: '/* eslint-disable */'
+      - fragment-matcher
       - 'typescript'
       - 'typescript-graphql-request'
       - "typescript-resolvers"
@@ -16,12 +17,10 @@ generates:
       - "typescript-operations"
     config:
       - skipTypename: true
-      - withHooks: true
-      - withHOC: false
-      - withComponent: false
       - nonOptionalTypename: true
       - withMutationFn: true
       - withResultType: true
       - withMutationOptionsType: true
-
+      - module: commonjs
+      - useExplicitTyping: true
 

@@ -1,11 +1,11 @@
 import * as functions from 'firebase-functions';
 import { client } from './client';
-import { User_Achievement_Insert_Input } from './types';
-
-type User_Achievement_InputType = {
-  achievement_id: number;
-  user_id: string;
-};
+import {
+  Achievement,
+  GetUserAndExistingAchievementsQuery,
+  GetUserAndUnachievedAchievementsQuery,
+  User_Achievement_Insert_Input,
+} from './types';
 
 exports.achievementValidation = functions.https.onRequest(async (req, res) => {
   const {
@@ -13,32 +13,94 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
     table,
   } = req.body;
 
-  if (op === 'INSERT' && table.name === 'activities' && table.schema === 'public') {
-    const { user_id } = data.new;
+  const objects: User_Achievement_Insert_Input[] = [];
 
-    // query
-    const queryData = await client.GetUserAndAchievements({ user_id });
-    const userAchievmentsArray: number[] = queryData.user_achievement.map((item) => item.achievement_id);
+  if ((op === 'INSERT' || op === 'UPDATE') && table.name === 'activities' && table.schema === 'public') {
+    const { user_id } = data.new ? data.new : data.old;
 
-    const unobtainedAchievments: User_Achievement_InputType[] = queryData.achievement
-      .map<User_Achievement_InputType>(({ id }) => {
-        return { achievement_id: id, user_id };
-      })
-      .filter(({ achievement_id }) => !userAchievmentsArray.includes(achievement_id));
+    const queryData = await client.GetUserAndUnachievedAchievements({ user_id });
 
-    // TODO validation logic
+    queryData.unachievedachievements.forEach((item) => {
+      if (isValidAchievment(item as Achievement, queryData)) {
+        objects.push({ achievement_id: item.id, user_id });
+      }
+    });
 
-    const objects: User_Achievement_Insert_Input[] = unobtainedAchievments;
-    console.log('[New Achievments]:', objects);
-    await client
-      .AddAchievement({ objects })
-      .then((response) => {
-        console.log('[mutationResponse]:', response);
-        return response;
-      })
-      .catch((e) => {
-        throw new functions.https.HttpsError('invalid-argument', e.message);
+    if (objects.length) {
+      await addAchievments(objects);
+
+      res.status(200).json({
+        status: 'Success',
+        data: `New ${objects.length} achievments`,
       });
+    } else {
+      res.status(200).json({
+        status: 'Success',
+        data: 'No new achievements',
+      });
+    }
+    return;
+  } else if (op === 'DELETE' && table.name === 'activities' && table.schema === 'public') {
+    const { user_id } = data.old;
+    const queryData = await client.GetUserAndExistingAchievements({ user_id });
+    queryData.user?.user_achievement.forEach(async ({ achievement }) => {
+      if (!isValidAchievment(achievement as Achievement, queryData)) {
+        objects.push({ achievement_id: achievement.id, user_id });
+        await deleteAchievment(achievement.id, user_id);
+      }
+    });
+
+    if (objects.length) {
+      res.status(200).json({
+        status: 'Success',
+        data: `Deleted ${objects.length} achievments`,
+      });
+    } else {
+      res.status(200).json({
+        status: 'Success',
+        data: 'No achievements to delete',
+      });
+    }
     return;
   }
+  res.status(501).json({
+    status: 'Not implemented',
+  });
 });
+
+async function deleteAchievment(achievement_id: number, user_id: string) {
+  await client
+    .DeleteAchievement({ achievement_id, user_id })
+    .then((response) => {
+      return response;
+    })
+    .catch((e) => {
+      throw new functions.https.HttpsError('invalid-argument', e.message);
+    });
+}
+
+async function addAchievments(objects: User_Achievement_Insert_Input[]) {
+  await client
+    .AddAchievement({ objects })
+    .then((response) => {
+      return response;
+    })
+    .catch((e) => {
+      throw new functions.https.HttpsError('invalid-argument', e.message);
+    });
+}
+
+function isValidAchievment(
+  item: Achievement,
+  queryData: GetUserAndUnachievedAchievementsQuery | GetUserAndExistingAchievementsQuery,
+): boolean {
+  switch (item.achievement_type) {
+    case 'SCORE': {
+      if (queryData.user?.totalScore >= item.rule.score) {
+        return true;
+      }
+      break;
+    }
+  }
+  return false;
+}

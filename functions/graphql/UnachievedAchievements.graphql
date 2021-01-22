@@ -1,0 +1,14 @@
+query GetUserAndUnachievedAchievements($user_id: String!) {
+  unachievedachievements(args: { uid: $user_id }) {
+    id
+    name
+    description
+    created_at
+    achievement_type
+    rule
+  }
+  user(id: $user_id ) {
+    id
+    totalScore
+  }
+}
