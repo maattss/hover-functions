@@ -1,0 +1,5 @@
+mutation DeleteAchievement($achievement_id: Int!, $user_id: String!) {
+  delete_user_achievement_by_pk(achievement_id: $achievement_id, user_id: $user_id) {
+    achievement_id
+  }
+}

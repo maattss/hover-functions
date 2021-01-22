@@ -1,4 +1,4 @@
-query GetUserAndAchievements($user_id: String!) {
+query GetUserAndUnachievedAchievements($user_id: String!) {
   unachievedachievements(args: { uid: $user_id }) {
     id
     name

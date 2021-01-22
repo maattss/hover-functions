@@ -36,17 +36,38 @@ export type Scalars = {
 
 export type Achievement = {
   __typename?: 'achievement';
+  achievementTypeByAchievementType?: Maybe<Achievement_Type>;
   achievement_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   name: Scalars['String'];
   rule: Scalars['json'];
+  user_achievements: Array<User_Achievement>;
+  user_achievements_aggregate: User_Achievement_Aggregate;
 };
 
 
 export type AchievementRuleArgs = {
   path?: Maybe<Scalars['String']>;
+};
+
+
+export type AchievementUser_AchievementsArgs = {
+  distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Achievement_Order_By>>;
+  where?: Maybe<User_Achievement_Bool_Exp>;
+};
+
+
+export type AchievementUser_Achievements_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Achievement_Order_By>>;
+  where?: Maybe<User_Achievement_Bool_Exp>;
 };
 
 export type Achievement_Aggregate = {
@@ -108,12 +129,14 @@ export type Achievement_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Achievement_Bool_Exp>>>;
   _not?: Maybe<Achievement_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Achievement_Bool_Exp>>>;
+  achievementTypeByAchievementType?: Maybe<Achievement_Type_Bool_Exp>;
   achievement_type?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   rule?: Maybe<Json_Comparison_Exp>;
+  user_achievements?: Maybe<User_Achievement_Bool_Exp>;
 };
 
 export enum Achievement_Constraint {
@@ -126,12 +149,14 @@ export type Achievement_Inc_Input = {
 };
 
 export type Achievement_Insert_Input = {
+  achievementTypeByAchievementType?: Maybe<Achievement_Type_Obj_Rel_Insert_Input>;
   achievement_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   rule?: Maybe<Scalars['json']>;
+  user_achievements?: Maybe<User_Achievement_Arr_Rel_Insert_Input>;
 };
 
 export type Achievement_Max_Fields = {
@@ -186,12 +211,14 @@ export type Achievement_On_Conflict = {
 };
 
 export type Achievement_Order_By = {
+  achievementTypeByAchievementType?: Maybe<Achievement_Type_Order_By>;
   achievement_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   rule?: Maybe<Order_By>;
+  user_achievements_aggregate?: Maybe<User_Achievement_Aggregate_Order_By>;
 };
 
 export type Achievement_Pk_Columns_Input = {
@@ -3397,8 +3424,10 @@ export type Unachievedachievements_Args = {
 
 export type User_Achievement = {
   __typename?: 'user_achievement';
+  achievement: Achievement;
   achievement_id: Scalars['Int'];
   created_at: Scalars['timestamptz'];
+  user: Users;
   user_id: Scalars['String'];
 };
 
@@ -3461,8 +3490,10 @@ export type User_Achievement_Bool_Exp = {
   _and?: Maybe<Array<Maybe<User_Achievement_Bool_Exp>>>;
   _not?: Maybe<User_Achievement_Bool_Exp>;
   _or?: Maybe<Array<Maybe<User_Achievement_Bool_Exp>>>;
+  achievement?: Maybe<Achievement_Bool_Exp>;
   achievement_id?: Maybe<Int_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  user?: Maybe<Users_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
 
@@ -3475,8 +3506,10 @@ export type User_Achievement_Inc_Input = {
 };
 
 export type User_Achievement_Insert_Input = {
+  achievement?: Maybe<Achievement_Obj_Rel_Insert_Input>;
   achievement_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  user?: Maybe<Users_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
 };
 
@@ -3524,8 +3557,10 @@ export type User_Achievement_On_Conflict = {
 };
 
 export type User_Achievement_Order_By = {
+  achievement?: Maybe<Achievement_Order_By>;
   achievement_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  user?: Maybe<Users_Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
@@ -3871,22 +3906,6 @@ export enum Users_Update_Column {
 }
 
 
-export const GetUserAndAchievementsDocument = gql`
-    query GetUserAndAchievements($user_id: String!) {
-  unachievedachievements(args: {uid: $user_id}) {
-    id
-    name
-    description
-    created_at
-    achievement_type
-    rule
-  }
-  user(id: $user_id) {
-    id
-    totalScore
-  }
-}
-    `;
 export const AddAchievementDocument = gql`
     mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
   insert_user_achievement(objects: $objects) {
@@ -3901,10 +3920,55 @@ export const CreateUserDocument = gql`
   }
 }
     `;
+export const DeleteAchievementDocument = gql`
+    mutation DeleteAchievement($achievement_id: Int!, $user_id: String!) {
+  delete_user_achievement_by_pk(
+    achievement_id: $achievement_id
+    user_id: $user_id
+  ) {
+    achievement_id
+  }
+}
+    `;
 export const DeleteUserDocument = gql`
     mutation DeleteUser($id: String!) {
   delete_users(where: {id: {_eq: $id}}) {
     affected_rows
+  }
+}
+    `;
+export const GetUserAndExistingAchievementsDocument = gql`
+    query GetUserAndExistingAchievements($user_id: String!) {
+  user(id: $user_id) {
+    id
+    totalScore
+    name
+    user_achievement {
+      achievement {
+        id
+        name
+        description
+        achievement_type
+        rule
+        created_at
+      }
+    }
+  }
+}
+    `;
+export const GetUserAndUnachievedAchievementsDocument = gql`
+    query GetUserAndUnachievedAchievements($user_id: String!) {
+  unachievedachievements(args: {uid: $user_id}) {
+    id
+    name
+    description
+    created_at
+    achievement_type
+    rule
+  }
+  user(id: $user_id) {
+    id
+    totalScore
   }
 }
     `;
@@ -3915,17 +3979,23 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    GetUserAndAchievements(variables: GetUserAndAchievementsQueryVariables): Promise<GetUserAndAchievementsQuery> {
-      return withWrapper(() => client.request<GetUserAndAchievementsQuery>(print(GetUserAndAchievementsDocument), variables));
-    },
     AddAchievement(variables: AddAchievementMutationVariables): Promise<AddAchievementMutation> {
       return withWrapper(() => client.request<AddAchievementMutation>(print(AddAchievementDocument), variables));
     },
     CreateUser(variables: CreateUserMutationVariables): Promise<CreateUserMutation> {
       return withWrapper(() => client.request<CreateUserMutation>(print(CreateUserDocument), variables));
     },
+    DeleteAchievement(variables: DeleteAchievementMutationVariables): Promise<DeleteAchievementMutation> {
+      return withWrapper(() => client.request<DeleteAchievementMutation>(print(DeleteAchievementDocument), variables));
+    },
     DeleteUser(variables: DeleteUserMutationVariables): Promise<DeleteUserMutation> {
       return withWrapper(() => client.request<DeleteUserMutation>(print(DeleteUserDocument), variables));
+    },
+    GetUserAndExistingAchievements(variables: GetUserAndExistingAchievementsQueryVariables): Promise<GetUserAndExistingAchievementsQuery> {
+      return withWrapper(() => client.request<GetUserAndExistingAchievementsQuery>(print(GetUserAndExistingAchievementsDocument), variables));
+    },
+    GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
+      return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
     }
   };
 }
@@ -4706,12 +4776,15 @@ export type ResolversParentTypes = {
 };
 
 export type AchievementResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement'] = ResolversParentTypes['achievement']> = {
+  achievementTypeByAchievementType?: Resolver<Maybe<ResolversTypes['achievement_type']>, ParentType, ContextType>;
   achievement_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rule?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<AchievementRuleArgs, never>>;
+  user_achievements?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<AchievementUser_AchievementsArgs, never>>;
+  user_achievements_aggregate?: Resolver<ResolversTypes['user_achievement_aggregate'], ParentType, ContextType, RequireFields<AchievementUser_Achievements_AggregateArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5644,8 +5717,10 @@ export interface TimestamptzScalarConfig extends GraphQLScalarTypeConfig<Resolve
 }
 
 export type User_AchievementResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement'] = ResolversParentTypes['user_achievement']> = {
+  achievement?: Resolver<ResolversTypes['achievement'], ParentType, ContextType>;
   achievement_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
   user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5931,22 +6006,6 @@ export type Resolvers<ContextType = any> = {
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
 
-export const GetUserAndAchievements = gql`
-    query GetUserAndAchievements($user_id: String!) {
-  unachievedachievements(args: {uid: $user_id}) {
-    id
-    name
-    description
-    created_at
-    achievement_type
-    rule
-  }
-  user(id: $user_id) {
-    id
-    totalScore
-  }
-}
-    `;
 export const AddAchievement = gql`
     mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
   insert_user_achievement(objects: $objects) {
@@ -5961,6 +6020,16 @@ export const CreateUser = gql`
   }
 }
     `;
+export const DeleteAchievement = gql`
+    mutation DeleteAchievement($achievement_id: Int!, $user_id: String!) {
+  delete_user_achievement_by_pk(
+    achievement_id: $achievement_id
+    user_id: $user_id
+  ) {
+    achievement_id
+  }
+}
+    `;
 export const DeleteUser = gql`
     mutation DeleteUser($id: String!) {
   delete_users(where: {id: {_eq: $id}}) {
@@ -5968,22 +6037,41 @@ export const DeleteUser = gql`
   }
 }
     `;
-export type GetUserAndAchievementsQueryVariables = Exact<{
-  user_id: Scalars['String'];
-}>;
-
-
-export type GetUserAndAchievementsQuery = (
-  { __typename?: 'query_root' }
-  & { unachievedachievements: Array<(
-    { __typename?: 'achievement' }
-    & Pick<Achievement, 'id' | 'name' | 'description' | 'created_at' | 'achievement_type' | 'rule'>
-  )>, user?: Maybe<(
-    { __typename?: 'users' }
-    & Pick<Users, 'id' | 'totalScore'>
-  )> }
-);
-
+export const GetUserAndExistingAchievements = gql`
+    query GetUserAndExistingAchievements($user_id: String!) {
+  user(id: $user_id) {
+    id
+    totalScore
+    name
+    user_achievement {
+      achievement {
+        id
+        name
+        description
+        achievement_type
+        rule
+        created_at
+      }
+    }
+  }
+}
+    `;
+export const GetUserAndUnachievedAchievements = gql`
+    query GetUserAndUnachievedAchievements($user_id: String!) {
+  unachievedachievements(args: {uid: $user_id}) {
+    id
+    name
+    description
+    created_at
+    achievement_type
+    rule
+  }
+  user(id: $user_id) {
+    id
+    totalScore
+  }
+}
+    `;
 export type AddAchievementMutationVariables = Exact<{
   objects: Array<User_Achievement_Insert_Input> | User_Achievement_Insert_Input;
 }>;
@@ -6011,6 +6099,20 @@ export type CreateUserMutation = (
   )> }
 );
 
+export type DeleteAchievementMutationVariables = Exact<{
+  achievement_id: Scalars['Int'];
+  user_id: Scalars['String'];
+}>;
+
+
+export type DeleteAchievementMutation = (
+  { __typename?: 'mutation_root' }
+  & { delete_user_achievement_by_pk?: Maybe<(
+    { __typename?: 'user_achievement' }
+    & Pick<User_Achievement, 'achievement_id'>
+  )> }
+);
+
 export type DeleteUserMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -6021,5 +6123,41 @@ export type DeleteUserMutation = (
   & { delete_users?: Maybe<(
     { __typename?: 'users_mutation_response' }
     & Pick<Users_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
+export type GetUserAndExistingAchievementsQueryVariables = Exact<{
+  user_id: Scalars['String'];
+}>;
+
+
+export type GetUserAndExistingAchievementsQuery = (
+  { __typename?: 'query_root' }
+  & { user?: Maybe<(
+    { __typename?: 'users' }
+    & Pick<Users, 'id' | 'totalScore' | 'name'>
+    & { user_achievement: Array<(
+      { __typename?: 'user_achievement' }
+      & { achievement: (
+        { __typename?: 'achievement' }
+        & Pick<Achievement, 'id' | 'name' | 'description' | 'achievement_type' | 'rule' | 'created_at'>
+      ) }
+    )> }
+  )> }
+);
+
+export type GetUserAndUnachievedAchievementsQueryVariables = Exact<{
+  user_id: Scalars['String'];
+}>;
+
+
+export type GetUserAndUnachievedAchievementsQuery = (
+  { __typename?: 'query_root' }
+  & { unachievedachievements: Array<(
+    { __typename?: 'achievement' }
+    & Pick<Achievement, 'id' | 'name' | 'description' | 'created_at' | 'achievement_type' | 'rule'>
+  )>, user?: Maybe<(
+    { __typename?: 'users' }
+    & Pick<Users, 'id' | 'totalScore'>
   )> }
 );

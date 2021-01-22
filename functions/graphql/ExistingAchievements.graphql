@@ -1,0 +1,17 @@
+query GetUserAndExistingAchievements($user_id: String!) {
+  user(id: $user_id) {
+    id
+    totalScore
+    name
+    user_achievement {
+      achievement {
+        id
+        name
+        description
+        achievement_type
+        rule
+        created_at
+      }
+    }
+  }
+}

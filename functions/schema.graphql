@@ -6,6 +6,8 @@ schema {
 
 # columns and relationships of "achievement"
 type achievement {
+  # An object relationship
+  achievementTypeByAchievementType: achievement_type
   achievement_type: String
   created_at: timestamptz
   description: String
@@ -15,6 +17,42 @@ type achievement {
     # JSON select path
     path: String
   ): json!
+
+  # An array relationship
+  user_achievements(
+    # distinct select on columns
+    distinct_on: [user_achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_achievement_order_by!]
+
+    # filter the rows returned
+    where: user_achievement_bool_exp
+  ): [user_achievement!]!
+
+  # An aggregated array relationship
+  user_achievements_aggregate(
+    # distinct select on columns
+    distinct_on: [user_achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_achievement_order_by!]
+
+    # filter the rows returned
+    where: user_achievement_bool_exp
+  ): user_achievement_aggregate!
 }
 
 # aggregated selection of "achievement"
@@ -74,12 +112,14 @@ input achievement_bool_exp {
   _and: [achievement_bool_exp]
   _not: achievement_bool_exp
   _or: [achievement_bool_exp]
+  achievementTypeByAchievementType: achievement_type_bool_exp
   achievement_type: String_comparison_exp
   created_at: timestamptz_comparison_exp
   description: String_comparison_exp
   id: Int_comparison_exp
   name: String_comparison_exp
   rule: json_comparison_exp
+  user_achievements: user_achievement_bool_exp
 }
 
 # unique or primary key constraints on table "achievement"
@@ -98,12 +138,14 @@ input achievement_inc_input {
 
 # input type for inserting data into table "achievement"
 input achievement_insert_input {
+  achievementTypeByAchievementType: achievement_type_obj_rel_insert_input
   achievement_type: String
   created_at: timestamptz
   description: String
   id: Int
   name: String
   rule: json
+  user_achievements: user_achievement_arr_rel_insert_input
 }
 
 # aggregate max on columns
@@ -166,12 +208,14 @@ input achievement_on_conflict {
 
 # ordering options when selecting data from "achievement"
 input achievement_order_by {
+  achievementTypeByAchievementType: achievement_type_order_by
   achievement_type: order_by
   created_at: order_by
   description: order_by
   id: order_by
   name: order_by
   rule: order_by
+  user_achievements_aggregate: user_achievement_aggregate_order_by
 }
 
 # primary key columns input for table: "achievement"
@@ -4192,8 +4236,13 @@ input unachievedachievements_args {
 
 # columns and relationships of "user_achievement"
 type user_achievement {
+  # An object relationship
+  achievement: achievement!
   achievement_id: Int!
   created_at: timestamptz!
+
+  # An object relationship
+  user: users!
   user_id: String!
 }
 
@@ -4254,8 +4303,10 @@ input user_achievement_bool_exp {
   _and: [user_achievement_bool_exp]
   _not: user_achievement_bool_exp
   _or: [user_achievement_bool_exp]
+  achievement: achievement_bool_exp
   achievement_id: Int_comparison_exp
   created_at: timestamptz_comparison_exp
+  user: users_bool_exp
   user_id: String_comparison_exp
 }
 
@@ -4272,8 +4323,10 @@ input user_achievement_inc_input {
 
 # input type for inserting data into table "user_achievement"
 input user_achievement_insert_input {
+  achievement: achievement_obj_rel_insert_input
   achievement_id: Int
   created_at: timestamptz
+  user: users_obj_rel_insert_input
   user_id: String
 }
 
@@ -4329,8 +4382,10 @@ input user_achievement_on_conflict {
 
 # ordering options when selecting data from "user_achievement"
 input user_achievement_order_by {
+  achievement: achievement_order_by
   achievement_id: order_by
   created_at: order_by
+  user: users_order_by
   user_id: order_by
 }
 
