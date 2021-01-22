@@ -1,0 +1,4801 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+# columns and relationships of "achievement"
+type achievement {
+  achievement_type: String
+  created_at: timestamptz
+  description: String
+  id: Int!
+  name: String!
+  rule(
+    # JSON select path
+    path: String
+  ): json!
+}
+
+# aggregated selection of "achievement"
+type achievement_aggregate {
+  aggregate: achievement_aggregate_fields
+  nodes: [achievement!]!
+}
+
+# aggregate fields of "achievement"
+type achievement_aggregate_fields {
+  avg: achievement_avg_fields
+  count(columns: [achievement_select_column!], distinct: Boolean): Int
+  max: achievement_max_fields
+  min: achievement_min_fields
+  stddev: achievement_stddev_fields
+  stddev_pop: achievement_stddev_pop_fields
+  stddev_samp: achievement_stddev_samp_fields
+  sum: achievement_sum_fields
+  var_pop: achievement_var_pop_fields
+  var_samp: achievement_var_samp_fields
+  variance: achievement_variance_fields
+}
+
+# order by aggregate values of table "achievement"
+input achievement_aggregate_order_by {
+  avg: achievement_avg_order_by
+  count: order_by
+  max: achievement_max_order_by
+  min: achievement_min_order_by
+  stddev: achievement_stddev_order_by
+  stddev_pop: achievement_stddev_pop_order_by
+  stddev_samp: achievement_stddev_samp_order_by
+  sum: achievement_sum_order_by
+  var_pop: achievement_var_pop_order_by
+  var_samp: achievement_var_samp_order_by
+  variance: achievement_variance_order_by
+}
+
+# input type for inserting array relation for remote table "achievement"
+input achievement_arr_rel_insert_input {
+  data: [achievement_insert_input!]!
+  on_conflict: achievement_on_conflict
+}
+
+# aggregate avg on columns
+type achievement_avg_fields {
+  id: Float
+}
+
+# order by avg() on columns of table "achievement"
+input achievement_avg_order_by {
+  id: order_by
+}
+
+# Boolean expression to filter rows from the table "achievement". All fields are combined with a logical 'AND'.
+input achievement_bool_exp {
+  _and: [achievement_bool_exp]
+  _not: achievement_bool_exp
+  _or: [achievement_bool_exp]
+  achievement_type: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  description: String_comparison_exp
+  id: Int_comparison_exp
+  name: String_comparison_exp
+  rule: json_comparison_exp
+}
+
+# unique or primary key constraints on table "achievement"
+enum achievement_constraint {
+  # unique or primary key constraint
+  Acheivement_name_key
+
+  # unique or primary key constraint
+  Acheivement_pkey
+}
+
+# input type for incrementing integer column in table "achievement"
+input achievement_inc_input {
+  id: Int
+}
+
+# input type for inserting data into table "achievement"
+input achievement_insert_input {
+  achievement_type: String
+  created_at: timestamptz
+  description: String
+  id: Int
+  name: String
+  rule: json
+}
+
+# aggregate max on columns
+type achievement_max_fields {
+  achievement_type: String
+  created_at: timestamptz
+  description: String
+  id: Int
+  name: String
+}
+
+# order by max() on columns of table "achievement"
+input achievement_max_order_by {
+  achievement_type: order_by
+  created_at: order_by
+  description: order_by
+  id: order_by
+  name: order_by
+}
+
+# aggregate min on columns
+type achievement_min_fields {
+  achievement_type: String
+  created_at: timestamptz
+  description: String
+  id: Int
+  name: String
+}
+
+# order by min() on columns of table "achievement"
+input achievement_min_order_by {
+  achievement_type: order_by
+  created_at: order_by
+  description: order_by
+  id: order_by
+  name: order_by
+}
+
+# response of any mutation on the table "achievement"
+type achievement_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [achievement!]!
+}
+
+# input type for inserting object relation for remote table "achievement"
+input achievement_obj_rel_insert_input {
+  data: achievement_insert_input!
+  on_conflict: achievement_on_conflict
+}
+
+# on conflict condition type for table "achievement"
+input achievement_on_conflict {
+  constraint: achievement_constraint!
+  update_columns: [achievement_update_column!]!
+  where: achievement_bool_exp
+}
+
+# ordering options when selecting data from "achievement"
+input achievement_order_by {
+  achievement_type: order_by
+  created_at: order_by
+  description: order_by
+  id: order_by
+  name: order_by
+  rule: order_by
+}
+
+# primary key columns input for table: "achievement"
+input achievement_pk_columns_input {
+  id: Int!
+}
+
+# select columns of table "achievement"
+enum achievement_select_column {
+  # column name
+  achievement_type
+
+  # column name
+  created_at
+
+  # column name
+  description
+
+  # column name
+  id
+
+  # column name
+  name
+
+  # column name
+  rule
+}
+
+# input type for updating data in table "achievement"
+input achievement_set_input {
+  achievement_type: String
+  created_at: timestamptz
+  description: String
+  id: Int
+  name: String
+  rule: json
+}
+
+# aggregate stddev on columns
+type achievement_stddev_fields {
+  id: Float
+}
+
+# order by stddev() on columns of table "achievement"
+input achievement_stddev_order_by {
+  id: order_by
+}
+
+# aggregate stddev_pop on columns
+type achievement_stddev_pop_fields {
+  id: Float
+}
+
+# order by stddev_pop() on columns of table "achievement"
+input achievement_stddev_pop_order_by {
+  id: order_by
+}
+
+# aggregate stddev_samp on columns
+type achievement_stddev_samp_fields {
+  id: Float
+}
+
+# order by stddev_samp() on columns of table "achievement"
+input achievement_stddev_samp_order_by {
+  id: order_by
+}
+
+# aggregate sum on columns
+type achievement_sum_fields {
+  id: Int
+}
+
+# order by sum() on columns of table "achievement"
+input achievement_sum_order_by {
+  id: order_by
+}
+
+# columns and relationships of "achievement_type"
+type achievement_type {
+  description: String
+  name: String!
+}
+
+# aggregated selection of "achievement_type"
+type achievement_type_aggregate {
+  aggregate: achievement_type_aggregate_fields
+  nodes: [achievement_type!]!
+}
+
+# aggregate fields of "achievement_type"
+type achievement_type_aggregate_fields {
+  count(columns: [achievement_type_select_column!], distinct: Boolean): Int
+  max: achievement_type_max_fields
+  min: achievement_type_min_fields
+}
+
+# order by aggregate values of table "achievement_type"
+input achievement_type_aggregate_order_by {
+  count: order_by
+  max: achievement_type_max_order_by
+  min: achievement_type_min_order_by
+}
+
+# input type for inserting array relation for remote table "achievement_type"
+input achievement_type_arr_rel_insert_input {
+  data: [achievement_type_insert_input!]!
+  on_conflict: achievement_type_on_conflict
+}
+
+# Boolean expression to filter rows from the table "achievement_type". All fields are combined with a logical 'AND'.
+input achievement_type_bool_exp {
+  _and: [achievement_type_bool_exp]
+  _not: achievement_type_bool_exp
+  _or: [achievement_type_bool_exp]
+  description: String_comparison_exp
+  name: String_comparison_exp
+}
+
+# unique or primary key constraints on table "achievement_type"
+enum achievement_type_constraint {
+  # unique or primary key constraint
+  achievement_type_pkey
+}
+
+# input type for inserting data into table "achievement_type"
+input achievement_type_insert_input {
+  description: String
+  name: String
+}
+
+# aggregate max on columns
+type achievement_type_max_fields {
+  description: String
+  name: String
+}
+
+# order by max() on columns of table "achievement_type"
+input achievement_type_max_order_by {
+  description: order_by
+  name: order_by
+}
+
+# aggregate min on columns
+type achievement_type_min_fields {
+  description: String
+  name: String
+}
+
+# order by min() on columns of table "achievement_type"
+input achievement_type_min_order_by {
+  description: order_by
+  name: order_by
+}
+
+# response of any mutation on the table "achievement_type"
+type achievement_type_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [achievement_type!]!
+}
+
+# input type for inserting object relation for remote table "achievement_type"
+input achievement_type_obj_rel_insert_input {
+  data: achievement_type_insert_input!
+  on_conflict: achievement_type_on_conflict
+}
+
+# on conflict condition type for table "achievement_type"
+input achievement_type_on_conflict {
+  constraint: achievement_type_constraint!
+  update_columns: [achievement_type_update_column!]!
+  where: achievement_type_bool_exp
+}
+
+# ordering options when selecting data from "achievement_type"
+input achievement_type_order_by {
+  description: order_by
+  name: order_by
+}
+
+# primary key columns input for table: "achievement_type"
+input achievement_type_pk_columns_input {
+  name: String!
+}
+
+# select columns of table "achievement_type"
+enum achievement_type_select_column {
+  # column name
+  description
+
+  # column name
+  name
+}
+
+# input type for updating data in table "achievement_type"
+input achievement_type_set_input {
+  description: String
+  name: String
+}
+
+# update columns of table "achievement_type"
+enum achievement_type_update_column {
+  # column name
+  description
+
+  # column name
+  name
+}
+
+# update columns of table "achievement"
+enum achievement_update_column {
+  # column name
+  achievement_type
+
+  # column name
+  created_at
+
+  # column name
+  description
+
+  # column name
+  id
+
+  # column name
+  name
+
+  # column name
+  rule
+}
+
+# aggregate var_pop on columns
+type achievement_var_pop_fields {
+  id: Float
+}
+
+# order by var_pop() on columns of table "achievement"
+input achievement_var_pop_order_by {
+  id: order_by
+}
+
+# aggregate var_samp on columns
+type achievement_var_samp_fields {
+  id: Float
+}
+
+# order by var_samp() on columns of table "achievement"
+input achievement_var_samp_order_by {
+  id: order_by
+}
+
+# aggregate variance on columns
+type achievement_variance_fields {
+  id: Float
+}
+
+# order by variance() on columns of table "achievement"
+input achievement_variance_order_by {
+  id: order_by
+}
+
+# columns and relationships of "activities"
+type activities {
+  activity_id: Int!
+  caption: String
+
+  # An array relationship
+  comments(
+    # distinct select on columns
+    distinct_on: [comments_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [comments_order_by!]
+
+    # filter the rows returned
+    where: comments_bool_exp
+  ): [comments!]!
+
+  # An aggregated array relationship
+  comments_aggregate(
+    # distinct select on columns
+    distinct_on: [comments_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [comments_order_by!]
+
+    # filter the rows returned
+    where: comments_bool_exp
+  ): comments_aggregate!
+  created_at: timestamptz
+  duration: interval!
+
+  # An object relationship
+  geofence: geofences!
+  geofence_id: Int!
+
+  # An array relationship
+  likes(
+    # distinct select on columns
+    distinct_on: [likes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [likes_order_by!]
+
+    # filter the rows returned
+    where: likes_bool_exp
+  ): [likes!]!
+
+  # An aggregated array relationship
+  likes_aggregate(
+    # distinct select on columns
+    distinct_on: [likes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [likes_order_by!]
+
+    # filter the rows returned
+    where: likes_bool_exp
+  ): likes_aggregate!
+  score: Int
+  started_at: timestamptz!
+
+  # A computed field, executes function "stopped_at"
+  stopped_at: timestamptz
+  updated_at: timestamptz
+
+  # An object relationship
+  user: users!
+  user_id: String!
+}
+
+# aggregated selection of "activities"
+type activities_aggregate {
+  aggregate: activities_aggregate_fields
+  nodes: [activities!]!
+}
+
+# aggregate fields of "activities"
+type activities_aggregate_fields {
+  avg: activities_avg_fields
+  count(columns: [activities_select_column!], distinct: Boolean): Int
+  max: activities_max_fields
+  min: activities_min_fields
+  stddev: activities_stddev_fields
+  stddev_pop: activities_stddev_pop_fields
+  stddev_samp: activities_stddev_samp_fields
+  sum: activities_sum_fields
+  var_pop: activities_var_pop_fields
+  var_samp: activities_var_samp_fields
+  variance: activities_variance_fields
+}
+
+# order by aggregate values of table "activities"
+input activities_aggregate_order_by {
+  avg: activities_avg_order_by
+  count: order_by
+  max: activities_max_order_by
+  min: activities_min_order_by
+  stddev: activities_stddev_order_by
+  stddev_pop: activities_stddev_pop_order_by
+  stddev_samp: activities_stddev_samp_order_by
+  sum: activities_sum_order_by
+  var_pop: activities_var_pop_order_by
+  var_samp: activities_var_samp_order_by
+  variance: activities_variance_order_by
+}
+
+# input type for inserting array relation for remote table "activities"
+input activities_arr_rel_insert_input {
+  data: [activities_insert_input!]!
+  on_conflict: activities_on_conflict
+}
+
+# aggregate avg on columns
+type activities_avg_fields {
+  activity_id: Float
+  geofence_id: Float
+  score: Float
+}
+
+# order by avg() on columns of table "activities"
+input activities_avg_order_by {
+  activity_id: order_by
+  geofence_id: order_by
+  score: order_by
+}
+
+# Boolean expression to filter rows from the table "activities". All fields are combined with a logical 'AND'.
+input activities_bool_exp {
+  _and: [activities_bool_exp]
+  _not: activities_bool_exp
+  _or: [activities_bool_exp]
+  activity_id: Int_comparison_exp
+  caption: String_comparison_exp
+  comments: comments_bool_exp
+  created_at: timestamptz_comparison_exp
+  duration: interval_comparison_exp
+  geofence: geofences_bool_exp
+  geofence_id: Int_comparison_exp
+  likes: likes_bool_exp
+  score: Int_comparison_exp
+  started_at: timestamptz_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  user: users_bool_exp
+  user_id: String_comparison_exp
+}
+
+# unique or primary key constraints on table "activities"
+enum activities_constraint {
+  # unique or primary key constraint
+  Activity_pkey
+}
+
+# input type for incrementing integer column in table "activities"
+input activities_inc_input {
+  activity_id: Int
+  geofence_id: Int
+  score: Int
+}
+
+# input type for inserting data into table "activities"
+input activities_insert_input {
+  activity_id: Int
+  caption: String
+  comments: comments_arr_rel_insert_input
+  created_at: timestamptz
+  duration: interval
+  geofence: geofences_obj_rel_insert_input
+  geofence_id: Int
+  likes: likes_arr_rel_insert_input
+  score: Int
+  started_at: timestamptz
+  updated_at: timestamptz
+  user: users_obj_rel_insert_input
+  user_id: String
+}
+
+# aggregate max on columns
+type activities_max_fields {
+  activity_id: Int
+  caption: String
+  created_at: timestamptz
+  geofence_id: Int
+  score: Int
+  started_at: timestamptz
+  updated_at: timestamptz
+  user_id: String
+}
+
+# order by max() on columns of table "activities"
+input activities_max_order_by {
+  activity_id: order_by
+  caption: order_by
+  created_at: order_by
+  geofence_id: order_by
+  score: order_by
+  started_at: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+# aggregate min on columns
+type activities_min_fields {
+  activity_id: Int
+  caption: String
+  created_at: timestamptz
+  geofence_id: Int
+  score: Int
+  started_at: timestamptz
+  updated_at: timestamptz
+  user_id: String
+}
+
+# order by min() on columns of table "activities"
+input activities_min_order_by {
+  activity_id: order_by
+  caption: order_by
+  created_at: order_by
+  geofence_id: order_by
+  score: order_by
+  started_at: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+# response of any mutation on the table "activities"
+type activities_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [activities!]!
+}
+
+# input type for inserting object relation for remote table "activities"
+input activities_obj_rel_insert_input {
+  data: activities_insert_input!
+  on_conflict: activities_on_conflict
+}
+
+# on conflict condition type for table "activities"
+input activities_on_conflict {
+  constraint: activities_constraint!
+  update_columns: [activities_update_column!]!
+  where: activities_bool_exp
+}
+
+# ordering options when selecting data from "activities"
+input activities_order_by {
+  activity_id: order_by
+  caption: order_by
+  comments_aggregate: comments_aggregate_order_by
+  created_at: order_by
+  duration: order_by
+  geofence: geofences_order_by
+  geofence_id: order_by
+  likes_aggregate: likes_aggregate_order_by
+  score: order_by
+  started_at: order_by
+  updated_at: order_by
+  user: users_order_by
+  user_id: order_by
+}
+
+# primary key columns input for table: "activities"
+input activities_pk_columns_input {
+  activity_id: Int!
+}
+
+# select columns of table "activities"
+enum activities_select_column {
+  # column name
+  activity_id
+
+  # column name
+  caption
+
+  # column name
+  created_at
+
+  # column name
+  duration
+
+  # column name
+  geofence_id
+
+  # column name
+  score
+
+  # column name
+  started_at
+
+  # column name
+  updated_at
+
+  # column name
+  user_id
+}
+
+# input type for updating data in table "activities"
+input activities_set_input {
+  activity_id: Int
+  caption: String
+  created_at: timestamptz
+  duration: interval
+  geofence_id: Int
+  score: Int
+  started_at: timestamptz
+  updated_at: timestamptz
+  user_id: String
+}
+
+# aggregate stddev on columns
+type activities_stddev_fields {
+  activity_id: Float
+  geofence_id: Float
+  score: Float
+}
+
+# order by stddev() on columns of table "activities"
+input activities_stddev_order_by {
+  activity_id: order_by
+  geofence_id: order_by
+  score: order_by
+}
+
+# aggregate stddev_pop on columns
+type activities_stddev_pop_fields {
+  activity_id: Float
+  geofence_id: Float
+  score: Float
+}
+
+# order by stddev_pop() on columns of table "activities"
+input activities_stddev_pop_order_by {
+  activity_id: order_by
+  geofence_id: order_by
+  score: order_by
+}
+
+# aggregate stddev_samp on columns
+type activities_stddev_samp_fields {
+  activity_id: Float
+  geofence_id: Float
+  score: Float
+}
+
+# order by stddev_samp() on columns of table "activities"
+input activities_stddev_samp_order_by {
+  activity_id: order_by
+  geofence_id: order_by
+  score: order_by
+}
+
+# aggregate sum on columns
+type activities_sum_fields {
+  activity_id: Int
+  geofence_id: Int
+  score: Int
+}
+
+# order by sum() on columns of table "activities"
+input activities_sum_order_by {
+  activity_id: order_by
+  geofence_id: order_by
+  score: order_by
+}
+
+# update columns of table "activities"
+enum activities_update_column {
+  # column name
+  activity_id
+
+  # column name
+  caption
+
+  # column name
+  created_at
+
+  # column name
+  duration
+
+  # column name
+  geofence_id
+
+  # column name
+  score
+
+  # column name
+  started_at
+
+  # column name
+  updated_at
+
+  # column name
+  user_id
+}
+
+# aggregate var_pop on columns
+type activities_var_pop_fields {
+  activity_id: Float
+  geofence_id: Float
+  score: Float
+}
+
+# order by var_pop() on columns of table "activities"
+input activities_var_pop_order_by {
+  activity_id: order_by
+  geofence_id: order_by
+  score: order_by
+}
+
+# aggregate var_samp on columns
+type activities_var_samp_fields {
+  activity_id: Float
+  geofence_id: Float
+  score: Float
+}
+
+# order by var_samp() on columns of table "activities"
+input activities_var_samp_order_by {
+  activity_id: order_by
+  geofence_id: order_by
+  score: order_by
+}
+
+# aggregate variance on columns
+type activities_variance_fields {
+  activity_id: Float
+  geofence_id: Float
+  score: Float
+}
+
+# order by variance() on columns of table "activities"
+input activities_variance_order_by {
+  activity_id: order_by
+  geofence_id: order_by
+  score: order_by
+}
+
+scalar bigint
+
+# columns and relationships of "categories"
+type categories {
+  description: String
+  name: String!
+  points_per_minute: Int!
+}
+
+# aggregated selection of "categories"
+type categories_aggregate {
+  aggregate: categories_aggregate_fields
+  nodes: [categories!]!
+}
+
+# aggregate fields of "categories"
+type categories_aggregate_fields {
+  avg: categories_avg_fields
+  count(columns: [categories_select_column!], distinct: Boolean): Int
+  max: categories_max_fields
+  min: categories_min_fields
+  stddev: categories_stddev_fields
+  stddev_pop: categories_stddev_pop_fields
+  stddev_samp: categories_stddev_samp_fields
+  sum: categories_sum_fields
+  var_pop: categories_var_pop_fields
+  var_samp: categories_var_samp_fields
+  variance: categories_variance_fields
+}
+
+# order by aggregate values of table "categories"
+input categories_aggregate_order_by {
+  avg: categories_avg_order_by
+  count: order_by
+  max: categories_max_order_by
+  min: categories_min_order_by
+  stddev: categories_stddev_order_by
+  stddev_pop: categories_stddev_pop_order_by
+  stddev_samp: categories_stddev_samp_order_by
+  sum: categories_sum_order_by
+  var_pop: categories_var_pop_order_by
+  var_samp: categories_var_samp_order_by
+  variance: categories_variance_order_by
+}
+
+# input type for inserting array relation for remote table "categories"
+input categories_arr_rel_insert_input {
+  data: [categories_insert_input!]!
+  on_conflict: categories_on_conflict
+}
+
+# aggregate avg on columns
+type categories_avg_fields {
+  points_per_minute: Float
+}
+
+# order by avg() on columns of table "categories"
+input categories_avg_order_by {
+  points_per_minute: order_by
+}
+
+# Boolean expression to filter rows from the table "categories". All fields are combined with a logical 'AND'.
+input categories_bool_exp {
+  _and: [categories_bool_exp]
+  _not: categories_bool_exp
+  _or: [categories_bool_exp]
+  description: String_comparison_exp
+  name: String_comparison_exp
+  points_per_minute: Int_comparison_exp
+}
+
+# unique or primary key constraints on table "categories"
+enum categories_constraint {
+  # unique or primary key constraint
+  Category_name_key
+
+  # unique or primary key constraint
+  categories_pkey
+}
+
+# input type for incrementing integer column in table "categories"
+input categories_inc_input {
+  points_per_minute: Int
+}
+
+# input type for inserting data into table "categories"
+input categories_insert_input {
+  description: String
+  name: String
+  points_per_minute: Int
+}
+
+# aggregate max on columns
+type categories_max_fields {
+  description: String
+  name: String
+  points_per_minute: Int
+}
+
+# order by max() on columns of table "categories"
+input categories_max_order_by {
+  description: order_by
+  name: order_by
+  points_per_minute: order_by
+}
+
+# aggregate min on columns
+type categories_min_fields {
+  description: String
+  name: String
+  points_per_minute: Int
+}
+
+# order by min() on columns of table "categories"
+input categories_min_order_by {
+  description: order_by
+  name: order_by
+  points_per_minute: order_by
+}
+
+# response of any mutation on the table "categories"
+type categories_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [categories!]!
+}
+
+# input type for inserting object relation for remote table "categories"
+input categories_obj_rel_insert_input {
+  data: categories_insert_input!
+  on_conflict: categories_on_conflict
+}
+
+# on conflict condition type for table "categories"
+input categories_on_conflict {
+  constraint: categories_constraint!
+  update_columns: [categories_update_column!]!
+  where: categories_bool_exp
+}
+
+# ordering options when selecting data from "categories"
+input categories_order_by {
+  description: order_by
+  name: order_by
+  points_per_minute: order_by
+}
+
+# primary key columns input for table: "categories"
+input categories_pk_columns_input {
+  name: String!
+}
+
+# select columns of table "categories"
+enum categories_select_column {
+  # column name
+  description
+
+  # column name
+  name
+
+  # column name
+  points_per_minute
+}
+
+# input type for updating data in table "categories"
+input categories_set_input {
+  description: String
+  name: String
+  points_per_minute: Int
+}
+
+# aggregate stddev on columns
+type categories_stddev_fields {
+  points_per_minute: Float
+}
+
+# order by stddev() on columns of table "categories"
+input categories_stddev_order_by {
+  points_per_minute: order_by
+}
+
+# aggregate stddev_pop on columns
+type categories_stddev_pop_fields {
+  points_per_minute: Float
+}
+
+# order by stddev_pop() on columns of table "categories"
+input categories_stddev_pop_order_by {
+  points_per_minute: order_by
+}
+
+# aggregate stddev_samp on columns
+type categories_stddev_samp_fields {
+  points_per_minute: Float
+}
+
+# order by stddev_samp() on columns of table "categories"
+input categories_stddev_samp_order_by {
+  points_per_minute: order_by
+}
+
+# aggregate sum on columns
+type categories_sum_fields {
+  points_per_minute: Int
+}
+
+# order by sum() on columns of table "categories"
+input categories_sum_order_by {
+  points_per_minute: order_by
+}
+
+# update columns of table "categories"
+enum categories_update_column {
+  # column name
+  description
+
+  # column name
+  name
+
+  # column name
+  points_per_minute
+}
+
+# aggregate var_pop on columns
+type categories_var_pop_fields {
+  points_per_minute: Float
+}
+
+# order by var_pop() on columns of table "categories"
+input categories_var_pop_order_by {
+  points_per_minute: order_by
+}
+
+# aggregate var_samp on columns
+type categories_var_samp_fields {
+  points_per_minute: Float
+}
+
+# order by var_samp() on columns of table "categories"
+input categories_var_samp_order_by {
+  points_per_minute: order_by
+}
+
+# aggregate variance on columns
+type categories_variance_fields {
+  points_per_minute: Float
+}
+
+# order by variance() on columns of table "categories"
+input categories_variance_order_by {
+  points_per_minute: order_by
+}
+
+# columns and relationships of "comments"
+type comments {
+  # An object relationship
+  activity: activities!
+  activity_id: Int!
+  comment_id: Int!
+  content: String!
+  created_at: timestamptz
+  updated_at: timestamp
+
+  # An object relationship
+  user: users!
+  user_id: String!
+}
+
+# aggregated selection of "comments"
+type comments_aggregate {
+  aggregate: comments_aggregate_fields
+  nodes: [comments!]!
+}
+
+# aggregate fields of "comments"
+type comments_aggregate_fields {
+  avg: comments_avg_fields
+  count(columns: [comments_select_column!], distinct: Boolean): Int
+  max: comments_max_fields
+  min: comments_min_fields
+  stddev: comments_stddev_fields
+  stddev_pop: comments_stddev_pop_fields
+  stddev_samp: comments_stddev_samp_fields
+  sum: comments_sum_fields
+  var_pop: comments_var_pop_fields
+  var_samp: comments_var_samp_fields
+  variance: comments_variance_fields
+}
+
+# order by aggregate values of table "comments"
+input comments_aggregate_order_by {
+  avg: comments_avg_order_by
+  count: order_by
+  max: comments_max_order_by
+  min: comments_min_order_by
+  stddev: comments_stddev_order_by
+  stddev_pop: comments_stddev_pop_order_by
+  stddev_samp: comments_stddev_samp_order_by
+  sum: comments_sum_order_by
+  var_pop: comments_var_pop_order_by
+  var_samp: comments_var_samp_order_by
+  variance: comments_variance_order_by
+}
+
+# input type for inserting array relation for remote table "comments"
+input comments_arr_rel_insert_input {
+  data: [comments_insert_input!]!
+  on_conflict: comments_on_conflict
+}
+
+# aggregate avg on columns
+type comments_avg_fields {
+  activity_id: Float
+  comment_id: Float
+}
+
+# order by avg() on columns of table "comments"
+input comments_avg_order_by {
+  activity_id: order_by
+  comment_id: order_by
+}
+
+# Boolean expression to filter rows from the table "comments". All fields are combined with a logical 'AND'.
+input comments_bool_exp {
+  _and: [comments_bool_exp]
+  _not: comments_bool_exp
+  _or: [comments_bool_exp]
+  activity: activities_bool_exp
+  activity_id: Int_comparison_exp
+  comment_id: Int_comparison_exp
+  content: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  updated_at: timestamp_comparison_exp
+  user: users_bool_exp
+  user_id: String_comparison_exp
+}
+
+# unique or primary key constraints on table "comments"
+enum comments_constraint {
+  # unique or primary key constraint
+  Comments_pkey
+}
+
+# input type for incrementing integer column in table "comments"
+input comments_inc_input {
+  activity_id: Int
+  comment_id: Int
+}
+
+# input type for inserting data into table "comments"
+input comments_insert_input {
+  activity: activities_obj_rel_insert_input
+  activity_id: Int
+  comment_id: Int
+  content: String
+  created_at: timestamptz
+  updated_at: timestamp
+  user: users_obj_rel_insert_input
+  user_id: String
+}
+
+# aggregate max on columns
+type comments_max_fields {
+  activity_id: Int
+  comment_id: Int
+  content: String
+  created_at: timestamptz
+  updated_at: timestamp
+  user_id: String
+}
+
+# order by max() on columns of table "comments"
+input comments_max_order_by {
+  activity_id: order_by
+  comment_id: order_by
+  content: order_by
+  created_at: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+# aggregate min on columns
+type comments_min_fields {
+  activity_id: Int
+  comment_id: Int
+  content: String
+  created_at: timestamptz
+  updated_at: timestamp
+  user_id: String
+}
+
+# order by min() on columns of table "comments"
+input comments_min_order_by {
+  activity_id: order_by
+  comment_id: order_by
+  content: order_by
+  created_at: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+# response of any mutation on the table "comments"
+type comments_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [comments!]!
+}
+
+# input type for inserting object relation for remote table "comments"
+input comments_obj_rel_insert_input {
+  data: comments_insert_input!
+  on_conflict: comments_on_conflict
+}
+
+# on conflict condition type for table "comments"
+input comments_on_conflict {
+  constraint: comments_constraint!
+  update_columns: [comments_update_column!]!
+  where: comments_bool_exp
+}
+
+# ordering options when selecting data from "comments"
+input comments_order_by {
+  activity: activities_order_by
+  activity_id: order_by
+  comment_id: order_by
+  content: order_by
+  created_at: order_by
+  updated_at: order_by
+  user: users_order_by
+  user_id: order_by
+}
+
+# primary key columns input for table: "comments"
+input comments_pk_columns_input {
+  comment_id: Int!
+}
+
+# select columns of table "comments"
+enum comments_select_column {
+  # column name
+  activity_id
+
+  # column name
+  comment_id
+
+  # column name
+  content
+
+  # column name
+  created_at
+
+  # column name
+  updated_at
+
+  # column name
+  user_id
+}
+
+# input type for updating data in table "comments"
+input comments_set_input {
+  activity_id: Int
+  comment_id: Int
+  content: String
+  created_at: timestamptz
+  updated_at: timestamp
+  user_id: String
+}
+
+# aggregate stddev on columns
+type comments_stddev_fields {
+  activity_id: Float
+  comment_id: Float
+}
+
+# order by stddev() on columns of table "comments"
+input comments_stddev_order_by {
+  activity_id: order_by
+  comment_id: order_by
+}
+
+# aggregate stddev_pop on columns
+type comments_stddev_pop_fields {
+  activity_id: Float
+  comment_id: Float
+}
+
+# order by stddev_pop() on columns of table "comments"
+input comments_stddev_pop_order_by {
+  activity_id: order_by
+  comment_id: order_by
+}
+
+# aggregate stddev_samp on columns
+type comments_stddev_samp_fields {
+  activity_id: Float
+  comment_id: Float
+}
+
+# order by stddev_samp() on columns of table "comments"
+input comments_stddev_samp_order_by {
+  activity_id: order_by
+  comment_id: order_by
+}
+
+# aggregate sum on columns
+type comments_sum_fields {
+  activity_id: Int
+  comment_id: Int
+}
+
+# order by sum() on columns of table "comments"
+input comments_sum_order_by {
+  activity_id: order_by
+  comment_id: order_by
+}
+
+# update columns of table "comments"
+enum comments_update_column {
+  # column name
+  activity_id
+
+  # column name
+  comment_id
+
+  # column name
+  content
+
+  # column name
+  created_at
+
+  # column name
+  updated_at
+
+  # column name
+  user_id
+}
+
+# aggregate var_pop on columns
+type comments_var_pop_fields {
+  activity_id: Float
+  comment_id: Float
+}
+
+# order by var_pop() on columns of table "comments"
+input comments_var_pop_order_by {
+  activity_id: order_by
+  comment_id: order_by
+}
+
+# aggregate var_samp on columns
+type comments_var_samp_fields {
+  activity_id: Float
+  comment_id: Float
+}
+
+# order by var_samp() on columns of table "comments"
+input comments_var_samp_order_by {
+  activity_id: order_by
+  comment_id: order_by
+}
+
+# aggregate variance on columns
+type comments_variance_fields {
+  activity_id: Float
+  comment_id: Float
+}
+
+# order by variance() on columns of table "comments"
+input comments_variance_order_by {
+  activity_id: order_by
+  comment_id: order_by
+}
+
+scalar float8
+
+# expression to compare columns of type float8. All fields are combined with logical 'AND'.
+input float8_comparison_exp {
+  _eq: float8
+  _gt: float8
+  _gte: float8
+  _in: [float8!]
+  _is_null: Boolean
+  _lt: float8
+  _lte: float8
+  _neq: float8
+  _nin: [float8!]
+}
+
+# columns and relationships of "followings"
+type followings {
+  created_at: timestamptz
+
+  # An object relationship
+  follower: users!
+  following_id: String!
+  updated_at: timestamptz
+
+  # An object relationship
+  user: users!
+  user_id: String!
+}
+
+# aggregated selection of "followings"
+type followings_aggregate {
+  aggregate: followings_aggregate_fields
+  nodes: [followings!]!
+}
+
+# aggregate fields of "followings"
+type followings_aggregate_fields {
+  count(columns: [followings_select_column!], distinct: Boolean): Int
+  max: followings_max_fields
+  min: followings_min_fields
+}
+
+# order by aggregate values of table "followings"
+input followings_aggregate_order_by {
+  count: order_by
+  max: followings_max_order_by
+  min: followings_min_order_by
+}
+
+# input type for inserting array relation for remote table "followings"
+input followings_arr_rel_insert_input {
+  data: [followings_insert_input!]!
+  on_conflict: followings_on_conflict
+}
+
+# Boolean expression to filter rows from the table "followings". All fields are combined with a logical 'AND'.
+input followings_bool_exp {
+  _and: [followings_bool_exp]
+  _not: followings_bool_exp
+  _or: [followings_bool_exp]
+  created_at: timestamptz_comparison_exp
+  follower: users_bool_exp
+  following_id: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  user: users_bool_exp
+  user_id: String_comparison_exp
+}
+
+# unique or primary key constraints on table "followings"
+enum followings_constraint {
+  # unique or primary key constraint
+  Followings_pkey
+}
+
+# input type for inserting data into table "followings"
+input followings_insert_input {
+  created_at: timestamptz
+  follower: users_obj_rel_insert_input
+  following_id: String
+  updated_at: timestamptz
+  user: users_obj_rel_insert_input
+  user_id: String
+}
+
+# aggregate max on columns
+type followings_max_fields {
+  created_at: timestamptz
+  following_id: String
+  updated_at: timestamptz
+  user_id: String
+}
+
+# order by max() on columns of table "followings"
+input followings_max_order_by {
+  created_at: order_by
+  following_id: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+# aggregate min on columns
+type followings_min_fields {
+  created_at: timestamptz
+  following_id: String
+  updated_at: timestamptz
+  user_id: String
+}
+
+# order by min() on columns of table "followings"
+input followings_min_order_by {
+  created_at: order_by
+  following_id: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+# response of any mutation on the table "followings"
+type followings_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [followings!]!
+}
+
+# input type for inserting object relation for remote table "followings"
+input followings_obj_rel_insert_input {
+  data: followings_insert_input!
+  on_conflict: followings_on_conflict
+}
+
+# on conflict condition type for table "followings"
+input followings_on_conflict {
+  constraint: followings_constraint!
+  update_columns: [followings_update_column!]!
+  where: followings_bool_exp
+}
+
+# ordering options when selecting data from "followings"
+input followings_order_by {
+  created_at: order_by
+  follower: users_order_by
+  following_id: order_by
+  updated_at: order_by
+  user: users_order_by
+  user_id: order_by
+}
+
+# primary key columns input for table: "followings"
+input followings_pk_columns_input {
+  following_id: String!
+  user_id: String!
+}
+
+# select columns of table "followings"
+enum followings_select_column {
+  # column name
+  created_at
+
+  # column name
+  following_id
+
+  # column name
+  updated_at
+
+  # column name
+  user_id
+}
+
+# input type for updating data in table "followings"
+input followings_set_input {
+  created_at: timestamptz
+  following_id: String
+  updated_at: timestamptz
+  user_id: String
+}
+
+# update columns of table "followings"
+enum followings_update_column {
+  # column name
+  created_at
+
+  # column name
+  following_id
+
+  # column name
+  updated_at
+
+  # column name
+  user_id
+}
+
+# columns and relationships of "geofence_variants"
+type geofence_variants {
+  description: String
+
+  # An array relationship
+  geofences(
+    # distinct select on columns
+    distinct_on: [geofences_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofences_order_by!]
+
+    # filter the rows returned
+    where: geofences_bool_exp
+  ): [geofences!]!
+
+  # An aggregated array relationship
+  geofences_aggregate(
+    # distinct select on columns
+    distinct_on: [geofences_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofences_order_by!]
+
+    # filter the rows returned
+    where: geofences_bool_exp
+  ): geofences_aggregate!
+  name: String!
+}
+
+# aggregated selection of "geofence_variants"
+type geofence_variants_aggregate {
+  aggregate: geofence_variants_aggregate_fields
+  nodes: [geofence_variants!]!
+}
+
+# aggregate fields of "geofence_variants"
+type geofence_variants_aggregate_fields {
+  count(columns: [geofence_variants_select_column!], distinct: Boolean): Int
+  max: geofence_variants_max_fields
+  min: geofence_variants_min_fields
+}
+
+# order by aggregate values of table "geofence_variants"
+input geofence_variants_aggregate_order_by {
+  count: order_by
+  max: geofence_variants_max_order_by
+  min: geofence_variants_min_order_by
+}
+
+# input type for inserting array relation for remote table "geofence_variants"
+input geofence_variants_arr_rel_insert_input {
+  data: [geofence_variants_insert_input!]!
+  on_conflict: geofence_variants_on_conflict
+}
+
+# Boolean expression to filter rows from the table "geofence_variants". All fields are combined with a logical 'AND'.
+input geofence_variants_bool_exp {
+  _and: [geofence_variants_bool_exp]
+  _not: geofence_variants_bool_exp
+  _or: [geofence_variants_bool_exp]
+  description: String_comparison_exp
+  geofences: geofences_bool_exp
+  name: String_comparison_exp
+}
+
+# unique or primary key constraints on table "geofence_variants"
+enum geofence_variants_constraint {
+  # unique or primary key constraint
+  geo_fence_categories_pkey
+}
+
+enum geofence_variants_enum {
+  # Circle geofence
+  CIRCLE
+
+  # Polygon geofence
+  POLYGON
+}
+
+# expression to compare columns of type geofence_variants_enum. All fields are combined with logical 'AND'.
+input geofence_variants_enum_comparison_exp {
+  _eq: geofence_variants_enum
+  _in: [geofence_variants_enum!]
+  _is_null: Boolean
+  _neq: geofence_variants_enum
+  _nin: [geofence_variants_enum!]
+}
+
+# input type for inserting data into table "geofence_variants"
+input geofence_variants_insert_input {
+  description: String
+  geofences: geofences_arr_rel_insert_input
+  name: String
+}
+
+# aggregate max on columns
+type geofence_variants_max_fields {
+  description: String
+  name: String
+}
+
+# order by max() on columns of table "geofence_variants"
+input geofence_variants_max_order_by {
+  description: order_by
+  name: order_by
+}
+
+# aggregate min on columns
+type geofence_variants_min_fields {
+  description: String
+  name: String
+}
+
+# order by min() on columns of table "geofence_variants"
+input geofence_variants_min_order_by {
+  description: order_by
+  name: order_by
+}
+
+# response of any mutation on the table "geofence_variants"
+type geofence_variants_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [geofence_variants!]!
+}
+
+# input type for inserting object relation for remote table "geofence_variants"
+input geofence_variants_obj_rel_insert_input {
+  data: geofence_variants_insert_input!
+  on_conflict: geofence_variants_on_conflict
+}
+
+# on conflict condition type for table "geofence_variants"
+input geofence_variants_on_conflict {
+  constraint: geofence_variants_constraint!
+  update_columns: [geofence_variants_update_column!]!
+  where: geofence_variants_bool_exp
+}
+
+# ordering options when selecting data from "geofence_variants"
+input geofence_variants_order_by {
+  description: order_by
+  geofences_aggregate: geofences_aggregate_order_by
+  name: order_by
+}
+
+# primary key columns input for table: "geofence_variants"
+input geofence_variants_pk_columns_input {
+  name: String!
+}
+
+# select columns of table "geofence_variants"
+enum geofence_variants_select_column {
+  # column name
+  description
+
+  # column name
+  name
+}
+
+# input type for updating data in table "geofence_variants"
+input geofence_variants_set_input {
+  description: String
+  name: String
+}
+
+# update columns of table "geofence_variants"
+enum geofence_variants_update_column {
+  # column name
+  description
+
+  # column name
+  name
+}
+
+# columns and relationships of "geofences"
+type geofences {
+  # An array relationship
+  activities(
+    # distinct select on columns
+    distinct_on: [activities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [activities_order_by!]
+
+    # filter the rows returned
+    where: activities_bool_exp
+  ): [activities!]!
+
+  # An aggregated array relationship
+  activities_aggregate(
+    # distinct select on columns
+    distinct_on: [activities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [activities_order_by!]
+
+    # filter the rows returned
+    where: activities_bool_exp
+  ): activities_aggregate!
+  category: String!
+
+  # Only for polygons
+  coordinates: String
+  created_at: timestamptz!
+  description: String
+
+  # An object relationship
+  geofenceByCategory: categories!
+
+  # An object relationship
+  geofence_variant: geofence_variants!
+  id: Int!
+  latitude: float8!
+  longitude: float8!
+  name: String!
+  radius: float8!
+  updated_at: timestamptz!
+  variant: geofence_variants_enum!
+}
+
+# aggregated selection of "geofences"
+type geofences_aggregate {
+  aggregate: geofences_aggregate_fields
+  nodes: [geofences!]!
+}
+
+# aggregate fields of "geofences"
+type geofences_aggregate_fields {
+  avg: geofences_avg_fields
+  count(columns: [geofences_select_column!], distinct: Boolean): Int
+  max: geofences_max_fields
+  min: geofences_min_fields
+  stddev: geofences_stddev_fields
+  stddev_pop: geofences_stddev_pop_fields
+  stddev_samp: geofences_stddev_samp_fields
+  sum: geofences_sum_fields
+  var_pop: geofences_var_pop_fields
+  var_samp: geofences_var_samp_fields
+  variance: geofences_variance_fields
+}
+
+# order by aggregate values of table "geofences"
+input geofences_aggregate_order_by {
+  avg: geofences_avg_order_by
+  count: order_by
+  max: geofences_max_order_by
+  min: geofences_min_order_by
+  stddev: geofences_stddev_order_by
+  stddev_pop: geofences_stddev_pop_order_by
+  stddev_samp: geofences_stddev_samp_order_by
+  sum: geofences_sum_order_by
+  var_pop: geofences_var_pop_order_by
+  var_samp: geofences_var_samp_order_by
+  variance: geofences_variance_order_by
+}
+
+# input type for inserting array relation for remote table "geofences"
+input geofences_arr_rel_insert_input {
+  data: [geofences_insert_input!]!
+  on_conflict: geofences_on_conflict
+}
+
+# aggregate avg on columns
+type geofences_avg_fields {
+  id: Float
+  latitude: Float
+  longitude: Float
+  radius: Float
+}
+
+# order by avg() on columns of table "geofences"
+input geofences_avg_order_by {
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  radius: order_by
+}
+
+# Boolean expression to filter rows from the table "geofences". All fields are combined with a logical 'AND'.
+input geofences_bool_exp {
+  _and: [geofences_bool_exp]
+  _not: geofences_bool_exp
+  _or: [geofences_bool_exp]
+  activities: activities_bool_exp
+  category: String_comparison_exp
+  coordinates: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  description: String_comparison_exp
+  geofenceByCategory: categories_bool_exp
+  geofence_variant: geofence_variants_bool_exp
+  id: Int_comparison_exp
+  latitude: float8_comparison_exp
+  longitude: float8_comparison_exp
+  name: String_comparison_exp
+  radius: float8_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  variant: geofence_variants_enum_comparison_exp
+}
+
+# unique or primary key constraints on table "geofences"
+enum geofences_constraint {
+  # unique or primary key constraint
+  geofences_pkey
+}
+
+# input type for incrementing integer column in table "geofences"
+input geofences_inc_input {
+  id: Int
+  latitude: float8
+  longitude: float8
+  radius: float8
+}
+
+# input type for inserting data into table "geofences"
+input geofences_insert_input {
+  activities: activities_arr_rel_insert_input
+  category: String
+  coordinates: String
+  created_at: timestamptz
+  description: String
+  geofenceByCategory: categories_obj_rel_insert_input
+  geofence_variant: geofence_variants_obj_rel_insert_input
+  id: Int
+  latitude: float8
+  longitude: float8
+  name: String
+  radius: float8
+  updated_at: timestamptz
+  variant: geofence_variants_enum
+}
+
+# aggregate max on columns
+type geofences_max_fields {
+  category: String
+  coordinates: String
+  created_at: timestamptz
+  description: String
+  id: Int
+  latitude: float8
+  longitude: float8
+  name: String
+  radius: float8
+  updated_at: timestamptz
+}
+
+# order by max() on columns of table "geofences"
+input geofences_max_order_by {
+  category: order_by
+  coordinates: order_by
+  created_at: order_by
+  description: order_by
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  name: order_by
+  radius: order_by
+  updated_at: order_by
+}
+
+# aggregate min on columns
+type geofences_min_fields {
+  category: String
+  coordinates: String
+  created_at: timestamptz
+  description: String
+  id: Int
+  latitude: float8
+  longitude: float8
+  name: String
+  radius: float8
+  updated_at: timestamptz
+}
+
+# order by min() on columns of table "geofences"
+input geofences_min_order_by {
+  category: order_by
+  coordinates: order_by
+  created_at: order_by
+  description: order_by
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  name: order_by
+  radius: order_by
+  updated_at: order_by
+}
+
+# response of any mutation on the table "geofences"
+type geofences_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [geofences!]!
+}
+
+# input type for inserting object relation for remote table "geofences"
+input geofences_obj_rel_insert_input {
+  data: geofences_insert_input!
+  on_conflict: geofences_on_conflict
+}
+
+# on conflict condition type for table "geofences"
+input geofences_on_conflict {
+  constraint: geofences_constraint!
+  update_columns: [geofences_update_column!]!
+  where: geofences_bool_exp
+}
+
+# ordering options when selecting data from "geofences"
+input geofences_order_by {
+  activities_aggregate: activities_aggregate_order_by
+  category: order_by
+  coordinates: order_by
+  created_at: order_by
+  description: order_by
+  geofenceByCategory: categories_order_by
+  geofence_variant: geofence_variants_order_by
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  name: order_by
+  radius: order_by
+  updated_at: order_by
+  variant: order_by
+}
+
+# primary key columns input for table: "geofences"
+input geofences_pk_columns_input {
+  id: Int!
+}
+
+# select columns of table "geofences"
+enum geofences_select_column {
+  # column name
+  category
+
+  # column name
+  coordinates
+
+  # column name
+  created_at
+
+  # column name
+  description
+
+  # column name
+  id
+
+  # column name
+  latitude
+
+  # column name
+  longitude
+
+  # column name
+  name
+
+  # column name
+  radius
+
+  # column name
+  updated_at
+
+  # column name
+  variant
+}
+
+# input type for updating data in table "geofences"
+input geofences_set_input {
+  category: String
+  coordinates: String
+  created_at: timestamptz
+  description: String
+  id: Int
+  latitude: float8
+  longitude: float8
+  name: String
+  radius: float8
+  updated_at: timestamptz
+  variant: geofence_variants_enum
+}
+
+# aggregate stddev on columns
+type geofences_stddev_fields {
+  id: Float
+  latitude: Float
+  longitude: Float
+  radius: Float
+}
+
+# order by stddev() on columns of table "geofences"
+input geofences_stddev_order_by {
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  radius: order_by
+}
+
+# aggregate stddev_pop on columns
+type geofences_stddev_pop_fields {
+  id: Float
+  latitude: Float
+  longitude: Float
+  radius: Float
+}
+
+# order by stddev_pop() on columns of table "geofences"
+input geofences_stddev_pop_order_by {
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  radius: order_by
+}
+
+# aggregate stddev_samp on columns
+type geofences_stddev_samp_fields {
+  id: Float
+  latitude: Float
+  longitude: Float
+  radius: Float
+}
+
+# order by stddev_samp() on columns of table "geofences"
+input geofences_stddev_samp_order_by {
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  radius: order_by
+}
+
+# aggregate sum on columns
+type geofences_sum_fields {
+  id: Int
+  latitude: float8
+  longitude: float8
+  radius: float8
+}
+
+# order by sum() on columns of table "geofences"
+input geofences_sum_order_by {
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  radius: order_by
+}
+
+# update columns of table "geofences"
+enum geofences_update_column {
+  # column name
+  category
+
+  # column name
+  coordinates
+
+  # column name
+  created_at
+
+  # column name
+  description
+
+  # column name
+  id
+
+  # column name
+  latitude
+
+  # column name
+  longitude
+
+  # column name
+  name
+
+  # column name
+  radius
+
+  # column name
+  updated_at
+
+  # column name
+  variant
+}
+
+# aggregate var_pop on columns
+type geofences_var_pop_fields {
+  id: Float
+  latitude: Float
+  longitude: Float
+  radius: Float
+}
+
+# order by var_pop() on columns of table "geofences"
+input geofences_var_pop_order_by {
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  radius: order_by
+}
+
+# aggregate var_samp on columns
+type geofences_var_samp_fields {
+  id: Float
+  latitude: Float
+  longitude: Float
+  radius: Float
+}
+
+# order by var_samp() on columns of table "geofences"
+input geofences_var_samp_order_by {
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  radius: order_by
+}
+
+# aggregate variance on columns
+type geofences_variance_fields {
+  id: Float
+  latitude: Float
+  longitude: Float
+  radius: Float
+}
+
+# order by variance() on columns of table "geofences"
+input geofences_variance_order_by {
+  id: order_by
+  latitude: order_by
+  longitude: order_by
+  radius: order_by
+}
+
+# expression to compare columns of type Int. All fields are combined with logical 'AND'.
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+scalar interval
+
+# expression to compare columns of type interval. All fields are combined with logical 'AND'.
+input interval_comparison_exp {
+  _eq: interval
+  _gt: interval
+  _gte: interval
+  _in: [interval!]
+  _is_null: Boolean
+  _lt: interval
+  _lte: interval
+  _neq: interval
+  _nin: [interval!]
+}
+
+scalar json
+
+# expression to compare columns of type json. All fields are combined with logical 'AND'.
+input json_comparison_exp {
+  _eq: json
+  _gt: json
+  _gte: json
+  _in: [json!]
+  _is_null: Boolean
+  _lt: json
+  _lte: json
+  _neq: json
+  _nin: [json!]
+}
+
+# columns and relationships of "likes"
+type likes {
+  # An object relationship
+  activity: activities!
+  activity_id: Int!
+  created_at: timestamptz
+  updated_at: timestamptz
+
+  # An object relationship
+  user: users!
+  user_id: String!
+}
+
+# aggregated selection of "likes"
+type likes_aggregate {
+  aggregate: likes_aggregate_fields
+  nodes: [likes!]!
+}
+
+# aggregate fields of "likes"
+type likes_aggregate_fields {
+  avg: likes_avg_fields
+  count(columns: [likes_select_column!], distinct: Boolean): Int
+  max: likes_max_fields
+  min: likes_min_fields
+  stddev: likes_stddev_fields
+  stddev_pop: likes_stddev_pop_fields
+  stddev_samp: likes_stddev_samp_fields
+  sum: likes_sum_fields
+  var_pop: likes_var_pop_fields
+  var_samp: likes_var_samp_fields
+  variance: likes_variance_fields
+}
+
+# order by aggregate values of table "likes"
+input likes_aggregate_order_by {
+  avg: likes_avg_order_by
+  count: order_by
+  max: likes_max_order_by
+  min: likes_min_order_by
+  stddev: likes_stddev_order_by
+  stddev_pop: likes_stddev_pop_order_by
+  stddev_samp: likes_stddev_samp_order_by
+  sum: likes_sum_order_by
+  var_pop: likes_var_pop_order_by
+  var_samp: likes_var_samp_order_by
+  variance: likes_variance_order_by
+}
+
+# input type for inserting array relation for remote table "likes"
+input likes_arr_rel_insert_input {
+  data: [likes_insert_input!]!
+  on_conflict: likes_on_conflict
+}
+
+# aggregate avg on columns
+type likes_avg_fields {
+  activity_id: Float
+}
+
+# order by avg() on columns of table "likes"
+input likes_avg_order_by {
+  activity_id: order_by
+}
+
+# Boolean expression to filter rows from the table "likes". All fields are combined with a logical 'AND'.
+input likes_bool_exp {
+  _and: [likes_bool_exp]
+  _not: likes_bool_exp
+  _or: [likes_bool_exp]
+  activity: activities_bool_exp
+  activity_id: Int_comparison_exp
+  created_at: timestamptz_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  user: users_bool_exp
+  user_id: String_comparison_exp
+}
+
+# unique or primary key constraints on table "likes"
+enum likes_constraint {
+  # unique or primary key constraint
+  Likes_pkey
+
+  # unique or primary key constraint
+  Likes_user_id_activity_id_key
+}
+
+# input type for incrementing integer column in table "likes"
+input likes_inc_input {
+  activity_id: Int
+}
+
+# input type for inserting data into table "likes"
+input likes_insert_input {
+  activity: activities_obj_rel_insert_input
+  activity_id: Int
+  created_at: timestamptz
+  updated_at: timestamptz
+  user: users_obj_rel_insert_input
+  user_id: String
+}
+
+# aggregate max on columns
+type likes_max_fields {
+  activity_id: Int
+  created_at: timestamptz
+  updated_at: timestamptz
+  user_id: String
+}
+
+# order by max() on columns of table "likes"
+input likes_max_order_by {
+  activity_id: order_by
+  created_at: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+# aggregate min on columns
+type likes_min_fields {
+  activity_id: Int
+  created_at: timestamptz
+  updated_at: timestamptz
+  user_id: String
+}
+
+# order by min() on columns of table "likes"
+input likes_min_order_by {
+  activity_id: order_by
+  created_at: order_by
+  updated_at: order_by
+  user_id: order_by
+}
+
+# response of any mutation on the table "likes"
+type likes_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [likes!]!
+}
+
+# input type for inserting object relation for remote table "likes"
+input likes_obj_rel_insert_input {
+  data: likes_insert_input!
+  on_conflict: likes_on_conflict
+}
+
+# on conflict condition type for table "likes"
+input likes_on_conflict {
+  constraint: likes_constraint!
+  update_columns: [likes_update_column!]!
+  where: likes_bool_exp
+}
+
+# ordering options when selecting data from "likes"
+input likes_order_by {
+  activity: activities_order_by
+  activity_id: order_by
+  created_at: order_by
+  updated_at: order_by
+  user: users_order_by
+  user_id: order_by
+}
+
+# primary key columns input for table: "likes"
+input likes_pk_columns_input {
+  activity_id: Int!
+  user_id: String!
+}
+
+# select columns of table "likes"
+enum likes_select_column {
+  # column name
+  activity_id
+
+  # column name
+  created_at
+
+  # column name
+  updated_at
+
+  # column name
+  user_id
+}
+
+# input type for updating data in table "likes"
+input likes_set_input {
+  activity_id: Int
+  created_at: timestamptz
+  updated_at: timestamptz
+  user_id: String
+}
+
+# aggregate stddev on columns
+type likes_stddev_fields {
+  activity_id: Float
+}
+
+# order by stddev() on columns of table "likes"
+input likes_stddev_order_by {
+  activity_id: order_by
+}
+
+# aggregate stddev_pop on columns
+type likes_stddev_pop_fields {
+  activity_id: Float
+}
+
+# order by stddev_pop() on columns of table "likes"
+input likes_stddev_pop_order_by {
+  activity_id: order_by
+}
+
+# aggregate stddev_samp on columns
+type likes_stddev_samp_fields {
+  activity_id: Float
+}
+
+# order by stddev_samp() on columns of table "likes"
+input likes_stddev_samp_order_by {
+  activity_id: order_by
+}
+
+# aggregate sum on columns
+type likes_sum_fields {
+  activity_id: Int
+}
+
+# order by sum() on columns of table "likes"
+input likes_sum_order_by {
+  activity_id: order_by
+}
+
+# update columns of table "likes"
+enum likes_update_column {
+  # column name
+  activity_id
+
+  # column name
+  created_at
+
+  # column name
+  updated_at
+
+  # column name
+  user_id
+}
+
+# aggregate var_pop on columns
+type likes_var_pop_fields {
+  activity_id: Float
+}
+
+# order by var_pop() on columns of table "likes"
+input likes_var_pop_order_by {
+  activity_id: order_by
+}
+
+# aggregate var_samp on columns
+type likes_var_samp_fields {
+  activity_id: Float
+}
+
+# order by var_samp() on columns of table "likes"
+input likes_var_samp_order_by {
+  activity_id: order_by
+}
+
+# aggregate variance on columns
+type likes_variance_fields {
+  activity_id: Float
+}
+
+# order by variance() on columns of table "likes"
+input likes_variance_order_by {
+  activity_id: order_by
+}
+
+# mutation root
+type mutation_root {
+  # delete data from the table: "achievement"
+  delete_achievement(
+    # filter the rows which have to be deleted
+    where: achievement_bool_exp!
+  ): achievement_mutation_response
+
+  # delete single row from the table: "achievement"
+  delete_achievement_by_pk(id: Int!): achievement
+
+  # delete data from the table: "achievement_type"
+  delete_achievement_type(
+    # filter the rows which have to be deleted
+    where: achievement_type_bool_exp!
+  ): achievement_type_mutation_response
+
+  # delete single row from the table: "achievement_type"
+  delete_achievement_type_by_pk(name: String!): achievement_type
+
+  # delete data from the table: "activities"
+  delete_activities(
+    # filter the rows which have to be deleted
+    where: activities_bool_exp!
+  ): activities_mutation_response
+
+  # delete single row from the table: "activities"
+  delete_activities_by_pk(activity_id: Int!): activities
+
+  # delete data from the table: "categories"
+  delete_categories(
+    # filter the rows which have to be deleted
+    where: categories_bool_exp!
+  ): categories_mutation_response
+
+  # delete single row from the table: "categories"
+  delete_categories_by_pk(name: String!): categories
+
+  # delete single row from the table: "comments"
+  delete_comment(comment_id: Int!): comments
+
+  # delete data from the table: "comments"
+  delete_comments(
+    # filter the rows which have to be deleted
+    where: comments_bool_exp!
+  ): comments_mutation_response
+
+  # delete data from the table: "followings"
+  delete_followings(
+    # filter the rows which have to be deleted
+    where: followings_bool_exp!
+  ): followings_mutation_response
+
+  # delete single row from the table: "followings"
+  delete_followings_by_pk(following_id: String!, user_id: String!): followings
+
+  # delete data from the table: "geofence_variants"
+  delete_geofence_variants(
+    # filter the rows which have to be deleted
+    where: geofence_variants_bool_exp!
+  ): geofence_variants_mutation_response
+
+  # delete single row from the table: "geofence_variants"
+  delete_geofence_variants_by_pk(name: String!): geofence_variants
+
+  # delete data from the table: "geofences"
+  delete_geofences(
+    # filter the rows which have to be deleted
+    where: geofences_bool_exp!
+  ): geofences_mutation_response
+
+  # delete single row from the table: "geofences"
+  delete_geofences_by_pk(id: Int!): geofences
+
+  # delete data from the table: "likes"
+  delete_likes(
+    # filter the rows which have to be deleted
+    where: likes_bool_exp!
+  ): likes_mutation_response
+
+  # delete single row from the table: "likes"
+  delete_likes_by_pk(activity_id: Int!, user_id: String!): likes
+
+  # delete single row from the table: "users"
+  delete_user(id: String!): users
+
+  # delete data from the table: "user_achievement"
+  delete_user_achievement(
+    # filter the rows which have to be deleted
+    where: user_achievement_bool_exp!
+  ): user_achievement_mutation_response
+
+  # delete single row from the table: "user_achievement"
+  delete_user_achievement_by_pk(achievement_id: Int!, user_id: String!): user_achievement
+
+  # delete data from the table: "users"
+  delete_users(
+    # filter the rows which have to be deleted
+    where: users_bool_exp!
+  ): users_mutation_response
+
+  # insert data into the table: "achievement"
+  insert_achievement(
+    # the rows to be inserted
+    objects: [achievement_insert_input!]!
+
+    # on conflict condition
+    on_conflict: achievement_on_conflict
+  ): achievement_mutation_response
+
+  # insert a single row into the table: "achievement"
+  insert_achievement_one(
+    # the row to be inserted
+    object: achievement_insert_input!
+
+    # on conflict condition
+    on_conflict: achievement_on_conflict
+  ): achievement
+
+  # insert data into the table: "achievement_type"
+  insert_achievement_type(
+    # the rows to be inserted
+    objects: [achievement_type_insert_input!]!
+
+    # on conflict condition
+    on_conflict: achievement_type_on_conflict
+  ): achievement_type_mutation_response
+
+  # insert a single row into the table: "achievement_type"
+  insert_achievement_type_one(
+    # the row to be inserted
+    object: achievement_type_insert_input!
+
+    # on conflict condition
+    on_conflict: achievement_type_on_conflict
+  ): achievement_type
+
+  # insert data into the table: "activities"
+  insert_activities(
+    # the rows to be inserted
+    objects: [activities_insert_input!]!
+
+    # on conflict condition
+    on_conflict: activities_on_conflict
+  ): activities_mutation_response
+
+  # insert a single row into the table: "activities"
+  insert_activities_one(
+    # the row to be inserted
+    object: activities_insert_input!
+
+    # on conflict condition
+    on_conflict: activities_on_conflict
+  ): activities
+
+  # insert data into the table: "categories"
+  insert_categories(
+    # the rows to be inserted
+    objects: [categories_insert_input!]!
+
+    # on conflict condition
+    on_conflict: categories_on_conflict
+  ): categories_mutation_response
+
+  # insert a single row into the table: "categories"
+  insert_categories_one(
+    # the row to be inserted
+    object: categories_insert_input!
+
+    # on conflict condition
+    on_conflict: categories_on_conflict
+  ): categories
+
+  # insert a single row into the table: "comments"
+  insert_comment(
+    # the row to be inserted
+    object: comments_insert_input!
+
+    # on conflict condition
+    on_conflict: comments_on_conflict
+  ): comments
+
+  # insert data into the table: "comments"
+  insert_comments(
+    # the rows to be inserted
+    objects: [comments_insert_input!]!
+
+    # on conflict condition
+    on_conflict: comments_on_conflict
+  ): comments_mutation_response
+
+  # insert data into the table: "followings"
+  insert_followings(
+    # the rows to be inserted
+    objects: [followings_insert_input!]!
+
+    # on conflict condition
+    on_conflict: followings_on_conflict
+  ): followings_mutation_response
+
+  # insert a single row into the table: "followings"
+  insert_followings_one(
+    # the row to be inserted
+    object: followings_insert_input!
+
+    # on conflict condition
+    on_conflict: followings_on_conflict
+  ): followings
+
+  # insert data into the table: "geofence_variants"
+  insert_geofence_variants(
+    # the rows to be inserted
+    objects: [geofence_variants_insert_input!]!
+
+    # on conflict condition
+    on_conflict: geofence_variants_on_conflict
+  ): geofence_variants_mutation_response
+
+  # insert a single row into the table: "geofence_variants"
+  insert_geofence_variants_one(
+    # the row to be inserted
+    object: geofence_variants_insert_input!
+
+    # on conflict condition
+    on_conflict: geofence_variants_on_conflict
+  ): geofence_variants
+
+  # insert data into the table: "geofences"
+  insert_geofences(
+    # the rows to be inserted
+    objects: [geofences_insert_input!]!
+
+    # on conflict condition
+    on_conflict: geofences_on_conflict
+  ): geofences_mutation_response
+
+  # insert a single row into the table: "geofences"
+  insert_geofences_one(
+    # the row to be inserted
+    object: geofences_insert_input!
+
+    # on conflict condition
+    on_conflict: geofences_on_conflict
+  ): geofences
+
+  # insert data into the table: "likes"
+  insert_likes(
+    # the rows to be inserted
+    objects: [likes_insert_input!]!
+
+    # on conflict condition
+    on_conflict: likes_on_conflict
+  ): likes_mutation_response
+
+  # insert a single row into the table: "likes"
+  insert_likes_one(
+    # the row to be inserted
+    object: likes_insert_input!
+
+    # on conflict condition
+    on_conflict: likes_on_conflict
+  ): likes
+
+  # insert a single row into the table: "users"
+  insert_user(
+    # the row to be inserted
+    object: users_insert_input!
+
+    # on conflict condition
+    on_conflict: users_on_conflict
+  ): users
+
+  # insert data into the table: "user_achievement"
+  insert_user_achievement(
+    # the rows to be inserted
+    objects: [user_achievement_insert_input!]!
+
+    # on conflict condition
+    on_conflict: user_achievement_on_conflict
+  ): user_achievement_mutation_response
+
+  # insert a single row into the table: "user_achievement"
+  insert_user_achievement_one(
+    # the row to be inserted
+    object: user_achievement_insert_input!
+
+    # on conflict condition
+    on_conflict: user_achievement_on_conflict
+  ): user_achievement
+
+  # insert data into the table: "users"
+  insert_users(
+    # the rows to be inserted
+    objects: [users_insert_input!]!
+
+    # on conflict condition
+    on_conflict: users_on_conflict
+  ): users_mutation_response
+
+  # update data of the table: "achievement"
+  update_achievement(
+    # increments the integer columns with given value of the filtered values
+    _inc: achievement_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: achievement_set_input
+
+    # filter the rows which have to be updated
+    where: achievement_bool_exp!
+  ): achievement_mutation_response
+
+  # update single row of the table: "achievement"
+  update_achievement_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: achievement_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: achievement_set_input
+    pk_columns: achievement_pk_columns_input!
+  ): achievement
+
+  # update data of the table: "achievement_type"
+  update_achievement_type(
+    # sets the columns of the filtered rows to the given values
+    _set: achievement_type_set_input
+
+    # filter the rows which have to be updated
+    where: achievement_type_bool_exp!
+  ): achievement_type_mutation_response
+
+  # update single row of the table: "achievement_type"
+  update_achievement_type_by_pk(
+    # sets the columns of the filtered rows to the given values
+    _set: achievement_type_set_input
+    pk_columns: achievement_type_pk_columns_input!
+  ): achievement_type
+
+  # update data of the table: "activities"
+  update_activities(
+    # increments the integer columns with given value of the filtered values
+    _inc: activities_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: activities_set_input
+
+    # filter the rows which have to be updated
+    where: activities_bool_exp!
+  ): activities_mutation_response
+
+  # update single row of the table: "activities"
+  update_activities_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: activities_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: activities_set_input
+    pk_columns: activities_pk_columns_input!
+  ): activities
+
+  # update data of the table: "categories"
+  update_categories(
+    # increments the integer columns with given value of the filtered values
+    _inc: categories_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: categories_set_input
+
+    # filter the rows which have to be updated
+    where: categories_bool_exp!
+  ): categories_mutation_response
+
+  # update single row of the table: "categories"
+  update_categories_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: categories_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: categories_set_input
+    pk_columns: categories_pk_columns_input!
+  ): categories
+
+  # update single row of the table: "comments"
+  update_comment(
+    # increments the integer columns with given value of the filtered values
+    _inc: comments_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: comments_set_input
+    pk_columns: comments_pk_columns_input!
+  ): comments
+
+  # update data of the table: "comments"
+  update_comments(
+    # increments the integer columns with given value of the filtered values
+    _inc: comments_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: comments_set_input
+
+    # filter the rows which have to be updated
+    where: comments_bool_exp!
+  ): comments_mutation_response
+
+  # update data of the table: "followings"
+  update_followings(
+    # sets the columns of the filtered rows to the given values
+    _set: followings_set_input
+
+    # filter the rows which have to be updated
+    where: followings_bool_exp!
+  ): followings_mutation_response
+
+  # update single row of the table: "followings"
+  update_followings_by_pk(
+    # sets the columns of the filtered rows to the given values
+    _set: followings_set_input
+    pk_columns: followings_pk_columns_input!
+  ): followings
+
+  # update data of the table: "geofence_variants"
+  update_geofence_variants(
+    # sets the columns of the filtered rows to the given values
+    _set: geofence_variants_set_input
+
+    # filter the rows which have to be updated
+    where: geofence_variants_bool_exp!
+  ): geofence_variants_mutation_response
+
+  # update single row of the table: "geofence_variants"
+  update_geofence_variants_by_pk(
+    # sets the columns of the filtered rows to the given values
+    _set: geofence_variants_set_input
+    pk_columns: geofence_variants_pk_columns_input!
+  ): geofence_variants
+
+  # update data of the table: "geofences"
+  update_geofences(
+    # increments the integer columns with given value of the filtered values
+    _inc: geofences_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: geofences_set_input
+
+    # filter the rows which have to be updated
+    where: geofences_bool_exp!
+  ): geofences_mutation_response
+
+  # update single row of the table: "geofences"
+  update_geofences_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: geofences_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: geofences_set_input
+    pk_columns: geofences_pk_columns_input!
+  ): geofences
+
+  # update data of the table: "likes"
+  update_likes(
+    # increments the integer columns with given value of the filtered values
+    _inc: likes_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: likes_set_input
+
+    # filter the rows which have to be updated
+    where: likes_bool_exp!
+  ): likes_mutation_response
+
+  # update single row of the table: "likes"
+  update_likes_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: likes_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: likes_set_input
+    pk_columns: likes_pk_columns_input!
+  ): likes
+
+  # update single row of the table: "users"
+  update_user(
+    # sets the columns of the filtered rows to the given values
+    _set: users_set_input
+    pk_columns: users_pk_columns_input!
+  ): users
+
+  # update data of the table: "user_achievement"
+  update_user_achievement(
+    # increments the integer columns with given value of the filtered values
+    _inc: user_achievement_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: user_achievement_set_input
+
+    # filter the rows which have to be updated
+    where: user_achievement_bool_exp!
+  ): user_achievement_mutation_response
+
+  # update single row of the table: "user_achievement"
+  update_user_achievement_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: user_achievement_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: user_achievement_set_input
+    pk_columns: user_achievement_pk_columns_input!
+  ): user_achievement
+
+  # update data of the table: "users"
+  update_users(
+    # sets the columns of the filtered rows to the given values
+    _set: users_set_input
+
+    # filter the rows which have to be updated
+    where: users_bool_exp!
+  ): users_mutation_response
+}
+
+# column ordering options
+enum order_by {
+  # in the ascending order, nulls last
+  asc
+
+  # in the ascending order, nulls first
+  asc_nulls_first
+
+  # in the ascending order, nulls last
+  asc_nulls_last
+
+  # in the descending order, nulls first
+  desc
+
+  # in the descending order, nulls first
+  desc_nulls_first
+
+  # in the descending order, nulls last
+  desc_nulls_last
+}
+
+# query root
+type query_root {
+  # fetch data from the table: "achievement"
+  achievement(
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): [achievement!]!
+
+  # fetch aggregated fields from the table: "achievement"
+  achievement_aggregate(
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): achievement_aggregate!
+
+  # fetch data from the table: "achievement" using primary key columns
+  achievement_by_pk(id: Int!): achievement
+
+  # fetch data from the table: "achievement_type"
+  achievement_type(
+    # distinct select on columns
+    distinct_on: [achievement_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_type_order_by!]
+
+    # filter the rows returned
+    where: achievement_type_bool_exp
+  ): [achievement_type!]!
+
+  # fetch aggregated fields from the table: "achievement_type"
+  achievement_type_aggregate(
+    # distinct select on columns
+    distinct_on: [achievement_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_type_order_by!]
+
+    # filter the rows returned
+    where: achievement_type_bool_exp
+  ): achievement_type_aggregate!
+
+  # fetch data from the table: "achievement_type" using primary key columns
+  achievement_type_by_pk(name: String!): achievement_type
+
+  # fetch data from the table: "activities"
+  activities(
+    # distinct select on columns
+    distinct_on: [activities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [activities_order_by!]
+
+    # filter the rows returned
+    where: activities_bool_exp
+  ): [activities!]!
+
+  # fetch aggregated fields from the table: "activities"
+  activities_aggregate(
+    # distinct select on columns
+    distinct_on: [activities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [activities_order_by!]
+
+    # filter the rows returned
+    where: activities_bool_exp
+  ): activities_aggregate!
+
+  # fetch data from the table: "activities" using primary key columns
+  activities_by_pk(activity_id: Int!): activities
+
+  # fetch data from the table: "categories"
+  categories(
+    # distinct select on columns
+    distinct_on: [categories_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [categories_order_by!]
+
+    # filter the rows returned
+    where: categories_bool_exp
+  ): [categories!]!
+
+  # fetch aggregated fields from the table: "categories"
+  categories_aggregate(
+    # distinct select on columns
+    distinct_on: [categories_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [categories_order_by!]
+
+    # filter the rows returned
+    where: categories_bool_exp
+  ): categories_aggregate!
+
+  # fetch data from the table: "categories" using primary key columns
+  categories_by_pk(name: String!): categories
+
+  # fetch data from the table: "comments" using primary key columns
+  comment(comment_id: Int!): comments
+
+  # fetch data from the table: "comments"
+  comments(
+    # distinct select on columns
+    distinct_on: [comments_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [comments_order_by!]
+
+    # filter the rows returned
+    where: comments_bool_exp
+  ): [comments!]!
+
+  # fetch aggregated fields from the table: "comments"
+  comments_aggregate(
+    # distinct select on columns
+    distinct_on: [comments_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [comments_order_by!]
+
+    # filter the rows returned
+    where: comments_bool_exp
+  ): comments_aggregate!
+
+  # fetch data from the table: "followings"
+  followings(
+    # distinct select on columns
+    distinct_on: [followings_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [followings_order_by!]
+
+    # filter the rows returned
+    where: followings_bool_exp
+  ): [followings!]!
+
+  # fetch aggregated fields from the table: "followings"
+  followings_aggregate(
+    # distinct select on columns
+    distinct_on: [followings_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [followings_order_by!]
+
+    # filter the rows returned
+    where: followings_bool_exp
+  ): followings_aggregate!
+
+  # fetch data from the table: "followings" using primary key columns
+  followings_by_pk(following_id: String!, user_id: String!): followings
+
+  # fetch data from the table: "geofence_variants"
+  geofence_variants(
+    # distinct select on columns
+    distinct_on: [geofence_variants_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofence_variants_order_by!]
+
+    # filter the rows returned
+    where: geofence_variants_bool_exp
+  ): [geofence_variants!]!
+
+  # fetch aggregated fields from the table: "geofence_variants"
+  geofence_variants_aggregate(
+    # distinct select on columns
+    distinct_on: [geofence_variants_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofence_variants_order_by!]
+
+    # filter the rows returned
+    where: geofence_variants_bool_exp
+  ): geofence_variants_aggregate!
+
+  # fetch data from the table: "geofence_variants" using primary key columns
+  geofence_variants_by_pk(name: String!): geofence_variants
+
+  # fetch data from the table: "geofences"
+  geofences(
+    # distinct select on columns
+    distinct_on: [geofences_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofences_order_by!]
+
+    # filter the rows returned
+    where: geofences_bool_exp
+  ): [geofences!]!
+
+  # fetch aggregated fields from the table: "geofences"
+  geofences_aggregate(
+    # distinct select on columns
+    distinct_on: [geofences_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofences_order_by!]
+
+    # filter the rows returned
+    where: geofences_bool_exp
+  ): geofences_aggregate!
+
+  # fetch data from the table: "geofences" using primary key columns
+  geofences_by_pk(id: Int!): geofences
+
+  # fetch data from the table: "likes"
+  likes(
+    # distinct select on columns
+    distinct_on: [likes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [likes_order_by!]
+
+    # filter the rows returned
+    where: likes_bool_exp
+  ): [likes!]!
+
+  # fetch aggregated fields from the table: "likes"
+  likes_aggregate(
+    # distinct select on columns
+    distinct_on: [likes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [likes_order_by!]
+
+    # filter the rows returned
+    where: likes_bool_exp
+  ): likes_aggregate!
+
+  # fetch data from the table: "likes" using primary key columns
+  likes_by_pk(activity_id: Int!, user_id: String!): likes
+
+  # execute function "unachievedachievements" which returns "achievement"
+  unachievedachievements(
+    # input parameters for function "unachievedachievements"
+    args: unachievedachievements_args!
+
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): [achievement!]!
+
+  # execute function "unachievedachievements" and query aggregates on result of table type "achievement"
+  unachievedachievements_aggregate(
+    # input parameters for function "unachievedachievements"
+    args: unachievedachievements_args!
+
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): achievement_aggregate!
+
+  # fetch data from the table: "users" using primary key columns
+  user(id: String!): users
+
+  # fetch data from the table: "user_achievement"
+  user_achievement(
+    # distinct select on columns
+    distinct_on: [user_achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_achievement_order_by!]
+
+    # filter the rows returned
+    where: user_achievement_bool_exp
+  ): [user_achievement!]!
+
+  # fetch aggregated fields from the table: "user_achievement"
+  user_achievement_aggregate(
+    # distinct select on columns
+    distinct_on: [user_achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_achievement_order_by!]
+
+    # filter the rows returned
+    where: user_achievement_bool_exp
+  ): user_achievement_aggregate!
+
+  # fetch data from the table: "user_achievement" using primary key columns
+  user_achievement_by_pk(achievement_id: Int!, user_id: String!): user_achievement
+
+  # fetch data from the table: "users"
+  users(
+    # distinct select on columns
+    distinct_on: [users_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [users_order_by!]
+
+    # filter the rows returned
+    where: users_bool_exp
+  ): [users!]!
+
+  # fetch aggregated fields from the table: "users"
+  users_aggregate(
+    # distinct select on columns
+    distinct_on: [users_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [users_order_by!]
+
+    # filter the rows returned
+    where: users_bool_exp
+  ): users_aggregate!
+}
+
+# expression to compare columns of type String. All fields are combined with logical 'AND'.
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+# subscription root
+type subscription_root {
+  # fetch data from the table: "achievement"
+  achievement(
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): [achievement!]!
+
+  # fetch aggregated fields from the table: "achievement"
+  achievement_aggregate(
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): achievement_aggregate!
+
+  # fetch data from the table: "achievement" using primary key columns
+  achievement_by_pk(id: Int!): achievement
+
+  # fetch data from the table: "achievement_type"
+  achievement_type(
+    # distinct select on columns
+    distinct_on: [achievement_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_type_order_by!]
+
+    # filter the rows returned
+    where: achievement_type_bool_exp
+  ): [achievement_type!]!
+
+  # fetch aggregated fields from the table: "achievement_type"
+  achievement_type_aggregate(
+    # distinct select on columns
+    distinct_on: [achievement_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_type_order_by!]
+
+    # filter the rows returned
+    where: achievement_type_bool_exp
+  ): achievement_type_aggregate!
+
+  # fetch data from the table: "achievement_type" using primary key columns
+  achievement_type_by_pk(name: String!): achievement_type
+
+  # fetch data from the table: "activities"
+  activities(
+    # distinct select on columns
+    distinct_on: [activities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [activities_order_by!]
+
+    # filter the rows returned
+    where: activities_bool_exp
+  ): [activities!]!
+
+  # fetch aggregated fields from the table: "activities"
+  activities_aggregate(
+    # distinct select on columns
+    distinct_on: [activities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [activities_order_by!]
+
+    # filter the rows returned
+    where: activities_bool_exp
+  ): activities_aggregate!
+
+  # fetch data from the table: "activities" using primary key columns
+  activities_by_pk(activity_id: Int!): activities
+
+  # fetch data from the table: "categories"
+  categories(
+    # distinct select on columns
+    distinct_on: [categories_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [categories_order_by!]
+
+    # filter the rows returned
+    where: categories_bool_exp
+  ): [categories!]!
+
+  # fetch aggregated fields from the table: "categories"
+  categories_aggregate(
+    # distinct select on columns
+    distinct_on: [categories_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [categories_order_by!]
+
+    # filter the rows returned
+    where: categories_bool_exp
+  ): categories_aggregate!
+
+  # fetch data from the table: "categories" using primary key columns
+  categories_by_pk(name: String!): categories
+
+  # fetch data from the table: "comments" using primary key columns
+  comment(comment_id: Int!): comments
+
+  # fetch data from the table: "comments"
+  comments(
+    # distinct select on columns
+    distinct_on: [comments_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [comments_order_by!]
+
+    # filter the rows returned
+    where: comments_bool_exp
+  ): [comments!]!
+
+  # fetch aggregated fields from the table: "comments"
+  comments_aggregate(
+    # distinct select on columns
+    distinct_on: [comments_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [comments_order_by!]
+
+    # filter the rows returned
+    where: comments_bool_exp
+  ): comments_aggregate!
+
+  # fetch data from the table: "followings"
+  followings(
+    # distinct select on columns
+    distinct_on: [followings_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [followings_order_by!]
+
+    # filter the rows returned
+    where: followings_bool_exp
+  ): [followings!]!
+
+  # fetch aggregated fields from the table: "followings"
+  followings_aggregate(
+    # distinct select on columns
+    distinct_on: [followings_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [followings_order_by!]
+
+    # filter the rows returned
+    where: followings_bool_exp
+  ): followings_aggregate!
+
+  # fetch data from the table: "followings" using primary key columns
+  followings_by_pk(following_id: String!, user_id: String!): followings
+
+  # fetch data from the table: "geofence_variants"
+  geofence_variants(
+    # distinct select on columns
+    distinct_on: [geofence_variants_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofence_variants_order_by!]
+
+    # filter the rows returned
+    where: geofence_variants_bool_exp
+  ): [geofence_variants!]!
+
+  # fetch aggregated fields from the table: "geofence_variants"
+  geofence_variants_aggregate(
+    # distinct select on columns
+    distinct_on: [geofence_variants_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofence_variants_order_by!]
+
+    # filter the rows returned
+    where: geofence_variants_bool_exp
+  ): geofence_variants_aggregate!
+
+  # fetch data from the table: "geofence_variants" using primary key columns
+  geofence_variants_by_pk(name: String!): geofence_variants
+
+  # fetch data from the table: "geofences"
+  geofences(
+    # distinct select on columns
+    distinct_on: [geofences_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofences_order_by!]
+
+    # filter the rows returned
+    where: geofences_bool_exp
+  ): [geofences!]!
+
+  # fetch aggregated fields from the table: "geofences"
+  geofences_aggregate(
+    # distinct select on columns
+    distinct_on: [geofences_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [geofences_order_by!]
+
+    # filter the rows returned
+    where: geofences_bool_exp
+  ): geofences_aggregate!
+
+  # fetch data from the table: "geofences" using primary key columns
+  geofences_by_pk(id: Int!): geofences
+
+  # fetch data from the table: "likes"
+  likes(
+    # distinct select on columns
+    distinct_on: [likes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [likes_order_by!]
+
+    # filter the rows returned
+    where: likes_bool_exp
+  ): [likes!]!
+
+  # fetch aggregated fields from the table: "likes"
+  likes_aggregate(
+    # distinct select on columns
+    distinct_on: [likes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [likes_order_by!]
+
+    # filter the rows returned
+    where: likes_bool_exp
+  ): likes_aggregate!
+
+  # fetch data from the table: "likes" using primary key columns
+  likes_by_pk(activity_id: Int!, user_id: String!): likes
+
+  # execute function "unachievedachievements" which returns "achievement"
+  unachievedachievements(
+    # input parameters for function "unachievedachievements"
+    args: unachievedachievements_args!
+
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): [achievement!]!
+
+  # execute function "unachievedachievements" and query aggregates on result of table type "achievement"
+  unachievedachievements_aggregate(
+    # input parameters for function "unachievedachievements"
+    args: unachievedachievements_args!
+
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): achievement_aggregate!
+
+  # fetch data from the table: "users" using primary key columns
+  user(id: String!): users
+
+  # fetch data from the table: "user_achievement"
+  user_achievement(
+    # distinct select on columns
+    distinct_on: [user_achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_achievement_order_by!]
+
+    # filter the rows returned
+    where: user_achievement_bool_exp
+  ): [user_achievement!]!
+
+  # fetch aggregated fields from the table: "user_achievement"
+  user_achievement_aggregate(
+    # distinct select on columns
+    distinct_on: [user_achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_achievement_order_by!]
+
+    # filter the rows returned
+    where: user_achievement_bool_exp
+  ): user_achievement_aggregate!
+
+  # fetch data from the table: "user_achievement" using primary key columns
+  user_achievement_by_pk(achievement_id: Int!, user_id: String!): user_achievement
+
+  # fetch data from the table: "users"
+  users(
+    # distinct select on columns
+    distinct_on: [users_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [users_order_by!]
+
+    # filter the rows returned
+    where: users_bool_exp
+  ): [users!]!
+
+  # fetch aggregated fields from the table: "users"
+  users_aggregate(
+    # distinct select on columns
+    distinct_on: [users_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [users_order_by!]
+
+    # filter the rows returned
+    where: users_bool_exp
+  ): users_aggregate!
+}
+
+scalar timestamp
+
+# expression to compare columns of type timestamp. All fields are combined with logical 'AND'.
+input timestamp_comparison_exp {
+  _eq: timestamp
+  _gt: timestamp
+  _gte: timestamp
+  _in: [timestamp!]
+  _is_null: Boolean
+  _lt: timestamp
+  _lte: timestamp
+  _neq: timestamp
+  _nin: [timestamp!]
+}
+
+scalar timestamptz
+
+# expression to compare columns of type timestamptz. All fields are combined with logical 'AND'.
+input timestamptz_comparison_exp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+input unachievedachievements_args {
+  uid: String
+}
+
+# columns and relationships of "user_achievement"
+type user_achievement {
+  achievement_id: Int!
+  created_at: timestamptz!
+  user_id: String!
+}
+
+# aggregated selection of "user_achievement"
+type user_achievement_aggregate {
+  aggregate: user_achievement_aggregate_fields
+  nodes: [user_achievement!]!
+}
+
+# aggregate fields of "user_achievement"
+type user_achievement_aggregate_fields {
+  avg: user_achievement_avg_fields
+  count(columns: [user_achievement_select_column!], distinct: Boolean): Int
+  max: user_achievement_max_fields
+  min: user_achievement_min_fields
+  stddev: user_achievement_stddev_fields
+  stddev_pop: user_achievement_stddev_pop_fields
+  stddev_samp: user_achievement_stddev_samp_fields
+  sum: user_achievement_sum_fields
+  var_pop: user_achievement_var_pop_fields
+  var_samp: user_achievement_var_samp_fields
+  variance: user_achievement_variance_fields
+}
+
+# order by aggregate values of table "user_achievement"
+input user_achievement_aggregate_order_by {
+  avg: user_achievement_avg_order_by
+  count: order_by
+  max: user_achievement_max_order_by
+  min: user_achievement_min_order_by
+  stddev: user_achievement_stddev_order_by
+  stddev_pop: user_achievement_stddev_pop_order_by
+  stddev_samp: user_achievement_stddev_samp_order_by
+  sum: user_achievement_sum_order_by
+  var_pop: user_achievement_var_pop_order_by
+  var_samp: user_achievement_var_samp_order_by
+  variance: user_achievement_variance_order_by
+}
+
+# input type for inserting array relation for remote table "user_achievement"
+input user_achievement_arr_rel_insert_input {
+  data: [user_achievement_insert_input!]!
+  on_conflict: user_achievement_on_conflict
+}
+
+# aggregate avg on columns
+type user_achievement_avg_fields {
+  achievement_id: Float
+}
+
+# order by avg() on columns of table "user_achievement"
+input user_achievement_avg_order_by {
+  achievement_id: order_by
+}
+
+# Boolean expression to filter rows from the table "user_achievement". All fields are combined with a logical 'AND'.
+input user_achievement_bool_exp {
+  _and: [user_achievement_bool_exp]
+  _not: user_achievement_bool_exp
+  _or: [user_achievement_bool_exp]
+  achievement_id: Int_comparison_exp
+  created_at: timestamptz_comparison_exp
+  user_id: String_comparison_exp
+}
+
+# unique or primary key constraints on table "user_achievement"
+enum user_achievement_constraint {
+  # unique or primary key constraint
+  user_achievment_pkey
+}
+
+# input type for incrementing integer column in table "user_achievement"
+input user_achievement_inc_input {
+  achievement_id: Int
+}
+
+# input type for inserting data into table "user_achievement"
+input user_achievement_insert_input {
+  achievement_id: Int
+  created_at: timestamptz
+  user_id: String
+}
+
+# aggregate max on columns
+type user_achievement_max_fields {
+  achievement_id: Int
+  created_at: timestamptz
+  user_id: String
+}
+
+# order by max() on columns of table "user_achievement"
+input user_achievement_max_order_by {
+  achievement_id: order_by
+  created_at: order_by
+  user_id: order_by
+}
+
+# aggregate min on columns
+type user_achievement_min_fields {
+  achievement_id: Int
+  created_at: timestamptz
+  user_id: String
+}
+
+# order by min() on columns of table "user_achievement"
+input user_achievement_min_order_by {
+  achievement_id: order_by
+  created_at: order_by
+  user_id: order_by
+}
+
+# response of any mutation on the table "user_achievement"
+type user_achievement_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [user_achievement!]!
+}
+
+# input type for inserting object relation for remote table "user_achievement"
+input user_achievement_obj_rel_insert_input {
+  data: user_achievement_insert_input!
+  on_conflict: user_achievement_on_conflict
+}
+
+# on conflict condition type for table "user_achievement"
+input user_achievement_on_conflict {
+  constraint: user_achievement_constraint!
+  update_columns: [user_achievement_update_column!]!
+  where: user_achievement_bool_exp
+}
+
+# ordering options when selecting data from "user_achievement"
+input user_achievement_order_by {
+  achievement_id: order_by
+  created_at: order_by
+  user_id: order_by
+}
+
+# primary key columns input for table: "user_achievement"
+input user_achievement_pk_columns_input {
+  achievement_id: Int!
+  user_id: String!
+}
+
+# select columns of table "user_achievement"
+enum user_achievement_select_column {
+  # column name
+  achievement_id
+
+  # column name
+  created_at
+
+  # column name
+  user_id
+}
+
+# input type for updating data in table "user_achievement"
+input user_achievement_set_input {
+  achievement_id: Int
+  created_at: timestamptz
+  user_id: String
+}
+
+# aggregate stddev on columns
+type user_achievement_stddev_fields {
+  achievement_id: Float
+}
+
+# order by stddev() on columns of table "user_achievement"
+input user_achievement_stddev_order_by {
+  achievement_id: order_by
+}
+
+# aggregate stddev_pop on columns
+type user_achievement_stddev_pop_fields {
+  achievement_id: Float
+}
+
+# order by stddev_pop() on columns of table "user_achievement"
+input user_achievement_stddev_pop_order_by {
+  achievement_id: order_by
+}
+
+# aggregate stddev_samp on columns
+type user_achievement_stddev_samp_fields {
+  achievement_id: Float
+}
+
+# order by stddev_samp() on columns of table "user_achievement"
+input user_achievement_stddev_samp_order_by {
+  achievement_id: order_by
+}
+
+# aggregate sum on columns
+type user_achievement_sum_fields {
+  achievement_id: Int
+}
+
+# order by sum() on columns of table "user_achievement"
+input user_achievement_sum_order_by {
+  achievement_id: order_by
+}
+
+# update columns of table "user_achievement"
+enum user_achievement_update_column {
+  # column name
+  achievement_id
+
+  # column name
+  created_at
+
+  # column name
+  user_id
+}
+
+# aggregate var_pop on columns
+type user_achievement_var_pop_fields {
+  achievement_id: Float
+}
+
+# order by var_pop() on columns of table "user_achievement"
+input user_achievement_var_pop_order_by {
+  achievement_id: order_by
+}
+
+# aggregate var_samp on columns
+type user_achievement_var_samp_fields {
+  achievement_id: Float
+}
+
+# order by var_samp() on columns of table "user_achievement"
+input user_achievement_var_samp_order_by {
+  achievement_id: order_by
+}
+
+# aggregate variance on columns
+type user_achievement_variance_fields {
+  achievement_id: Float
+}
+
+# order by variance() on columns of table "user_achievement"
+input user_achievement_variance_order_by {
+  achievement_id: order_by
+}
+
+# columns and relationships of "users"
+type users {
+  # An array relationship
+  activities(
+    # distinct select on columns
+    distinct_on: [activities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [activities_order_by!]
+
+    # filter the rows returned
+    where: activities_bool_exp
+  ): [activities!]!
+
+  # An aggregated array relationship
+  activities_aggregate(
+    # distinct select on columns
+    distinct_on: [activities_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [activities_order_by!]
+
+    # filter the rows returned
+    where: activities_bool_exp
+  ): activities_aggregate!
+  bio: String
+  created_at: timestamptz
+  email: String!
+
+  # An array relationship
+  followers(
+    # distinct select on columns
+    distinct_on: [followings_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [followings_order_by!]
+
+    # filter the rows returned
+    where: followings_bool_exp
+  ): [followings!]!
+
+  # An aggregated array relationship
+  followers_aggregate(
+    # distinct select on columns
+    distinct_on: [followings_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [followings_order_by!]
+
+    # filter the rows returned
+    where: followings_bool_exp
+  ): followings_aggregate!
+
+  # An array relationship
+  following(
+    # distinct select on columns
+    distinct_on: [followings_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [followings_order_by!]
+
+    # filter the rows returned
+    where: followings_bool_exp
+  ): [followings!]!
+
+  # An aggregated array relationship
+  following_aggregate(
+    # distinct select on columns
+    distinct_on: [followings_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [followings_order_by!]
+
+    # filter the rows returned
+    where: followings_bool_exp
+  ): followings_aggregate!
+  id: String!
+  name: String
+
+  # A computed field, executes function "totalscore"
+  totalScore: bigint
+  updated_at: timestamptz
+
+  # An array relationship
+  user_achievement(
+    # distinct select on columns
+    distinct_on: [user_achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_achievement_order_by!]
+
+    # filter the rows returned
+    where: user_achievement_bool_exp
+  ): [user_achievement!]!
+
+  # An aggregated array relationship
+  user_achievement_aggregate(
+    # distinct select on columns
+    distinct_on: [user_achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_achievement_order_by!]
+
+    # filter the rows returned
+    where: user_achievement_bool_exp
+  ): user_achievement_aggregate!
+}
+
+# aggregated selection of "users"
+type users_aggregate {
+  aggregate: users_aggregate_fields
+  nodes: [users!]!
+}
+
+# aggregate fields of "users"
+type users_aggregate_fields {
+  count(columns: [users_select_column!], distinct: Boolean): Int
+  max: users_max_fields
+  min: users_min_fields
+}
+
+# order by aggregate values of table "users"
+input users_aggregate_order_by {
+  count: order_by
+  max: users_max_order_by
+  min: users_min_order_by
+}
+
+# input type for inserting array relation for remote table "users"
+input users_arr_rel_insert_input {
+  data: [users_insert_input!]!
+  on_conflict: users_on_conflict
+}
+
+# Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'.
+input users_bool_exp {
+  _and: [users_bool_exp]
+  _not: users_bool_exp
+  _or: [users_bool_exp]
+  activities: activities_bool_exp
+  bio: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  email: String_comparison_exp
+  followers: followings_bool_exp
+  following: followings_bool_exp
+  id: String_comparison_exp
+  name: String_comparison_exp
+  updated_at: timestamptz_comparison_exp
+  user_achievement: user_achievement_bool_exp
+}
+
+# unique or primary key constraints on table "users"
+enum users_constraint {
+  # unique or primary key constraint
+  Users_email_key
+
+  # unique or primary key constraint
+  Users_id_key
+
+  # unique or primary key constraint
+  Users_pkey
+}
+
+# input type for inserting data into table "users"
+input users_insert_input {
+  activities: activities_arr_rel_insert_input
+  bio: String
+  created_at: timestamptz
+  email: String
+  followers: followings_arr_rel_insert_input
+  following: followings_arr_rel_insert_input
+  id: String
+  name: String
+  updated_at: timestamptz
+  user_achievement: user_achievement_arr_rel_insert_input
+}
+
+# aggregate max on columns
+type users_max_fields {
+  bio: String
+  created_at: timestamptz
+  email: String
+  id: String
+  name: String
+  updated_at: timestamptz
+}
+
+# order by max() on columns of table "users"
+input users_max_order_by {
+  bio: order_by
+  created_at: order_by
+  email: order_by
+  id: order_by
+  name: order_by
+  updated_at: order_by
+}
+
+# aggregate min on columns
+type users_min_fields {
+  bio: String
+  created_at: timestamptz
+  email: String
+  id: String
+  name: String
+  updated_at: timestamptz
+}
+
+# order by min() on columns of table "users"
+input users_min_order_by {
+  bio: order_by
+  created_at: order_by
+  email: order_by
+  id: order_by
+  name: order_by
+  updated_at: order_by
+}
+
+# response of any mutation on the table "users"
+type users_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [users!]!
+}
+
+# input type for inserting object relation for remote table "users"
+input users_obj_rel_insert_input {
+  data: users_insert_input!
+  on_conflict: users_on_conflict
+}
+
+# on conflict condition type for table "users"
+input users_on_conflict {
+  constraint: users_constraint!
+  update_columns: [users_update_column!]!
+  where: users_bool_exp
+}
+
+# ordering options when selecting data from "users"
+input users_order_by {
+  activities_aggregate: activities_aggregate_order_by
+  bio: order_by
+  created_at: order_by
+  email: order_by
+  followers_aggregate: followings_aggregate_order_by
+  following_aggregate: followings_aggregate_order_by
+  id: order_by
+  name: order_by
+  updated_at: order_by
+  user_achievement_aggregate: user_achievement_aggregate_order_by
+}
+
+# primary key columns input for table: "users"
+input users_pk_columns_input {
+  id: String!
+}
+
+# select columns of table "users"
+enum users_select_column {
+  # column name
+  bio
+
+  # column name
+  created_at
+
+  # column name
+  email
+
+  # column name
+  id
+
+  # column name
+  name
+
+  # column name
+  updated_at
+}
+
+# input type for updating data in table "users"
+input users_set_input {
+  bio: String
+  created_at: timestamptz
+  email: String
+  id: String
+  name: String
+  updated_at: timestamptz
+}
+
+# update columns of table "users"
+enum users_update_column {
+  # column name
+  bio
+
+  # column name
+  created_at
+
+  # column name
+  email
+
+  # column name
+  id
+
+  # column name
+  name
+
+  # column name
+  updated_at
+}
+

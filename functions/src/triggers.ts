@@ -2,43 +2,64 @@ import * as functions from 'firebase-functions';
 import { client } from './client';
 import { User_Achievement_Insert_Input } from './types';
 
-type User_Achievement_InputType = {
-  achievement_id: number;
-  user_id: string;
-};
-
 exports.achievementValidation = functions.https.onRequest(async (req, res) => {
   const {
     event: { op, data },
     table,
   } = req.body;
 
-  if (op === 'INSERT' && table.name === 'activities' && table.schema === 'public') {
-    const { user_id } = data.new;
+  const objects: User_Achievement_Insert_Input[] = [];
+
+  if ((op === 'INSERT' || op === 'UPDATE') && table.name === 'activities' && table.schema === 'public') {
+    const { user_id } = data.new ? data.new : data.old;
 
     // query
     const queryData = await client.GetUserAndAchievements({ user_id });
-    const userAchievmentsArray: number[] = queryData.user_achievement.map((item) => item.achievement_id);
 
-    const unobtainedAchievments: User_Achievement_InputType[] = queryData.achievement
-      .map<User_Achievement_InputType>(({ id }) => {
-        return { achievement_id: id, user_id };
-      })
-      .filter(({ achievement_id }) => !userAchievmentsArray.includes(achievement_id));
+    queryData.unachievedachievements.forEach((item) => {
+      const rule = item.rule;
+      
+      switch (item.achievement_type) {
+        case 'SCORE': {
+          if (queryData.user?.totalScore >= rule.score) {
+            objects.push({ achievement_id: item.id, user_id });
+          }
+          break;
+        }
+        case 'CATEGORY': {
+          //statements;
+          break;
+        }
+        case 'SCOREINCATEGORY': {
+          //statements;
+          break;
+        }
+      }
+    });
+    if (objects.length) {
+      await client
+        .AddAchievement({ objects })
+        .then((response) => {
+          return response;
+        })
+        .catch((e) => {
+          throw new functions.https.HttpsError('invalid-argument', e.message);
+        });
 
-    // TODO validation logic
-
-    const objects: User_Achievement_Insert_Input[] = unobtainedAchievments;
-    console.log('[New Achievments]:', objects);
-    await client
-      .AddAchievement({ objects })
-      .then((response) => {
-        console.log('[mutationResponse]:', response);
-        return response;
-      })
-      .catch((e) => {
-        throw new functions.https.HttpsError('invalid-argument', e.message);
+      res.status(200).json({
+        status: 'Success',
+        data: `New ${objects.length} achievments`,
       });
+    } else {
+      res.status(200).json({
+        status: 'Success',
+        data: 'No new achievements',
+      });
+    }
     return;
   }
+  res.status(200).json({
+    status: 'Success',
+    data: 'No new achievements',
+  });
 });
