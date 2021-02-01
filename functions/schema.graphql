@@ -7,11 +7,12 @@ schema {
 # columns and relationships of "achievement"
 type achievement {
   # An object relationship
-  achievementTypeByAchievementType: achievement_type
-  achievement_type: String
+  achievementTypeByAchievementType: achievement_type!
+  achievement_type: achievement_type_enum!
   created_at: timestamptz
   description: String
   id: Int!
+  level: Int!
   name: String!
   rule(
     # JSON select path
@@ -100,11 +101,13 @@ input achievement_arr_rel_insert_input {
 # aggregate avg on columns
 type achievement_avg_fields {
   id: Float
+  level: Float
 }
 
 # order by avg() on columns of table "achievement"
 input achievement_avg_order_by {
   id: order_by
+  level: order_by
 }
 
 # Boolean expression to filter rows from the table "achievement". All fields are combined with a logical 'AND'.
@@ -113,10 +116,11 @@ input achievement_bool_exp {
   _not: achievement_bool_exp
   _or: [achievement_bool_exp]
   achievementTypeByAchievementType: achievement_type_bool_exp
-  achievement_type: String_comparison_exp
+  achievement_type: achievement_type_enum_comparison_exp
   created_at: timestamptz_comparison_exp
   description: String_comparison_exp
   id: Int_comparison_exp
+  level: Int_comparison_exp
   name: String_comparison_exp
   rule: json_comparison_exp
   user_achievements: user_achievement_bool_exp
@@ -134,15 +138,17 @@ enum achievement_constraint {
 # input type for incrementing integer column in table "achievement"
 input achievement_inc_input {
   id: Int
+  level: Int
 }
 
 # input type for inserting data into table "achievement"
 input achievement_insert_input {
   achievementTypeByAchievementType: achievement_type_obj_rel_insert_input
-  achievement_type: String
+  achievement_type: achievement_type_enum
   created_at: timestamptz
   description: String
   id: Int
+  level: Int
   name: String
   rule: json
   user_achievements: user_achievement_arr_rel_insert_input
@@ -150,37 +156,37 @@ input achievement_insert_input {
 
 # aggregate max on columns
 type achievement_max_fields {
-  achievement_type: String
   created_at: timestamptz
   description: String
   id: Int
+  level: Int
   name: String
 }
 
 # order by max() on columns of table "achievement"
 input achievement_max_order_by {
-  achievement_type: order_by
   created_at: order_by
   description: order_by
   id: order_by
+  level: order_by
   name: order_by
 }
 
 # aggregate min on columns
 type achievement_min_fields {
-  achievement_type: String
   created_at: timestamptz
   description: String
   id: Int
+  level: Int
   name: String
 }
 
 # order by min() on columns of table "achievement"
 input achievement_min_order_by {
-  achievement_type: order_by
   created_at: order_by
   description: order_by
   id: order_by
+  level: order_by
   name: order_by
 }
 
@@ -213,6 +219,7 @@ input achievement_order_by {
   created_at: order_by
   description: order_by
   id: order_by
+  level: order_by
   name: order_by
   rule: order_by
   user_achievements_aggregate: user_achievement_aggregate_order_by
@@ -238,6 +245,9 @@ enum achievement_select_column {
   id
 
   # column name
+  level
+
+  # column name
   name
 
   # column name
@@ -246,10 +256,11 @@ enum achievement_select_column {
 
 # input type for updating data in table "achievement"
 input achievement_set_input {
-  achievement_type: String
+  achievement_type: achievement_type_enum
   created_at: timestamptz
   description: String
   id: Int
+  level: Int
   name: String
   rule: json
 }
@@ -257,45 +268,88 @@ input achievement_set_input {
 # aggregate stddev on columns
 type achievement_stddev_fields {
   id: Float
+  level: Float
 }
 
 # order by stddev() on columns of table "achievement"
 input achievement_stddev_order_by {
   id: order_by
+  level: order_by
 }
 
 # aggregate stddev_pop on columns
 type achievement_stddev_pop_fields {
   id: Float
+  level: Float
 }
 
 # order by stddev_pop() on columns of table "achievement"
 input achievement_stddev_pop_order_by {
   id: order_by
+  level: order_by
 }
 
 # aggregate stddev_samp on columns
 type achievement_stddev_samp_fields {
   id: Float
+  level: Float
 }
 
 # order by stddev_samp() on columns of table "achievement"
 input achievement_stddev_samp_order_by {
   id: order_by
+  level: order_by
 }
 
 # aggregate sum on columns
 type achievement_sum_fields {
   id: Int
+  level: Int
 }
 
 # order by sum() on columns of table "achievement"
 input achievement_sum_order_by {
   id: order_by
+  level: order_by
 }
 
 # columns and relationships of "achievement_type"
 type achievement_type {
+  # An array relationship
+  achievements(
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): [achievement!]!
+
+  # An aggregated array relationship
+  achievements_aggregate(
+    # distinct select on columns
+    distinct_on: [achievement_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [achievement_order_by!]
+
+    # filter the rows returned
+    where: achievement_bool_exp
+  ): achievement_aggregate!
   description: String
   name: String!
 }
@@ -331,6 +385,7 @@ input achievement_type_bool_exp {
   _and: [achievement_type_bool_exp]
   _not: achievement_type_bool_exp
   _or: [achievement_type_bool_exp]
+  achievements: achievement_bool_exp
   description: String_comparison_exp
   name: String_comparison_exp
 }
@@ -341,8 +396,25 @@ enum achievement_type_constraint {
   achievement_type_pkey
 }
 
+enum achievement_type_enum {
+  # First activity on the app
+  FIRST_ACTIVITY
+  SCORE
+  SCORE_IN_CATEGORY
+}
+
+# expression to compare columns of type achievement_type_enum. All fields are combined with logical 'AND'.
+input achievement_type_enum_comparison_exp {
+  _eq: achievement_type_enum
+  _in: [achievement_type_enum!]
+  _is_null: Boolean
+  _neq: achievement_type_enum
+  _nin: [achievement_type_enum!]
+}
+
 # input type for inserting data into table "achievement_type"
 input achievement_type_insert_input {
+  achievements: achievement_arr_rel_insert_input
   description: String
   name: String
 }
@@ -395,6 +467,7 @@ input achievement_type_on_conflict {
 
 # ordering options when selecting data from "achievement_type"
 input achievement_type_order_by {
+  achievements_aggregate: achievement_aggregate_order_by
   description: order_by
   name: order_by
 }
@@ -443,6 +516,9 @@ enum achievement_update_column {
   id
 
   # column name
+  level
+
+  # column name
   name
 
   # column name
@@ -452,31 +528,37 @@ enum achievement_update_column {
 # aggregate var_pop on columns
 type achievement_var_pop_fields {
   id: Float
+  level: Float
 }
 
 # order by var_pop() on columns of table "achievement"
 input achievement_var_pop_order_by {
   id: order_by
+  level: order_by
 }
 
 # aggregate var_samp on columns
 type achievement_var_samp_fields {
   id: Float
+  level: Float
 }
 
 # order by var_samp() on columns of table "achievement"
 input achievement_var_samp_order_by {
   id: order_by
+  level: order_by
 }
 
 # aggregate variance on columns
 type achievement_variance_fields {
   id: Float
+  level: Float
 }
 
 # order by variance() on columns of table "achievement"
 input achievement_variance_order_by {
   id: order_by
+  level: order_by
 }
 
 # columns and relationships of "activities"
@@ -944,6 +1026,19 @@ input activities_variance_order_by {
 
 scalar bigint
 
+# expression to compare columns of type Boolean. All fields are combined with logical 'AND'.
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
 # columns and relationships of "categories"
 type categories {
   description: String
@@ -1195,6 +1290,157 @@ type categories_variance_fields {
 # order by variance() on columns of table "categories"
 input categories_variance_order_by {
   points_per_minute: order_by
+}
+
+# columns and relationships of "challenge_type"
+type challenge_type {
+  description: String
+  name: String!
+  rules(
+    # JSON select path
+    path: String
+  ): json
+}
+
+# aggregated selection of "challenge_type"
+type challenge_type_aggregate {
+  aggregate: challenge_type_aggregate_fields
+  nodes: [challenge_type!]!
+}
+
+# aggregate fields of "challenge_type"
+type challenge_type_aggregate_fields {
+  count(columns: [challenge_type_select_column!], distinct: Boolean): Int
+  max: challenge_type_max_fields
+  min: challenge_type_min_fields
+}
+
+# order by aggregate values of table "challenge_type"
+input challenge_type_aggregate_order_by {
+  count: order_by
+  max: challenge_type_max_order_by
+  min: challenge_type_min_order_by
+}
+
+# input type for inserting array relation for remote table "challenge_type"
+input challenge_type_arr_rel_insert_input {
+  data: [challenge_type_insert_input!]!
+  on_conflict: challenge_type_on_conflict
+}
+
+# Boolean expression to filter rows from the table "challenge_type". All fields are combined with a logical 'AND'.
+input challenge_type_bool_exp {
+  _and: [challenge_type_bool_exp]
+  _not: challenge_type_bool_exp
+  _or: [challenge_type_bool_exp]
+  description: String_comparison_exp
+  name: String_comparison_exp
+  rules: json_comparison_exp
+}
+
+# unique or primary key constraints on table "challenge_type"
+enum challenge_type_constraint {
+  # unique or primary key constraint
+  challenge_type_description_key
+
+  # unique or primary key constraint
+  challenge_type_pkey
+}
+
+# input type for inserting data into table "challenge_type"
+input challenge_type_insert_input {
+  description: String
+  name: String
+  rules: json
+}
+
+# aggregate max on columns
+type challenge_type_max_fields {
+  description: String
+  name: String
+}
+
+# order by max() on columns of table "challenge_type"
+input challenge_type_max_order_by {
+  description: order_by
+  name: order_by
+}
+
+# aggregate min on columns
+type challenge_type_min_fields {
+  description: String
+  name: String
+}
+
+# order by min() on columns of table "challenge_type"
+input challenge_type_min_order_by {
+  description: order_by
+  name: order_by
+}
+
+# response of any mutation on the table "challenge_type"
+type challenge_type_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [challenge_type!]!
+}
+
+# input type for inserting object relation for remote table "challenge_type"
+input challenge_type_obj_rel_insert_input {
+  data: challenge_type_insert_input!
+  on_conflict: challenge_type_on_conflict
+}
+
+# on conflict condition type for table "challenge_type"
+input challenge_type_on_conflict {
+  constraint: challenge_type_constraint!
+  update_columns: [challenge_type_update_column!]!
+  where: challenge_type_bool_exp
+}
+
+# ordering options when selecting data from "challenge_type"
+input challenge_type_order_by {
+  description: order_by
+  name: order_by
+  rules: order_by
+}
+
+# primary key columns input for table: "challenge_type"
+input challenge_type_pk_columns_input {
+  name: String!
+}
+
+# select columns of table "challenge_type"
+enum challenge_type_select_column {
+  # column name
+  description
+
+  # column name
+  name
+
+  # column name
+  rules
+}
+
+# input type for updating data in table "challenge_type"
+input challenge_type_set_input {
+  description: String
+  name: String
+  rules: json
+}
+
+# update columns of table "challenge_type"
+enum challenge_type_update_column {
+  # column name
+  description
+
+  # column name
+  name
+
+  # column name
+  rules
 }
 
 # columns and relationships of "comments"
@@ -1518,6 +1764,21 @@ type comments_variance_fields {
 input comments_variance_order_by {
   activity_id: order_by
   comment_id: order_by
+}
+
+scalar daterange
+
+# expression to compare columns of type daterange. All fields are combined with logical 'AND'.
+input daterange_comparison_exp {
+  _eq: daterange
+  _gt: daterange
+  _gte: daterange
+  _in: [daterange!]
+  _is_null: Boolean
+  _lt: daterange
+  _lte: daterange
+  _neq: daterange
+  _nin: [daterange!]
 }
 
 scalar float8
@@ -2041,6 +2302,15 @@ input geofences_bool_exp {
 
 # unique or primary key constraints on table "geofences"
 enum geofences_constraint {
+  # unique or primary key constraint
+  geofences_coordinates_key
+
+  # unique or primary key constraint
+  geofences_latitude_longitude_key
+
+  # unique or primary key constraint
+  geofences_name_key
+
   # unique or primary key constraint
   geofences_pkey
 }
@@ -2732,6 +3002,15 @@ type mutation_root {
   # delete single row from the table: "categories"
   delete_categories_by_pk(name: String!): categories
 
+  # delete data from the table: "challenge_type"
+  delete_challenge_type(
+    # filter the rows which have to be deleted
+    where: challenge_type_bool_exp!
+  ): challenge_type_mutation_response
+
+  # delete single row from the table: "challenge_type"
+  delete_challenge_type_by_pk(name: String!): challenge_type
+
   # delete single row from the table: "comments"
   delete_comment(comment_id: Int!): comments
 
@@ -2788,6 +3067,15 @@ type mutation_root {
 
   # delete single row from the table: "user_achievement"
   delete_user_achievement_by_pk(achievement_id: Int!, user_id: String!): user_achievement
+
+  # delete data from the table: "user_challenge"
+  delete_user_challenge(
+    # filter the rows which have to be deleted
+    where: user_challenge_bool_exp!
+  ): user_challenge_mutation_response
+
+  # delete single row from the table: "user_challenge"
+  delete_user_challenge_by_pk(id: Int!): user_challenge
 
   # delete data from the table: "users"
   delete_users(
@@ -2866,6 +3154,24 @@ type mutation_root {
     # on conflict condition
     on_conflict: categories_on_conflict
   ): categories
+
+  # insert data into the table: "challenge_type"
+  insert_challenge_type(
+    # the rows to be inserted
+    objects: [challenge_type_insert_input!]!
+
+    # on conflict condition
+    on_conflict: challenge_type_on_conflict
+  ): challenge_type_mutation_response
+
+  # insert a single row into the table: "challenge_type"
+  insert_challenge_type_one(
+    # the row to be inserted
+    object: challenge_type_insert_input!
+
+    # on conflict condition
+    on_conflict: challenge_type_on_conflict
+  ): challenge_type
 
   # insert a single row into the table: "comments"
   insert_comment(
@@ -2984,6 +3290,24 @@ type mutation_root {
     on_conflict: user_achievement_on_conflict
   ): user_achievement
 
+  # insert data into the table: "user_challenge"
+  insert_user_challenge(
+    # the rows to be inserted
+    objects: [user_challenge_insert_input!]!
+
+    # on conflict condition
+    on_conflict: user_challenge_on_conflict
+  ): user_challenge_mutation_response
+
+  # insert a single row into the table: "user_challenge"
+  insert_user_challenge_one(
+    # the row to be inserted
+    object: user_challenge_insert_input!
+
+    # on conflict condition
+    on_conflict: user_challenge_on_conflict
+  ): user_challenge
+
   # insert data into the table: "users"
   insert_users(
     # the rows to be inserted
@@ -3074,6 +3398,22 @@ type mutation_root {
     _set: categories_set_input
     pk_columns: categories_pk_columns_input!
   ): categories
+
+  # update data of the table: "challenge_type"
+  update_challenge_type(
+    # sets the columns of the filtered rows to the given values
+    _set: challenge_type_set_input
+
+    # filter the rows which have to be updated
+    where: challenge_type_bool_exp!
+  ): challenge_type_mutation_response
+
+  # update single row of the table: "challenge_type"
+  update_challenge_type_by_pk(
+    # sets the columns of the filtered rows to the given values
+    _set: challenge_type_set_input
+    pk_columns: challenge_type_pk_columns_input!
+  ): challenge_type
 
   # update single row of the table: "comments"
   update_comment(
@@ -3201,6 +3541,28 @@ type mutation_root {
     _set: user_achievement_set_input
     pk_columns: user_achievement_pk_columns_input!
   ): user_achievement
+
+  # update data of the table: "user_challenge"
+  update_user_challenge(
+    # increments the integer columns with given value of the filtered values
+    _inc: user_challenge_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: user_challenge_set_input
+
+    # filter the rows which have to be updated
+    where: user_challenge_bool_exp!
+  ): user_challenge_mutation_response
+
+  # update single row of the table: "user_challenge"
+  update_user_challenge_by_pk(
+    # increments the integer columns with given value of the filtered values
+    _inc: user_challenge_inc_input
+
+    # sets the columns of the filtered rows to the given values
+    _set: user_challenge_set_input
+    pk_columns: user_challenge_pk_columns_input!
+  ): user_challenge
 
   # update data of the table: "users"
   update_users(
@@ -3390,6 +3752,45 @@ type query_root {
 
   # fetch data from the table: "categories" using primary key columns
   categories_by_pk(name: String!): categories
+
+  # fetch data from the table: "challenge_type"
+  challenge_type(
+    # distinct select on columns
+    distinct_on: [challenge_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [challenge_type_order_by!]
+
+    # filter the rows returned
+    where: challenge_type_bool_exp
+  ): [challenge_type!]!
+
+  # fetch aggregated fields from the table: "challenge_type"
+  challenge_type_aggregate(
+    # distinct select on columns
+    distinct_on: [challenge_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [challenge_type_order_by!]
+
+    # filter the rows returned
+    where: challenge_type_bool_exp
+  ): challenge_type_aggregate!
+
+  # fetch data from the table: "challenge_type" using primary key columns
+  challenge_type_by_pk(name: String!): challenge_type
 
   # fetch data from the table: "comments" using primary key columns
   comment(comment_id: Int!): comments
@@ -3669,6 +4070,45 @@ type query_root {
 
   # fetch data from the table: "user_achievement" using primary key columns
   user_achievement_by_pk(achievement_id: Int!, user_id: String!): user_achievement
+
+  # fetch data from the table: "user_challenge"
+  user_challenge(
+    # distinct select on columns
+    distinct_on: [user_challenge_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_challenge_order_by!]
+
+    # filter the rows returned
+    where: user_challenge_bool_exp
+  ): [user_challenge!]!
+
+  # fetch aggregated fields from the table: "user_challenge"
+  user_challenge_aggregate(
+    # distinct select on columns
+    distinct_on: [user_challenge_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_challenge_order_by!]
+
+    # filter the rows returned
+    where: user_challenge_bool_exp
+  ): user_challenge_aggregate!
+
+  # fetch data from the table: "user_challenge" using primary key columns
+  user_challenge_by_pk(id: Int!): user_challenge
 
   # fetch data from the table: "users"
   users(
@@ -3884,6 +4324,45 @@ type subscription_root {
   # fetch data from the table: "categories" using primary key columns
   categories_by_pk(name: String!): categories
 
+  # fetch data from the table: "challenge_type"
+  challenge_type(
+    # distinct select on columns
+    distinct_on: [challenge_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [challenge_type_order_by!]
+
+    # filter the rows returned
+    where: challenge_type_bool_exp
+  ): [challenge_type!]!
+
+  # fetch aggregated fields from the table: "challenge_type"
+  challenge_type_aggregate(
+    # distinct select on columns
+    distinct_on: [challenge_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [challenge_type_order_by!]
+
+    # filter the rows returned
+    where: challenge_type_bool_exp
+  ): challenge_type_aggregate!
+
+  # fetch data from the table: "challenge_type" using primary key columns
+  challenge_type_by_pk(name: String!): challenge_type
+
   # fetch data from the table: "comments" using primary key columns
   comment(comment_id: Int!): comments
 
@@ -4162,6 +4641,45 @@ type subscription_root {
 
   # fetch data from the table: "user_achievement" using primary key columns
   user_achievement_by_pk(achievement_id: Int!, user_id: String!): user_achievement
+
+  # fetch data from the table: "user_challenge"
+  user_challenge(
+    # distinct select on columns
+    distinct_on: [user_challenge_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_challenge_order_by!]
+
+    # filter the rows returned
+    where: user_challenge_bool_exp
+  ): [user_challenge!]!
+
+  # fetch aggregated fields from the table: "user_challenge"
+  user_challenge_aggregate(
+    # distinct select on columns
+    distinct_on: [user_challenge_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [user_challenge_order_by!]
+
+    # filter the rows returned
+    where: user_challenge_bool_exp
+  ): user_challenge_aggregate!
+
+  # fetch data from the table: "user_challenge" using primary key columns
+  user_challenge_by_pk(id: Int!): user_challenge
 
   # fetch data from the table: "users"
   users(
@@ -4496,6 +5014,322 @@ input user_achievement_variance_order_by {
   achievement_id: order_by
 }
 
+# columns and relationships of "user_challenge"
+type user_challenge {
+  challenge_type: String!
+  challenger_uid: String!
+  created_at: timestamptz!
+  daterange: daterange
+  id: Int!
+  is_active: Boolean!
+  receiver_uid: String!
+  rules(
+    # JSON select path
+    path: String
+  ): json
+}
+
+# aggregated selection of "user_challenge"
+type user_challenge_aggregate {
+  aggregate: user_challenge_aggregate_fields
+  nodes: [user_challenge!]!
+}
+
+# aggregate fields of "user_challenge"
+type user_challenge_aggregate_fields {
+  avg: user_challenge_avg_fields
+  count(columns: [user_challenge_select_column!], distinct: Boolean): Int
+  max: user_challenge_max_fields
+  min: user_challenge_min_fields
+  stddev: user_challenge_stddev_fields
+  stddev_pop: user_challenge_stddev_pop_fields
+  stddev_samp: user_challenge_stddev_samp_fields
+  sum: user_challenge_sum_fields
+  var_pop: user_challenge_var_pop_fields
+  var_samp: user_challenge_var_samp_fields
+  variance: user_challenge_variance_fields
+}
+
+# order by aggregate values of table "user_challenge"
+input user_challenge_aggregate_order_by {
+  avg: user_challenge_avg_order_by
+  count: order_by
+  max: user_challenge_max_order_by
+  min: user_challenge_min_order_by
+  stddev: user_challenge_stddev_order_by
+  stddev_pop: user_challenge_stddev_pop_order_by
+  stddev_samp: user_challenge_stddev_samp_order_by
+  sum: user_challenge_sum_order_by
+  var_pop: user_challenge_var_pop_order_by
+  var_samp: user_challenge_var_samp_order_by
+  variance: user_challenge_variance_order_by
+}
+
+# input type for inserting array relation for remote table "user_challenge"
+input user_challenge_arr_rel_insert_input {
+  data: [user_challenge_insert_input!]!
+  on_conflict: user_challenge_on_conflict
+}
+
+# aggregate avg on columns
+type user_challenge_avg_fields {
+  id: Float
+}
+
+# order by avg() on columns of table "user_challenge"
+input user_challenge_avg_order_by {
+  id: order_by
+}
+
+# Boolean expression to filter rows from the table "user_challenge". All fields are combined with a logical 'AND'.
+input user_challenge_bool_exp {
+  _and: [user_challenge_bool_exp]
+  _not: user_challenge_bool_exp
+  _or: [user_challenge_bool_exp]
+  challenge_type: String_comparison_exp
+  challenger_uid: String_comparison_exp
+  created_at: timestamptz_comparison_exp
+  daterange: daterange_comparison_exp
+  id: Int_comparison_exp
+  is_active: Boolean_comparison_exp
+  receiver_uid: String_comparison_exp
+  rules: json_comparison_exp
+}
+
+# unique or primary key constraints on table "user_challenge"
+enum user_challenge_constraint {
+  # unique or primary key constraint
+  user_challenge_pkey
+}
+
+# input type for incrementing integer column in table "user_challenge"
+input user_challenge_inc_input {
+  id: Int
+}
+
+# input type for inserting data into table "user_challenge"
+input user_challenge_insert_input {
+  challenge_type: String
+  challenger_uid: String
+  created_at: timestamptz
+  daterange: daterange
+  id: Int
+  is_active: Boolean
+  receiver_uid: String
+  rules: json
+}
+
+# aggregate max on columns
+type user_challenge_max_fields {
+  challenge_type: String
+  challenger_uid: String
+  created_at: timestamptz
+  id: Int
+  receiver_uid: String
+}
+
+# order by max() on columns of table "user_challenge"
+input user_challenge_max_order_by {
+  challenge_type: order_by
+  challenger_uid: order_by
+  created_at: order_by
+  id: order_by
+  receiver_uid: order_by
+}
+
+# aggregate min on columns
+type user_challenge_min_fields {
+  challenge_type: String
+  challenger_uid: String
+  created_at: timestamptz
+  id: Int
+  receiver_uid: String
+}
+
+# order by min() on columns of table "user_challenge"
+input user_challenge_min_order_by {
+  challenge_type: order_by
+  challenger_uid: order_by
+  created_at: order_by
+  id: order_by
+  receiver_uid: order_by
+}
+
+# response of any mutation on the table "user_challenge"
+type user_challenge_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [user_challenge!]!
+}
+
+# input type for inserting object relation for remote table "user_challenge"
+input user_challenge_obj_rel_insert_input {
+  data: user_challenge_insert_input!
+  on_conflict: user_challenge_on_conflict
+}
+
+# on conflict condition type for table "user_challenge"
+input user_challenge_on_conflict {
+  constraint: user_challenge_constraint!
+  update_columns: [user_challenge_update_column!]!
+  where: user_challenge_bool_exp
+}
+
+# ordering options when selecting data from "user_challenge"
+input user_challenge_order_by {
+  challenge_type: order_by
+  challenger_uid: order_by
+  created_at: order_by
+  daterange: order_by
+  id: order_by
+  is_active: order_by
+  receiver_uid: order_by
+  rules: order_by
+}
+
+# primary key columns input for table: "user_challenge"
+input user_challenge_pk_columns_input {
+  id: Int!
+}
+
+# select columns of table "user_challenge"
+enum user_challenge_select_column {
+  # column name
+  challenge_type
+
+  # column name
+  challenger_uid
+
+  # column name
+  created_at
+
+  # column name
+  daterange
+
+  # column name
+  id
+
+  # column name
+  is_active
+
+  # column name
+  receiver_uid
+
+  # column name
+  rules
+}
+
+# input type for updating data in table "user_challenge"
+input user_challenge_set_input {
+  challenge_type: String
+  challenger_uid: String
+  created_at: timestamptz
+  daterange: daterange
+  id: Int
+  is_active: Boolean
+  receiver_uid: String
+  rules: json
+}
+
+# aggregate stddev on columns
+type user_challenge_stddev_fields {
+  id: Float
+}
+
+# order by stddev() on columns of table "user_challenge"
+input user_challenge_stddev_order_by {
+  id: order_by
+}
+
+# aggregate stddev_pop on columns
+type user_challenge_stddev_pop_fields {
+  id: Float
+}
+
+# order by stddev_pop() on columns of table "user_challenge"
+input user_challenge_stddev_pop_order_by {
+  id: order_by
+}
+
+# aggregate stddev_samp on columns
+type user_challenge_stddev_samp_fields {
+  id: Float
+}
+
+# order by stddev_samp() on columns of table "user_challenge"
+input user_challenge_stddev_samp_order_by {
+  id: order_by
+}
+
+# aggregate sum on columns
+type user_challenge_sum_fields {
+  id: Int
+}
+
+# order by sum() on columns of table "user_challenge"
+input user_challenge_sum_order_by {
+  id: order_by
+}
+
+# update columns of table "user_challenge"
+enum user_challenge_update_column {
+  # column name
+  challenge_type
+
+  # column name
+  challenger_uid
+
+  # column name
+  created_at
+
+  # column name
+  daterange
+
+  # column name
+  id
+
+  # column name
+  is_active
+
+  # column name
+  receiver_uid
+
+  # column name
+  rules
+}
+
+# aggregate var_pop on columns
+type user_challenge_var_pop_fields {
+  id: Float
+}
+
+# order by var_pop() on columns of table "user_challenge"
+input user_challenge_var_pop_order_by {
+  id: order_by
+}
+
+# aggregate var_samp on columns
+type user_challenge_var_samp_fields {
+  id: Float
+}
+
+# order by var_samp() on columns of table "user_challenge"
+input user_challenge_var_samp_order_by {
+  id: order_by
+}
+
+# aggregate variance on columns
+type user_challenge_variance_fields {
+  id: Float
+}
+
+# order by variance() on columns of table "user_challenge"
+input user_challenge_variance_order_by {
+  id: order_by
+}
+
 # columns and relationships of "users"
 type users {
   # An array relationship
@@ -4610,6 +5444,7 @@ type users {
   ): followings_aggregate!
   id: String!
   name: String
+  picture: String!
 
   # A computed field, executes function "totalscore"
   totalScore: bigint
@@ -4691,6 +5526,7 @@ input users_bool_exp {
   following: followings_bool_exp
   id: String_comparison_exp
   name: String_comparison_exp
+  picture: String_comparison_exp
   updated_at: timestamptz_comparison_exp
   user_achievement: user_achievement_bool_exp
 }
@@ -4717,6 +5553,7 @@ input users_insert_input {
   following: followings_arr_rel_insert_input
   id: String
   name: String
+  picture: String
   updated_at: timestamptz
   user_achievement: user_achievement_arr_rel_insert_input
 }
@@ -4728,6 +5565,7 @@ type users_max_fields {
   email: String
   id: String
   name: String
+  picture: String
   updated_at: timestamptz
 }
 
@@ -4738,6 +5576,7 @@ input users_max_order_by {
   email: order_by
   id: order_by
   name: order_by
+  picture: order_by
   updated_at: order_by
 }
 
@@ -4748,6 +5587,7 @@ type users_min_fields {
   email: String
   id: String
   name: String
+  picture: String
   updated_at: timestamptz
 }
 
@@ -4758,6 +5598,7 @@ input users_min_order_by {
   email: order_by
   id: order_by
   name: order_by
+  picture: order_by
   updated_at: order_by
 }
 
@@ -4793,6 +5634,7 @@ input users_order_by {
   following_aggregate: followings_aggregate_order_by
   id: order_by
   name: order_by
+  picture: order_by
   updated_at: order_by
   user_achievement_aggregate: user_achievement_aggregate_order_by
 }
@@ -4820,6 +5662,9 @@ enum users_select_column {
   name
 
   # column name
+  picture
+
+  # column name
   updated_at
 }
 
@@ -4830,6 +5675,7 @@ input users_set_input {
   email: String
   id: String
   name: String
+  picture: String
   updated_at: timestamptz
 }
 
@@ -4849,6 +5695,9 @@ enum users_update_column {
 
   # column name
   name
+
+  # column name
+  picture
 
   # column name
   updated_at

@@ -3,6 +3,37 @@ query GetUserAndExistingAchievements($user_id: String!) {
     id
     totalScore
     name
+    activities{
+      activity_id
+    }
+    education_score: activities_aggregate(where: {geofence: {category: {_eq: "EDUCATION"}}}) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    culture_score: activities_aggregate(where: {geofence: {category: {_eq: "CULTURE"}}}) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    social_score: activities_aggregate(where: {geofence: {category: {_eq: "SOCIAL"}}}) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    health_score: activities_aggregate(where: {geofence: {category: {_eq: "HEALTH"}}}) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
     user_achievement {
       achievement {
         id
