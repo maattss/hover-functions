@@ -4626,8 +4626,10 @@ export const GetUserAndExistingAchievementsDocument = gql`
     id
     totalScore
     name
-    activities {
-      activity_id
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
     }
     education_score: activities_aggregate(
       where: {geofence: {category: {_eq: "EDUCATION"}}}
@@ -4691,8 +4693,10 @@ export const GetUserAndUnachievedAchievementsDocument = gql`
   user(id: $user_id) {
     id
     totalScore
-    activities {
-      activity_id
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
     }
     education_score: activities_aggregate(
       where: {geofence: {category: {_eq: "EDUCATION"}}}
@@ -7119,8 +7123,10 @@ export const GetUserAndExistingAchievements = gql`
     id
     totalScore
     name
-    activities {
-      activity_id
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
     }
     education_score: activities_aggregate(
       where: {geofence: {category: {_eq: "EDUCATION"}}}
@@ -7184,8 +7190,10 @@ export const GetUserAndUnachievedAchievements = gql`
   user(id: $user_id) {
     id
     totalScore
-    activities {
-      activity_id
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
     }
     education_score: activities_aggregate(
       where: {geofence: {category: {_eq: "EDUCATION"}}}
@@ -7290,10 +7298,13 @@ export type GetUserAndExistingAchievementsQuery = (
   & { user?: Maybe<(
     { __typename?: 'users' }
     & Pick<Users, 'id' | 'totalScore' | 'name'>
-    & { activities: Array<(
-      { __typename?: 'activities' }
-      & Pick<Activities, 'activity_id'>
-    )>, education_score: (
+    & { activity_count: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & Pick<Activities_Aggregate_Fields, 'count'>
+      )> }
+    ), education_score: (
       { __typename?: 'activities_aggregate' }
       & { aggregate?: Maybe<(
         { __typename?: 'activities_aggregate_fields' }
@@ -7352,10 +7363,13 @@ export type GetUserAndUnachievedAchievementsQuery = (
   )>, user?: Maybe<(
     { __typename?: 'users' }
     & Pick<Users, 'id' | 'totalScore'>
-    & { activities: Array<(
-      { __typename?: 'activities' }
-      & Pick<Activities, 'activity_id'>
-    )>, education_score: (
+    & { activity_count: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & Pick<Activities_Aggregate_Fields, 'count'>
+      )> }
+    ), education_score: (
       { __typename?: 'activities_aggregate' }
       & { aggregate?: Maybe<(
         { __typename?: 'activities_aggregate_fields' }

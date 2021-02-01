@@ -3,8 +3,10 @@ query GetUserAndExistingAchievements($user_id: String!) {
     id
     totalScore
     name
-    activities{
-      activity_id
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
     }
     education_score: activities_aggregate(where: {geofence: {category: {_eq: "EDUCATION"}}}) {
       aggregate {
