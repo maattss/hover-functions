@@ -4657,8 +4657,8 @@ export const GetUserAndExistingAchievementsDocument = gql`
         }
       }
     }
-    health_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "HEALTH"}}}
+    exercise_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "EXERCISE"}}}
     ) {
       aggregate {
         sum {
@@ -4724,8 +4724,8 @@ export const GetUserAndUnachievedAchievementsDocument = gql`
         }
       }
     }
-    health_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "HEALTH"}}}
+    exercise_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "EXERCISE"}}}
     ) {
       aggregate {
         sum {
@@ -7153,8 +7153,8 @@ export const GetUserAndExistingAchievements = gql`
         }
       }
     }
-    health_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "HEALTH"}}}
+    exercise_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "EXERCISE"}}}
     ) {
       aggregate {
         sum {
@@ -7220,8 +7220,8 @@ export const GetUserAndUnachievedAchievements = gql`
         }
       }
     }
-    health_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "HEALTH"}}}
+    exercise_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "EXERCISE"}}}
     ) {
       aggregate {
         sum {
@@ -7329,7 +7329,7 @@ export type GetUserAndExistingAchievementsQuery = (
           & Pick<Activities_Sum_Fields, 'score'>
         )> }
       )> }
-    ), health_score: (
+    ), exercise_score: (
       { __typename?: 'activities_aggregate' }
       & { aggregate?: Maybe<(
         { __typename?: 'activities_aggregate_fields' }
@@ -7394,7 +7394,7 @@ export type GetUserAndUnachievedAchievementsQuery = (
           & Pick<Activities_Sum_Fields, 'score'>
         )> }
       )> }
-    ), health_score: (
+    ), exercise_score: (
       { __typename?: 'activities_aggregate' }
       & { aggregate?: Maybe<(
         { __typename?: 'activities_aggregate_fields' }

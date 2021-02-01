@@ -36,7 +36,7 @@ query GetUserAndUnachievedAchievements($user_id: String!) {
         }
       }
     }
-    health_score: activities_aggregate(where: {geofence: {category: {_eq: "HEALTH"}}}) {
+    exercise_score: activities_aggregate(where: {geofence: {category: {_eq: "EXERCISE"}}}) {
       aggregate {
         sum {
           score
