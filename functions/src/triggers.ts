@@ -31,7 +31,7 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
 
       res.status(200).json({
         status: 'Success',
-        data: `New ${objects.length} achievments`,
+        data: `Added ${objects.length} new achievments for user ${user_id}.`,
       });
     } else {
       res.status(200).json({
@@ -53,7 +53,7 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
     if (objects.length) {
       res.status(200).json({
         status: 'Success',
-        data: `Deleted ${objects.length} achievments`,
+        data: `Deleted ${objects.length} achievments from user ${user_id}.`,
       });
     } else {
       res.status(200).json({
@@ -99,6 +99,37 @@ function isValidAchievment(
       if (queryData.user?.totalScore >= item.rule.score) {
         return true;
       }
+      break;
+    }
+    case 'FIRST_ACTIVITY': {
+      if (queryData.user?.activity_count.aggregate?.count && queryData.user?.activity_count.aggregate?.count >= 1 ) {
+        return true;
+      }
+      break;
+    }
+    case 'SCORE_IN_CATEGORY': {
+      switch (item.rule.category){
+        case 'CULTURE': {
+          const score = queryData.user?.culture_score.aggregate?.sum?.score;
+          if( score && score >= item.rule.score) return true;
+          break;
+        }
+        case 'EDUCATION': {
+          const score = queryData.user?.education_score.aggregate?.sum?.score;
+          if( score && score >= item.rule.score) return true;
+          break;
+        }
+        case 'HEALTH': {
+          const score = queryData.user?.health_score.aggregate?.sum?.score;
+          if( score && score >= item.rule.score) return true;
+          break;
+        }
+        case 'SOCIAL': {
+          const score = queryData.user?.social_score.aggregate?.sum?.score;
+          if( score && score >= item.rule.score) return true;
+          break;
+        }
+      } 
       break;
     }
   }

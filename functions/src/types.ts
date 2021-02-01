@@ -27,6 +27,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   bigint: any;
+  daterange: any;
   float8: any;
   interval: any;
   json: any;
@@ -36,11 +37,12 @@ export type Scalars = {
 
 export type Achievement = {
   __typename?: 'achievement';
-  achievementTypeByAchievementType?: Maybe<Achievement_Type>;
-  achievement_type?: Maybe<Scalars['String']>;
+  achievementTypeByAchievementType: Achievement_Type;
+  achievement_type: Achievement_Type_Enum;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
+  level: Scalars['Int'];
   name: Scalars['String'];
   rule: Scalars['json'];
   user_achievements: Array<User_Achievement>;
@@ -119,10 +121,12 @@ export type Achievement_Arr_Rel_Insert_Input = {
 export type Achievement_Avg_Fields = {
   __typename?: 'achievement_avg_fields';
   id?: Maybe<Scalars['Float']>;
+  level?: Maybe<Scalars['Float']>;
 };
 
 export type Achievement_Avg_Order_By = {
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
 };
 
 export type Achievement_Bool_Exp = {
@@ -130,10 +134,11 @@ export type Achievement_Bool_Exp = {
   _not?: Maybe<Achievement_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Achievement_Bool_Exp>>>;
   achievementTypeByAchievementType?: Maybe<Achievement_Type_Bool_Exp>;
-  achievement_type?: Maybe<String_Comparison_Exp>;
+  achievement_type?: Maybe<Achievement_Type_Enum_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  level?: Maybe<Int_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   rule?: Maybe<Json_Comparison_Exp>;
   user_achievements?: Maybe<User_Achievement_Bool_Exp>;
@@ -146,14 +151,16 @@ export enum Achievement_Constraint {
 
 export type Achievement_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['Int']>;
 };
 
 export type Achievement_Insert_Input = {
   achievementTypeByAchievementType?: Maybe<Achievement_Type_Obj_Rel_Insert_Input>;
-  achievement_type?: Maybe<Scalars['String']>;
+  achievement_type?: Maybe<Achievement_Type_Enum>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   rule?: Maybe<Scalars['json']>;
   user_achievements?: Maybe<User_Achievement_Arr_Rel_Insert_Input>;
@@ -161,35 +168,35 @@ export type Achievement_Insert_Input = {
 
 export type Achievement_Max_Fields = {
   __typename?: 'achievement_max_fields';
-  achievement_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
 };
 
 export type Achievement_Max_Order_By = {
-  achievement_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
 
 export type Achievement_Min_Fields = {
   __typename?: 'achievement_min_fields';
-  achievement_type?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
 };
 
 export type Achievement_Min_Order_By = {
-  achievement_type?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
 
@@ -216,6 +223,7 @@ export type Achievement_Order_By = {
   created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   rule?: Maybe<Order_By>;
   user_achievements_aggregate?: Maybe<User_Achievement_Aggregate_Order_By>;
@@ -230,15 +238,17 @@ export enum Achievement_Select_Column {
   CreatedAt = 'created_at',
   Description = 'description',
   Id = 'id',
+  Level = 'level',
   Name = 'name',
   Rule = 'rule'
 }
 
 export type Achievement_Set_Input = {
-  achievement_type?: Maybe<Scalars['String']>;
+  achievement_type?: Maybe<Achievement_Type_Enum>;
   created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   rule?: Maybe<Scalars['json']>;
 };
@@ -246,43 +256,71 @@ export type Achievement_Set_Input = {
 export type Achievement_Stddev_Fields = {
   __typename?: 'achievement_stddev_fields';
   id?: Maybe<Scalars['Float']>;
+  level?: Maybe<Scalars['Float']>;
 };
 
 export type Achievement_Stddev_Order_By = {
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
 };
 
 export type Achievement_Stddev_Pop_Fields = {
   __typename?: 'achievement_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  level?: Maybe<Scalars['Float']>;
 };
 
 export type Achievement_Stddev_Pop_Order_By = {
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
 };
 
 export type Achievement_Stddev_Samp_Fields = {
   __typename?: 'achievement_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  level?: Maybe<Scalars['Float']>;
 };
 
 export type Achievement_Stddev_Samp_Order_By = {
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
 };
 
 export type Achievement_Sum_Fields = {
   __typename?: 'achievement_sum_fields';
   id?: Maybe<Scalars['Int']>;
+  level?: Maybe<Scalars['Int']>;
 };
 
 export type Achievement_Sum_Order_By = {
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
 };
 
 export type Achievement_Type = {
   __typename?: 'achievement_type';
+  achievements: Array<Achievement>;
+  achievements_aggregate: Achievement_Aggregate;
   description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+};
+
+
+export type Achievement_TypeAchievementsArgs = {
+  distinct_on?: Maybe<Array<Achievement_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Achievement_Order_By>>;
+  where?: Maybe<Achievement_Bool_Exp>;
+};
+
+
+export type Achievement_TypeAchievements_AggregateArgs = {
+  distinct_on?: Maybe<Array<Achievement_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Achievement_Order_By>>;
+  where?: Maybe<Achievement_Bool_Exp>;
 };
 
 export type Achievement_Type_Aggregate = {
@@ -319,6 +357,7 @@ export type Achievement_Type_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Achievement_Type_Bool_Exp>>>;
   _not?: Maybe<Achievement_Type_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Achievement_Type_Bool_Exp>>>;
+  achievements?: Maybe<Achievement_Bool_Exp>;
   description?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
 };
@@ -327,7 +366,22 @@ export enum Achievement_Type_Constraint {
   AchievementTypePkey = 'achievement_type_pkey'
 }
 
+export enum Achievement_Type_Enum {
+  FirstActivity = 'FIRST_ACTIVITY',
+  Score = 'SCORE',
+  ScoreInCategory = 'SCORE_IN_CATEGORY'
+}
+
+export type Achievement_Type_Enum_Comparison_Exp = {
+  _eq?: Maybe<Achievement_Type_Enum>;
+  _in?: Maybe<Array<Achievement_Type_Enum>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Achievement_Type_Enum>;
+  _nin?: Maybe<Array<Achievement_Type_Enum>>;
+};
+
 export type Achievement_Type_Insert_Input = {
+  achievements?: Maybe<Achievement_Arr_Rel_Insert_Input>;
   description?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
@@ -372,6 +426,7 @@ export type Achievement_Type_On_Conflict = {
 };
 
 export type Achievement_Type_Order_By = {
+  achievements_aggregate?: Maybe<Achievement_Aggregate_Order_By>;
   description?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
 };
@@ -400,6 +455,7 @@ export enum Achievement_Update_Column {
   CreatedAt = 'created_at',
   Description = 'description',
   Id = 'id',
+  Level = 'level',
   Name = 'name',
   Rule = 'rule'
 }
@@ -407,28 +463,34 @@ export enum Achievement_Update_Column {
 export type Achievement_Var_Pop_Fields = {
   __typename?: 'achievement_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  level?: Maybe<Scalars['Float']>;
 };
 
 export type Achievement_Var_Pop_Order_By = {
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
 };
 
 export type Achievement_Var_Samp_Fields = {
   __typename?: 'achievement_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  level?: Maybe<Scalars['Float']>;
 };
 
 export type Achievement_Var_Samp_Order_By = {
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
 };
 
 export type Achievement_Variance_Fields = {
   __typename?: 'achievement_variance_fields';
   id?: Maybe<Scalars['Float']>;
+  level?: Maybe<Scalars['Float']>;
 };
 
 export type Achievement_Variance_Order_By = {
   id?: Maybe<Order_By>;
+  level?: Maybe<Order_By>;
 };
 
 export type Activities = {
@@ -802,6 +864,18 @@ export type Activities_Variance_Order_By = {
 };
 
 
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
+};
+
 export type Categories = {
   __typename?: 'categories';
   description?: Maybe<Scalars['String']>;
@@ -1021,6 +1095,135 @@ export type Categories_Variance_Fields = {
 export type Categories_Variance_Order_By = {
   points_per_minute?: Maybe<Order_By>;
 };
+
+export type Challenge_Type = {
+  __typename?: 'challenge_type';
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  rules?: Maybe<Scalars['json']>;
+};
+
+
+export type Challenge_TypeRulesArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+export type Challenge_Type_Aggregate = {
+  __typename?: 'challenge_type_aggregate';
+  aggregate?: Maybe<Challenge_Type_Aggregate_Fields>;
+  nodes: Array<Challenge_Type>;
+};
+
+export type Challenge_Type_Aggregate_Fields = {
+  __typename?: 'challenge_type_aggregate_fields';
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Challenge_Type_Max_Fields>;
+  min?: Maybe<Challenge_Type_Min_Fields>;
+};
+
+
+export type Challenge_Type_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Challenge_Type_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+export type Challenge_Type_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Challenge_Type_Max_Order_By>;
+  min?: Maybe<Challenge_Type_Min_Order_By>;
+};
+
+export type Challenge_Type_Arr_Rel_Insert_Input = {
+  data: Array<Challenge_Type_Insert_Input>;
+  on_conflict?: Maybe<Challenge_Type_On_Conflict>;
+};
+
+export type Challenge_Type_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Challenge_Type_Bool_Exp>>>;
+  _not?: Maybe<Challenge_Type_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Challenge_Type_Bool_Exp>>>;
+  description?: Maybe<String_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  rules?: Maybe<Json_Comparison_Exp>;
+};
+
+export enum Challenge_Type_Constraint {
+  ChallengeTypeDescriptionKey = 'challenge_type_description_key',
+  ChallengeTypePkey = 'challenge_type_pkey'
+}
+
+export type Challenge_Type_Insert_Input = {
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  rules?: Maybe<Scalars['json']>;
+};
+
+export type Challenge_Type_Max_Fields = {
+  __typename?: 'challenge_type_max_fields';
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type Challenge_Type_Max_Order_By = {
+  description?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+};
+
+export type Challenge_Type_Min_Fields = {
+  __typename?: 'challenge_type_min_fields';
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type Challenge_Type_Min_Order_By = {
+  description?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+};
+
+export type Challenge_Type_Mutation_Response = {
+  __typename?: 'challenge_type_mutation_response';
+  affected_rows: Scalars['Int'];
+  returning: Array<Challenge_Type>;
+};
+
+export type Challenge_Type_Obj_Rel_Insert_Input = {
+  data: Challenge_Type_Insert_Input;
+  on_conflict?: Maybe<Challenge_Type_On_Conflict>;
+};
+
+export type Challenge_Type_On_Conflict = {
+  constraint: Challenge_Type_Constraint;
+  update_columns: Array<Challenge_Type_Update_Column>;
+  where?: Maybe<Challenge_Type_Bool_Exp>;
+};
+
+export type Challenge_Type_Order_By = {
+  description?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  rules?: Maybe<Order_By>;
+};
+
+export type Challenge_Type_Pk_Columns_Input = {
+  name: Scalars['String'];
+};
+
+export enum Challenge_Type_Select_Column {
+  Description = 'description',
+  Name = 'name',
+  Rules = 'rules'
+}
+
+export type Challenge_Type_Set_Input = {
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  rules?: Maybe<Scalars['json']>;
+};
+
+export enum Challenge_Type_Update_Column {
+  Description = 'description',
+  Name = 'name',
+  Rules = 'rules'
+}
 
 export type Comments = {
   __typename?: 'comments';
@@ -1297,6 +1500,19 @@ export type Comments_Variance_Fields = {
 export type Comments_Variance_Order_By = {
   activity_id?: Maybe<Order_By>;
   comment_id?: Maybe<Order_By>;
+};
+
+
+export type Daterange_Comparison_Exp = {
+  _eq?: Maybe<Scalars['daterange']>;
+  _gt?: Maybe<Scalars['daterange']>;
+  _gte?: Maybe<Scalars['daterange']>;
+  _in?: Maybe<Array<Scalars['daterange']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['daterange']>;
+  _lte?: Maybe<Scalars['daterange']>;
+  _neq?: Maybe<Scalars['daterange']>;
+  _nin?: Maybe<Array<Scalars['daterange']>>;
 };
 
 
@@ -1730,6 +1946,9 @@ export type Geofences_Bool_Exp = {
 };
 
 export enum Geofences_Constraint {
+  GeofencesCoordinatesKey = 'geofences_coordinates_key',
+  GeofencesLatitudeLongitudeKey = 'geofences_latitude_longitude_key',
+  GeofencesNameKey = 'geofences_name_key',
   GeofencesPkey = 'geofences_pkey'
 }
 
@@ -2284,6 +2503,8 @@ export type Mutation_Root = {
   delete_activities_by_pk?: Maybe<Activities>;
   delete_categories?: Maybe<Categories_Mutation_Response>;
   delete_categories_by_pk?: Maybe<Categories>;
+  delete_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
+  delete_challenge_type_by_pk?: Maybe<Challenge_Type>;
   delete_comment?: Maybe<Comments>;
   delete_comments?: Maybe<Comments_Mutation_Response>;
   delete_followings?: Maybe<Followings_Mutation_Response>;
@@ -2297,6 +2518,8 @@ export type Mutation_Root = {
   delete_user?: Maybe<Users>;
   delete_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
   delete_user_achievement_by_pk?: Maybe<User_Achievement>;
+  delete_user_challenge?: Maybe<User_Challenge_Mutation_Response>;
+  delete_user_challenge_by_pk?: Maybe<User_Challenge>;
   delete_users?: Maybe<Users_Mutation_Response>;
   insert_achievement?: Maybe<Achievement_Mutation_Response>;
   insert_achievement_one?: Maybe<Achievement>;
@@ -2306,6 +2529,8 @@ export type Mutation_Root = {
   insert_activities_one?: Maybe<Activities>;
   insert_categories?: Maybe<Categories_Mutation_Response>;
   insert_categories_one?: Maybe<Categories>;
+  insert_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
+  insert_challenge_type_one?: Maybe<Challenge_Type>;
   insert_comment?: Maybe<Comments>;
   insert_comments?: Maybe<Comments_Mutation_Response>;
   insert_followings?: Maybe<Followings_Mutation_Response>;
@@ -2319,6 +2544,8 @@ export type Mutation_Root = {
   insert_user?: Maybe<Users>;
   insert_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
   insert_user_achievement_one?: Maybe<User_Achievement>;
+  insert_user_challenge?: Maybe<User_Challenge_Mutation_Response>;
+  insert_user_challenge_one?: Maybe<User_Challenge>;
   insert_users?: Maybe<Users_Mutation_Response>;
   update_achievement?: Maybe<Achievement_Mutation_Response>;
   update_achievement_by_pk?: Maybe<Achievement>;
@@ -2328,6 +2555,8 @@ export type Mutation_Root = {
   update_activities_by_pk?: Maybe<Activities>;
   update_categories?: Maybe<Categories_Mutation_Response>;
   update_categories_by_pk?: Maybe<Categories>;
+  update_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
+  update_challenge_type_by_pk?: Maybe<Challenge_Type>;
   update_comment?: Maybe<Comments>;
   update_comments?: Maybe<Comments_Mutation_Response>;
   update_followings?: Maybe<Followings_Mutation_Response>;
@@ -2341,6 +2570,8 @@ export type Mutation_Root = {
   update_user?: Maybe<Users>;
   update_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
   update_user_achievement_by_pk?: Maybe<User_Achievement>;
+  update_user_challenge?: Maybe<User_Challenge_Mutation_Response>;
+  update_user_challenge_by_pk?: Maybe<User_Challenge>;
   update_users?: Maybe<Users_Mutation_Response>;
 };
 
@@ -2381,6 +2612,16 @@ export type Mutation_RootDelete_CategoriesArgs = {
 
 
 export type Mutation_RootDelete_Categories_By_PkArgs = {
+  name: Scalars['String'];
+};
+
+
+export type Mutation_RootDelete_Challenge_TypeArgs = {
+  where: Challenge_Type_Bool_Exp;
+};
+
+
+export type Mutation_RootDelete_Challenge_Type_By_PkArgs = {
   name: Scalars['String'];
 };
 
@@ -2453,6 +2694,16 @@ export type Mutation_RootDelete_User_Achievement_By_PkArgs = {
 };
 
 
+export type Mutation_RootDelete_User_ChallengeArgs = {
+  where: User_Challenge_Bool_Exp;
+};
+
+
+export type Mutation_RootDelete_User_Challenge_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type Mutation_RootDelete_UsersArgs = {
   where: Users_Bool_Exp;
 };
@@ -2503,6 +2754,18 @@ export type Mutation_RootInsert_CategoriesArgs = {
 export type Mutation_RootInsert_Categories_OneArgs = {
   object: Categories_Insert_Input;
   on_conflict?: Maybe<Categories_On_Conflict>;
+};
+
+
+export type Mutation_RootInsert_Challenge_TypeArgs = {
+  objects: Array<Challenge_Type_Insert_Input>;
+  on_conflict?: Maybe<Challenge_Type_On_Conflict>;
+};
+
+
+export type Mutation_RootInsert_Challenge_Type_OneArgs = {
+  object: Challenge_Type_Insert_Input;
+  on_conflict?: Maybe<Challenge_Type_On_Conflict>;
 };
 
 
@@ -2584,6 +2847,18 @@ export type Mutation_RootInsert_User_Achievement_OneArgs = {
 };
 
 
+export type Mutation_RootInsert_User_ChallengeArgs = {
+  objects: Array<User_Challenge_Insert_Input>;
+  on_conflict?: Maybe<User_Challenge_On_Conflict>;
+};
+
+
+export type Mutation_RootInsert_User_Challenge_OneArgs = {
+  object: User_Challenge_Insert_Input;
+  on_conflict?: Maybe<User_Challenge_On_Conflict>;
+};
+
+
 export type Mutation_RootInsert_UsersArgs = {
   objects: Array<Users_Insert_Input>;
   on_conflict?: Maybe<Users_On_Conflict>;
@@ -2641,6 +2916,18 @@ export type Mutation_RootUpdate_Categories_By_PkArgs = {
   _inc?: Maybe<Categories_Inc_Input>;
   _set?: Maybe<Categories_Set_Input>;
   pk_columns: Categories_Pk_Columns_Input;
+};
+
+
+export type Mutation_RootUpdate_Challenge_TypeArgs = {
+  _set?: Maybe<Challenge_Type_Set_Input>;
+  where: Challenge_Type_Bool_Exp;
+};
+
+
+export type Mutation_RootUpdate_Challenge_Type_By_PkArgs = {
+  _set?: Maybe<Challenge_Type_Set_Input>;
+  pk_columns: Challenge_Type_Pk_Columns_Input;
 };
 
 
@@ -2730,6 +3017,20 @@ export type Mutation_RootUpdate_User_Achievement_By_PkArgs = {
 };
 
 
+export type Mutation_RootUpdate_User_ChallengeArgs = {
+  _inc?: Maybe<User_Challenge_Inc_Input>;
+  _set?: Maybe<User_Challenge_Set_Input>;
+  where: User_Challenge_Bool_Exp;
+};
+
+
+export type Mutation_RootUpdate_User_Challenge_By_PkArgs = {
+  _inc?: Maybe<User_Challenge_Inc_Input>;
+  _set?: Maybe<User_Challenge_Set_Input>;
+  pk_columns: User_Challenge_Pk_Columns_Input;
+};
+
+
 export type Mutation_RootUpdate_UsersArgs = {
   _set?: Maybe<Users_Set_Input>;
   where: Users_Bool_Exp;
@@ -2758,6 +3059,9 @@ export type Query_Root = {
   categories: Array<Categories>;
   categories_aggregate: Categories_Aggregate;
   categories_by_pk?: Maybe<Categories>;
+  challenge_type: Array<Challenge_Type>;
+  challenge_type_aggregate: Challenge_Type_Aggregate;
+  challenge_type_by_pk?: Maybe<Challenge_Type>;
   comment?: Maybe<Comments>;
   comments: Array<Comments>;
   comments_aggregate: Comments_Aggregate;
@@ -2779,6 +3083,9 @@ export type Query_Root = {
   user_achievement: Array<User_Achievement>;
   user_achievement_aggregate: User_Achievement_Aggregate;
   user_achievement_by_pk?: Maybe<User_Achievement>;
+  user_challenge: Array<User_Challenge>;
+  user_challenge_aggregate: User_Challenge_Aggregate;
+  user_challenge_by_pk?: Maybe<User_Challenge>;
   users: Array<Users>;
   users_aggregate: Users_Aggregate;
 };
@@ -2872,6 +3179,29 @@ export type Query_RootCategories_AggregateArgs = {
 
 
 export type Query_RootCategories_By_PkArgs = {
+  name: Scalars['String'];
+};
+
+
+export type Query_RootChallenge_TypeArgs = {
+  distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Type_Order_By>>;
+  where?: Maybe<Challenge_Type_Bool_Exp>;
+};
+
+
+export type Query_RootChallenge_Type_AggregateArgs = {
+  distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Type_Order_By>>;
+  where?: Maybe<Challenge_Type_Bool_Exp>;
+};
+
+
+export type Query_RootChallenge_Type_By_PkArgs = {
   name: Scalars['String'];
 };
 
@@ -3042,6 +3372,29 @@ export type Query_RootUser_Achievement_By_PkArgs = {
 };
 
 
+export type Query_RootUser_ChallengeArgs = {
+  distinct_on?: Maybe<Array<User_Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Challenge_Order_By>>;
+  where?: Maybe<User_Challenge_Bool_Exp>;
+};
+
+
+export type Query_RootUser_Challenge_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Challenge_Order_By>>;
+  where?: Maybe<User_Challenge_Bool_Exp>;
+};
+
+
+export type Query_RootUser_Challenge_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type Query_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3091,6 +3444,9 @@ export type Subscription_Root = {
   categories: Array<Categories>;
   categories_aggregate: Categories_Aggregate;
   categories_by_pk?: Maybe<Categories>;
+  challenge_type: Array<Challenge_Type>;
+  challenge_type_aggregate: Challenge_Type_Aggregate;
+  challenge_type_by_pk?: Maybe<Challenge_Type>;
   comment?: Maybe<Comments>;
   comments: Array<Comments>;
   comments_aggregate: Comments_Aggregate;
@@ -3112,6 +3468,9 @@ export type Subscription_Root = {
   user_achievement: Array<User_Achievement>;
   user_achievement_aggregate: User_Achievement_Aggregate;
   user_achievement_by_pk?: Maybe<User_Achievement>;
+  user_challenge: Array<User_Challenge>;
+  user_challenge_aggregate: User_Challenge_Aggregate;
+  user_challenge_by_pk?: Maybe<User_Challenge>;
   users: Array<Users>;
   users_aggregate: Users_Aggregate;
 };
@@ -3205,6 +3564,29 @@ export type Subscription_RootCategories_AggregateArgs = {
 
 
 export type Subscription_RootCategories_By_PkArgs = {
+  name: Scalars['String'];
+};
+
+
+export type Subscription_RootChallenge_TypeArgs = {
+  distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Type_Order_By>>;
+  where?: Maybe<Challenge_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootChallenge_Type_AggregateArgs = {
+  distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Type_Order_By>>;
+  where?: Maybe<Challenge_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootChallenge_Type_By_PkArgs = {
   name: Scalars['String'];
 };
 
@@ -3372,6 +3754,29 @@ export type Subscription_RootUser_Achievement_AggregateArgs = {
 export type Subscription_RootUser_Achievement_By_PkArgs = {
   achievement_id: Scalars['Int'];
   user_id: Scalars['String'];
+};
+
+
+export type Subscription_RootUser_ChallengeArgs = {
+  distinct_on?: Maybe<Array<User_Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Challenge_Order_By>>;
+  where?: Maybe<User_Challenge_Bool_Exp>;
+};
+
+
+export type Subscription_RootUser_Challenge_AggregateArgs = {
+  distinct_on?: Maybe<Array<User_Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<User_Challenge_Order_By>>;
+  where?: Maybe<User_Challenge_Bool_Exp>;
+};
+
+
+export type Subscription_RootUser_Challenge_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -3650,6 +4055,273 @@ export type User_Achievement_Variance_Order_By = {
   achievement_id?: Maybe<Order_By>;
 };
 
+export type User_Challenge = {
+  __typename?: 'user_challenge';
+  challenge_type: Scalars['String'];
+  challenger_uid: Scalars['String'];
+  created_at: Scalars['timestamptz'];
+  daterange?: Maybe<Scalars['daterange']>;
+  id: Scalars['Int'];
+  is_active: Scalars['Boolean'];
+  receiver_uid: Scalars['String'];
+  rules?: Maybe<Scalars['json']>;
+};
+
+
+export type User_ChallengeRulesArgs = {
+  path?: Maybe<Scalars['String']>;
+};
+
+export type User_Challenge_Aggregate = {
+  __typename?: 'user_challenge_aggregate';
+  aggregate?: Maybe<User_Challenge_Aggregate_Fields>;
+  nodes: Array<User_Challenge>;
+};
+
+export type User_Challenge_Aggregate_Fields = {
+  __typename?: 'user_challenge_aggregate_fields';
+  avg?: Maybe<User_Challenge_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<User_Challenge_Max_Fields>;
+  min?: Maybe<User_Challenge_Min_Fields>;
+  stddev?: Maybe<User_Challenge_Stddev_Fields>;
+  stddev_pop?: Maybe<User_Challenge_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<User_Challenge_Stddev_Samp_Fields>;
+  sum?: Maybe<User_Challenge_Sum_Fields>;
+  var_pop?: Maybe<User_Challenge_Var_Pop_Fields>;
+  var_samp?: Maybe<User_Challenge_Var_Samp_Fields>;
+  variance?: Maybe<User_Challenge_Variance_Fields>;
+};
+
+
+export type User_Challenge_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<User_Challenge_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+export type User_Challenge_Aggregate_Order_By = {
+  avg?: Maybe<User_Challenge_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<User_Challenge_Max_Order_By>;
+  min?: Maybe<User_Challenge_Min_Order_By>;
+  stddev?: Maybe<User_Challenge_Stddev_Order_By>;
+  stddev_pop?: Maybe<User_Challenge_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<User_Challenge_Stddev_Samp_Order_By>;
+  sum?: Maybe<User_Challenge_Sum_Order_By>;
+  var_pop?: Maybe<User_Challenge_Var_Pop_Order_By>;
+  var_samp?: Maybe<User_Challenge_Var_Samp_Order_By>;
+  variance?: Maybe<User_Challenge_Variance_Order_By>;
+};
+
+export type User_Challenge_Arr_Rel_Insert_Input = {
+  data: Array<User_Challenge_Insert_Input>;
+  on_conflict?: Maybe<User_Challenge_On_Conflict>;
+};
+
+export type User_Challenge_Avg_Fields = {
+  __typename?: 'user_challenge_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type User_Challenge_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<User_Challenge_Bool_Exp>>>;
+  _not?: Maybe<User_Challenge_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<User_Challenge_Bool_Exp>>>;
+  challenge_type?: Maybe<String_Comparison_Exp>;
+  challenger_uid?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  daterange?: Maybe<Daterange_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  is_active?: Maybe<Boolean_Comparison_Exp>;
+  receiver_uid?: Maybe<String_Comparison_Exp>;
+  rules?: Maybe<Json_Comparison_Exp>;
+};
+
+export enum User_Challenge_Constraint {
+  UserChallengePkey = 'user_challenge_pkey'
+}
+
+export type User_Challenge_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type User_Challenge_Insert_Input = {
+  challenge_type?: Maybe<Scalars['String']>;
+  challenger_uid?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  daterange?: Maybe<Scalars['daterange']>;
+  id?: Maybe<Scalars['Int']>;
+  is_active?: Maybe<Scalars['Boolean']>;
+  receiver_uid?: Maybe<Scalars['String']>;
+  rules?: Maybe<Scalars['json']>;
+};
+
+export type User_Challenge_Max_Fields = {
+  __typename?: 'user_challenge_max_fields';
+  challenge_type?: Maybe<Scalars['String']>;
+  challenger_uid?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  receiver_uid?: Maybe<Scalars['String']>;
+};
+
+export type User_Challenge_Max_Order_By = {
+  challenge_type?: Maybe<Order_By>;
+  challenger_uid?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  receiver_uid?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Min_Fields = {
+  __typename?: 'user_challenge_min_fields';
+  challenge_type?: Maybe<Scalars['String']>;
+  challenger_uid?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  receiver_uid?: Maybe<Scalars['String']>;
+};
+
+export type User_Challenge_Min_Order_By = {
+  challenge_type?: Maybe<Order_By>;
+  challenger_uid?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  receiver_uid?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Mutation_Response = {
+  __typename?: 'user_challenge_mutation_response';
+  affected_rows: Scalars['Int'];
+  returning: Array<User_Challenge>;
+};
+
+export type User_Challenge_Obj_Rel_Insert_Input = {
+  data: User_Challenge_Insert_Input;
+  on_conflict?: Maybe<User_Challenge_On_Conflict>;
+};
+
+export type User_Challenge_On_Conflict = {
+  constraint: User_Challenge_Constraint;
+  update_columns: Array<User_Challenge_Update_Column>;
+  where?: Maybe<User_Challenge_Bool_Exp>;
+};
+
+export type User_Challenge_Order_By = {
+  challenge_type?: Maybe<Order_By>;
+  challenger_uid?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  daterange?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  is_active?: Maybe<Order_By>;
+  receiver_uid?: Maybe<Order_By>;
+  rules?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+export enum User_Challenge_Select_Column {
+  ChallengeType = 'challenge_type',
+  ChallengerUid = 'challenger_uid',
+  CreatedAt = 'created_at',
+  Daterange = 'daterange',
+  Id = 'id',
+  IsActive = 'is_active',
+  ReceiverUid = 'receiver_uid',
+  Rules = 'rules'
+}
+
+export type User_Challenge_Set_Input = {
+  challenge_type?: Maybe<Scalars['String']>;
+  challenger_uid?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  daterange?: Maybe<Scalars['daterange']>;
+  id?: Maybe<Scalars['Int']>;
+  is_active?: Maybe<Scalars['Boolean']>;
+  receiver_uid?: Maybe<Scalars['String']>;
+  rules?: Maybe<Scalars['json']>;
+};
+
+export type User_Challenge_Stddev_Fields = {
+  __typename?: 'user_challenge_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type User_Challenge_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Stddev_Pop_Fields = {
+  __typename?: 'user_challenge_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type User_Challenge_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Stddev_Samp_Fields = {
+  __typename?: 'user_challenge_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type User_Challenge_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Sum_Fields = {
+  __typename?: 'user_challenge_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type User_Challenge_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export enum User_Challenge_Update_Column {
+  ChallengeType = 'challenge_type',
+  ChallengerUid = 'challenger_uid',
+  CreatedAt = 'created_at',
+  Daterange = 'daterange',
+  Id = 'id',
+  IsActive = 'is_active',
+  ReceiverUid = 'receiver_uid',
+  Rules = 'rules'
+}
+
+export type User_Challenge_Var_Pop_Fields = {
+  __typename?: 'user_challenge_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type User_Challenge_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Var_Samp_Fields = {
+  __typename?: 'user_challenge_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type User_Challenge_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type User_Challenge_Variance_Fields = {
+  __typename?: 'user_challenge_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type User_Challenge_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
 export type Users = {
   __typename?: 'users';
   activities: Array<Activities>;
@@ -3663,6 +4335,7 @@ export type Users = {
   following_aggregate: Followings_Aggregate;
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
+  picture: Scalars['String'];
   totalScore?: Maybe<Scalars['bigint']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_achievement: Array<User_Achievement>;
@@ -3783,6 +4456,7 @@ export type Users_Bool_Exp = {
   following?: Maybe<Followings_Bool_Exp>;
   id?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  picture?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user_achievement?: Maybe<User_Achievement_Bool_Exp>;
 };
@@ -3802,6 +4476,7 @@ export type Users_Insert_Input = {
   following?: Maybe<Followings_Arr_Rel_Insert_Input>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_achievement?: Maybe<User_Achievement_Arr_Rel_Insert_Input>;
 };
@@ -3813,6 +4488,7 @@ export type Users_Max_Fields = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -3822,6 +4498,7 @@ export type Users_Max_Order_By = {
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  picture?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -3832,6 +4509,7 @@ export type Users_Min_Fields = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -3841,6 +4519,7 @@ export type Users_Min_Order_By = {
   email?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  picture?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -3870,6 +4549,7 @@ export type Users_Order_By = {
   following_aggregate?: Maybe<Followings_Aggregate_Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  picture?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_achievement_aggregate?: Maybe<User_Achievement_Aggregate_Order_By>;
 };
@@ -3884,6 +4564,7 @@ export enum Users_Select_Column {
   Email = 'email',
   Id = 'id',
   Name = 'name',
+  Picture = 'picture',
   UpdatedAt = 'updated_at'
 }
 
@@ -3893,6 +4574,7 @@ export type Users_Set_Input = {
   email?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -3902,6 +4584,7 @@ export enum Users_Update_Column {
   Email = 'email',
   Id = 'id',
   Name = 'name',
+  Picture = 'picture',
   UpdatedAt = 'updated_at'
 }
 
@@ -3942,7 +4625,47 @@ export const GetUserAndExistingAchievementsDocument = gql`
   user(id: $user_id) {
     id
     totalScore
-    name
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
+    }
+    education_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "EDUCATION"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    culture_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "CULTURE"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    social_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "SOCIAL"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    health_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "HEALTH"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
     user_achievement {
       achievement {
         id
@@ -3969,6 +4692,47 @@ export const GetUserAndUnachievedAchievementsDocument = gql`
   user(id: $user_id) {
     id
     totalScore
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
+    }
+    education_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "EDUCATION"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    culture_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "CULTURE"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    social_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "SOCIAL"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    health_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "HEALTH"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
   }
 }
     `;
@@ -4119,6 +4883,8 @@ export type ResolversTypes = {
   achievement_type_arr_rel_insert_input: Achievement_Type_Arr_Rel_Insert_Input;
   achievement_type_bool_exp: Achievement_Type_Bool_Exp;
   achievement_type_constraint: Achievement_Type_Constraint;
+  achievement_type_enum: Achievement_Type_Enum;
+  achievement_type_enum_comparison_exp: Achievement_Type_Enum_Comparison_Exp;
   achievement_type_insert_input: Achievement_Type_Insert_Input;
   achievement_type_max_fields: ResolverTypeWrapper<Achievement_Type_Max_Fields>;
   achievement_type_max_order_by: Achievement_Type_Max_Order_By;
@@ -4177,6 +4943,7 @@ export type ResolversTypes = {
   activities_variance_fields: ResolverTypeWrapper<Activities_Variance_Fields>;
   activities_variance_order_by: Activities_Variance_Order_By;
   bigint: ResolverTypeWrapper<Scalars['bigint']>;
+  Boolean_comparison_exp: Boolean_Comparison_Exp;
   categories: ResolverTypeWrapper<Categories>;
   categories_aggregate: ResolverTypeWrapper<Categories_Aggregate>;
   categories_aggregate_fields: ResolverTypeWrapper<Categories_Aggregate_Fields>;
@@ -4214,6 +4981,26 @@ export type ResolversTypes = {
   categories_var_samp_order_by: Categories_Var_Samp_Order_By;
   categories_variance_fields: ResolverTypeWrapper<Categories_Variance_Fields>;
   categories_variance_order_by: Categories_Variance_Order_By;
+  challenge_type: ResolverTypeWrapper<Challenge_Type>;
+  challenge_type_aggregate: ResolverTypeWrapper<Challenge_Type_Aggregate>;
+  challenge_type_aggregate_fields: ResolverTypeWrapper<Challenge_Type_Aggregate_Fields>;
+  challenge_type_aggregate_order_by: Challenge_Type_Aggregate_Order_By;
+  challenge_type_arr_rel_insert_input: Challenge_Type_Arr_Rel_Insert_Input;
+  challenge_type_bool_exp: Challenge_Type_Bool_Exp;
+  challenge_type_constraint: Challenge_Type_Constraint;
+  challenge_type_insert_input: Challenge_Type_Insert_Input;
+  challenge_type_max_fields: ResolverTypeWrapper<Challenge_Type_Max_Fields>;
+  challenge_type_max_order_by: Challenge_Type_Max_Order_By;
+  challenge_type_min_fields: ResolverTypeWrapper<Challenge_Type_Min_Fields>;
+  challenge_type_min_order_by: Challenge_Type_Min_Order_By;
+  challenge_type_mutation_response: ResolverTypeWrapper<Challenge_Type_Mutation_Response>;
+  challenge_type_obj_rel_insert_input: Challenge_Type_Obj_Rel_Insert_Input;
+  challenge_type_on_conflict: Challenge_Type_On_Conflict;
+  challenge_type_order_by: Challenge_Type_Order_By;
+  challenge_type_pk_columns_input: Challenge_Type_Pk_Columns_Input;
+  challenge_type_select_column: Challenge_Type_Select_Column;
+  challenge_type_set_input: Challenge_Type_Set_Input;
+  challenge_type_update_column: Challenge_Type_Update_Column;
   comments: ResolverTypeWrapper<Comments>;
   comments_aggregate: ResolverTypeWrapper<Comments_Aggregate>;
   comments_aggregate_fields: ResolverTypeWrapper<Comments_Aggregate_Fields>;
@@ -4251,6 +5038,8 @@ export type ResolversTypes = {
   comments_var_samp_order_by: Comments_Var_Samp_Order_By;
   comments_variance_fields: ResolverTypeWrapper<Comments_Variance_Fields>;
   comments_variance_order_by: Comments_Variance_Order_By;
+  daterange: ResolverTypeWrapper<Scalars['daterange']>;
+  daterange_comparison_exp: Daterange_Comparison_Exp;
   float8: ResolverTypeWrapper<Scalars['float8']>;
   float8_comparison_exp: Float8_Comparison_Exp;
   followings: ResolverTypeWrapper<Followings>;
@@ -4421,6 +5210,43 @@ export type ResolversTypes = {
   user_achievement_var_samp_order_by: User_Achievement_Var_Samp_Order_By;
   user_achievement_variance_fields: ResolverTypeWrapper<User_Achievement_Variance_Fields>;
   user_achievement_variance_order_by: User_Achievement_Variance_Order_By;
+  user_challenge: ResolverTypeWrapper<User_Challenge>;
+  user_challenge_aggregate: ResolverTypeWrapper<User_Challenge_Aggregate>;
+  user_challenge_aggregate_fields: ResolverTypeWrapper<User_Challenge_Aggregate_Fields>;
+  user_challenge_aggregate_order_by: User_Challenge_Aggregate_Order_By;
+  user_challenge_arr_rel_insert_input: User_Challenge_Arr_Rel_Insert_Input;
+  user_challenge_avg_fields: ResolverTypeWrapper<User_Challenge_Avg_Fields>;
+  user_challenge_avg_order_by: User_Challenge_Avg_Order_By;
+  user_challenge_bool_exp: User_Challenge_Bool_Exp;
+  user_challenge_constraint: User_Challenge_Constraint;
+  user_challenge_inc_input: User_Challenge_Inc_Input;
+  user_challenge_insert_input: User_Challenge_Insert_Input;
+  user_challenge_max_fields: ResolverTypeWrapper<User_Challenge_Max_Fields>;
+  user_challenge_max_order_by: User_Challenge_Max_Order_By;
+  user_challenge_min_fields: ResolverTypeWrapper<User_Challenge_Min_Fields>;
+  user_challenge_min_order_by: User_Challenge_Min_Order_By;
+  user_challenge_mutation_response: ResolverTypeWrapper<User_Challenge_Mutation_Response>;
+  user_challenge_obj_rel_insert_input: User_Challenge_Obj_Rel_Insert_Input;
+  user_challenge_on_conflict: User_Challenge_On_Conflict;
+  user_challenge_order_by: User_Challenge_Order_By;
+  user_challenge_pk_columns_input: User_Challenge_Pk_Columns_Input;
+  user_challenge_select_column: User_Challenge_Select_Column;
+  user_challenge_set_input: User_Challenge_Set_Input;
+  user_challenge_stddev_fields: ResolverTypeWrapper<User_Challenge_Stddev_Fields>;
+  user_challenge_stddev_order_by: User_Challenge_Stddev_Order_By;
+  user_challenge_stddev_pop_fields: ResolverTypeWrapper<User_Challenge_Stddev_Pop_Fields>;
+  user_challenge_stddev_pop_order_by: User_Challenge_Stddev_Pop_Order_By;
+  user_challenge_stddev_samp_fields: ResolverTypeWrapper<User_Challenge_Stddev_Samp_Fields>;
+  user_challenge_stddev_samp_order_by: User_Challenge_Stddev_Samp_Order_By;
+  user_challenge_sum_fields: ResolverTypeWrapper<User_Challenge_Sum_Fields>;
+  user_challenge_sum_order_by: User_Challenge_Sum_Order_By;
+  user_challenge_update_column: User_Challenge_Update_Column;
+  user_challenge_var_pop_fields: ResolverTypeWrapper<User_Challenge_Var_Pop_Fields>;
+  user_challenge_var_pop_order_by: User_Challenge_Var_Pop_Order_By;
+  user_challenge_var_samp_fields: ResolverTypeWrapper<User_Challenge_Var_Samp_Fields>;
+  user_challenge_var_samp_order_by: User_Challenge_Var_Samp_Order_By;
+  user_challenge_variance_fields: ResolverTypeWrapper<User_Challenge_Variance_Fields>;
+  user_challenge_variance_order_by: User_Challenge_Variance_Order_By;
   users: ResolverTypeWrapper<Users>;
   users_aggregate: ResolverTypeWrapper<Users_Aggregate>;
   users_aggregate_fields: ResolverTypeWrapper<Users_Aggregate_Fields>;
@@ -4483,6 +5309,7 @@ export type ResolversParentTypes = {
   achievement_type_aggregate_order_by: Achievement_Type_Aggregate_Order_By;
   achievement_type_arr_rel_insert_input: Achievement_Type_Arr_Rel_Insert_Input;
   achievement_type_bool_exp: Achievement_Type_Bool_Exp;
+  achievement_type_enum_comparison_exp: Achievement_Type_Enum_Comparison_Exp;
   achievement_type_insert_input: Achievement_Type_Insert_Input;
   achievement_type_max_fields: Achievement_Type_Max_Fields;
   achievement_type_max_order_by: Achievement_Type_Max_Order_By;
@@ -4535,6 +5362,7 @@ export type ResolversParentTypes = {
   activities_variance_fields: Activities_Variance_Fields;
   activities_variance_order_by: Activities_Variance_Order_By;
   bigint: Scalars['bigint'];
+  Boolean_comparison_exp: Boolean_Comparison_Exp;
   categories: Categories;
   categories_aggregate: Categories_Aggregate;
   categories_aggregate_fields: Categories_Aggregate_Fields;
@@ -4569,6 +5397,23 @@ export type ResolversParentTypes = {
   categories_var_samp_order_by: Categories_Var_Samp_Order_By;
   categories_variance_fields: Categories_Variance_Fields;
   categories_variance_order_by: Categories_Variance_Order_By;
+  challenge_type: Challenge_Type;
+  challenge_type_aggregate: Challenge_Type_Aggregate;
+  challenge_type_aggregate_fields: Challenge_Type_Aggregate_Fields;
+  challenge_type_aggregate_order_by: Challenge_Type_Aggregate_Order_By;
+  challenge_type_arr_rel_insert_input: Challenge_Type_Arr_Rel_Insert_Input;
+  challenge_type_bool_exp: Challenge_Type_Bool_Exp;
+  challenge_type_insert_input: Challenge_Type_Insert_Input;
+  challenge_type_max_fields: Challenge_Type_Max_Fields;
+  challenge_type_max_order_by: Challenge_Type_Max_Order_By;
+  challenge_type_min_fields: Challenge_Type_Min_Fields;
+  challenge_type_min_order_by: Challenge_Type_Min_Order_By;
+  challenge_type_mutation_response: Challenge_Type_Mutation_Response;
+  challenge_type_obj_rel_insert_input: Challenge_Type_Obj_Rel_Insert_Input;
+  challenge_type_on_conflict: Challenge_Type_On_Conflict;
+  challenge_type_order_by: Challenge_Type_Order_By;
+  challenge_type_pk_columns_input: Challenge_Type_Pk_Columns_Input;
+  challenge_type_set_input: Challenge_Type_Set_Input;
   comments: Comments;
   comments_aggregate: Comments_Aggregate;
   comments_aggregate_fields: Comments_Aggregate_Fields;
@@ -4603,6 +5448,8 @@ export type ResolversParentTypes = {
   comments_var_samp_order_by: Comments_Var_Samp_Order_By;
   comments_variance_fields: Comments_Variance_Fields;
   comments_variance_order_by: Comments_Variance_Order_By;
+  daterange: Scalars['daterange'];
+  daterange_comparison_exp: Daterange_Comparison_Exp;
   float8: Scalars['float8'];
   float8_comparison_exp: Float8_Comparison_Exp;
   followings: Followings;
@@ -4756,6 +5603,40 @@ export type ResolversParentTypes = {
   user_achievement_var_samp_order_by: User_Achievement_Var_Samp_Order_By;
   user_achievement_variance_fields: User_Achievement_Variance_Fields;
   user_achievement_variance_order_by: User_Achievement_Variance_Order_By;
+  user_challenge: User_Challenge;
+  user_challenge_aggregate: User_Challenge_Aggregate;
+  user_challenge_aggregate_fields: User_Challenge_Aggregate_Fields;
+  user_challenge_aggregate_order_by: User_Challenge_Aggregate_Order_By;
+  user_challenge_arr_rel_insert_input: User_Challenge_Arr_Rel_Insert_Input;
+  user_challenge_avg_fields: User_Challenge_Avg_Fields;
+  user_challenge_avg_order_by: User_Challenge_Avg_Order_By;
+  user_challenge_bool_exp: User_Challenge_Bool_Exp;
+  user_challenge_inc_input: User_Challenge_Inc_Input;
+  user_challenge_insert_input: User_Challenge_Insert_Input;
+  user_challenge_max_fields: User_Challenge_Max_Fields;
+  user_challenge_max_order_by: User_Challenge_Max_Order_By;
+  user_challenge_min_fields: User_Challenge_Min_Fields;
+  user_challenge_min_order_by: User_Challenge_Min_Order_By;
+  user_challenge_mutation_response: User_Challenge_Mutation_Response;
+  user_challenge_obj_rel_insert_input: User_Challenge_Obj_Rel_Insert_Input;
+  user_challenge_on_conflict: User_Challenge_On_Conflict;
+  user_challenge_order_by: User_Challenge_Order_By;
+  user_challenge_pk_columns_input: User_Challenge_Pk_Columns_Input;
+  user_challenge_set_input: User_Challenge_Set_Input;
+  user_challenge_stddev_fields: User_Challenge_Stddev_Fields;
+  user_challenge_stddev_order_by: User_Challenge_Stddev_Order_By;
+  user_challenge_stddev_pop_fields: User_Challenge_Stddev_Pop_Fields;
+  user_challenge_stddev_pop_order_by: User_Challenge_Stddev_Pop_Order_By;
+  user_challenge_stddev_samp_fields: User_Challenge_Stddev_Samp_Fields;
+  user_challenge_stddev_samp_order_by: User_Challenge_Stddev_Samp_Order_By;
+  user_challenge_sum_fields: User_Challenge_Sum_Fields;
+  user_challenge_sum_order_by: User_Challenge_Sum_Order_By;
+  user_challenge_var_pop_fields: User_Challenge_Var_Pop_Fields;
+  user_challenge_var_pop_order_by: User_Challenge_Var_Pop_Order_By;
+  user_challenge_var_samp_fields: User_Challenge_Var_Samp_Fields;
+  user_challenge_var_samp_order_by: User_Challenge_Var_Samp_Order_By;
+  user_challenge_variance_fields: User_Challenge_Variance_Fields;
+  user_challenge_variance_order_by: User_Challenge_Variance_Order_By;
   users: Users;
   users_aggregate: Users_Aggregate;
   users_aggregate_fields: Users_Aggregate_Fields;
@@ -4776,11 +5657,12 @@ export type ResolversParentTypes = {
 };
 
 export type AchievementResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement'] = ResolversParentTypes['achievement']> = {
-  achievementTypeByAchievementType?: Resolver<Maybe<ResolversTypes['achievement_type']>, ParentType, ContextType>;
-  achievement_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  achievementTypeByAchievementType?: Resolver<ResolversTypes['achievement_type'], ParentType, ContextType>;
+  achievement_type?: Resolver<ResolversTypes['achievement_type_enum'], ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  level?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rule?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<AchievementRuleArgs, never>>;
   user_achievements?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<AchievementUser_AchievementsArgs, never>>;
@@ -4811,23 +5693,24 @@ export type Achievement_Aggregate_FieldsResolvers<ContextType = any, ParentType 
 
 export type Achievement_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_avg_fields'] = ResolversParentTypes['achievement_avg_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_max_fields'] = ResolversParentTypes['achievement_max_fields']> = {
-  achievement_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_min_fields'] = ResolversParentTypes['achievement_min_fields']> = {
-  achievement_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -4840,25 +5723,31 @@ export type Achievement_Mutation_ResponseResolvers<ContextType = any, ParentType
 
 export type Achievement_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_fields'] = ResolversParentTypes['achievement_stddev_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_pop_fields'] = ResolversParentTypes['achievement_stddev_pop_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_samp_fields'] = ResolversParentTypes['achievement_stddev_samp_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_sum_fields'] = ResolversParentTypes['achievement_sum_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_TypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_type'] = ResolversParentTypes['achievement_type']> = {
+  achievements?: Resolver<Array<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Achievement_TypeAchievementsArgs, never>>;
+  achievements_aggregate?: Resolver<ResolversTypes['achievement_aggregate'], ParentType, ContextType, RequireFields<Achievement_TypeAchievements_AggregateArgs, never>>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -4897,16 +5786,19 @@ export type Achievement_Type_Mutation_ResponseResolvers<ContextType = any, Paren
 
 export type Achievement_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_var_pop_fields'] = ResolversParentTypes['achievement_var_pop_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_var_samp_fields'] = ResolversParentTypes['achievement_var_samp_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_variance_fields'] = ResolversParentTypes['achievement_variance_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -5129,6 +6021,44 @@ export type Categories_Variance_FieldsResolvers<ContextType = any, ParentType ex
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type Challenge_TypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type'] = ResolversParentTypes['challenge_type']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  rules?: Resolver<Maybe<ResolversTypes['json']>, ParentType, ContextType, RequireFields<Challenge_TypeRulesArgs, never>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_Type_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_aggregate'] = ResolversParentTypes['challenge_type_aggregate']> = {
+  aggregate?: Resolver<Maybe<ResolversTypes['challenge_type_aggregate_fields']>, ParentType, ContextType>;
+  nodes?: Resolver<Array<ResolversTypes['challenge_type']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_Type_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_aggregate_fields'] = ResolversParentTypes['challenge_type_aggregate_fields']> = {
+  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Challenge_Type_Aggregate_FieldsCountArgs, never>>;
+  max?: Resolver<Maybe<ResolversTypes['challenge_type_max_fields']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['challenge_type_min_fields']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_Type_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_max_fields'] = ResolversParentTypes['challenge_type_max_fields']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_Type_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_min_fields'] = ResolversParentTypes['challenge_type_min_fields']> = {
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_Type_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_mutation_response'] = ResolversParentTypes['challenge_type_mutation_response']> = {
+  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['challenge_type']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type CommentsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments'] = ResolversParentTypes['comments']> = {
   activity?: Resolver<ResolversTypes['activities'], ParentType, ContextType>;
   activity_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -5235,6 +6165,10 @@ export type Comments_Variance_FieldsResolvers<ContextType = any, ParentType exte
   comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
+
+export interface DaterangeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['daterange'], any> {
+  name: 'daterange';
+}
 
 export interface Float8ScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['float8'], any> {
   name: 'float8';
@@ -5572,6 +6506,8 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   delete_activities_by_pk?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Activities_By_PkArgs, 'activity_id'>>;
   delete_categories?: Resolver<Maybe<ResolversTypes['categories_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_CategoriesArgs, 'where'>>;
   delete_categories_by_pk?: Resolver<Maybe<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Categories_By_PkArgs, 'name'>>;
+  delete_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Challenge_TypeArgs, 'where'>>;
+  delete_challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Challenge_Type_By_PkArgs, 'name'>>;
   delete_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_CommentArgs, 'comment_id'>>;
   delete_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_CommentsArgs, 'where'>>;
   delete_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_FollowingsArgs, 'where'>>;
@@ -5585,6 +6521,8 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   delete_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_UserArgs, 'id'>>;
   delete_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_AchievementArgs, 'where'>>;
   delete_user_achievement_by_pk?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>>;
+  delete_user_challenge?: Resolver<Maybe<ResolversTypes['user_challenge_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_ChallengeArgs, 'where'>>;
+  delete_user_challenge_by_pk?: Resolver<Maybe<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_Challenge_By_PkArgs, 'id'>>;
   delete_users?: Resolver<Maybe<ResolversTypes['users_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_UsersArgs, 'where'>>;
   insert_achievement?: Resolver<Maybe<ResolversTypes['achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_AchievementArgs, 'objects'>>;
   insert_achievement_one?: Resolver<Maybe<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Achievement_OneArgs, 'object'>>;
@@ -5594,6 +6532,8 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   insert_activities_one?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Activities_OneArgs, 'object'>>;
   insert_categories?: Resolver<Maybe<ResolversTypes['categories_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_CategoriesArgs, 'objects'>>;
   insert_categories_one?: Resolver<Maybe<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Categories_OneArgs, 'object'>>;
+  insert_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Challenge_TypeArgs, 'objects'>>;
+  insert_challenge_type_one?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Challenge_Type_OneArgs, 'object'>>;
   insert_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_CommentArgs, 'object'>>;
   insert_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_CommentsArgs, 'objects'>>;
   insert_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_FollowingsArgs, 'objects'>>;
@@ -5607,6 +6547,8 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   insert_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_UserArgs, 'object'>>;
   insert_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_AchievementArgs, 'objects'>>;
   insert_user_achievement_one?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_Achievement_OneArgs, 'object'>>;
+  insert_user_challenge?: Resolver<Maybe<ResolversTypes['user_challenge_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_ChallengeArgs, 'objects'>>;
+  insert_user_challenge_one?: Resolver<Maybe<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_Challenge_OneArgs, 'object'>>;
   insert_users?: Resolver<Maybe<ResolversTypes['users_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_UsersArgs, 'objects'>>;
   update_achievement?: Resolver<Maybe<ResolversTypes['achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_AchievementArgs, 'where'>>;
   update_achievement_by_pk?: Resolver<Maybe<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Achievement_By_PkArgs, 'pk_columns'>>;
@@ -5616,6 +6558,8 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   update_activities_by_pk?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Activities_By_PkArgs, 'pk_columns'>>;
   update_categories?: Resolver<Maybe<ResolversTypes['categories_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_CategoriesArgs, 'where'>>;
   update_categories_by_pk?: Resolver<Maybe<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Categories_By_PkArgs, 'pk_columns'>>;
+  update_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Challenge_TypeArgs, 'where'>>;
+  update_challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Challenge_Type_By_PkArgs, 'pk_columns'>>;
   update_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_CommentArgs, 'pk_columns'>>;
   update_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_CommentsArgs, 'where'>>;
   update_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_FollowingsArgs, 'where'>>;
@@ -5629,6 +6573,8 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   update_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_UserArgs, 'pk_columns'>>;
   update_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_AchievementArgs, 'where'>>;
   update_user_achievement_by_pk?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_Achievement_By_PkArgs, 'pk_columns'>>;
+  update_user_challenge?: Resolver<Maybe<ResolversTypes['user_challenge_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_ChallengeArgs, 'where'>>;
+  update_user_challenge_by_pk?: Resolver<Maybe<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_Challenge_By_PkArgs, 'pk_columns'>>;
   update_users?: Resolver<Maybe<ResolversTypes['users_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_UsersArgs, 'where'>>;
 };
 
@@ -5645,6 +6591,9 @@ export type Query_RootResolvers<ContextType = any, ParentType extends ResolversP
   categories?: Resolver<Array<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Query_RootCategoriesArgs, never>>;
   categories_aggregate?: Resolver<ResolversTypes['categories_aggregate'], ParentType, ContextType, RequireFields<Query_RootCategories_AggregateArgs, never>>;
   categories_by_pk?: Resolver<Maybe<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Query_RootCategories_By_PkArgs, 'name'>>;
+  challenge_type?: Resolver<Array<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Query_RootChallenge_TypeArgs, never>>;
+  challenge_type_aggregate?: Resolver<ResolversTypes['challenge_type_aggregate'], ParentType, ContextType, RequireFields<Query_RootChallenge_Type_AggregateArgs, never>>;
+  challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Query_RootChallenge_Type_By_PkArgs, 'name'>>;
   comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Query_RootCommentArgs, 'comment_id'>>;
   comments?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Query_RootCommentsArgs, never>>;
   comments_aggregate?: Resolver<ResolversTypes['comments_aggregate'], ParentType, ContextType, RequireFields<Query_RootComments_AggregateArgs, never>>;
@@ -5666,6 +6615,9 @@ export type Query_RootResolvers<ContextType = any, ParentType extends ResolversP
   user_achievement?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Query_RootUser_AchievementArgs, never>>;
   user_achievement_aggregate?: Resolver<ResolversTypes['user_achievement_aggregate'], ParentType, ContextType, RequireFields<Query_RootUser_Achievement_AggregateArgs, never>>;
   user_achievement_by_pk?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Query_RootUser_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>>;
+  user_challenge?: Resolver<Array<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Query_RootUser_ChallengeArgs, never>>;
+  user_challenge_aggregate?: Resolver<ResolversTypes['user_challenge_aggregate'], ParentType, ContextType, RequireFields<Query_RootUser_Challenge_AggregateArgs, never>>;
+  user_challenge_by_pk?: Resolver<Maybe<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Query_RootUser_Challenge_By_PkArgs, 'id'>>;
   users?: Resolver<Array<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Query_RootUsersArgs, never>>;
   users_aggregate?: Resolver<ResolversTypes['users_aggregate'], ParentType, ContextType, RequireFields<Query_RootUsers_AggregateArgs, never>>;
 };
@@ -5683,6 +6635,9 @@ export type Subscription_RootResolvers<ContextType = any, ParentType extends Res
   categories?: SubscriptionResolver<Array<ResolversTypes['categories']>, "categories", ParentType, ContextType, RequireFields<Subscription_RootCategoriesArgs, never>>;
   categories_aggregate?: SubscriptionResolver<ResolversTypes['categories_aggregate'], "categories_aggregate", ParentType, ContextType, RequireFields<Subscription_RootCategories_AggregateArgs, never>>;
   categories_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['categories']>, "categories_by_pk", ParentType, ContextType, RequireFields<Subscription_RootCategories_By_PkArgs, 'name'>>;
+  challenge_type?: SubscriptionResolver<Array<ResolversTypes['challenge_type']>, "challenge_type", ParentType, ContextType, RequireFields<Subscription_RootChallenge_TypeArgs, never>>;
+  challenge_type_aggregate?: SubscriptionResolver<ResolversTypes['challenge_type_aggregate'], "challenge_type_aggregate", ParentType, ContextType, RequireFields<Subscription_RootChallenge_Type_AggregateArgs, never>>;
+  challenge_type_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['challenge_type']>, "challenge_type_by_pk", ParentType, ContextType, RequireFields<Subscription_RootChallenge_Type_By_PkArgs, 'name'>>;
   comment?: SubscriptionResolver<Maybe<ResolversTypes['comments']>, "comment", ParentType, ContextType, RequireFields<Subscription_RootCommentArgs, 'comment_id'>>;
   comments?: SubscriptionResolver<Array<ResolversTypes['comments']>, "comments", ParentType, ContextType, RequireFields<Subscription_RootCommentsArgs, never>>;
   comments_aggregate?: SubscriptionResolver<ResolversTypes['comments_aggregate'], "comments_aggregate", ParentType, ContextType, RequireFields<Subscription_RootComments_AggregateArgs, never>>;
@@ -5704,6 +6659,9 @@ export type Subscription_RootResolvers<ContextType = any, ParentType extends Res
   user_achievement?: SubscriptionResolver<Array<ResolversTypes['user_achievement']>, "user_achievement", ParentType, ContextType, RequireFields<Subscription_RootUser_AchievementArgs, never>>;
   user_achievement_aggregate?: SubscriptionResolver<ResolversTypes['user_achievement_aggregate'], "user_achievement_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUser_Achievement_AggregateArgs, never>>;
   user_achievement_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['user_achievement']>, "user_achievement_by_pk", ParentType, ContextType, RequireFields<Subscription_RootUser_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>>;
+  user_challenge?: SubscriptionResolver<Array<ResolversTypes['user_challenge']>, "user_challenge", ParentType, ContextType, RequireFields<Subscription_RootUser_ChallengeArgs, never>>;
+  user_challenge_aggregate?: SubscriptionResolver<ResolversTypes['user_challenge_aggregate'], "user_challenge_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUser_Challenge_AggregateArgs, never>>;
+  user_challenge_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['user_challenge']>, "user_challenge_by_pk", ParentType, ContextType, RequireFields<Subscription_RootUser_Challenge_By_PkArgs, 'id'>>;
   users?: SubscriptionResolver<Array<ResolversTypes['users']>, "users", ParentType, ContextType, RequireFields<Subscription_RootUsersArgs, never>>;
   users_aggregate?: SubscriptionResolver<ResolversTypes['users_aggregate'], "users_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUsers_AggregateArgs, never>>;
 };
@@ -5806,6 +6764,103 @@ export type User_Achievement_Variance_FieldsResolvers<ContextType = any, ParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type User_ChallengeResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge'] = ResolversParentTypes['user_challenge']> = {
+  challenge_type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  challenger_uid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
+  daterange?: Resolver<Maybe<ResolversTypes['daterange']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  is_active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  receiver_uid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  rules?: Resolver<Maybe<ResolversTypes['json']>, ParentType, ContextType, RequireFields<User_ChallengeRulesArgs, never>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_aggregate'] = ResolversParentTypes['user_challenge_aggregate']> = {
+  aggregate?: Resolver<Maybe<ResolversTypes['user_challenge_aggregate_fields']>, ParentType, ContextType>;
+  nodes?: Resolver<Array<ResolversTypes['user_challenge']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_aggregate_fields'] = ResolversParentTypes['user_challenge_aggregate_fields']> = {
+  avg?: Resolver<Maybe<ResolversTypes['user_challenge_avg_fields']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<User_Challenge_Aggregate_FieldsCountArgs, never>>;
+  max?: Resolver<Maybe<ResolversTypes['user_challenge_max_fields']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['user_challenge_min_fields']>, ParentType, ContextType>;
+  stddev?: Resolver<Maybe<ResolversTypes['user_challenge_stddev_fields']>, ParentType, ContextType>;
+  stddev_pop?: Resolver<Maybe<ResolversTypes['user_challenge_stddev_pop_fields']>, ParentType, ContextType>;
+  stddev_samp?: Resolver<Maybe<ResolversTypes['user_challenge_stddev_samp_fields']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['user_challenge_sum_fields']>, ParentType, ContextType>;
+  var_pop?: Resolver<Maybe<ResolversTypes['user_challenge_var_pop_fields']>, ParentType, ContextType>;
+  var_samp?: Resolver<Maybe<ResolversTypes['user_challenge_var_samp_fields']>, ParentType, ContextType>;
+  variance?: Resolver<Maybe<ResolversTypes['user_challenge_variance_fields']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_avg_fields'] = ResolversParentTypes['user_challenge_avg_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_max_fields'] = ResolversParentTypes['user_challenge_max_fields']> = {
+  challenge_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  challenger_uid?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  receiver_uid?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_min_fields'] = ResolversParentTypes['user_challenge_min_fields']> = {
+  challenge_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  challenger_uid?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  receiver_uid?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_mutation_response'] = ResolversParentTypes['user_challenge_mutation_response']> = {
+  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['user_challenge']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_stddev_fields'] = ResolversParentTypes['user_challenge_stddev_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_stddev_pop_fields'] = ResolversParentTypes['user_challenge_stddev_pop_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_stddev_samp_fields'] = ResolversParentTypes['user_challenge_stddev_samp_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_sum_fields'] = ResolversParentTypes['user_challenge_sum_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_var_pop_fields'] = ResolversParentTypes['user_challenge_var_pop_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_var_samp_fields'] = ResolversParentTypes['user_challenge_var_samp_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type User_Challenge_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_variance_fields'] = ResolversParentTypes['user_challenge_variance_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UsersResolvers<ContextType = any, ParentType extends ResolversParentTypes['users'] = ResolversParentTypes['users']> = {
   activities?: Resolver<Array<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<UsersActivitiesArgs, never>>;
   activities_aggregate?: Resolver<ResolversTypes['activities_aggregate'], ParentType, ContextType, RequireFields<UsersActivities_AggregateArgs, never>>;
@@ -5818,6 +6873,7 @@ export type UsersResolvers<ContextType = any, ParentType extends ResolversParent
   following_aggregate?: Resolver<ResolversTypes['followings_aggregate'], ParentType, ContextType, RequireFields<UsersFollowing_AggregateArgs, never>>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  picture?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   totalScore?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_achievement?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<UsersUser_AchievementArgs, never>>;
@@ -5844,6 +6900,7 @@ export type Users_Max_FieldsResolvers<ContextType = any, ParentType extends Reso
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5854,6 +6911,7 @@ export type Users_Min_FieldsResolvers<ContextType = any, ParentType extends Reso
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -5914,6 +6972,12 @@ export type Resolvers<ContextType = any> = {
   categories_var_pop_fields?: Categories_Var_Pop_FieldsResolvers<ContextType>;
   categories_var_samp_fields?: Categories_Var_Samp_FieldsResolvers<ContextType>;
   categories_variance_fields?: Categories_Variance_FieldsResolvers<ContextType>;
+  challenge_type?: Challenge_TypeResolvers<ContextType>;
+  challenge_type_aggregate?: Challenge_Type_AggregateResolvers<ContextType>;
+  challenge_type_aggregate_fields?: Challenge_Type_Aggregate_FieldsResolvers<ContextType>;
+  challenge_type_max_fields?: Challenge_Type_Max_FieldsResolvers<ContextType>;
+  challenge_type_min_fields?: Challenge_Type_Min_FieldsResolvers<ContextType>;
+  challenge_type_mutation_response?: Challenge_Type_Mutation_ResponseResolvers<ContextType>;
   comments?: CommentsResolvers<ContextType>;
   comments_aggregate?: Comments_AggregateResolvers<ContextType>;
   comments_aggregate_fields?: Comments_Aggregate_FieldsResolvers<ContextType>;
@@ -5928,6 +6992,7 @@ export type Resolvers<ContextType = any> = {
   comments_var_pop_fields?: Comments_Var_Pop_FieldsResolvers<ContextType>;
   comments_var_samp_fields?: Comments_Var_Samp_FieldsResolvers<ContextType>;
   comments_variance_fields?: Comments_Variance_FieldsResolvers<ContextType>;
+  daterange?: GraphQLScalarType;
   float8?: GraphQLScalarType;
   followings?: FollowingsResolvers<ContextType>;
   followings_aggregate?: Followings_AggregateResolvers<ContextType>;
@@ -5990,6 +7055,20 @@ export type Resolvers<ContextType = any> = {
   user_achievement_var_pop_fields?: User_Achievement_Var_Pop_FieldsResolvers<ContextType>;
   user_achievement_var_samp_fields?: User_Achievement_Var_Samp_FieldsResolvers<ContextType>;
   user_achievement_variance_fields?: User_Achievement_Variance_FieldsResolvers<ContextType>;
+  user_challenge?: User_ChallengeResolvers<ContextType>;
+  user_challenge_aggregate?: User_Challenge_AggregateResolvers<ContextType>;
+  user_challenge_aggregate_fields?: User_Challenge_Aggregate_FieldsResolvers<ContextType>;
+  user_challenge_avg_fields?: User_Challenge_Avg_FieldsResolvers<ContextType>;
+  user_challenge_max_fields?: User_Challenge_Max_FieldsResolvers<ContextType>;
+  user_challenge_min_fields?: User_Challenge_Min_FieldsResolvers<ContextType>;
+  user_challenge_mutation_response?: User_Challenge_Mutation_ResponseResolvers<ContextType>;
+  user_challenge_stddev_fields?: User_Challenge_Stddev_FieldsResolvers<ContextType>;
+  user_challenge_stddev_pop_fields?: User_Challenge_Stddev_Pop_FieldsResolvers<ContextType>;
+  user_challenge_stddev_samp_fields?: User_Challenge_Stddev_Samp_FieldsResolvers<ContextType>;
+  user_challenge_sum_fields?: User_Challenge_Sum_FieldsResolvers<ContextType>;
+  user_challenge_var_pop_fields?: User_Challenge_Var_Pop_FieldsResolvers<ContextType>;
+  user_challenge_var_samp_fields?: User_Challenge_Var_Samp_FieldsResolvers<ContextType>;
+  user_challenge_variance_fields?: User_Challenge_Variance_FieldsResolvers<ContextType>;
   users?: UsersResolvers<ContextType>;
   users_aggregate?: Users_AggregateResolvers<ContextType>;
   users_aggregate_fields?: Users_Aggregate_FieldsResolvers<ContextType>;
@@ -6042,7 +7121,47 @@ export const GetUserAndExistingAchievements = gql`
   user(id: $user_id) {
     id
     totalScore
-    name
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
+    }
+    education_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "EDUCATION"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    culture_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "CULTURE"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    social_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "SOCIAL"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    health_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "HEALTH"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
     user_achievement {
       achievement {
         id
@@ -6069,6 +7188,47 @@ export const GetUserAndUnachievedAchievements = gql`
   user(id: $user_id) {
     id
     totalScore
+    activity_count: activities_aggregate {
+      aggregate {
+        count(columns: activity_id)
+      }
+    }
+    education_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "EDUCATION"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    culture_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "CULTURE"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    social_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "SOCIAL"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
+    health_score: activities_aggregate(
+      where: {geofence: {category: {_eq: "HEALTH"}}}
+    ) {
+      aggregate {
+        sum {
+          score
+        }
+      }
+    }
   }
 }
     `;
@@ -6135,8 +7295,50 @@ export type GetUserAndExistingAchievementsQuery = (
   { __typename?: 'query_root' }
   & { user?: Maybe<(
     { __typename?: 'users' }
-    & Pick<Users, 'id' | 'totalScore' | 'name'>
-    & { user_achievement: Array<(
+    & Pick<Users, 'id' | 'totalScore'>
+    & { activity_count: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & Pick<Activities_Aggregate_Fields, 'count'>
+      )> }
+    ), education_score: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'activities_sum_fields' }
+          & Pick<Activities_Sum_Fields, 'score'>
+        )> }
+      )> }
+    ), culture_score: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'activities_sum_fields' }
+          & Pick<Activities_Sum_Fields, 'score'>
+        )> }
+      )> }
+    ), social_score: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'activities_sum_fields' }
+          & Pick<Activities_Sum_Fields, 'score'>
+        )> }
+      )> }
+    ), health_score: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'activities_sum_fields' }
+          & Pick<Activities_Sum_Fields, 'score'>
+        )> }
+      )> }
+    ), user_achievement: Array<(
       { __typename?: 'user_achievement' }
       & { achievement: (
         { __typename?: 'achievement' }
@@ -6159,5 +7361,48 @@ export type GetUserAndUnachievedAchievementsQuery = (
   )>, user?: Maybe<(
     { __typename?: 'users' }
     & Pick<Users, 'id' | 'totalScore'>
+    & { activity_count: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & Pick<Activities_Aggregate_Fields, 'count'>
+      )> }
+    ), education_score: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'activities_sum_fields' }
+          & Pick<Activities_Sum_Fields, 'score'>
+        )> }
+      )> }
+    ), culture_score: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'activities_sum_fields' }
+          & Pick<Activities_Sum_Fields, 'score'>
+        )> }
+      )> }
+    ), social_score: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'activities_sum_fields' }
+          & Pick<Activities_Sum_Fields, 'score'>
+        )> }
+      )> }
+    ), health_score: (
+      { __typename?: 'activities_aggregate' }
+      & { aggregate?: Maybe<(
+        { __typename?: 'activities_aggregate_fields' }
+        & { sum?: Maybe<(
+          { __typename?: 'activities_sum_fields' }
+          & Pick<Activities_Sum_Fields, 'score'>
+        )> }
+      )> }
+    ) }
   )> }
 );
