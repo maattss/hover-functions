@@ -31,7 +31,7 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
 
       res.status(200).json({
         status: 'Success',
-        data: `New ${objects.length} achievments`,
+        data: `Added ${objects.length} new achievments for user ${user_id}.`,
       });
     } else {
       res.status(200).json({
@@ -53,7 +53,7 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
     if (objects.length) {
       res.status(200).json({
         status: 'Success',
-        data: `Deleted ${objects.length} achievments`,
+        data: `Deleted ${objects.length} achievments from user ${user_id}.`,
       });
     } else {
       res.status(200).json({
