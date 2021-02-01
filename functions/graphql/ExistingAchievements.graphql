@@ -2,7 +2,6 @@ query GetUserAndExistingAchievements($user_id: String!) {
   user(id: $user_id) {
     id
     totalScore
-    name
     activity_count: activities_aggregate {
       aggregate {
         count(columns: activity_id)

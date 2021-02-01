@@ -4625,7 +4625,6 @@ export const GetUserAndExistingAchievementsDocument = gql`
   user(id: $user_id) {
     id
     totalScore
-    name
     activity_count: activities_aggregate {
       aggregate {
         count(columns: activity_id)
@@ -7122,7 +7121,6 @@ export const GetUserAndExistingAchievements = gql`
   user(id: $user_id) {
     id
     totalScore
-    name
     activity_count: activities_aggregate {
       aggregate {
         count(columns: activity_id)
@@ -7297,7 +7295,7 @@ export type GetUserAndExistingAchievementsQuery = (
   { __typename?: 'query_root' }
   & { user?: Maybe<(
     { __typename?: 'users' }
-    & Pick<Users, 'id' | 'totalScore' | 'name'>
+    & Pick<Users, 'id' | 'totalScore'>
     & { activity_count: (
       { __typename?: 'activities_aggregate' }
       & { aggregate?: Maybe<(
