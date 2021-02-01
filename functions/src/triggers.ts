@@ -119,8 +119,8 @@ function isValidAchievment(
           if( score && score >= item.rule.score) return true;
           break;
         }
-        case 'HEALTH': {
-          const score = queryData.user?.health_score.aggregate?.sum?.score;
+        case 'EXERCISE': {
+          const score = queryData.user?.exercise_score.aggregate?.sum?.score;
           if( score && score >= item.rule.score) return true;
           break;
         }
