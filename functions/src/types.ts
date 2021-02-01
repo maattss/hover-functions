@@ -1075,34 +1075,12 @@ export type Challenge = {
   challengeTypeByChallengeType: Challenge_Type;
   challenge_participants: Array<Challenge_Participant>;
   challenge_participants_aggregate: Challenge_Participant_Aggregate;
-  challenge_state: Challenge_State;
   challenge_type: Challenge_Type_Enum;
   created_at: Scalars['timestamptz'];
-  created_by: Scalars['String'];
-  created_by_user: Users;
-  end_date: Scalars['date'];
+  daterange?: Maybe<Scalars['daterange']>;
   id: Scalars['Int'];
-  rules: Scalars['json'];
-  start_date: Scalars['date'];
-  state: Challenge_State_Enum;
-};
-
-
-export type ChallengeChallenge_ParticipantsArgs = {
-  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
-  where?: Maybe<Challenge_Participant_Bool_Exp>;
-};
-
-
-export type ChallengeChallenge_Participants_AggregateArgs = {
-  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
-  where?: Maybe<Challenge_Participant_Bool_Exp>;
+  is_active: Scalars['Boolean'];
+  rules?: Maybe<Scalars['json']>;
 };
 
 
@@ -1171,16 +1149,12 @@ export type Challenge_Bool_Exp = {
   _or?: Maybe<Array<Maybe<Challenge_Bool_Exp>>>;
   challengeTypeByChallengeType?: Maybe<Challenge_Type_Bool_Exp>;
   challenge_participants?: Maybe<Challenge_Participant_Bool_Exp>;
-  challenge_state?: Maybe<Challenge_State_Bool_Exp>;
   challenge_type?: Maybe<Challenge_Type_Enum_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  created_by?: Maybe<String_Comparison_Exp>;
-  created_by_user?: Maybe<Users_Bool_Exp>;
-  end_date?: Maybe<Date_Comparison_Exp>;
+  daterange?: Maybe<Daterange_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  is_active?: Maybe<Boolean_Comparison_Exp>;
   rules?: Maybe<Json_Comparison_Exp>;
-  start_date?: Maybe<Date_Comparison_Exp>;
-  state?: Maybe<Challenge_State_Enum_Comparison_Exp>;
 };
 
 export enum Challenge_Constraint {
@@ -1194,16 +1168,418 @@ export type Challenge_Inc_Input = {
 export type Challenge_Insert_Input = {
   challengeTypeByChallengeType?: Maybe<Challenge_Type_Obj_Rel_Insert_Input>;
   challenge_participants?: Maybe<Challenge_Participant_Arr_Rel_Insert_Input>;
-  challenge_state?: Maybe<Challenge_State_Obj_Rel_Insert_Input>;
   challenge_type?: Maybe<Challenge_Type_Enum>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  created_by?: Maybe<Scalars['String']>;
-  created_by_user?: Maybe<Users_Obj_Rel_Insert_Input>;
-  end_date?: Maybe<Scalars['date']>;
+  daterange?: Maybe<Scalars['daterange']>;
   id?: Maybe<Scalars['Int']>;
+  is_active?: Maybe<Scalars['Boolean']>;
   rules?: Maybe<Scalars['json']>;
-  start_date?: Maybe<Scalars['date']>;
-  state?: Maybe<Challenge_State_Enum>;
+};
+
+export type Challenge_Max_Fields = {
+  __typename?: 'challenge_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Challenge_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+export type Challenge_Min_Fields = {
+  __typename?: 'challenge_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Challenge_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+};
+
+export type Challenge_Mutation_Response = {
+  __typename?: 'challenge_mutation_response';
+  affected_rows: Scalars['Int'];
+  returning: Array<Challenge>;
+};
+
+export type Challenge_Obj_Rel_Insert_Input = {
+  data: Challenge_Insert_Input;
+  on_conflict?: Maybe<Challenge_On_Conflict>;
+};
+
+export type Challenge_On_Conflict = {
+  constraint: Challenge_Constraint;
+  update_columns: Array<Challenge_Update_Column>;
+  where?: Maybe<Challenge_Bool_Exp>;
+};
+
+export type Challenge_Order_By = {
+  challengeTypeByChallengeType?: Maybe<Challenge_Type_Order_By>;
+  challenge_participants_aggregate?: Maybe<Challenge_Participant_Aggregate_Order_By>;
+  challenge_type?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  daterange?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  is_active?: Maybe<Order_By>;
+  rules?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant = {
+  __typename?: 'challenge_participant';
+  challenge: Challenge;
+  challenge_id: Scalars['Int'];
+  user: Users;
+  user_id: Scalars['String'];
+};
+
+export type Challenge_Participant_Aggregate = {
+  __typename?: 'challenge_participant_aggregate';
+  aggregate?: Maybe<Challenge_Participant_Aggregate_Fields>;
+  nodes: Array<Challenge_Participant>;
+};
+
+export type Challenge_Participant_Aggregate_Fields = {
+  __typename?: 'challenge_participant_aggregate_fields';
+  avg?: Maybe<Challenge_Participant_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Challenge_Participant_Max_Fields>;
+  min?: Maybe<Challenge_Participant_Min_Fields>;
+  stddev?: Maybe<Challenge_Participant_Stddev_Fields>;
+  stddev_pop?: Maybe<Challenge_Participant_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Challenge_Participant_Stddev_Samp_Fields>;
+  sum?: Maybe<Challenge_Participant_Sum_Fields>;
+  var_pop?: Maybe<Challenge_Participant_Var_Pop_Fields>;
+  var_samp?: Maybe<Challenge_Participant_Var_Samp_Fields>;
+  variance?: Maybe<Challenge_Participant_Variance_Fields>;
+};
+
+
+export type Challenge_Participant_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Challenge_Participant_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+export type Challenge_Participant_Aggregate_Order_By = {
+  avg?: Maybe<Challenge_Participant_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Challenge_Participant_Max_Order_By>;
+  min?: Maybe<Challenge_Participant_Min_Order_By>;
+  stddev?: Maybe<Challenge_Participant_Stddev_Order_By>;
+  stddev_pop?: Maybe<Challenge_Participant_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Challenge_Participant_Stddev_Samp_Order_By>;
+  sum?: Maybe<Challenge_Participant_Sum_Order_By>;
+  var_pop?: Maybe<Challenge_Participant_Var_Pop_Order_By>;
+  var_samp?: Maybe<Challenge_Participant_Var_Samp_Order_By>;
+  variance?: Maybe<Challenge_Participant_Variance_Order_By>;
+};
+
+export type Challenge_Participant_Arr_Rel_Insert_Input = {
+  data: Array<Challenge_Participant_Insert_Input>;
+  on_conflict?: Maybe<Challenge_Participant_On_Conflict>;
+};
+
+export type Challenge_Participant_Avg_Fields = {
+  __typename?: 'challenge_participant_avg_fields';
+  challenge_id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Participant_Avg_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Challenge_Participant_Bool_Exp>>>;
+  _not?: Maybe<Challenge_Participant_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Challenge_Participant_Bool_Exp>>>;
+  challenge?: Maybe<Challenge_Bool_Exp>;
+  challenge_id?: Maybe<Int_Comparison_Exp>;
+  user?: Maybe<Users_Bool_Exp>;
+  user_id?: Maybe<String_Comparison_Exp>;
+};
+
+export enum Challenge_Participant_Constraint {
+  ChallengeParticipantsPkey = 'challenge_participants_pkey'
+}
+
+export type Challenge_Participant_Inc_Input = {
+  challenge_id?: Maybe<Scalars['Int']>;
+};
+
+export type Challenge_Participant_Insert_Input = {
+  challenge?: Maybe<Challenge_Obj_Rel_Insert_Input>;
+  challenge_id?: Maybe<Scalars['Int']>;
+  user?: Maybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Challenge_Participant_Max_Fields = {
+  __typename?: 'challenge_participant_max_fields';
+  challenge_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Challenge_Participant_Max_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Min_Fields = {
+  __typename?: 'challenge_participant_min_fields';
+  challenge_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Challenge_Participant_Min_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Mutation_Response = {
+  __typename?: 'challenge_participant_mutation_response';
+  affected_rows: Scalars['Int'];
+  returning: Array<Challenge_Participant>;
+};
+
+export type Challenge_Participant_Obj_Rel_Insert_Input = {
+  data: Challenge_Participant_Insert_Input;
+  on_conflict?: Maybe<Challenge_Participant_On_Conflict>;
+};
+
+export type Challenge_Participant_On_Conflict = {
+  constraint: Challenge_Participant_Constraint;
+  update_columns: Array<Challenge_Participant_Update_Column>;
+  where?: Maybe<Challenge_Participant_Bool_Exp>;
+};
+
+export type Challenge_Participant_Order_By = {
+  challenge?: Maybe<Challenge_Order_By>;
+  challenge_id?: Maybe<Order_By>;
+  user?: Maybe<Users_Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Pk_Columns_Input = {
+  challenge_id: Scalars['Int'];
+  user_id: Scalars['String'];
+};
+
+export enum Challenge_Participant_Select_Column {
+  ChallengeId = 'challenge_id',
+  UserId = 'user_id'
+}
+
+export type Challenge_Participant_Set_Input = {
+  challenge_id?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Challenge_Participant_Stddev_Fields = {
+  __typename?: 'challenge_participant_stddev_fields';
+  challenge_id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Participant_Stddev_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Stddev_Pop_Fields = {
+  __typename?: 'challenge_participant_stddev_pop_fields';
+  challenge_id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Participant_Stddev_Pop_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Stddev_Samp_Fields = {
+  __typename?: 'challenge_participant_stddev_samp_fields';
+  challenge_id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Participant_Stddev_Samp_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Sum_Fields = {
+  __typename?: 'challenge_participant_sum_fields';
+  challenge_id?: Maybe<Scalars['Int']>;
+};
+
+export type Challenge_Participant_Sum_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+};
+
+export enum Challenge_Participant_Update_Column {
+  ChallengeId = 'challenge_id',
+  UserId = 'user_id'
+}
+
+export type Challenge_Participant_Var_Pop_Fields = {
+  __typename?: 'challenge_participant_var_pop_fields';
+  challenge_id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Participant_Var_Pop_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Var_Samp_Fields = {
+  __typename?: 'challenge_participant_var_samp_fields';
+  challenge_id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Participant_Var_Samp_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Participant_Variance_Fields = {
+  __typename?: 'challenge_participant_variance_fields';
+  challenge_id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Participant_Variance_Order_By = {
+  challenge_id?: Maybe<Order_By>;
+};
+
+export type Challenge_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+export enum Challenge_Select_Column {
+  ChallengeType = 'challenge_type',
+  CreatedAt = 'created_at',
+  Daterange = 'daterange',
+  Id = 'id',
+  IsActive = 'is_active',
+  Rules = 'rules'
+}
+
+export type Challenge_Set_Input = {
+  challenge_type?: Maybe<Challenge_Type_Enum>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  daterange?: Maybe<Scalars['daterange']>;
+  id?: Maybe<Scalars['Int']>;
+  is_active?: Maybe<Scalars['Boolean']>;
+  rules?: Maybe<Scalars['json']>;
+};
+
+export type Challenge_Stddev_Fields = {
+  __typename?: 'challenge_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Challenge_Stddev_Pop_Fields = {
+  __typename?: 'challenge_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Challenge_Stddev_Samp_Fields = {
+  __typename?: 'challenge_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Challenge_Sum_Fields = {
+  __typename?: 'challenge_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Challenge_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Challenge_Type = {
+  __typename?: 'challenge_type';
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+export type Challenge_Type_Aggregate = {
+  __typename?: 'challenge_type_aggregate';
+  aggregate?: Maybe<Challenge_Type_Aggregate_Fields>;
+  nodes: Array<Challenge_Type>;
+};
+
+export type Challenge_Aggregate_Fields = {
+  __typename?: 'challenge_aggregate_fields';
+  avg?: Maybe<Challenge_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Challenge_Max_Fields>;
+  min?: Maybe<Challenge_Min_Fields>;
+  stddev?: Maybe<Challenge_Stddev_Fields>;
+  stddev_pop?: Maybe<Challenge_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Challenge_Stddev_Samp_Fields>;
+  sum?: Maybe<Challenge_Sum_Fields>;
+  var_pop?: Maybe<Challenge_Var_Pop_Fields>;
+  var_samp?: Maybe<Challenge_Var_Samp_Fields>;
+  variance?: Maybe<Challenge_Variance_Fields>;
+};
+
+
+export type Challenge_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Challenge_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+export type Challenge_Aggregate_Order_By = {
+  avg?: Maybe<Challenge_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Challenge_Max_Order_By>;
+  min?: Maybe<Challenge_Min_Order_By>;
+  stddev?: Maybe<Challenge_Stddev_Order_By>;
+  stddev_pop?: Maybe<Challenge_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Challenge_Stddev_Samp_Order_By>;
+  sum?: Maybe<Challenge_Sum_Order_By>;
+  var_pop?: Maybe<Challenge_Var_Pop_Order_By>;
+  var_samp?: Maybe<Challenge_Var_Samp_Order_By>;
+  variance?: Maybe<Challenge_Variance_Order_By>;
+};
+
+export type Challenge_Arr_Rel_Insert_Input = {
+  data: Array<Challenge_Insert_Input>;
+  on_conflict?: Maybe<Challenge_On_Conflict>;
+};
+
+export type Challenge_Type_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Challenge_Type_Bool_Exp>>>;
+  _not?: Maybe<Challenge_Type_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Challenge_Type_Bool_Exp>>>;
+  description?: Maybe<String_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+};
+
+export enum Challenge_Constraint {
+  UserChallengePkey = 'user_challenge_pkey'
+}
+
+export enum Challenge_Type_Enum {
+  Score = 'SCORE'
+}
+
+export type Challenge_Type_Enum_Comparison_Exp = {
+  _eq?: Maybe<Challenge_Type_Enum>;
+  _in?: Maybe<Array<Challenge_Type_Enum>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Challenge_Type_Enum>;
+  _nin?: Maybe<Array<Challenge_Type_Enum>>;
+};
+
+export type Challenge_Type_Insert_Input = {
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Max_Fields = {
@@ -1257,28 +1633,67 @@ export type Challenge_On_Conflict = {
   where?: Maybe<Challenge_Bool_Exp>;
 };
 
-export type Challenge_Order_By = {
-  challengeTypeByChallengeType?: Maybe<Challenge_Type_Order_By>;
-  challenge_participants_aggregate?: Maybe<Challenge_Participant_Aggregate_Order_By>;
-  challenge_state?: Maybe<Challenge_State_Order_By>;
-  challenge_type?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  created_by?: Maybe<Order_By>;
-  created_by_user?: Maybe<Users_Order_By>;
-  end_date?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  rules?: Maybe<Order_By>;
-  start_date?: Maybe<Order_By>;
-  state?: Maybe<Order_By>;
+export type Challenge_Type_Order_By = {
+  description?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant = {
-  __typename?: 'challenge_participant';
-  challenge: Challenge;
-  challenge_id: Scalars['Int'];
-  challenge_participant_state: Challenge_Participant_State;
-  progress?: Maybe<Scalars['Int']>;
-  state: Challenge_Participant_State_Enum;
+export type Challenge_Type_Pk_Columns_Input = {
+  name: Scalars['String'];
+};
+
+export enum Challenge_Type_Select_Column {
+  Description = 'description',
+  Name = 'name',
+  Rules = 'rules',
+}
+
+export type Challenge_Type_Set_Input = {
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export enum Challenge_Type_Update_Column {
+  Description = 'description',
+  Name = 'name',
+  Rules = 'rules',
+}
+
+export type Challenge_Var_Pop_Fields = {
+  __typename?: 'challenge_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Challenge_Var_Samp_Fields = {
+  __typename?: 'challenge_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Challenge_Variance_Fields = {
+  __typename?: 'challenge_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Challenge_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Comments = {
+  __typename?: 'comments';
+  activity: Activities;
+  activity_id: Scalars['Int'];
+  comment_id: Scalars['Int'];
+  content: Scalars['String'];
+  created_at?: Maybe<Scalars['timestamptz']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
   user: Users;
   user_id: Scalars['String'];
 };
@@ -2344,6 +2759,93 @@ export type Comments_Variance_Order_By = {
   comment_id?: Maybe<Order_By>;
 };
 
+export type Mutation_Root = {
+  __typename?: 'mutation_root';
+  delete_achievement?: Maybe<Achievement_Mutation_Response>;
+  delete_achievement_by_pk?: Maybe<Achievement>;
+  delete_achievement_type?: Maybe<Achievement_Type_Mutation_Response>;
+  delete_achievement_type_by_pk?: Maybe<Achievement_Type>;
+  delete_activities?: Maybe<Activities_Mutation_Response>;
+  delete_activities_by_pk?: Maybe<Activities>;
+  delete_categories?: Maybe<Categories_Mutation_Response>;
+  delete_categories_by_pk?: Maybe<Categories>;
+  delete_challenge?: Maybe<Challenge_Mutation_Response>;
+  delete_challenge_by_pk?: Maybe<Challenge>;
+  delete_challenge_participant?: Maybe<Challenge_Participant_Mutation_Response>;
+  delete_challenge_participant_by_pk?: Maybe<Challenge_Participant>;
+  delete_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
+  delete_challenge_type_by_pk?: Maybe<Challenge_Type>;
+  delete_comment?: Maybe<Comments>;
+  delete_comments?: Maybe<Comments_Mutation_Response>;
+  delete_followings?: Maybe<Followings_Mutation_Response>;
+  delete_followings_by_pk?: Maybe<Followings>;
+  delete_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
+  delete_geofence_variants_by_pk?: Maybe<Geofence_Variants>;
+  delete_geofences?: Maybe<Geofences_Mutation_Response>;
+  delete_geofences_by_pk?: Maybe<Geofences>;
+  delete_likes?: Maybe<Likes_Mutation_Response>;
+  delete_likes_by_pk?: Maybe<Likes>;
+  delete_user?: Maybe<Users>;
+  delete_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
+  delete_user_achievement_by_pk?: Maybe<User_Achievement>;
+  delete_users?: Maybe<Users_Mutation_Response>;
+  insert_achievement?: Maybe<Achievement_Mutation_Response>;
+  insert_achievement_one?: Maybe<Achievement>;
+  insert_achievement_type?: Maybe<Achievement_Type_Mutation_Response>;
+  insert_achievement_type_one?: Maybe<Achievement_Type>;
+  insert_activities?: Maybe<Activities_Mutation_Response>;
+  insert_activities_one?: Maybe<Activities>;
+  insert_categories?: Maybe<Categories_Mutation_Response>;
+  insert_categories_one?: Maybe<Categories>;
+  insert_challenge?: Maybe<Challenge_Mutation_Response>;
+  insert_challenge_one?: Maybe<Challenge>;
+  insert_challenge_participant?: Maybe<Challenge_Participant_Mutation_Response>;
+  insert_challenge_participant_one?: Maybe<Challenge_Participant>;
+  insert_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
+  insert_challenge_type_one?: Maybe<Challenge_Type>;
+  insert_comment?: Maybe<Comments>;
+  insert_comments?: Maybe<Comments_Mutation_Response>;
+  insert_followings?: Maybe<Followings_Mutation_Response>;
+  insert_followings_one?: Maybe<Followings>;
+  insert_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
+  insert_geofence_variants_one?: Maybe<Geofence_Variants>;
+  insert_geofences?: Maybe<Geofences_Mutation_Response>;
+  insert_geofences_one?: Maybe<Geofences>;
+  insert_likes?: Maybe<Likes_Mutation_Response>;
+  insert_likes_one?: Maybe<Likes>;
+  insert_user?: Maybe<Users>;
+  insert_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
+  insert_user_achievement_one?: Maybe<User_Achievement>;
+  insert_users?: Maybe<Users_Mutation_Response>;
+  update_achievement?: Maybe<Achievement_Mutation_Response>;
+  update_achievement_by_pk?: Maybe<Achievement>;
+  update_achievement_type?: Maybe<Achievement_Type_Mutation_Response>;
+  update_achievement_type_by_pk?: Maybe<Achievement_Type>;
+  update_activities?: Maybe<Activities_Mutation_Response>;
+  update_activities_by_pk?: Maybe<Activities>;
+  update_categories?: Maybe<Categories_Mutation_Response>;
+  update_categories_by_pk?: Maybe<Categories>;
+  update_challenge?: Maybe<Challenge_Mutation_Response>;
+  update_challenge_by_pk?: Maybe<Challenge>;
+  update_challenge_participant?: Maybe<Challenge_Participant_Mutation_Response>;
+  update_challenge_participant_by_pk?: Maybe<Challenge_Participant>;
+  update_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
+  update_challenge_type_by_pk?: Maybe<Challenge_Type>;
+  update_comment?: Maybe<Comments>;
+  update_comments?: Maybe<Comments_Mutation_Response>;
+  update_followings?: Maybe<Followings_Mutation_Response>;
+  update_followings_by_pk?: Maybe<Followings>;
+  update_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
+  update_geofence_variants_by_pk?: Maybe<Geofence_Variants>;
+  update_geofences?: Maybe<Geofences_Mutation_Response>;
+  update_geofences_by_pk?: Maybe<Geofences>;
+  update_likes?: Maybe<Likes_Mutation_Response>;
+  update_likes_by_pk?: Maybe<Likes>;
+  update_user?: Maybe<Users>;
+  update_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
+  update_user_achievement_by_pk?: Maybe<User_Achievement>;
+  update_users?: Maybe<Users_Mutation_Response>;
+};
 
 export type Date_Comparison_Exp = {
   _eq?: Maybe<Scalars['date']>;
@@ -2931,13 +3433,61 @@ export type Followings_On_Conflict = {
   where?: Maybe<Followings_Bool_Exp>;
 };
 
-export type Followings_Order_By = {
-  created_at?: Maybe<Order_By>;
-  follower?: Maybe<Users_Order_By>;
-  following_id?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-  user?: Maybe<Users_Order_By>;
-  user_id?: Maybe<Order_By>;
+export enum Order_By {
+  Asc = 'asc',
+  AscNullsFirst = 'asc_nulls_first',
+  AscNullsLast = 'asc_nulls_last',
+  Desc = 'desc',
+  DescNullsFirst = 'desc_nulls_first',
+  DescNullsLast = 'desc_nulls_last',
+}
+
+export type Query_Root = {
+  __typename?: 'query_root';
+  achievement: Array<Achievement>;
+  achievement_aggregate: Achievement_Aggregate;
+  achievement_by_pk?: Maybe<Achievement>;
+  achievement_type: Array<Achievement_Type>;
+  achievement_type_aggregate: Achievement_Type_Aggregate;
+  achievement_type_by_pk?: Maybe<Achievement_Type>;
+  activities: Array<Activities>;
+  activities_aggregate: Activities_Aggregate;
+  activities_by_pk?: Maybe<Activities>;
+  categories: Array<Categories>;
+  categories_aggregate: Categories_Aggregate;
+  categories_by_pk?: Maybe<Categories>;
+  challenge: Array<Challenge>;
+  challenge_aggregate: Challenge_Aggregate;
+  challenge_by_pk?: Maybe<Challenge>;
+  challenge_participant: Array<Challenge_Participant>;
+  challenge_participant_aggregate: Challenge_Participant_Aggregate;
+  challenge_participant_by_pk?: Maybe<Challenge_Participant>;
+  challenge_type: Array<Challenge_Type>;
+  challenge_type_aggregate: Challenge_Type_Aggregate;
+  challenge_type_by_pk?: Maybe<Challenge_Type>;
+  comment?: Maybe<Comments>;
+  comments: Array<Comments>;
+  comments_aggregate: Comments_Aggregate;
+  followings: Array<Followings>;
+  followings_aggregate: Followings_Aggregate;
+  followings_by_pk?: Maybe<Followings>;
+  geofence_variants: Array<Geofence_Variants>;
+  geofence_variants_aggregate: Geofence_Variants_Aggregate;
+  geofence_variants_by_pk?: Maybe<Geofence_Variants>;
+  geofences: Array<Geofences>;
+  geofences_aggregate: Geofences_Aggregate;
+  geofences_by_pk?: Maybe<Geofences>;
+  likes: Array<Likes>;
+  likes_aggregate: Likes_Aggregate;
+  likes_by_pk?: Maybe<Likes>;
+  unachievedachievements: Array<Achievement>;
+  unachievedachievements_aggregate: Achievement_Aggregate;
+  user?: Maybe<Users>;
+  user_achievement: Array<User_Achievement>;
+  user_achievement_aggregate: User_Achievement_Aggregate;
+  user_achievement_by_pk?: Maybe<User_Achievement>;
+  users: Array<Users>;
+  users_aggregate: Users_Aggregate;
 };
 
 export type Followings_Pk_Columns_Input = {
@@ -3002,23 +3552,20 @@ export type Friends_Tracking_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-export type Friends_Tracking_Aggregate_Order_By = {
-  avg?: Maybe<Friends_Tracking_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Friends_Tracking_Max_Order_By>;
-  min?: Maybe<Friends_Tracking_Min_Order_By>;
-  stddev?: Maybe<Friends_Tracking_Stddev_Order_By>;
-  stddev_pop?: Maybe<Friends_Tracking_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Friends_Tracking_Stddev_Samp_Order_By>;
-  sum?: Maybe<Friends_Tracking_Sum_Order_By>;
-  var_pop?: Maybe<Friends_Tracking_Var_Pop_Order_By>;
-  var_samp?: Maybe<Friends_Tracking_Var_Samp_Order_By>;
-  variance?: Maybe<Friends_Tracking_Variance_Order_By>;
+export type Query_RootActivitiesArgs = {
+  distinct_on?: Maybe<Array<Activities_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
 };
 
-export type Friends_Tracking_Arr_Rel_Insert_Input = {
-  data: Array<Friends_Tracking_Insert_Input>;
-  on_conflict?: Maybe<Friends_Tracking_On_Conflict>;
+export type Query_RootActivities_AggregateArgs = {
+  distinct_on?: Maybe<Array<Activities_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
 };
 
 export type Friends_Tracking_Avg_Fields = {
@@ -3027,20 +3574,20 @@ export type Friends_Tracking_Avg_Fields = {
   id?: Maybe<Scalars['Float']>;
 };
 
-export type Friends_Tracking_Avg_Order_By = {
-  geofence_id?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
+export type Query_RootCategoriesArgs = {
+  distinct_on?: Maybe<Array<Categories_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
+  where?: Maybe<Challenge_Participant_Bool_Exp>;
 };
 
-export type Friends_Tracking_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Friends_Tracking_Bool_Exp>>>;
-  _not?: Maybe<Friends_Tracking_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Friends_Tracking_Bool_Exp>>>;
-  geofence_id?: Maybe<Int_Comparison_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  linking_word?: Maybe<String_Comparison_Exp>;
-  user_join?: Maybe<String_Comparison_Exp>;
-  user_start?: Maybe<String_Comparison_Exp>;
+export type Query_RootCategories_AggregateArgs = {
+  distinct_on?: Maybe<Array<Categories_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
+  where?: Maybe<Challenge_Participant_Bool_Exp>;
 };
 
 export enum Friends_Tracking_Constraint {
@@ -3256,11 +3803,52 @@ export type Geofence_Variants_Aggregate = {
   nodes: Array<Geofence_Variants>;
 };
 
-export type Geofence_Variants_Aggregate_Fields = {
-  __typename?: 'geofence_variants_aggregate_fields';
-  count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Geofence_Variants_Max_Fields>;
-  min?: Maybe<Geofence_Variants_Min_Fields>;
+export type Subscription_Root = {
+  __typename?: 'subscription_root';
+  achievement: Array<Achievement>;
+  achievement_aggregate: Achievement_Aggregate;
+  achievement_by_pk?: Maybe<Achievement>;
+  achievement_type: Array<Achievement_Type>;
+  achievement_type_aggregate: Achievement_Type_Aggregate;
+  achievement_type_by_pk?: Maybe<Achievement_Type>;
+  activities: Array<Activities>;
+  activities_aggregate: Activities_Aggregate;
+  activities_by_pk?: Maybe<Activities>;
+  categories: Array<Categories>;
+  categories_aggregate: Categories_Aggregate;
+  categories_by_pk?: Maybe<Categories>;
+  challenge: Array<Challenge>;
+  challenge_aggregate: Challenge_Aggregate;
+  challenge_by_pk?: Maybe<Challenge>;
+  challenge_participant: Array<Challenge_Participant>;
+  challenge_participant_aggregate: Challenge_Participant_Aggregate;
+  challenge_participant_by_pk?: Maybe<Challenge_Participant>;
+  challenge_type: Array<Challenge_Type>;
+  challenge_type_aggregate: Challenge_Type_Aggregate;
+  challenge_type_by_pk?: Maybe<Challenge_Type>;
+  comment?: Maybe<Comments>;
+  comments: Array<Comments>;
+  comments_aggregate: Comments_Aggregate;
+  followings: Array<Followings>;
+  followings_aggregate: Followings_Aggregate;
+  followings_by_pk?: Maybe<Followings>;
+  geofence_variants: Array<Geofence_Variants>;
+  geofence_variants_aggregate: Geofence_Variants_Aggregate;
+  geofence_variants_by_pk?: Maybe<Geofence_Variants>;
+  geofences: Array<Geofences>;
+  geofences_aggregate: Geofences_Aggregate;
+  geofences_by_pk?: Maybe<Geofences>;
+  likes: Array<Likes>;
+  likes_aggregate: Likes_Aggregate;
+  likes_by_pk?: Maybe<Likes>;
+  unachievedachievements: Array<Achievement>;
+  unachievedachievements_aggregate: Achievement_Aggregate;
+  user?: Maybe<Users>;
+  user_achievement: Array<User_Achievement>;
+  user_achievement_aggregate: User_Achievement_Aggregate;
+  user_achievement_by_pk?: Maybe<User_Achievement>;
+  users: Array<Users>;
+  users_aggregate: Users_Aggregate;
 };
 
 
@@ -3953,211 +4541,114 @@ export type Likes_Order_By = {
   user_id?: Maybe<Order_By>;
 };
 
-export type Likes_Pk_Columns_Input = {
-  activity_id: Scalars['Int'];
+export type User_Achievement_Pk_Columns_Input = {
+  achievement_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
 
-export enum Likes_Select_Column {
-  ActivityId = 'activity_id',
+export enum User_Achievement_Select_Column {
+  AchievementId = 'achievement_id',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
   UserId = 'user_id'
 }
 
-export type Likes_Set_Input = {
-  activity_id?: Maybe<Scalars['Int']>;
+export type User_Achievement_Set_Input = {
+  achievement_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Likes_Stddev_Fields = {
-  __typename?: 'likes_stddev_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+export type User_Achievement_Stddev_Fields = {
+  __typename?: 'user_achievement_stddev_fields';
+  achievement_id?: Maybe<Scalars['Float']>;
 };
 
-export type Likes_Stddev_Order_By = {
-  activity_id?: Maybe<Order_By>;
+export type User_Achievement_Stddev_Order_By = {
+  achievement_id?: Maybe<Order_By>;
 };
 
-export type Likes_Stddev_Pop_Fields = {
-  __typename?: 'likes_stddev_pop_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+export type User_Achievement_Stddev_Pop_Fields = {
+  __typename?: 'user_achievement_stddev_pop_fields';
+  achievement_id?: Maybe<Scalars['Float']>;
 };
 
-export type Likes_Stddev_Pop_Order_By = {
-  activity_id?: Maybe<Order_By>;
+export type User_Achievement_Stddev_Pop_Order_By = {
+  achievement_id?: Maybe<Order_By>;
 };
 
-export type Likes_Stddev_Samp_Fields = {
-  __typename?: 'likes_stddev_samp_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+export type User_Achievement_Stddev_Samp_Fields = {
+  __typename?: 'user_achievement_stddev_samp_fields';
+  achievement_id?: Maybe<Scalars['Float']>;
 };
 
-export type Likes_Stddev_Samp_Order_By = {
-  activity_id?: Maybe<Order_By>;
+export type User_Achievement_Stddev_Samp_Order_By = {
+  achievement_id?: Maybe<Order_By>;
 };
 
-export type Likes_Sum_Fields = {
-  __typename?: 'likes_sum_fields';
-  activity_id?: Maybe<Scalars['Int']>;
+export type User_Achievement_Sum_Fields = {
+  __typename?: 'user_achievement_sum_fields';
+  achievement_id?: Maybe<Scalars['Int']>;
 };
 
-export type Likes_Sum_Order_By = {
-  activity_id?: Maybe<Order_By>;
+export type User_Achievement_Sum_Order_By = {
+  achievement_id?: Maybe<Order_By>;
 };
 
-export enum Likes_Update_Column {
-  ActivityId = 'activity_id',
+export enum User_Achievement_Update_Column {
+  AchievementId = 'achievement_id',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
   UserId = 'user_id'
 }
 
-export type Likes_Var_Pop_Fields = {
-  __typename?: 'likes_var_pop_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+export type User_Achievement_Var_Pop_Fields = {
+  __typename?: 'user_achievement_var_pop_fields';
+  achievement_id?: Maybe<Scalars['Float']>;
 };
 
-export type Likes_Var_Pop_Order_By = {
-  activity_id?: Maybe<Order_By>;
+export type User_Achievement_Var_Pop_Order_By = {
+  achievement_id?: Maybe<Order_By>;
 };
 
-export type Likes_Var_Samp_Fields = {
-  __typename?: 'likes_var_samp_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+export type User_Achievement_Var_Samp_Fields = {
+  __typename?: 'user_achievement_var_samp_fields';
+  achievement_id?: Maybe<Scalars['Float']>;
 };
 
-export type Likes_Var_Samp_Order_By = {
-  activity_id?: Maybe<Order_By>;
+export type User_Achievement_Var_Samp_Order_By = {
+  achievement_id?: Maybe<Order_By>;
 };
 
-export type Likes_Variance_Fields = {
-  __typename?: 'likes_variance_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+export type User_Achievement_Variance_Fields = {
+  __typename?: 'user_achievement_variance_fields';
+  achievement_id?: Maybe<Scalars['Float']>;
 };
 
-export type Likes_Variance_Order_By = {
-  activity_id?: Maybe<Order_By>;
+export type User_Achievement_Variance_Order_By = {
+  achievement_id?: Maybe<Order_By>;
 };
 
-export type Mutation_Root = {
-  __typename?: 'mutation_root';
-  delete_achievement?: Maybe<Achievement_Mutation_Response>;
-  delete_achievement_by_pk?: Maybe<Achievement>;
-  delete_achievement_type?: Maybe<Achievement_Type_Mutation_Response>;
-  delete_achievement_type_by_pk?: Maybe<Achievement_Type>;
-  delete_activities?: Maybe<Activities_Mutation_Response>;
-  delete_activities_by_pk?: Maybe<Activities>;
-  delete_categories?: Maybe<Categories_Mutation_Response>;
-  delete_categories_by_pk?: Maybe<Categories>;
-  delete_challenge?: Maybe<Challenge_Mutation_Response>;
-  delete_challenge_by_pk?: Maybe<Challenge>;
-  delete_challenge_participant?: Maybe<Challenge_Participant_Mutation_Response>;
-  delete_challenge_participant_by_pk?: Maybe<Challenge_Participant>;
-  delete_challenge_participant_state?: Maybe<Challenge_Participant_State_Mutation_Response>;
-  delete_challenge_participant_state_by_pk?: Maybe<Challenge_Participant_State>;
-  delete_challenge_state?: Maybe<Challenge_State_Mutation_Response>;
-  delete_challenge_state_by_pk?: Maybe<Challenge_State>;
-  delete_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
-  delete_challenge_type_by_pk?: Maybe<Challenge_Type>;
-  delete_comment?: Maybe<Comments>;
-  delete_comments?: Maybe<Comments_Mutation_Response>;
-  delete_feed?: Maybe<Feed_Mutation_Response>;
-  delete_feed_by_pk?: Maybe<Feed>;
-  delete_feed_type?: Maybe<Feed_Type_Mutation_Response>;
-  delete_feed_type_by_pk?: Maybe<Feed_Type>;
-  delete_followings?: Maybe<Followings_Mutation_Response>;
-  delete_followings_by_pk?: Maybe<Followings>;
-  delete_friends_tracking?: Maybe<Friends_Tracking_Mutation_Response>;
-  delete_friends_tracking_by_pk?: Maybe<Friends_Tracking>;
-  delete_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
-  delete_geofence_variants_by_pk?: Maybe<Geofence_Variants>;
-  delete_geofences?: Maybe<Geofences_Mutation_Response>;
-  delete_geofences_by_pk?: Maybe<Geofences>;
-  delete_likes?: Maybe<Likes_Mutation_Response>;
-  delete_likes_by_pk?: Maybe<Likes>;
-  delete_user?: Maybe<Users>;
-  delete_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
-  delete_user_achievement_by_pk?: Maybe<User_Achievement>;
-  delete_users?: Maybe<Users_Mutation_Response>;
-  insert_achievement?: Maybe<Achievement_Mutation_Response>;
-  insert_achievement_one?: Maybe<Achievement>;
-  insert_achievement_type?: Maybe<Achievement_Type_Mutation_Response>;
-  insert_achievement_type_one?: Maybe<Achievement_Type>;
-  insert_activities?: Maybe<Activities_Mutation_Response>;
-  insert_activities_one?: Maybe<Activities>;
-  insert_categories?: Maybe<Categories_Mutation_Response>;
-  insert_categories_one?: Maybe<Categories>;
-  insert_challenge?: Maybe<Challenge_Mutation_Response>;
-  insert_challenge_one?: Maybe<Challenge>;
-  insert_challenge_participant?: Maybe<Challenge_Participant_Mutation_Response>;
-  insert_challenge_participant_one?: Maybe<Challenge_Participant>;
-  insert_challenge_participant_state?: Maybe<Challenge_Participant_State_Mutation_Response>;
-  insert_challenge_participant_state_one?: Maybe<Challenge_Participant_State>;
-  insert_challenge_state?: Maybe<Challenge_State_Mutation_Response>;
-  insert_challenge_state_one?: Maybe<Challenge_State>;
-  insert_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
-  insert_challenge_type_one?: Maybe<Challenge_Type>;
-  insert_comment?: Maybe<Comments>;
-  insert_comments?: Maybe<Comments_Mutation_Response>;
-  insert_feed?: Maybe<Feed_Mutation_Response>;
-  insert_feed_one?: Maybe<Feed>;
-  insert_feed_type?: Maybe<Feed_Type_Mutation_Response>;
-  insert_feed_type_one?: Maybe<Feed_Type>;
-  insert_followings?: Maybe<Followings_Mutation_Response>;
-  insert_followings_one?: Maybe<Followings>;
-  insert_friends_tracking?: Maybe<Friends_Tracking_Mutation_Response>;
-  insert_friends_tracking_one?: Maybe<Friends_Tracking>;
-  insert_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
-  insert_geofence_variants_one?: Maybe<Geofence_Variants>;
-  insert_geofences?: Maybe<Geofences_Mutation_Response>;
-  insert_geofences_one?: Maybe<Geofences>;
-  insert_likes?: Maybe<Likes_Mutation_Response>;
-  insert_likes_one?: Maybe<Likes>;
-  insert_user?: Maybe<Users>;
-  insert_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
-  insert_user_achievement_one?: Maybe<User_Achievement>;
-  insert_users?: Maybe<Users_Mutation_Response>;
-  update_achievement?: Maybe<Achievement_Mutation_Response>;
-  update_achievement_by_pk?: Maybe<Achievement>;
-  update_achievement_type?: Maybe<Achievement_Type_Mutation_Response>;
-  update_achievement_type_by_pk?: Maybe<Achievement_Type>;
-  update_activities?: Maybe<Activities_Mutation_Response>;
-  update_activities_by_pk?: Maybe<Activities>;
-  update_categories?: Maybe<Categories_Mutation_Response>;
-  update_categories_by_pk?: Maybe<Categories>;
-  update_challenge?: Maybe<Challenge_Mutation_Response>;
-  update_challenge_by_pk?: Maybe<Challenge>;
-  update_challenge_participant?: Maybe<Challenge_Participant_Mutation_Response>;
-  update_challenge_participant_by_pk?: Maybe<Challenge_Participant>;
-  update_challenge_participant_state?: Maybe<Challenge_Participant_State_Mutation_Response>;
-  update_challenge_participant_state_by_pk?: Maybe<Challenge_Participant_State>;
-  update_challenge_state?: Maybe<Challenge_State_Mutation_Response>;
-  update_challenge_state_by_pk?: Maybe<Challenge_State>;
-  update_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
-  update_challenge_type_by_pk?: Maybe<Challenge_Type>;
-  update_comment?: Maybe<Comments>;
-  update_comments?: Maybe<Comments_Mutation_Response>;
-  update_feed?: Maybe<Feed_Mutation_Response>;
-  update_feed_by_pk?: Maybe<Feed>;
-  update_feed_type?: Maybe<Feed_Type_Mutation_Response>;
-  update_feed_type_by_pk?: Maybe<Feed_Type>;
-  update_followings?: Maybe<Followings_Mutation_Response>;
-  update_followings_by_pk?: Maybe<Followings>;
-  update_friends_tracking?: Maybe<Friends_Tracking_Mutation_Response>;
-  update_friends_tracking_by_pk?: Maybe<Friends_Tracking>;
-  update_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
-  update_geofence_variants_by_pk?: Maybe<Geofence_Variants>;
-  update_geofences?: Maybe<Geofences_Mutation_Response>;
-  update_geofences_by_pk?: Maybe<Geofences>;
-  update_likes?: Maybe<Likes_Mutation_Response>;
-  update_likes_by_pk?: Maybe<Likes>;
-  update_user?: Maybe<Users>;
-  update_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
-  update_user_achievement_by_pk?: Maybe<User_Achievement>;
-  update_users?: Maybe<Users_Mutation_Response>;
+export type Users = {
+  __typename?: 'users';
+  activities: Array<Activities>;
+  activities_aggregate: Activities_Aggregate;
+  bio?: Maybe<Scalars['String']>;
+  challenge_participants: Array<Challenge_Participant>;
+  challenge_participants_aggregate: Challenge_Participant_Aggregate;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email: Scalars['String'];
+  followers: Array<Followings>;
+  followers_aggregate: Followings_Aggregate;
+  following: Array<Followings>;
+  following_aggregate: Followings_Aggregate;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  picture: Scalars['String'];
+  totalScore?: Maybe<Scalars['bigint']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_achievement: Array<User_Achievement>;
+  user_achievement_aggregate: User_Achievement_Aggregate;
 };
 
 
@@ -4215,15 +4706,38 @@ export type Mutation_RootDelete_Challenge_ParticipantArgs = {
   where: Challenge_Participant_Bool_Exp;
 };
 
-
-export type Mutation_RootDelete_Challenge_Participant_By_PkArgs = {
-  challenge_id: Scalars['Int'];
-  user_id: Scalars['String'];
+export type Users_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Users_Bool_Exp>>>;
+  _not?: Maybe<Users_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Users_Bool_Exp>>>;
+  activities?: Maybe<Activities_Bool_Exp>;
+  bio?: Maybe<String_Comparison_Exp>;
+  challenge_participants?: Maybe<Challenge_Participant_Bool_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  email?: Maybe<String_Comparison_Exp>;
+  followers?: Maybe<Followings_Bool_Exp>;
+  following?: Maybe<Followings_Bool_Exp>;
+  id?: Maybe<String_Comparison_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
+  picture?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  user_achievement?: Maybe<User_Achievement_Bool_Exp>;
 };
 
 
-export type Mutation_RootDelete_Challenge_Participant_StateArgs = {
-  where: Challenge_Participant_State_Bool_Exp;
+export type Users_Insert_Input = {
+  activities?: Maybe<Activities_Arr_Rel_Insert_Input>;
+  bio?: Maybe<Scalars['String']>;
+  challenge_participants?: Maybe<Challenge_Participant_Arr_Rel_Insert_Input>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  followers?: Maybe<Followings_Arr_Rel_Insert_Input>;
+  following?: Maybe<Followings_Arr_Rel_Insert_Input>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_achievement?: Maybe<User_Achievement_Arr_Rel_Insert_Input>;
 };
 
 
@@ -4261,9 +4775,19 @@ export type Mutation_RootDelete_CommentsArgs = {
   where: Comments_Bool_Exp;
 };
 
-
-export type Mutation_RootDelete_FeedArgs = {
-  where: Feed_Bool_Exp;
+export type Users_Order_By = {
+  activities_aggregate?: Maybe<Activities_Aggregate_Order_By>;
+  bio?: Maybe<Order_By>;
+  challenge_participants_aggregate?: Maybe<Challenge_Participant_Aggregate_Order_By>;
+  created_at?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  followers_aggregate?: Maybe<Followings_Aggregate_Order_By>;
+  following_aggregate?: Maybe<Followings_Aggregate_Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  picture?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user_achievement_aggregate?: Maybe<User_Achievement_Aggregate_Order_By>;
 };
 
 
@@ -4323,8 +4847,472 @@ export type Mutation_RootDelete_Geofences_By_PkArgs = {
 };
 
 
-export type Mutation_RootDelete_LikesArgs = {
-  where: Likes_Bool_Exp;
+/** Mapping between all available schema types and the resolvers types */
+export type ResolversTypes = {
+  achievement: ResolverTypeWrapper<Achievement>;
+  String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  achievement_aggregate: ResolverTypeWrapper<Achievement_Aggregate>;
+  achievement_aggregate_fields: ResolverTypeWrapper<Achievement_Aggregate_Fields>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  achievement_aggregate_order_by: Achievement_Aggregate_Order_By;
+  achievement_arr_rel_insert_input: Achievement_Arr_Rel_Insert_Input;
+  achievement_avg_fields: ResolverTypeWrapper<Achievement_Avg_Fields>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
+  achievement_avg_order_by: Achievement_Avg_Order_By;
+  achievement_bool_exp: Achievement_Bool_Exp;
+  achievement_constraint: Achievement_Constraint;
+  achievement_inc_input: Achievement_Inc_Input;
+  achievement_insert_input: Achievement_Insert_Input;
+  achievement_max_fields: ResolverTypeWrapper<Achievement_Max_Fields>;
+  achievement_max_order_by: Achievement_Max_Order_By;
+  achievement_min_fields: ResolverTypeWrapper<Achievement_Min_Fields>;
+  achievement_min_order_by: Achievement_Min_Order_By;
+  achievement_mutation_response: ResolverTypeWrapper<Achievement_Mutation_Response>;
+  achievement_obj_rel_insert_input: Achievement_Obj_Rel_Insert_Input;
+  achievement_on_conflict: Achievement_On_Conflict;
+  achievement_order_by: Achievement_Order_By;
+  achievement_pk_columns_input: Achievement_Pk_Columns_Input;
+  achievement_select_column: Achievement_Select_Column;
+  achievement_set_input: Achievement_Set_Input;
+  achievement_stddev_fields: ResolverTypeWrapper<Achievement_Stddev_Fields>;
+  achievement_stddev_order_by: Achievement_Stddev_Order_By;
+  achievement_stddev_pop_fields: ResolverTypeWrapper<Achievement_Stddev_Pop_Fields>;
+  achievement_stddev_pop_order_by: Achievement_Stddev_Pop_Order_By;
+  achievement_stddev_samp_fields: ResolverTypeWrapper<Achievement_Stddev_Samp_Fields>;
+  achievement_stddev_samp_order_by: Achievement_Stddev_Samp_Order_By;
+  achievement_sum_fields: ResolverTypeWrapper<Achievement_Sum_Fields>;
+  achievement_sum_order_by: Achievement_Sum_Order_By;
+  achievement_type: ResolverTypeWrapper<Achievement_Type>;
+  achievement_type_aggregate: ResolverTypeWrapper<Achievement_Type_Aggregate>;
+  achievement_type_aggregate_fields: ResolverTypeWrapper<Achievement_Type_Aggregate_Fields>;
+  achievement_type_aggregate_order_by: Achievement_Type_Aggregate_Order_By;
+  achievement_type_arr_rel_insert_input: Achievement_Type_Arr_Rel_Insert_Input;
+  achievement_type_bool_exp: Achievement_Type_Bool_Exp;
+  achievement_type_constraint: Achievement_Type_Constraint;
+  achievement_type_enum: Achievement_Type_Enum;
+  achievement_type_enum_comparison_exp: Achievement_Type_Enum_Comparison_Exp;
+  achievement_type_insert_input: Achievement_Type_Insert_Input;
+  achievement_type_max_fields: ResolverTypeWrapper<Achievement_Type_Max_Fields>;
+  achievement_type_max_order_by: Achievement_Type_Max_Order_By;
+  achievement_type_min_fields: ResolverTypeWrapper<Achievement_Type_Min_Fields>;
+  achievement_type_min_order_by: Achievement_Type_Min_Order_By;
+  achievement_type_mutation_response: ResolverTypeWrapper<Achievement_Type_Mutation_Response>;
+  achievement_type_obj_rel_insert_input: Achievement_Type_Obj_Rel_Insert_Input;
+  achievement_type_on_conflict: Achievement_Type_On_Conflict;
+  achievement_type_order_by: Achievement_Type_Order_By;
+  achievement_type_pk_columns_input: Achievement_Type_Pk_Columns_Input;
+  achievement_type_select_column: Achievement_Type_Select_Column;
+  achievement_type_set_input: Achievement_Type_Set_Input;
+  achievement_type_update_column: Achievement_Type_Update_Column;
+  achievement_update_column: Achievement_Update_Column;
+  achievement_var_pop_fields: ResolverTypeWrapper<Achievement_Var_Pop_Fields>;
+  achievement_var_pop_order_by: Achievement_Var_Pop_Order_By;
+  achievement_var_samp_fields: ResolverTypeWrapper<Achievement_Var_Samp_Fields>;
+  achievement_var_samp_order_by: Achievement_Var_Samp_Order_By;
+  achievement_variance_fields: ResolverTypeWrapper<Achievement_Variance_Fields>;
+  achievement_variance_order_by: Achievement_Variance_Order_By;
+  activities: ResolverTypeWrapper<Activities>;
+  activities_aggregate: ResolverTypeWrapper<Activities_Aggregate>;
+  activities_aggregate_fields: ResolverTypeWrapper<Activities_Aggregate_Fields>;
+  activities_aggregate_order_by: Activities_Aggregate_Order_By;
+  activities_arr_rel_insert_input: Activities_Arr_Rel_Insert_Input;
+  activities_avg_fields: ResolverTypeWrapper<Activities_Avg_Fields>;
+  activities_avg_order_by: Activities_Avg_Order_By;
+  activities_bool_exp: Activities_Bool_Exp;
+  activities_constraint: Activities_Constraint;
+  activities_inc_input: Activities_Inc_Input;
+  activities_insert_input: Activities_Insert_Input;
+  activities_max_fields: ResolverTypeWrapper<Activities_Max_Fields>;
+  activities_max_order_by: Activities_Max_Order_By;
+  activities_min_fields: ResolverTypeWrapper<Activities_Min_Fields>;
+  activities_min_order_by: Activities_Min_Order_By;
+  activities_mutation_response: ResolverTypeWrapper<Activities_Mutation_Response>;
+  activities_obj_rel_insert_input: Activities_Obj_Rel_Insert_Input;
+  activities_on_conflict: Activities_On_Conflict;
+  activities_order_by: Activities_Order_By;
+  activities_pk_columns_input: Activities_Pk_Columns_Input;
+  activities_select_column: Activities_Select_Column;
+  activities_set_input: Activities_Set_Input;
+  activities_stddev_fields: ResolverTypeWrapper<Activities_Stddev_Fields>;
+  activities_stddev_order_by: Activities_Stddev_Order_By;
+  activities_stddev_pop_fields: ResolverTypeWrapper<Activities_Stddev_Pop_Fields>;
+  activities_stddev_pop_order_by: Activities_Stddev_Pop_Order_By;
+  activities_stddev_samp_fields: ResolverTypeWrapper<Activities_Stddev_Samp_Fields>;
+  activities_stddev_samp_order_by: Activities_Stddev_Samp_Order_By;
+  activities_sum_fields: ResolverTypeWrapper<Activities_Sum_Fields>;
+  activities_sum_order_by: Activities_Sum_Order_By;
+  activities_update_column: Activities_Update_Column;
+  activities_var_pop_fields: ResolverTypeWrapper<Activities_Var_Pop_Fields>;
+  activities_var_pop_order_by: Activities_Var_Pop_Order_By;
+  activities_var_samp_fields: ResolverTypeWrapper<Activities_Var_Samp_Fields>;
+  activities_var_samp_order_by: Activities_Var_Samp_Order_By;
+  activities_variance_fields: ResolverTypeWrapper<Activities_Variance_Fields>;
+  activities_variance_order_by: Activities_Variance_Order_By;
+  bigint: ResolverTypeWrapper<Scalars['bigint']>;
+  Boolean_comparison_exp: Boolean_Comparison_Exp;
+  categories: ResolverTypeWrapper<Categories>;
+  categories_aggregate: ResolverTypeWrapper<Categories_Aggregate>;
+  categories_aggregate_fields: ResolverTypeWrapper<Categories_Aggregate_Fields>;
+  categories_aggregate_order_by: Categories_Aggregate_Order_By;
+  categories_arr_rel_insert_input: Categories_Arr_Rel_Insert_Input;
+  categories_avg_fields: ResolverTypeWrapper<Categories_Avg_Fields>;
+  categories_avg_order_by: Categories_Avg_Order_By;
+  categories_bool_exp: Categories_Bool_Exp;
+  categories_constraint: Categories_Constraint;
+  categories_inc_input: Categories_Inc_Input;
+  categories_insert_input: Categories_Insert_Input;
+  categories_max_fields: ResolverTypeWrapper<Categories_Max_Fields>;
+  categories_max_order_by: Categories_Max_Order_By;
+  categories_min_fields: ResolverTypeWrapper<Categories_Min_Fields>;
+  categories_min_order_by: Categories_Min_Order_By;
+  categories_mutation_response: ResolverTypeWrapper<Categories_Mutation_Response>;
+  categories_obj_rel_insert_input: Categories_Obj_Rel_Insert_Input;
+  categories_on_conflict: Categories_On_Conflict;
+  categories_order_by: Categories_Order_By;
+  categories_pk_columns_input: Categories_Pk_Columns_Input;
+  categories_select_column: Categories_Select_Column;
+  categories_set_input: Categories_Set_Input;
+  categories_stddev_fields: ResolverTypeWrapper<Categories_Stddev_Fields>;
+  categories_stddev_order_by: Categories_Stddev_Order_By;
+  categories_stddev_pop_fields: ResolverTypeWrapper<Categories_Stddev_Pop_Fields>;
+  categories_stddev_pop_order_by: Categories_Stddev_Pop_Order_By;
+  categories_stddev_samp_fields: ResolverTypeWrapper<Categories_Stddev_Samp_Fields>;
+  categories_stddev_samp_order_by: Categories_Stddev_Samp_Order_By;
+  categories_sum_fields: ResolverTypeWrapper<Categories_Sum_Fields>;
+  categories_sum_order_by: Categories_Sum_Order_By;
+  categories_update_column: Categories_Update_Column;
+  categories_var_pop_fields: ResolverTypeWrapper<Categories_Var_Pop_Fields>;
+  categories_var_pop_order_by: Categories_Var_Pop_Order_By;
+  categories_var_samp_fields: ResolverTypeWrapper<Categories_Var_Samp_Fields>;
+  categories_var_samp_order_by: Categories_Var_Samp_Order_By;
+  categories_variance_fields: ResolverTypeWrapper<Categories_Variance_Fields>;
+  categories_variance_order_by: Categories_Variance_Order_By;
+  challenge: ResolverTypeWrapper<Challenge>;
+  challenge_aggregate: ResolverTypeWrapper<Challenge_Aggregate>;
+  challenge_aggregate_fields: ResolverTypeWrapper<Challenge_Aggregate_Fields>;
+  challenge_aggregate_order_by: Challenge_Aggregate_Order_By;
+  challenge_arr_rel_insert_input: Challenge_Arr_Rel_Insert_Input;
+  challenge_avg_fields: ResolverTypeWrapper<Challenge_Avg_Fields>;
+  challenge_avg_order_by: Challenge_Avg_Order_By;
+  challenge_bool_exp: Challenge_Bool_Exp;
+  challenge_constraint: Challenge_Constraint;
+  challenge_inc_input: Challenge_Inc_Input;
+  challenge_insert_input: Challenge_Insert_Input;
+  challenge_max_fields: ResolverTypeWrapper<Challenge_Max_Fields>;
+  challenge_max_order_by: Challenge_Max_Order_By;
+  challenge_min_fields: ResolverTypeWrapper<Challenge_Min_Fields>;
+  challenge_min_order_by: Challenge_Min_Order_By;
+  challenge_mutation_response: ResolverTypeWrapper<Challenge_Mutation_Response>;
+  challenge_obj_rel_insert_input: Challenge_Obj_Rel_Insert_Input;
+  challenge_on_conflict: Challenge_On_Conflict;
+  challenge_order_by: Challenge_Order_By;
+  challenge_participant: ResolverTypeWrapper<Challenge_Participant>;
+  challenge_participant_aggregate: ResolverTypeWrapper<Challenge_Participant_Aggregate>;
+  challenge_participant_aggregate_fields: ResolverTypeWrapper<Challenge_Participant_Aggregate_Fields>;
+  challenge_participant_aggregate_order_by: Challenge_Participant_Aggregate_Order_By;
+  challenge_participant_arr_rel_insert_input: Challenge_Participant_Arr_Rel_Insert_Input;
+  challenge_participant_avg_fields: ResolverTypeWrapper<Challenge_Participant_Avg_Fields>;
+  challenge_participant_avg_order_by: Challenge_Participant_Avg_Order_By;
+  challenge_participant_bool_exp: Challenge_Participant_Bool_Exp;
+  challenge_participant_constraint: Challenge_Participant_Constraint;
+  challenge_participant_inc_input: Challenge_Participant_Inc_Input;
+  challenge_participant_insert_input: Challenge_Participant_Insert_Input;
+  challenge_participant_max_fields: ResolverTypeWrapper<Challenge_Participant_Max_Fields>;
+  challenge_participant_max_order_by: Challenge_Participant_Max_Order_By;
+  challenge_participant_min_fields: ResolverTypeWrapper<Challenge_Participant_Min_Fields>;
+  challenge_participant_min_order_by: Challenge_Participant_Min_Order_By;
+  challenge_participant_mutation_response: ResolverTypeWrapper<Challenge_Participant_Mutation_Response>;
+  challenge_participant_obj_rel_insert_input: Challenge_Participant_Obj_Rel_Insert_Input;
+  challenge_participant_on_conflict: Challenge_Participant_On_Conflict;
+  challenge_participant_order_by: Challenge_Participant_Order_By;
+  challenge_participant_pk_columns_input: Challenge_Participant_Pk_Columns_Input;
+  challenge_participant_select_column: Challenge_Participant_Select_Column;
+  challenge_participant_set_input: Challenge_Participant_Set_Input;
+  challenge_participant_stddev_fields: ResolverTypeWrapper<Challenge_Participant_Stddev_Fields>;
+  challenge_participant_stddev_order_by: Challenge_Participant_Stddev_Order_By;
+  challenge_participant_stddev_pop_fields: ResolverTypeWrapper<Challenge_Participant_Stddev_Pop_Fields>;
+  challenge_participant_stddev_pop_order_by: Challenge_Participant_Stddev_Pop_Order_By;
+  challenge_participant_stddev_samp_fields: ResolverTypeWrapper<Challenge_Participant_Stddev_Samp_Fields>;
+  challenge_participant_stddev_samp_order_by: Challenge_Participant_Stddev_Samp_Order_By;
+  challenge_participant_sum_fields: ResolverTypeWrapper<Challenge_Participant_Sum_Fields>;
+  challenge_participant_sum_order_by: Challenge_Participant_Sum_Order_By;
+  challenge_participant_update_column: Challenge_Participant_Update_Column;
+  challenge_participant_var_pop_fields: ResolverTypeWrapper<Challenge_Participant_Var_Pop_Fields>;
+  challenge_participant_var_pop_order_by: Challenge_Participant_Var_Pop_Order_By;
+  challenge_participant_var_samp_fields: ResolverTypeWrapper<Challenge_Participant_Var_Samp_Fields>;
+  challenge_participant_var_samp_order_by: Challenge_Participant_Var_Samp_Order_By;
+  challenge_participant_variance_fields: ResolverTypeWrapper<Challenge_Participant_Variance_Fields>;
+  challenge_participant_variance_order_by: Challenge_Participant_Variance_Order_By;
+  challenge_pk_columns_input: Challenge_Pk_Columns_Input;
+  challenge_select_column: Challenge_Select_Column;
+  challenge_set_input: Challenge_Set_Input;
+  challenge_stddev_fields: ResolverTypeWrapper<Challenge_Stddev_Fields>;
+  challenge_stddev_order_by: Challenge_Stddev_Order_By;
+  challenge_stddev_pop_fields: ResolverTypeWrapper<Challenge_Stddev_Pop_Fields>;
+  challenge_stddev_pop_order_by: Challenge_Stddev_Pop_Order_By;
+  challenge_stddev_samp_fields: ResolverTypeWrapper<Challenge_Stddev_Samp_Fields>;
+  challenge_stddev_samp_order_by: Challenge_Stddev_Samp_Order_By;
+  challenge_sum_fields: ResolverTypeWrapper<Challenge_Sum_Fields>;
+  challenge_sum_order_by: Challenge_Sum_Order_By;
+  challenge_type: ResolverTypeWrapper<Challenge_Type>;
+  challenge_type_aggregate: ResolverTypeWrapper<Challenge_Type_Aggregate>;
+  challenge_type_aggregate_fields: ResolverTypeWrapper<Challenge_Type_Aggregate_Fields>;
+  challenge_type_aggregate_order_by: Challenge_Type_Aggregate_Order_By;
+  challenge_type_arr_rel_insert_input: Challenge_Type_Arr_Rel_Insert_Input;
+  challenge_type_bool_exp: Challenge_Type_Bool_Exp;
+  challenge_type_constraint: Challenge_Type_Constraint;
+  challenge_type_enum: Challenge_Type_Enum;
+  challenge_type_enum_comparison_exp: Challenge_Type_Enum_Comparison_Exp;
+  challenge_type_insert_input: Challenge_Type_Insert_Input;
+  challenge_type_max_fields: ResolverTypeWrapper<Challenge_Type_Max_Fields>;
+  challenge_type_max_order_by: Challenge_Type_Max_Order_By;
+  challenge_type_min_fields: ResolverTypeWrapper<Challenge_Type_Min_Fields>;
+  challenge_type_min_order_by: Challenge_Type_Min_Order_By;
+  challenge_type_mutation_response: ResolverTypeWrapper<Challenge_Type_Mutation_Response>;
+  challenge_type_obj_rel_insert_input: Challenge_Type_Obj_Rel_Insert_Input;
+  challenge_type_on_conflict: Challenge_Type_On_Conflict;
+  challenge_type_order_by: Challenge_Type_Order_By;
+  challenge_type_pk_columns_input: Challenge_Type_Pk_Columns_Input;
+  challenge_type_select_column: Challenge_Type_Select_Column;
+  challenge_type_set_input: Challenge_Type_Set_Input;
+  challenge_type_update_column: Challenge_Type_Update_Column;
+  challenge_update_column: Challenge_Update_Column;
+  challenge_var_pop_fields: ResolverTypeWrapper<Challenge_Var_Pop_Fields>;
+  challenge_var_pop_order_by: Challenge_Var_Pop_Order_By;
+  challenge_var_samp_fields: ResolverTypeWrapper<Challenge_Var_Samp_Fields>;
+  challenge_var_samp_order_by: Challenge_Var_Samp_Order_By;
+  challenge_variance_fields: ResolverTypeWrapper<Challenge_Variance_Fields>;
+  challenge_variance_order_by: Challenge_Variance_Order_By;
+  comments: ResolverTypeWrapper<Comments>;
+  comments_aggregate: ResolverTypeWrapper<Comments_Aggregate>;
+  comments_aggregate_fields: ResolverTypeWrapper<Comments_Aggregate_Fields>;
+  comments_aggregate_order_by: Comments_Aggregate_Order_By;
+  comments_arr_rel_insert_input: Comments_Arr_Rel_Insert_Input;
+  comments_avg_fields: ResolverTypeWrapper<Comments_Avg_Fields>;
+  comments_avg_order_by: Comments_Avg_Order_By;
+  comments_bool_exp: Comments_Bool_Exp;
+  comments_constraint: Comments_Constraint;
+  comments_inc_input: Comments_Inc_Input;
+  comments_insert_input: Comments_Insert_Input;
+  comments_max_fields: ResolverTypeWrapper<Comments_Max_Fields>;
+  comments_max_order_by: Comments_Max_Order_By;
+  comments_min_fields: ResolverTypeWrapper<Comments_Min_Fields>;
+  comments_min_order_by: Comments_Min_Order_By;
+  comments_mutation_response: ResolverTypeWrapper<Comments_Mutation_Response>;
+  comments_obj_rel_insert_input: Comments_Obj_Rel_Insert_Input;
+  comments_on_conflict: Comments_On_Conflict;
+  comments_order_by: Comments_Order_By;
+  comments_pk_columns_input: Comments_Pk_Columns_Input;
+  comments_select_column: Comments_Select_Column;
+  comments_set_input: Comments_Set_Input;
+  comments_stddev_fields: ResolverTypeWrapper<Comments_Stddev_Fields>;
+  comments_stddev_order_by: Comments_Stddev_Order_By;
+  comments_stddev_pop_fields: ResolverTypeWrapper<Comments_Stddev_Pop_Fields>;
+  comments_stddev_pop_order_by: Comments_Stddev_Pop_Order_By;
+  comments_stddev_samp_fields: ResolverTypeWrapper<Comments_Stddev_Samp_Fields>;
+  comments_stddev_samp_order_by: Comments_Stddev_Samp_Order_By;
+  comments_sum_fields: ResolverTypeWrapper<Comments_Sum_Fields>;
+  comments_sum_order_by: Comments_Sum_Order_By;
+  comments_update_column: Comments_Update_Column;
+  comments_var_pop_fields: ResolverTypeWrapper<Comments_Var_Pop_Fields>;
+  comments_var_pop_order_by: Comments_Var_Pop_Order_By;
+  comments_var_samp_fields: ResolverTypeWrapper<Comments_Var_Samp_Fields>;
+  comments_var_samp_order_by: Comments_Var_Samp_Order_By;
+  comments_variance_fields: ResolverTypeWrapper<Comments_Variance_Fields>;
+  comments_variance_order_by: Comments_Variance_Order_By;
+  daterange: ResolverTypeWrapper<Scalars['daterange']>;
+  daterange_comparison_exp: Daterange_Comparison_Exp;
+  float8: ResolverTypeWrapper<Scalars['float8']>;
+  float8_comparison_exp: Float8_Comparison_Exp;
+  followings: ResolverTypeWrapper<Followings>;
+  followings_aggregate: ResolverTypeWrapper<Followings_Aggregate>;
+  followings_aggregate_fields: ResolverTypeWrapper<Followings_Aggregate_Fields>;
+  followings_aggregate_order_by: Followings_Aggregate_Order_By;
+  followings_arr_rel_insert_input: Followings_Arr_Rel_Insert_Input;
+  followings_bool_exp: Followings_Bool_Exp;
+  followings_constraint: Followings_Constraint;
+  followings_insert_input: Followings_Insert_Input;
+  followings_max_fields: ResolverTypeWrapper<Followings_Max_Fields>;
+  followings_max_order_by: Followings_Max_Order_By;
+  followings_min_fields: ResolverTypeWrapper<Followings_Min_Fields>;
+  followings_min_order_by: Followings_Min_Order_By;
+  followings_mutation_response: ResolverTypeWrapper<Followings_Mutation_Response>;
+  followings_obj_rel_insert_input: Followings_Obj_Rel_Insert_Input;
+  followings_on_conflict: Followings_On_Conflict;
+  followings_order_by: Followings_Order_By;
+  followings_pk_columns_input: Followings_Pk_Columns_Input;
+  followings_select_column: Followings_Select_Column;
+  followings_set_input: Followings_Set_Input;
+  followings_update_column: Followings_Update_Column;
+  geofence_variants: ResolverTypeWrapper<Geofence_Variants>;
+  geofence_variants_aggregate: ResolverTypeWrapper<Geofence_Variants_Aggregate>;
+  geofence_variants_aggregate_fields: ResolverTypeWrapper<Geofence_Variants_Aggregate_Fields>;
+  geofence_variants_aggregate_order_by: Geofence_Variants_Aggregate_Order_By;
+  geofence_variants_arr_rel_insert_input: Geofence_Variants_Arr_Rel_Insert_Input;
+  geofence_variants_bool_exp: Geofence_Variants_Bool_Exp;
+  geofence_variants_constraint: Geofence_Variants_Constraint;
+  geofence_variants_enum: Geofence_Variants_Enum;
+  geofence_variants_enum_comparison_exp: Geofence_Variants_Enum_Comparison_Exp;
+  geofence_variants_insert_input: Geofence_Variants_Insert_Input;
+  geofence_variants_max_fields: ResolverTypeWrapper<Geofence_Variants_Max_Fields>;
+  geofence_variants_max_order_by: Geofence_Variants_Max_Order_By;
+  geofence_variants_min_fields: ResolverTypeWrapper<Geofence_Variants_Min_Fields>;
+  geofence_variants_min_order_by: Geofence_Variants_Min_Order_By;
+  geofence_variants_mutation_response: ResolverTypeWrapper<Geofence_Variants_Mutation_Response>;
+  geofence_variants_obj_rel_insert_input: Geofence_Variants_Obj_Rel_Insert_Input;
+  geofence_variants_on_conflict: Geofence_Variants_On_Conflict;
+  geofence_variants_order_by: Geofence_Variants_Order_By;
+  geofence_variants_pk_columns_input: Geofence_Variants_Pk_Columns_Input;
+  geofence_variants_select_column: Geofence_Variants_Select_Column;
+  geofence_variants_set_input: Geofence_Variants_Set_Input;
+  geofence_variants_update_column: Geofence_Variants_Update_Column;
+  geofences: ResolverTypeWrapper<Geofences>;
+  geofences_aggregate: ResolverTypeWrapper<Geofences_Aggregate>;
+  geofences_aggregate_fields: ResolverTypeWrapper<Geofences_Aggregate_Fields>;
+  geofences_aggregate_order_by: Geofences_Aggregate_Order_By;
+  geofences_arr_rel_insert_input: Geofences_Arr_Rel_Insert_Input;
+  geofences_avg_fields: ResolverTypeWrapper<Geofences_Avg_Fields>;
+  geofences_avg_order_by: Geofences_Avg_Order_By;
+  geofences_bool_exp: Geofences_Bool_Exp;
+  geofences_constraint: Geofences_Constraint;
+  geofences_inc_input: Geofences_Inc_Input;
+  geofences_insert_input: Geofences_Insert_Input;
+  geofences_max_fields: ResolverTypeWrapper<Geofences_Max_Fields>;
+  geofences_max_order_by: Geofences_Max_Order_By;
+  geofences_min_fields: ResolverTypeWrapper<Geofences_Min_Fields>;
+  geofences_min_order_by: Geofences_Min_Order_By;
+  geofences_mutation_response: ResolverTypeWrapper<Geofences_Mutation_Response>;
+  geofences_obj_rel_insert_input: Geofences_Obj_Rel_Insert_Input;
+  geofences_on_conflict: Geofences_On_Conflict;
+  geofences_order_by: Geofences_Order_By;
+  geofences_pk_columns_input: Geofences_Pk_Columns_Input;
+  geofences_select_column: Geofences_Select_Column;
+  geofences_set_input: Geofences_Set_Input;
+  geofences_stddev_fields: ResolverTypeWrapper<Geofences_Stddev_Fields>;
+  geofences_stddev_order_by: Geofences_Stddev_Order_By;
+  geofences_stddev_pop_fields: ResolverTypeWrapper<Geofences_Stddev_Pop_Fields>;
+  geofences_stddev_pop_order_by: Geofences_Stddev_Pop_Order_By;
+  geofences_stddev_samp_fields: ResolverTypeWrapper<Geofences_Stddev_Samp_Fields>;
+  geofences_stddev_samp_order_by: Geofences_Stddev_Samp_Order_By;
+  geofences_sum_fields: ResolverTypeWrapper<Geofences_Sum_Fields>;
+  geofences_sum_order_by: Geofences_Sum_Order_By;
+  geofences_update_column: Geofences_Update_Column;
+  geofences_var_pop_fields: ResolverTypeWrapper<Geofences_Var_Pop_Fields>;
+  geofences_var_pop_order_by: Geofences_Var_Pop_Order_By;
+  geofences_var_samp_fields: ResolverTypeWrapper<Geofences_Var_Samp_Fields>;
+  geofences_var_samp_order_by: Geofences_Var_Samp_Order_By;
+  geofences_variance_fields: ResolverTypeWrapper<Geofences_Variance_Fields>;
+  geofences_variance_order_by: Geofences_Variance_Order_By;
+  Int_comparison_exp: Int_Comparison_Exp;
+  interval: ResolverTypeWrapper<Scalars['interval']>;
+  interval_comparison_exp: Interval_Comparison_Exp;
+  json: ResolverTypeWrapper<Scalars['json']>;
+  json_comparison_exp: Json_Comparison_Exp;
+  likes: ResolverTypeWrapper<Likes>;
+  likes_aggregate: ResolverTypeWrapper<Likes_Aggregate>;
+  likes_aggregate_fields: ResolverTypeWrapper<Likes_Aggregate_Fields>;
+  likes_aggregate_order_by: Likes_Aggregate_Order_By;
+  likes_arr_rel_insert_input: Likes_Arr_Rel_Insert_Input;
+  likes_avg_fields: ResolverTypeWrapper<Likes_Avg_Fields>;
+  likes_avg_order_by: Likes_Avg_Order_By;
+  likes_bool_exp: Likes_Bool_Exp;
+  likes_constraint: Likes_Constraint;
+  likes_inc_input: Likes_Inc_Input;
+  likes_insert_input: Likes_Insert_Input;
+  likes_max_fields: ResolverTypeWrapper<Likes_Max_Fields>;
+  likes_max_order_by: Likes_Max_Order_By;
+  likes_min_fields: ResolverTypeWrapper<Likes_Min_Fields>;
+  likes_min_order_by: Likes_Min_Order_By;
+  likes_mutation_response: ResolverTypeWrapper<Likes_Mutation_Response>;
+  likes_obj_rel_insert_input: Likes_Obj_Rel_Insert_Input;
+  likes_on_conflict: Likes_On_Conflict;
+  likes_order_by: Likes_Order_By;
+  likes_pk_columns_input: Likes_Pk_Columns_Input;
+  likes_select_column: Likes_Select_Column;
+  likes_set_input: Likes_Set_Input;
+  likes_stddev_fields: ResolverTypeWrapper<Likes_Stddev_Fields>;
+  likes_stddev_order_by: Likes_Stddev_Order_By;
+  likes_stddev_pop_fields: ResolverTypeWrapper<Likes_Stddev_Pop_Fields>;
+  likes_stddev_pop_order_by: Likes_Stddev_Pop_Order_By;
+  likes_stddev_samp_fields: ResolverTypeWrapper<Likes_Stddev_Samp_Fields>;
+  likes_stddev_samp_order_by: Likes_Stddev_Samp_Order_By;
+  likes_sum_fields: ResolverTypeWrapper<Likes_Sum_Fields>;
+  likes_sum_order_by: Likes_Sum_Order_By;
+  likes_update_column: Likes_Update_Column;
+  likes_var_pop_fields: ResolverTypeWrapper<Likes_Var_Pop_Fields>;
+  likes_var_pop_order_by: Likes_Var_Pop_Order_By;
+  likes_var_samp_fields: ResolverTypeWrapper<Likes_Var_Samp_Fields>;
+  likes_var_samp_order_by: Likes_Var_Samp_Order_By;
+  likes_variance_fields: ResolverTypeWrapper<Likes_Variance_Fields>;
+  likes_variance_order_by: Likes_Variance_Order_By;
+  mutation_root: ResolverTypeWrapper<{}>;
+  order_by: Order_By;
+  query_root: ResolverTypeWrapper<{}>;
+  String_comparison_exp: String_Comparison_Exp;
+  subscription_root: ResolverTypeWrapper<{}>;
+  timestamp: ResolverTypeWrapper<Scalars['timestamp']>;
+  timestamp_comparison_exp: Timestamp_Comparison_Exp;
+  timestamptz: ResolverTypeWrapper<Scalars['timestamptz']>;
+  timestamptz_comparison_exp: Timestamptz_Comparison_Exp;
+  unachievedachievements_args: Unachievedachievements_Args;
+  user_achievement: ResolverTypeWrapper<User_Achievement>;
+  user_achievement_aggregate: ResolverTypeWrapper<User_Achievement_Aggregate>;
+  user_achievement_aggregate_fields: ResolverTypeWrapper<User_Achievement_Aggregate_Fields>;
+  user_achievement_aggregate_order_by: User_Achievement_Aggregate_Order_By;
+  user_achievement_arr_rel_insert_input: User_Achievement_Arr_Rel_Insert_Input;
+  user_achievement_avg_fields: ResolverTypeWrapper<User_Achievement_Avg_Fields>;
+  user_achievement_avg_order_by: User_Achievement_Avg_Order_By;
+  user_achievement_bool_exp: User_Achievement_Bool_Exp;
+  user_achievement_constraint: User_Achievement_Constraint;
+  user_achievement_inc_input: User_Achievement_Inc_Input;
+  user_achievement_insert_input: User_Achievement_Insert_Input;
+  user_achievement_max_fields: ResolverTypeWrapper<User_Achievement_Max_Fields>;
+  user_achievement_max_order_by: User_Achievement_Max_Order_By;
+  user_achievement_min_fields: ResolverTypeWrapper<User_Achievement_Min_Fields>;
+  user_achievement_min_order_by: User_Achievement_Min_Order_By;
+  user_achievement_mutation_response: ResolverTypeWrapper<User_Achievement_Mutation_Response>;
+  user_achievement_obj_rel_insert_input: User_Achievement_Obj_Rel_Insert_Input;
+  user_achievement_on_conflict: User_Achievement_On_Conflict;
+  user_achievement_order_by: User_Achievement_Order_By;
+  user_achievement_pk_columns_input: User_Achievement_Pk_Columns_Input;
+  user_achievement_select_column: User_Achievement_Select_Column;
+  user_achievement_set_input: User_Achievement_Set_Input;
+  user_achievement_stddev_fields: ResolverTypeWrapper<User_Achievement_Stddev_Fields>;
+  user_achievement_stddev_order_by: User_Achievement_Stddev_Order_By;
+  user_achievement_stddev_pop_fields: ResolverTypeWrapper<User_Achievement_Stddev_Pop_Fields>;
+  user_achievement_stddev_pop_order_by: User_Achievement_Stddev_Pop_Order_By;
+  user_achievement_stddev_samp_fields: ResolverTypeWrapper<User_Achievement_Stddev_Samp_Fields>;
+  user_achievement_stddev_samp_order_by: User_Achievement_Stddev_Samp_Order_By;
+  user_achievement_sum_fields: ResolverTypeWrapper<User_Achievement_Sum_Fields>;
+  user_achievement_sum_order_by: User_Achievement_Sum_Order_By;
+  user_achievement_update_column: User_Achievement_Update_Column;
+  user_achievement_var_pop_fields: ResolverTypeWrapper<User_Achievement_Var_Pop_Fields>;
+  user_achievement_var_pop_order_by: User_Achievement_Var_Pop_Order_By;
+  user_achievement_var_samp_fields: ResolverTypeWrapper<User_Achievement_Var_Samp_Fields>;
+  user_achievement_var_samp_order_by: User_Achievement_Var_Samp_Order_By;
+  user_achievement_variance_fields: ResolverTypeWrapper<User_Achievement_Variance_Fields>;
+  user_achievement_variance_order_by: User_Achievement_Variance_Order_By;
+  users: ResolverTypeWrapper<Users>;
+  users_aggregate: ResolverTypeWrapper<Users_Aggregate>;
+  users_aggregate_fields: ResolverTypeWrapper<Users_Aggregate_Fields>;
+  users_aggregate_order_by: Users_Aggregate_Order_By;
+  users_arr_rel_insert_input: Users_Arr_Rel_Insert_Input;
+  users_bool_exp: Users_Bool_Exp;
+  users_constraint: Users_Constraint;
+  users_insert_input: Users_Insert_Input;
+  users_max_fields: ResolverTypeWrapper<Users_Max_Fields>;
+  users_max_order_by: Users_Max_Order_By;
+  users_min_fields: ResolverTypeWrapper<Users_Min_Fields>;
+  users_min_order_by: Users_Min_Order_By;
+  users_mutation_response: ResolverTypeWrapper<Users_Mutation_Response>;
+  users_obj_rel_insert_input: Users_Obj_Rel_Insert_Input;
+  users_on_conflict: Users_On_Conflict;
+  users_order_by: Users_Order_By;
+  users_pk_columns_input: Users_Pk_Columns_Input;
+  users_select_column: Users_Select_Column;
+  users_set_input: Users_Set_Input;
+  users_update_column: Users_Update_Column;
 };
 
 
@@ -7480,24 +8468,6 @@ export type ResolversParentTypes = {
   challenge_participant_order_by: Challenge_Participant_Order_By;
   challenge_participant_pk_columns_input: Challenge_Participant_Pk_Columns_Input;
   challenge_participant_set_input: Challenge_Participant_Set_Input;
-  challenge_participant_state: Challenge_Participant_State;
-  challenge_participant_state_aggregate: Challenge_Participant_State_Aggregate;
-  challenge_participant_state_aggregate_fields: Challenge_Participant_State_Aggregate_Fields;
-  challenge_participant_state_aggregate_order_by: Challenge_Participant_State_Aggregate_Order_By;
-  challenge_participant_state_arr_rel_insert_input: Challenge_Participant_State_Arr_Rel_Insert_Input;
-  challenge_participant_state_bool_exp: Challenge_Participant_State_Bool_Exp;
-  challenge_participant_state_enum_comparison_exp: Challenge_Participant_State_Enum_Comparison_Exp;
-  challenge_participant_state_insert_input: Challenge_Participant_State_Insert_Input;
-  challenge_participant_state_max_fields: Challenge_Participant_State_Max_Fields;
-  challenge_participant_state_max_order_by: Challenge_Participant_State_Max_Order_By;
-  challenge_participant_state_min_fields: Challenge_Participant_State_Min_Fields;
-  challenge_participant_state_min_order_by: Challenge_Participant_State_Min_Order_By;
-  challenge_participant_state_mutation_response: Challenge_Participant_State_Mutation_Response;
-  challenge_participant_state_obj_rel_insert_input: Challenge_Participant_State_Obj_Rel_Insert_Input;
-  challenge_participant_state_on_conflict: Challenge_Participant_State_On_Conflict;
-  challenge_participant_state_order_by: Challenge_Participant_State_Order_By;
-  challenge_participant_state_pk_columns_input: Challenge_Participant_State_Pk_Columns_Input;
-  challenge_participant_state_set_input: Challenge_Participant_State_Set_Input;
   challenge_participant_stddev_fields: Challenge_Participant_Stddev_Fields;
   challenge_participant_stddev_order_by: Challenge_Participant_Stddev_Order_By;
   challenge_participant_stddev_pop_fields: Challenge_Participant_Stddev_Pop_Fields;
@@ -7514,24 +8484,6 @@ export type ResolversParentTypes = {
   challenge_participant_variance_order_by: Challenge_Participant_Variance_Order_By;
   challenge_pk_columns_input: Challenge_Pk_Columns_Input;
   challenge_set_input: Challenge_Set_Input;
-  challenge_state: Challenge_State;
-  challenge_state_aggregate: Challenge_State_Aggregate;
-  challenge_state_aggregate_fields: Challenge_State_Aggregate_Fields;
-  challenge_state_aggregate_order_by: Challenge_State_Aggregate_Order_By;
-  challenge_state_arr_rel_insert_input: Challenge_State_Arr_Rel_Insert_Input;
-  challenge_state_bool_exp: Challenge_State_Bool_Exp;
-  challenge_state_enum_comparison_exp: Challenge_State_Enum_Comparison_Exp;
-  challenge_state_insert_input: Challenge_State_Insert_Input;
-  challenge_state_max_fields: Challenge_State_Max_Fields;
-  challenge_state_max_order_by: Challenge_State_Max_Order_By;
-  challenge_state_min_fields: Challenge_State_Min_Fields;
-  challenge_state_min_order_by: Challenge_State_Min_Order_By;
-  challenge_state_mutation_response: Challenge_State_Mutation_Response;
-  challenge_state_obj_rel_insert_input: Challenge_State_Obj_Rel_Insert_Input;
-  challenge_state_on_conflict: Challenge_State_On_Conflict;
-  challenge_state_order_by: Challenge_State_Order_By;
-  challenge_state_pk_columns_input: Challenge_State_Pk_Columns_Input;
-  challenge_state_set_input: Challenge_State_Set_Input;
   challenge_stddev_fields: Challenge_Stddev_Fields;
   challenge_stddev_order_by: Challenge_Stddev_Order_By;
   challenge_stddev_pop_fields: Challenge_Stddev_Pop_Fields;
@@ -9695,12 +10647,6 @@ export type Resolvers<ContextType = any> = {
   challenge_participant_max_fields?: Challenge_Participant_Max_FieldsResolvers<ContextType>;
   challenge_participant_min_fields?: Challenge_Participant_Min_FieldsResolvers<ContextType>;
   challenge_participant_mutation_response?: Challenge_Participant_Mutation_ResponseResolvers<ContextType>;
-  challenge_participant_state?: Challenge_Participant_StateResolvers<ContextType>;
-  challenge_participant_state_aggregate?: Challenge_Participant_State_AggregateResolvers<ContextType>;
-  challenge_participant_state_aggregate_fields?: Challenge_Participant_State_Aggregate_FieldsResolvers<ContextType>;
-  challenge_participant_state_max_fields?: Challenge_Participant_State_Max_FieldsResolvers<ContextType>;
-  challenge_participant_state_min_fields?: Challenge_Participant_State_Min_FieldsResolvers<ContextType>;
-  challenge_participant_state_mutation_response?: Challenge_Participant_State_Mutation_ResponseResolvers<ContextType>;
   challenge_participant_stddev_fields?: Challenge_Participant_Stddev_FieldsResolvers<ContextType>;
   challenge_participant_stddev_pop_fields?: Challenge_Participant_Stddev_Pop_FieldsResolvers<ContextType>;
   challenge_participant_stddev_samp_fields?: Challenge_Participant_Stddev_Samp_FieldsResolvers<ContextType>;
@@ -9708,12 +10654,6 @@ export type Resolvers<ContextType = any> = {
   challenge_participant_var_pop_fields?: Challenge_Participant_Var_Pop_FieldsResolvers<ContextType>;
   challenge_participant_var_samp_fields?: Challenge_Participant_Var_Samp_FieldsResolvers<ContextType>;
   challenge_participant_variance_fields?: Challenge_Participant_Variance_FieldsResolvers<ContextType>;
-  challenge_state?: Challenge_StateResolvers<ContextType>;
-  challenge_state_aggregate?: Challenge_State_AggregateResolvers<ContextType>;
-  challenge_state_aggregate_fields?: Challenge_State_Aggregate_FieldsResolvers<ContextType>;
-  challenge_state_max_fields?: Challenge_State_Max_FieldsResolvers<ContextType>;
-  challenge_state_min_fields?: Challenge_State_Min_FieldsResolvers<ContextType>;
-  challenge_state_mutation_response?: Challenge_State_Mutation_ResponseResolvers<ContextType>;
   challenge_stddev_fields?: Challenge_Stddev_FieldsResolvers<ContextType>;
   challenge_stddev_pop_fields?: Challenge_Stddev_Pop_FieldsResolvers<ContextType>;
   challenge_stddev_samp_fields?: Challenge_Stddev_Samp_FieldsResolvers<ContextType>;
