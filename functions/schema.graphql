@@ -5400,6 +5400,42 @@ type mutation_root {
     on_conflict: challenge_state_on_conflict
   ): challenge_state
 
+  # insert data into the table: "challenge"
+  insert_challenge(
+    # the rows to be inserted
+    objects: [challenge_insert_input!]!
+
+    # on conflict condition
+    on_conflict: challenge_on_conflict
+  ): challenge_mutation_response
+
+  # insert a single row into the table: "challenge"
+  insert_challenge_one(
+    # the row to be inserted
+    object: challenge_insert_input!
+
+    # on conflict condition
+    on_conflict: challenge_on_conflict
+  ): challenge
+
+  # insert data into the table: "challenge_participant"
+  insert_challenge_participant(
+    # the rows to be inserted
+    objects: [challenge_participant_insert_input!]!
+
+    # on conflict condition
+    on_conflict: challenge_participant_on_conflict
+  ): challenge_participant_mutation_response
+
+  # insert a single row into the table: "challenge_participant"
+  insert_challenge_participant_one(
+    # the row to be inserted
+    object: challenge_participant_insert_input!
+
+    # on conflict condition
+    on_conflict: challenge_participant_on_conflict
+  ): challenge_participant
+
   # insert data into the table: "challenge_type"
   insert_challenge_type(
     # the rows to be inserted
@@ -6952,6 +6988,84 @@ type subscription_root {
 
   # fetch data from the table: "categories" using primary key columns
   categories_by_pk(name: String!): categories
+
+  # fetch data from the table: "challenge"
+  challenge(
+    # distinct select on columns
+    distinct_on: [challenge_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [challenge_order_by!]
+
+    # filter the rows returned
+    where: challenge_bool_exp
+  ): [challenge!]!
+
+  # fetch aggregated fields from the table: "challenge"
+  challenge_aggregate(
+    # distinct select on columns
+    distinct_on: [challenge_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [challenge_order_by!]
+
+    # filter the rows returned
+    where: challenge_bool_exp
+  ): challenge_aggregate!
+
+  # fetch data from the table: "challenge" using primary key columns
+  challenge_by_pk(id: Int!): challenge
+
+  # fetch data from the table: "challenge_participant"
+  challenge_participant(
+    # distinct select on columns
+    distinct_on: [challenge_participant_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [challenge_participant_order_by!]
+
+    # filter the rows returned
+    where: challenge_participant_bool_exp
+  ): [challenge_participant!]!
+
+  # fetch aggregated fields from the table: "challenge_participant"
+  challenge_participant_aggregate(
+    # distinct select on columns
+    distinct_on: [challenge_participant_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [challenge_participant_order_by!]
+
+    # filter the rows returned
+    where: challenge_participant_bool_exp
+  ): challenge_participant_aggregate!
+
+  # fetch data from the table: "challenge_participant" using primary key columns
+  challenge_participant_by_pk(challenge_id: Int!, user_id: String!): challenge_participant
 
   # fetch data from the table: "challenge"
   challenge(

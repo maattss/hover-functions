@@ -5040,6 +5040,53 @@ export type Query_RootChallenge_Participant_By_PkArgs = {
 };
 
 
+export type Query_RootChallengeArgs = {
+  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
+};
+
+
+export type Query_RootChallenge_AggregateArgs = {
+  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
+};
+
+
+export type Query_RootChallenge_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Query_RootChallenge_ParticipantArgs = {
+  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
+  where?: Maybe<Challenge_Participant_Bool_Exp>;
+};
+
+
+export type Query_RootChallenge_Participant_AggregateArgs = {
+  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
+  where?: Maybe<Challenge_Participant_Bool_Exp>;
+};
+
+
+export type Query_RootChallenge_Participant_By_PkArgs = {
+  challenge_id: Scalars['Int'];
+  user_id: Scalars['String'];
+};
+
+
 export type Query_RootChallenge_Participant_StateArgs = {
   distinct_on?: Maybe<Array<Challenge_Participant_State_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -5625,6 +5672,53 @@ export type Subscription_RootChallenge_State_AggregateArgs = {
 
 export type Subscription_RootChallenge_State_By_PkArgs = {
   state: Scalars['String'];
+};
+
+
+export type Subscription_RootChallengeArgs = {
+  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
+};
+
+
+export type Subscription_RootChallenge_AggregateArgs = {
+  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
+};
+
+
+export type Subscription_RootChallenge_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootChallenge_ParticipantArgs = {
+  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
+  where?: Maybe<Challenge_Participant_Bool_Exp>;
+};
+
+
+export type Subscription_RootChallenge_Participant_AggregateArgs = {
+  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
+  where?: Maybe<Challenge_Participant_Bool_Exp>;
+};
+
+
+export type Subscription_RootChallenge_Participant_By_PkArgs = {
+  challenge_id: Scalars['Int'];
+  user_id: Scalars['String'];
 };
 
 
