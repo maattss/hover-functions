@@ -3039,7 +3039,7 @@ enum feed_select_column {
   id
 
   # column name
-  user_id
+  id
 }
 
 # input type for updating data in table "feed"
@@ -3284,6 +3284,8 @@ enum feed_update_column {
   # column name
   achievement_id
 
+# update columns of table "feed"
+enum feed_update_column {
   # column name
   activity_id
 
@@ -3297,7 +3299,7 @@ enum feed_update_column {
   id
 
   # column name
-  user_id
+  id
 }
 
 # aggregate var_pop on columns
@@ -4859,6 +4861,42 @@ type mutation_root {
 
   # delete single row from the table: "categories"
   delete_categories_by_pk(name: String!): categories
+
+  # delete data from the table: "challenge"
+  delete_challenge(
+    # filter the rows which have to be deleted
+    where: challenge_bool_exp!
+  ): challenge_mutation_response
+
+  # delete single row from the table: "challenge"
+  delete_challenge_by_pk(id: Int!): challenge
+
+  # delete data from the table: "challenge_participant"
+  delete_challenge_participant(
+    # filter the rows which have to be deleted
+    where: challenge_participant_bool_exp!
+  ): challenge_participant_mutation_response
+
+  # delete single row from the table: "challenge_participant"
+  delete_challenge_participant_by_pk(challenge_id: Int!, user_id: String!): challenge_participant
+
+  # delete data from the table: "challenge_participant_state"
+  delete_challenge_participant_state(
+    # filter the rows which have to be deleted
+    where: challenge_participant_state_bool_exp!
+  ): challenge_participant_state_mutation_response
+
+  # delete single row from the table: "challenge_participant_state"
+  delete_challenge_participant_state_by_pk(state: String!): challenge_participant_state
+
+  # delete data from the table: "challenge_state"
+  delete_challenge_state(
+    # filter the rows which have to be deleted
+    where: challenge_state_bool_exp!
+  ): challenge_state_mutation_response
+
+  # delete single row from the table: "challenge_state"
+  delete_challenge_state_by_pk(state: String!): challenge_state
 
   # delete data from the table: "challenge"
   delete_challenge(
@@ -6925,6 +6963,84 @@ type subscription_root {
     # filter the rows returned
     where: comments_bool_exp
   ): comments_aggregate!
+
+  # fetch data from the table: "feed"
+  feed(
+    # distinct select on columns
+    distinct_on: [feed_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [feed_order_by!]
+
+    # filter the rows returned
+    where: feed_bool_exp
+  ): [feed!]!
+
+  # fetch aggregated fields from the table: "feed"
+  feed_aggregate(
+    # distinct select on columns
+    distinct_on: [feed_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [feed_order_by!]
+
+    # filter the rows returned
+    where: feed_bool_exp
+  ): feed_aggregate!
+
+  # fetch data from the table: "feed" using primary key columns
+  feed_by_pk(id: Int!): feed
+
+  # fetch data from the table: "feed_type"
+  feed_type(
+    # distinct select on columns
+    distinct_on: [feed_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [feed_type_order_by!]
+
+    # filter the rows returned
+    where: feed_type_bool_exp
+  ): [feed_type!]!
+
+  # fetch aggregated fields from the table: "feed_type"
+  feed_type_aggregate(
+    # distinct select on columns
+    distinct_on: [feed_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [feed_type_order_by!]
+
+    # filter the rows returned
+    where: feed_type_bool_exp
+  ): feed_type_aggregate!
+
+  # fetch data from the table: "feed_type" using primary key columns
+  feed_type_by_pk(name: String!): feed_type
 
   # fetch data from the table: "feed"
   feed(
