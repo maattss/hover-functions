@@ -4685,6 +4685,30 @@ export type Mutation_RootUpdate_Challenge_State_By_PkArgs = {
 };
 
 
+export type Mutation_RootUpdate_Challenge_Participant_StateArgs = {
+  _set?: Maybe<Challenge_Participant_State_Set_Input>;
+  where: Challenge_Participant_State_Bool_Exp;
+};
+
+
+export type Mutation_RootUpdate_Challenge_Participant_State_By_PkArgs = {
+  _set?: Maybe<Challenge_Participant_State_Set_Input>;
+  pk_columns: Challenge_Participant_State_Pk_Columns_Input;
+};
+
+
+export type Mutation_RootUpdate_Challenge_StateArgs = {
+  _set?: Maybe<Challenge_State_Set_Input>;
+  where: Challenge_State_Bool_Exp;
+};
+
+
+export type Mutation_RootUpdate_Challenge_State_By_PkArgs = {
+  _set?: Maybe<Challenge_State_Set_Input>;
+  pk_columns: Challenge_State_Pk_Columns_Input;
+};
+
+
 export type Mutation_RootUpdate_Challenge_TypeArgs = {
   _set?: Maybe<Challenge_Type_Set_Input>;
   where: Challenge_Type_Bool_Exp;
@@ -8513,6 +8537,42 @@ export type Challenge_Participant_Var_Samp_FieldsResolvers<ContextType = any, Pa
 export type Challenge_Participant_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_variance_fields'] = ResolversParentTypes['challenge_participant_variance_fields']> = {
   challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   progress?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_StateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state'] = ResolversParentTypes['challenge_state']> = {
+  challenges?: Resolver<Array<ResolversTypes['challenge']>, ParentType, ContextType, RequireFields<Challenge_StateChallengesArgs, never>>;
+  challenges_aggregate?: Resolver<ResolversTypes['challenge_aggregate'], ParentType, ContextType, RequireFields<Challenge_StateChallenges_AggregateArgs, never>>;
+  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_State_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_aggregate'] = ResolversParentTypes['challenge_state_aggregate']> = {
+  aggregate?: Resolver<Maybe<ResolversTypes['challenge_state_aggregate_fields']>, ParentType, ContextType>;
+  nodes?: Resolver<Array<ResolversTypes['challenge_state']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_State_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_aggregate_fields'] = ResolversParentTypes['challenge_state_aggregate_fields']> = {
+  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Challenge_State_Aggregate_FieldsCountArgs, never>>;
+  max?: Resolver<Maybe<ResolversTypes['challenge_state_max_fields']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['challenge_state_min_fields']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_State_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_max_fields'] = ResolversParentTypes['challenge_state_max_fields']> = {
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_State_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_min_fields'] = ResolversParentTypes['challenge_state_min_fields']> = {
+  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Challenge_State_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_mutation_response'] = ResolversParentTypes['challenge_state_mutation_response']> = {
+  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['challenge_state']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
