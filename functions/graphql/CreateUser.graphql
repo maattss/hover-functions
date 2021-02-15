@@ -1,5 +1,12 @@
-mutation CreateUser($id: String!, $email: String) {
-  insert_users(objects: [{ id: $id, email: $email }]) {
+mutation CreateUser(
+  $id: String!
+  $email: String
+  $name: String
+  $picture: String
+) {
+  insert_users(
+    objects: [{ id: $id, email: $email, name: $name, picture: $picture }]
+  ) {
     affected_rows
   }
 }

@@ -4597,8 +4597,10 @@ export const AddAchievementDocument = gql`
 }
     `;
 export const CreateUserDocument = gql`
-    mutation CreateUser($id: String!, $email: String) {
-  insert_users(objects: [{id: $id, email: $email}]) {
+    mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
+  insert_users(
+    objects: [{id: $id, email: $email, name: $name, picture: $picture}]
+  ) {
     affected_rows
   }
 }
@@ -7093,8 +7095,10 @@ export const AddAchievement = gql`
 }
     `;
 export const CreateUser = gql`
-    mutation CreateUser($id: String!, $email: String) {
-  insert_users(objects: [{id: $id, email: $email}]) {
+    mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
+  insert_users(
+    objects: [{id: $id, email: $email, name: $name, picture: $picture}]
+  ) {
     affected_rows
   }
 }
@@ -7248,6 +7252,8 @@ export type AddAchievementMutation = (
 export type CreateUserMutationVariables = Exact<{
   id: Scalars['String'];
   email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
 }>;
 
 
