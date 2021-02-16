@@ -1,0 +1,29 @@
+fragment basicActivityFragment on activities {
+  activity_id
+  duration
+  score
+  started_at
+}
+
+fragment challengeFragment on challenge {
+  id
+  challenge_type
+  created_at
+  start_date
+  end_date
+  state
+  rules
+  created_by_user {
+    id
+    name
+    picture
+  }
+}
+
+fragment participantFragment on challenge_participant {
+  state
+  progress
+  challenge {
+    ...challengeFragment
+  }
+}

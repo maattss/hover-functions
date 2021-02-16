@@ -1,24 +1,8 @@
 query GetActivitiesAndChallenges($id: String) {
   activities(where: { user_id: { _eq: $id } }) {
-    activity_id
-    duration
-    score
-    started_at
+    ...basicActivityFragment
   }
   challenge_participant(where: { user_id: { _eq: $id }, state: { _neq: DECLINED } }) {
-    challenge {
-      id
-      challenge_type
-      created_at
-      start_date
-      end_date
-      state
-      rules
-      created_by_user {
-        id
-        name
-        picture
-      }
-    }
+    ...participantFragment
   }
 }
