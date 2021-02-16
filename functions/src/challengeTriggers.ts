@@ -1,8 +1,6 @@
 import * as functions from 'firebase-functions';
 import { client } from './client';
-import {
-  GetActivitiesAndChallengesQuery,
-} from './types';
+import { BasicActivityFragmentFragment, ParticipantFragmentFragment } from './types';
 
 exports.sendChallengeNotification = functions.https.onRequest(async (req, res) => {
   res.status(200).json({
@@ -21,14 +19,20 @@ exports.challengeValidation = functions.https.onRequest(async (req, res) => {
 
     const queryData = await client.GetActivitiesAndChallenges({ id: user_id });
 
-    queryData.challenge_participant.forEach(async (item) => {
-      if (validateChallengeParticipation({} as Challenge_Participant, queryData)) {
+    const activities: BasicActivityFragmentFragment[] = queryData.activities;
+    queryData.challenge_participant.forEach(async (item: ParticipantFragmentFragment) => {
+      
+      const newProgress = calculateProgress(item, activities);
+      if (newProgress !== item.progress) {
         const updateData: Challenge_Participant = {
           user_id: user_id,
           challenge_id: item.challenge.id,
-          progress: 30,
+          progress: newProgress,
         };
-        await updateProgress(updateData);
+        //TODO if new progress is not equal to old progress, update progress
+        if (true) {
+          await updateProgress(updateData);
+        }
       }
     });
   }
@@ -53,9 +57,8 @@ async function updateProgress({ user_id, challenge_id, progress }: Challenge_Par
       throw new functions.https.HttpsError('invalid-argument', e.message);
     });
 }
-function validateChallengeParticipation(
-  item: Challenge_Participant,
-  queryData: GetActivitiesAndChallengesQuery,
-): boolean {
-  return true;
+
+// TODO calculate progress
+function calculateProgress(item: ParticipantFragmentFragment, activities: BasicActivityFragmentFragment[]): number {
+  return 5;
 }
