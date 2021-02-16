@@ -1906,19 +1906,11 @@ export type Challenge_Type_Aggregate = {
   nodes: Array<Challenge_Type>;
 };
 
-export type Challenge_Aggregate_Fields = {
-  __typename?: 'challenge_aggregate_fields';
-  avg?: Maybe<Challenge_Avg_Fields>;
+export type Challenge_Type_Aggregate_Fields = {
+  __typename?: 'challenge_type_aggregate_fields';
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Challenge_Max_Fields>;
-  min?: Maybe<Challenge_Min_Fields>;
-  stddev?: Maybe<Challenge_Stddev_Fields>;
-  stddev_pop?: Maybe<Challenge_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Challenge_Stddev_Samp_Fields>;
-  sum?: Maybe<Challenge_Sum_Fields>;
-  var_pop?: Maybe<Challenge_Var_Pop_Fields>;
-  var_samp?: Maybe<Challenge_Var_Samp_Fields>;
-  variance?: Maybe<Challenge_Variance_Fields>;
+  max?: Maybe<Challenge_Type_Max_Fields>;
+  min?: Maybe<Challenge_Type_Min_Fields>;
 };
 
 
@@ -1927,23 +1919,15 @@ export type Challenge_Type_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-export type Challenge_Aggregate_Order_By = {
-  avg?: Maybe<Challenge_Avg_Order_By>;
+export type Challenge_Type_Aggregate_Order_By = {
   count?: Maybe<Order_By>;
-  max?: Maybe<Challenge_Max_Order_By>;
-  min?: Maybe<Challenge_Min_Order_By>;
-  stddev?: Maybe<Challenge_Stddev_Order_By>;
-  stddev_pop?: Maybe<Challenge_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Challenge_Stddev_Samp_Order_By>;
-  sum?: Maybe<Challenge_Sum_Order_By>;
-  var_pop?: Maybe<Challenge_Var_Pop_Order_By>;
-  var_samp?: Maybe<Challenge_Var_Samp_Order_By>;
-  variance?: Maybe<Challenge_Variance_Order_By>;
+  max?: Maybe<Challenge_Type_Max_Order_By>;
+  min?: Maybe<Challenge_Type_Min_Order_By>;
 };
 
-export type Challenge_Arr_Rel_Insert_Input = {
-  data: Array<Challenge_Insert_Input>;
-  on_conflict?: Maybe<Challenge_On_Conflict>;
+export type Challenge_Type_Arr_Rel_Insert_Input = {
+  data: Array<Challenge_Type_Insert_Input>;
+  on_conflict?: Maybe<Challenge_Type_On_Conflict>;
 };
 
 export type Challenge_Type_Bool_Exp = {
@@ -1981,55 +1965,43 @@ export type Challenge_Type_Insert_Input = {
   name?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Max_Fields = {
-  __typename?: 'challenge_max_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  created_by?: Maybe<Scalars['String']>;
-  end_date?: Maybe<Scalars['date']>;
-  id?: Maybe<Scalars['Int']>;
-  start_date?: Maybe<Scalars['date']>;
+export type Challenge_Type_Max_Fields = {
+  __typename?: 'challenge_type_max_fields';
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Max_Order_By = {
-  created_at?: Maybe<Order_By>;
-  created_by?: Maybe<Order_By>;
-  end_date?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  start_date?: Maybe<Order_By>;
+export type Challenge_Type_Max_Order_By = {
+  description?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
 };
 
-export type Challenge_Min_Fields = {
-  __typename?: 'challenge_min_fields';
-  created_at?: Maybe<Scalars['timestamptz']>;
-  created_by?: Maybe<Scalars['String']>;
-  end_date?: Maybe<Scalars['date']>;
-  id?: Maybe<Scalars['Int']>;
-  start_date?: Maybe<Scalars['date']>;
+export type Challenge_Type_Min_Fields = {
+  __typename?: 'challenge_type_min_fields';
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Min_Order_By = {
-  created_at?: Maybe<Order_By>;
-  created_by?: Maybe<Order_By>;
-  end_date?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  start_date?: Maybe<Order_By>;
+export type Challenge_Type_Min_Order_By = {
+  description?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
 };
 
-export type Challenge_Mutation_Response = {
-  __typename?: 'challenge_mutation_response';
+export type Challenge_Type_Mutation_Response = {
+  __typename?: 'challenge_type_mutation_response';
   affected_rows: Scalars['Int'];
-  returning: Array<Challenge>;
+  returning: Array<Challenge_Type>;
 };
 
-export type Challenge_Obj_Rel_Insert_Input = {
-  data: Challenge_Insert_Input;
-  on_conflict?: Maybe<Challenge_On_Conflict>;
+export type Challenge_Type_Obj_Rel_Insert_Input = {
+  data: Challenge_Type_Insert_Input;
+  on_conflict?: Maybe<Challenge_Type_On_Conflict>;
 };
 
-export type Challenge_On_Conflict = {
-  constraint: Challenge_Constraint;
-  update_columns: Array<Challenge_Update_Column>;
-  where?: Maybe<Challenge_Bool_Exp>;
+export type Challenge_Type_On_Conflict = {
+  constraint: Challenge_Type_Constraint;
+  update_columns: Array<Challenge_Type_Update_Column>;
+  where?: Maybe<Challenge_Type_Bool_Exp>;
 };
 
 export type Challenge_Type_Order_By = {
@@ -2107,25 +2079,25 @@ export type Comments = {
   user_id: Scalars['String'];
 };
 
-export type Challenge_Participant_Aggregate = {
-  __typename?: 'challenge_participant_aggregate';
-  aggregate?: Maybe<Challenge_Participant_Aggregate_Fields>;
-  nodes: Array<Challenge_Participant>;
+export type Comments_Aggregate = {
+  __typename?: 'comments_aggregate';
+  aggregate?: Maybe<Comments_Aggregate_Fields>;
+  nodes: Array<Comments>;
 };
 
-export type Challenge_Participant_Aggregate_Fields = {
-  __typename?: 'challenge_participant_aggregate_fields';
-  avg?: Maybe<Challenge_Participant_Avg_Fields>;
+export type Comments_Aggregate_Fields = {
+  __typename?: 'comments_aggregate_fields';
+  avg?: Maybe<Comments_Avg_Fields>;
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Challenge_Participant_Max_Fields>;
-  min?: Maybe<Challenge_Participant_Min_Fields>;
-  stddev?: Maybe<Challenge_Participant_Stddev_Fields>;
-  stddev_pop?: Maybe<Challenge_Participant_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Challenge_Participant_Stddev_Samp_Fields>;
-  sum?: Maybe<Challenge_Participant_Sum_Fields>;
-  var_pop?: Maybe<Challenge_Participant_Var_Pop_Fields>;
-  var_samp?: Maybe<Challenge_Participant_Var_Samp_Fields>;
-  variance?: Maybe<Challenge_Participant_Variance_Fields>;
+  max?: Maybe<Comments_Max_Fields>;
+  min?: Maybe<Comments_Min_Fields>;
+  stddev?: Maybe<Comments_Stddev_Fields>;
+  stddev_pop?: Maybe<Comments_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Comments_Stddev_Samp_Fields>;
+  sum?: Maybe<Comments_Sum_Fields>;
+  var_pop?: Maybe<Comments_Var_Pop_Fields>;
+  var_samp?: Maybe<Comments_Var_Samp_Fields>;
+  variance?: Maybe<Comments_Variance_Fields>;
 };
 
 
@@ -2134,45 +2106,46 @@ export type Comments_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-export type Challenge_Participant_Aggregate_Order_By = {
-  avg?: Maybe<Challenge_Participant_Avg_Order_By>;
+export type Comments_Aggregate_Order_By = {
+  avg?: Maybe<Comments_Avg_Order_By>;
   count?: Maybe<Order_By>;
-  max?: Maybe<Challenge_Participant_Max_Order_By>;
-  min?: Maybe<Challenge_Participant_Min_Order_By>;
-  stddev?: Maybe<Challenge_Participant_Stddev_Order_By>;
-  stddev_pop?: Maybe<Challenge_Participant_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Challenge_Participant_Stddev_Samp_Order_By>;
-  sum?: Maybe<Challenge_Participant_Sum_Order_By>;
-  var_pop?: Maybe<Challenge_Participant_Var_Pop_Order_By>;
-  var_samp?: Maybe<Challenge_Participant_Var_Samp_Order_By>;
-  variance?: Maybe<Challenge_Participant_Variance_Order_By>;
+  max?: Maybe<Comments_Max_Order_By>;
+  min?: Maybe<Comments_Min_Order_By>;
+  stddev?: Maybe<Comments_Stddev_Order_By>;
+  stddev_pop?: Maybe<Comments_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Comments_Stddev_Samp_Order_By>;
+  sum?: Maybe<Comments_Sum_Order_By>;
+  var_pop?: Maybe<Comments_Var_Pop_Order_By>;
+  var_samp?: Maybe<Comments_Var_Samp_Order_By>;
+  variance?: Maybe<Comments_Variance_Order_By>;
 };
 
-export type Challenge_Participant_Arr_Rel_Insert_Input = {
-  data: Array<Challenge_Participant_Insert_Input>;
-  on_conflict?: Maybe<Challenge_Participant_On_Conflict>;
+export type Comments_Arr_Rel_Insert_Input = {
+  data: Array<Comments_Insert_Input>;
+  on_conflict?: Maybe<Comments_On_Conflict>;
 };
 
-export type Challenge_Participant_Avg_Fields = {
-  __typename?: 'challenge_participant_avg_fields';
-  challenge_id?: Maybe<Scalars['Float']>;
-  progress?: Maybe<Scalars['Float']>;
+export type Comments_Avg_Fields = {
+  __typename?: 'comments_avg_fields';
+  activity_id?: Maybe<Scalars['Float']>;
+  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Challenge_Participant_Avg_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
+export type Comments_Avg_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Challenge_Participant_Bool_Exp>>>;
-  _not?: Maybe<Challenge_Participant_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Challenge_Participant_Bool_Exp>>>;
-  challenge?: Maybe<Challenge_Bool_Exp>;
-  challenge_id?: Maybe<Int_Comparison_Exp>;
-  challenge_participant_state?: Maybe<Challenge_Participant_State_Bool_Exp>;
-  progress?: Maybe<Int_Comparison_Exp>;
-  state?: Maybe<Challenge_Participant_State_Enum_Comparison_Exp>;
+export type Comments_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Comments_Bool_Exp>>>;
+  _not?: Maybe<Comments_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Comments_Bool_Exp>>>;
+  activity?: Maybe<Activities_Bool_Exp>;
+  activity_id?: Maybe<Int_Comparison_Exp>;
+  comment_id?: Maybe<Int_Comparison_Exp>;
+  content?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  updated_at?: Maybe<Timestamp_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
@@ -2181,77 +2154,90 @@ export enum Comments_Constraint {
   CommentsPkey = 'Comments_pkey'
 }
 
-export type Challenge_Participant_Inc_Input = {
-  challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+export type Comments_Inc_Input = {
+  activity_id?: Maybe<Scalars['Int']>;
+  comment_id?: Maybe<Scalars['Int']>;
 };
 
-export type Challenge_Participant_Insert_Input = {
-  challenge?: Maybe<Challenge_Obj_Rel_Insert_Input>;
-  challenge_id?: Maybe<Scalars['Int']>;
-  challenge_participant_state?: Maybe<Challenge_Participant_State_Obj_Rel_Insert_Input>;
-  progress?: Maybe<Scalars['Int']>;
-  state?: Maybe<Challenge_Participant_State_Enum>;
+export type Comments_Insert_Input = {
+  activity?: Maybe<Activities_Obj_Rel_Insert_Input>;
+  activity_id?: Maybe<Scalars['Int']>;
+  comment_id?: Maybe<Scalars['Int']>;
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Participant_Max_Fields = {
-  __typename?: 'challenge_participant_max_fields';
-  challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+export type Comments_Max_Fields = {
+  __typename?: 'comments_max_fields';
+  activity_id?: Maybe<Scalars['Int']>;
+  comment_id?: Maybe<Scalars['Int']>;
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Participant_Max_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
+export type Comments_Max_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
+  content?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_Min_Fields = {
-  __typename?: 'challenge_participant_min_fields';
-  challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+export type Comments_Min_Fields = {
+  __typename?: 'comments_min_fields';
+  activity_id?: Maybe<Scalars['Int']>;
+  comment_id?: Maybe<Scalars['Int']>;
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Participant_Min_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
+export type Comments_Min_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
+  content?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_Mutation_Response = {
-  __typename?: 'challenge_participant_mutation_response';
+export type Comments_Mutation_Response = {
+  __typename?: 'comments_mutation_response';
   affected_rows: Scalars['Int'];
-  returning: Array<Challenge_Participant>;
+  returning: Array<Comments>;
 };
 
-export type Challenge_Participant_Obj_Rel_Insert_Input = {
-  data: Challenge_Participant_Insert_Input;
-  on_conflict?: Maybe<Challenge_Participant_On_Conflict>;
+export type Comments_Obj_Rel_Insert_Input = {
+  data: Comments_Insert_Input;
+  on_conflict?: Maybe<Comments_On_Conflict>;
 };
 
-export type Challenge_Participant_On_Conflict = {
-  constraint: Challenge_Participant_Constraint;
-  update_columns: Array<Challenge_Participant_Update_Column>;
-  where?: Maybe<Challenge_Participant_Bool_Exp>;
+export type Comments_On_Conflict = {
+  constraint: Comments_Constraint;
+  update_columns: Array<Comments_Update_Column>;
+  where?: Maybe<Comments_Bool_Exp>;
 };
 
-export type Challenge_Participant_Order_By = {
-  challenge?: Maybe<Challenge_Order_By>;
-  challenge_id?: Maybe<Order_By>;
-  challenge_participant_state?: Maybe<Challenge_Participant_State_Order_By>;
-  progress?: Maybe<Order_By>;
-  state?: Maybe<Order_By>;
+export type Comments_Order_By = {
+  activity?: Maybe<Activities_Order_By>;
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
+  content?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
   user?: Maybe<Users_Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_Pk_Columns_Input = {
-  challenge_id: Scalars['Int'];
-  user_id: Scalars['String'];
+export type Comments_Pk_Columns_Input = {
+  comment_id: Scalars['Int'];
 };
 
 export enum Comments_Select_Column {
@@ -2263,51 +2249,58 @@ export enum Comments_Select_Column {
   UserId = 'user_id'
 }
 
-export type Challenge_Participant_Set_Input = {
-  challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
-  state?: Maybe<Challenge_Participant_State_Enum>;
+export type Comments_Set_Input = {
+  activity_id?: Maybe<Scalars['Int']>;
+  comment_id?: Maybe<Scalars['Int']>;
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  updated_at?: Maybe<Scalars['timestamp']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Participant_State = {
-  __typename?: 'challenge_participant_state';
-  challenge_participants: Array<Challenge_Participant>;
-  challenge_participants_aggregate: Challenge_Participant_Aggregate;
-  state: Scalars['String'];
+export type Comments_Stddev_Fields = {
+  __typename?: 'comments_stddev_fields';
+  activity_id?: Maybe<Scalars['Float']>;
+  comment_id?: Maybe<Scalars['Float']>;
 };
 
-
-export type Challenge_Participant_StateChallenge_ParticipantsArgs = {
-  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
-  where?: Maybe<Challenge_Participant_Bool_Exp>;
+export type Comments_Stddev_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
 };
 
-
-export type Challenge_Participant_StateChallenge_Participants_AggregateArgs = {
-  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
-  where?: Maybe<Challenge_Participant_Bool_Exp>;
+export type Comments_Stddev_Pop_Fields = {
+  __typename?: 'comments_stddev_pop_fields';
+  activity_id?: Maybe<Scalars['Float']>;
+  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Challenge_Participant_State_Aggregate = {
-  __typename?: 'challenge_participant_state_aggregate';
-  aggregate?: Maybe<Challenge_Participant_State_Aggregate_Fields>;
-  nodes: Array<Challenge_Participant_State>;
+export type Comments_Stddev_Pop_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_State_Aggregate_Fields = {
-  __typename?: 'challenge_participant_state_aggregate_fields';
-  count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Challenge_Participant_State_Max_Fields>;
-  min?: Maybe<Challenge_Participant_State_Min_Fields>;
+export type Comments_Stddev_Samp_Fields = {
+  __typename?: 'comments_stddev_samp_fields';
+  activity_id?: Maybe<Scalars['Float']>;
+  comment_id?: Maybe<Scalars['Float']>;
 };
 
+export type Comments_Stddev_Samp_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
+};
+
+export type Comments_Sum_Fields = {
+  __typename?: 'comments_sum_fields';
+  activity_id?: Maybe<Scalars['Int']>;
+  comment_id?: Maybe<Scalars['Int']>;
+};
+
+export type Comments_Sum_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
+};
 
 export enum Comments_Update_Column {
   ActivityId = 'activity_id',
@@ -2318,51 +2311,37 @@ export enum Comments_Update_Column {
   UserId = 'user_id'
 }
 
-export type Challenge_Participant_State_Aggregate_Order_By = {
-  count?: Maybe<Order_By>;
-  max?: Maybe<Challenge_Participant_State_Max_Order_By>;
-  min?: Maybe<Challenge_Participant_State_Min_Order_By>;
+export type Comments_Var_Pop_Fields = {
+  __typename?: 'comments_var_pop_fields';
+  activity_id?: Maybe<Scalars['Float']>;
+  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Challenge_Participant_State_Arr_Rel_Insert_Input = {
-  data: Array<Challenge_Participant_State_Insert_Input>;
-  on_conflict?: Maybe<Challenge_Participant_State_On_Conflict>;
+export type Comments_Var_Pop_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_State_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Challenge_Participant_State_Bool_Exp>>>;
-  _not?: Maybe<Challenge_Participant_State_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Challenge_Participant_State_Bool_Exp>>>;
-  challenge_participants?: Maybe<Challenge_Participant_Bool_Exp>;
-  state?: Maybe<String_Comparison_Exp>;
+export type Comments_Var_Samp_Fields = {
+  __typename?: 'comments_var_samp_fields';
+  activity_id?: Maybe<Scalars['Float']>;
+  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export enum Challenge_Participant_State_Constraint {
-  ChallengeParticipantStatePkey = 'challenge_participant_state_pkey'
-}
-
-export enum Challenge_Participant_State_Enum {
-  Accepted = 'ACCEPTED',
-  Declined = 'DECLINED',
-  Pending = 'PENDING'
-}
-
-export type Challenge_Participant_State_Enum_Comparison_Exp = {
-  _eq?: Maybe<Challenge_Participant_State_Enum>;
-  _in?: Maybe<Array<Challenge_Participant_State_Enum>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Challenge_Participant_State_Enum>;
-  _nin?: Maybe<Array<Challenge_Participant_State_Enum>>;
+export type Comments_Var_Samp_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_State_Insert_Input = {
-  challenge_participants?: Maybe<Challenge_Participant_Arr_Rel_Insert_Input>;
-  state?: Maybe<Scalars['String']>;
+export type Comments_Variance_Fields = {
+  __typename?: 'comments_variance_fields';
+  activity_id?: Maybe<Scalars['Float']>;
+  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Challenge_Participant_State_Max_Fields = {
-  __typename?: 'challenge_participant_state_max_fields';
-  state?: Maybe<Scalars['String']>;
+export type Comments_Variance_Order_By = {
+  activity_id?: Maybe<Order_By>;
+  comment_id?: Maybe<Order_By>;
 };
 
 
@@ -2909,55 +2888,57 @@ export type Followings_Max_Fields = {
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Participant_Stddev_Pop_Fields = {
-  __typename?: 'challenge_participant_stddev_pop_fields';
-  challenge_id?: Maybe<Scalars['Float']>;
-  progress?: Maybe<Scalars['Float']>;
+export type Followings_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  following_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_Stddev_Pop_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
+export type Followings_Min_Fields = {
+  __typename?: 'followings_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  following_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Participant_Stddev_Samp_Fields = {
-  __typename?: 'challenge_participant_stddev_samp_fields';
-  challenge_id?: Maybe<Scalars['Float']>;
-  progress?: Maybe<Scalars['Float']>;
+export type Followings_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  following_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_Stddev_Samp_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
+export type Followings_Mutation_Response = {
+  __typename?: 'followings_mutation_response';
+  affected_rows: Scalars['Int'];
+  returning: Array<Followings>;
 };
 
-export type Challenge_Participant_Sum_Fields = {
-  __typename?: 'challenge_participant_sum_fields';
-  challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+export type Followings_Obj_Rel_Insert_Input = {
+  data: Followings_Insert_Input;
+  on_conflict?: Maybe<Followings_On_Conflict>;
 };
 
-export type Challenge_Participant_Sum_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
+export type Followings_On_Conflict = {
+  constraint: Followings_Constraint;
+  update_columns: Array<Followings_Update_Column>;
+  where?: Maybe<Followings_Bool_Exp>;
 };
 
-export enum Challenge_Participant_Update_Column {
-  ChallengeId = 'challenge_id',
-  Progress = 'progress',
-  State = 'state',
-  UserId = 'user_id'
-}
-
-export type Challenge_Participant_Var_Pop_Fields = {
-  __typename?: 'challenge_participant_var_pop_fields';
-  challenge_id?: Maybe<Scalars['Float']>;
-  progress?: Maybe<Scalars['Float']>;
+export type Followings_Order_By = {
+  created_at?: Maybe<Order_By>;
+  follower?: Maybe<Users_Order_By>;
+  following_id?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user?: Maybe<Users_Order_By>;
+  user_id?: Maybe<Order_By>;
 };
 
-export type Challenge_Participant_Var_Pop_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
+export type Followings_Pk_Columns_Input = {
+  following_id: Scalars['String'];
+  user_id: Scalars['String'];
 };
 
 export enum Followings_Select_Column {
@@ -2967,28 +2948,14 @@ export enum Followings_Select_Column {
   UserId = 'user_id'
 }
 
-export type Challenge_Participant_Var_Samp_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
+export type Followings_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  following_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_Participant_Variance_Fields = {
-  __typename?: 'challenge_participant_variance_fields';
-  challenge_id?: Maybe<Scalars['Float']>;
-  progress?: Maybe<Scalars['Float']>;
-};
-
-export type Challenge_Participant_Variance_Order_By = {
-  challenge_id?: Maybe<Order_By>;
-  progress?: Maybe<Order_By>;
-};
-
-export type Challenge_Pk_Columns_Input = {
-  id: Scalars['Int'];
-};
-
-export enum Challenge_Select_Column {
-  ChallengeType = 'challenge_type',
+export enum Followings_Update_Column {
   CreatedAt = 'created_at',
   FollowingId = 'following_id',
   UpdatedAt = 'updated_at',
@@ -3266,8 +3233,8 @@ export type Geofence_VariantsGeofencesArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Order_By>>;
-  where?: Maybe<Challenge_Bool_Exp>;
+  order_by?: Maybe<Array<Geofences_Order_By>>;
+  where?: Maybe<Geofences_Bool_Exp>;
 };
 
 
@@ -3275,21 +3242,21 @@ export type Geofence_VariantsGeofences_AggregateArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Order_By>>;
-  where?: Maybe<Challenge_Bool_Exp>;
+  order_by?: Maybe<Array<Geofences_Order_By>>;
+  where?: Maybe<Geofences_Bool_Exp>;
 };
 
-export type Challenge_State_Aggregate = {
-  __typename?: 'challenge_state_aggregate';
-  aggregate?: Maybe<Challenge_State_Aggregate_Fields>;
-  nodes: Array<Challenge_State>;
+export type Geofence_Variants_Aggregate = {
+  __typename?: 'geofence_variants_aggregate';
+  aggregate?: Maybe<Geofence_Variants_Aggregate_Fields>;
+  nodes: Array<Geofence_Variants>;
 };
 
-export type Challenge_State_Aggregate_Fields = {
-  __typename?: 'challenge_state_aggregate_fields';
+export type Geofence_Variants_Aggregate_Fields = {
+  __typename?: 'geofence_variants_aggregate_fields';
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Challenge_State_Max_Fields>;
-  min?: Maybe<Challenge_State_Min_Fields>;
+  max?: Maybe<Geofence_Variants_Max_Fields>;
+  min?: Maybe<Geofence_Variants_Min_Fields>;
 };
 
 
@@ -3298,23 +3265,24 @@ export type Geofence_Variants_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-export type Challenge_State_Aggregate_Order_By = {
+export type Geofence_Variants_Aggregate_Order_By = {
   count?: Maybe<Order_By>;
-  max?: Maybe<Challenge_State_Max_Order_By>;
-  min?: Maybe<Challenge_State_Min_Order_By>;
+  max?: Maybe<Geofence_Variants_Max_Order_By>;
+  min?: Maybe<Geofence_Variants_Min_Order_By>;
 };
 
-export type Challenge_State_Arr_Rel_Insert_Input = {
-  data: Array<Challenge_State_Insert_Input>;
-  on_conflict?: Maybe<Challenge_State_On_Conflict>;
+export type Geofence_Variants_Arr_Rel_Insert_Input = {
+  data: Array<Geofence_Variants_Insert_Input>;
+  on_conflict?: Maybe<Geofence_Variants_On_Conflict>;
 };
 
-export type Challenge_State_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Challenge_State_Bool_Exp>>>;
-  _not?: Maybe<Challenge_State_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Challenge_State_Bool_Exp>>>;
-  challenges?: Maybe<Challenge_Bool_Exp>;
-  state?: Maybe<String_Comparison_Exp>;
+export type Geofence_Variants_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Geofence_Variants_Bool_Exp>>>;
+  _not?: Maybe<Geofence_Variants_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Geofence_Variants_Bool_Exp>>>;
+  description?: Maybe<String_Comparison_Exp>;
+  geofences?: Maybe<Geofences_Bool_Exp>;
+  name?: Maybe<String_Comparison_Exp>;
 };
 
 export enum Geofence_Variants_Constraint {
@@ -3326,61 +3294,67 @@ export enum Geofence_Variants_Enum {
   Polygon = 'POLYGON'
 }
 
-export type Challenge_State_Enum_Comparison_Exp = {
-  _eq?: Maybe<Challenge_State_Enum>;
-  _in?: Maybe<Array<Challenge_State_Enum>>;
+export type Geofence_Variants_Enum_Comparison_Exp = {
+  _eq?: Maybe<Geofence_Variants_Enum>;
+  _in?: Maybe<Array<Geofence_Variants_Enum>>;
   _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Challenge_State_Enum>;
-  _nin?: Maybe<Array<Challenge_State_Enum>>;
+  _neq?: Maybe<Geofence_Variants_Enum>;
+  _nin?: Maybe<Array<Geofence_Variants_Enum>>;
 };
 
-export type Challenge_State_Insert_Input = {
-  challenges?: Maybe<Challenge_Arr_Rel_Insert_Input>;
-  state?: Maybe<Scalars['String']>;
+export type Geofence_Variants_Insert_Input = {
+  description?: Maybe<Scalars['String']>;
+  geofences?: Maybe<Geofences_Arr_Rel_Insert_Input>;
+  name?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_State_Max_Fields = {
-  __typename?: 'challenge_state_max_fields';
-  state?: Maybe<Scalars['String']>;
+export type Geofence_Variants_Max_Fields = {
+  __typename?: 'geofence_variants_max_fields';
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_State_Max_Order_By = {
-  state?: Maybe<Order_By>;
+export type Geofence_Variants_Max_Order_By = {
+  description?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
 };
 
-export type Challenge_State_Min_Fields = {
-  __typename?: 'challenge_state_min_fields';
-  state?: Maybe<Scalars['String']>;
+export type Geofence_Variants_Min_Fields = {
+  __typename?: 'geofence_variants_min_fields';
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
-export type Challenge_State_Min_Order_By = {
-  state?: Maybe<Order_By>;
+export type Geofence_Variants_Min_Order_By = {
+  description?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
 };
 
-export type Challenge_State_Mutation_Response = {
-  __typename?: 'challenge_state_mutation_response';
+export type Geofence_Variants_Mutation_Response = {
+  __typename?: 'geofence_variants_mutation_response';
   affected_rows: Scalars['Int'];
-  returning: Array<Challenge_State>;
+  returning: Array<Geofence_Variants>;
 };
 
-export type Challenge_State_Obj_Rel_Insert_Input = {
-  data: Challenge_State_Insert_Input;
-  on_conflict?: Maybe<Challenge_State_On_Conflict>;
+export type Geofence_Variants_Obj_Rel_Insert_Input = {
+  data: Geofence_Variants_Insert_Input;
+  on_conflict?: Maybe<Geofence_Variants_On_Conflict>;
 };
 
-export type Challenge_State_On_Conflict = {
-  constraint: Challenge_State_Constraint;
-  update_columns: Array<Challenge_State_Update_Column>;
-  where?: Maybe<Challenge_State_Bool_Exp>;
+export type Geofence_Variants_On_Conflict = {
+  constraint: Geofence_Variants_Constraint;
+  update_columns: Array<Geofence_Variants_Update_Column>;
+  where?: Maybe<Geofence_Variants_Bool_Exp>;
 };
 
-export type Challenge_State_Order_By = {
-  challenges_aggregate?: Maybe<Challenge_Aggregate_Order_By>;
-  state?: Maybe<Order_By>;
+export type Geofence_Variants_Order_By = {
+  description?: Maybe<Order_By>;
+  geofences_aggregate?: Maybe<Geofences_Aggregate_Order_By>;
+  name?: Maybe<Order_By>;
 };
 
-export type Challenge_State_Pk_Columns_Input = {
-  state: Scalars['String'];
+export type Geofence_Variants_Pk_Columns_Input = {
+  name: Scalars['String'];
 };
 
 export enum Geofence_Variants_Select_Column {
@@ -3388,8 +3362,9 @@ export enum Geofence_Variants_Select_Column {
   Name = 'name'
 }
 
-export type Challenge_State_Set_Input = {
-  state?: Maybe<Scalars['String']>;
+export type Geofence_Variants_Set_Input = {
+  description?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export enum Geofence_Variants_Update_Column {
@@ -3397,48 +3372,23 @@ export enum Geofence_Variants_Update_Column {
   Name = 'name'
 }
 
-export type Challenge_Stddev_Fields = {
-  __typename?: 'challenge_stddev_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-export type Challenge_Stddev_Order_By = {
-  id?: Maybe<Order_By>;
-};
-
-export type Challenge_Stddev_Pop_Fields = {
-  __typename?: 'challenge_stddev_pop_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-export type Challenge_Stddev_Pop_Order_By = {
-  id?: Maybe<Order_By>;
-};
-
-export type Challenge_Stddev_Samp_Fields = {
-  __typename?: 'challenge_stddev_samp_fields';
-  id?: Maybe<Scalars['Float']>;
-};
-
-export type Challenge_Stddev_Samp_Order_By = {
-  id?: Maybe<Order_By>;
-};
-
-export type Challenge_Sum_Fields = {
-  __typename?: 'challenge_sum_fields';
-  id?: Maybe<Scalars['Int']>;
-};
-
-export type Challenge_Sum_Order_By = {
-  id?: Maybe<Order_By>;
-};
-
-export type Challenge_Type = {
-  __typename?: 'challenge_type';
-  challenges: Array<Challenge>;
-  challenges_aggregate: Challenge_Aggregate;
+export type Geofences = {
+  __typename?: 'geofences';
+  activities: Array<Activities>;
+  activities_aggregate: Activities_Aggregate;
+  category: Scalars['String'];
+  coordinates?: Maybe<Scalars['String']>;
+  created_at: Scalars['timestamptz'];
   description?: Maybe<Scalars['String']>;
+  geofenceByCategory: Categories;
+  geofence_variant: Geofence_Variants;
+  id: Scalars['Int'];
+  latitude: Scalars['float8'];
+  longitude: Scalars['float8'];
   name: Scalars['String'];
+  radius: Scalars['float8'];
+  updated_at: Scalars['timestamptz'];
+  variant: Geofence_Variants_Enum;
 };
 
 
@@ -3446,8 +3396,8 @@ export type GeofencesActivitiesArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Order_By>>;
-  where?: Maybe<Challenge_Bool_Exp>;
+  order_by?: Maybe<Array<Activities_Order_By>>;
+  where?: Maybe<Activities_Bool_Exp>;
 };
 
 
@@ -3455,21 +3405,29 @@ export type GeofencesActivities_AggregateArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Order_By>>;
-  where?: Maybe<Challenge_Bool_Exp>;
+  order_by?: Maybe<Array<Activities_Order_By>>;
+  where?: Maybe<Activities_Bool_Exp>;
 };
 
-export type Challenge_Type_Aggregate = {
-  __typename?: 'challenge_type_aggregate';
-  aggregate?: Maybe<Challenge_Type_Aggregate_Fields>;
-  nodes: Array<Challenge_Type>;
+export type Geofences_Aggregate = {
+  __typename?: 'geofences_aggregate';
+  aggregate?: Maybe<Geofences_Aggregate_Fields>;
+  nodes: Array<Geofences>;
 };
 
-export type Challenge_Type_Aggregate_Fields = {
-  __typename?: 'challenge_type_aggregate_fields';
+export type Geofences_Aggregate_Fields = {
+  __typename?: 'geofences_aggregate_fields';
+  avg?: Maybe<Geofences_Avg_Fields>;
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Challenge_Type_Max_Fields>;
-  min?: Maybe<Challenge_Type_Min_Fields>;
+  max?: Maybe<Geofences_Max_Fields>;
+  min?: Maybe<Geofences_Min_Fields>;
+  stddev?: Maybe<Geofences_Stddev_Fields>;
+  stddev_pop?: Maybe<Geofences_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Geofences_Stddev_Samp_Fields>;
+  sum?: Maybe<Geofences_Sum_Fields>;
+  var_pop?: Maybe<Geofences_Var_Pop_Fields>;
+  var_samp?: Maybe<Geofences_Var_Samp_Fields>;
+  variance?: Maybe<Geofences_Variance_Fields>;
 };
 
 
@@ -3478,24 +3436,58 @@ export type Geofences_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-export type Challenge_Type_Aggregate_Order_By = {
+export type Geofences_Aggregate_Order_By = {
+  avg?: Maybe<Geofences_Avg_Order_By>;
   count?: Maybe<Order_By>;
-  max?: Maybe<Challenge_Type_Max_Order_By>;
-  min?: Maybe<Challenge_Type_Min_Order_By>;
+  max?: Maybe<Geofences_Max_Order_By>;
+  min?: Maybe<Geofences_Min_Order_By>;
+  stddev?: Maybe<Geofences_Stddev_Order_By>;
+  stddev_pop?: Maybe<Geofences_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Geofences_Stddev_Samp_Order_By>;
+  sum?: Maybe<Geofences_Sum_Order_By>;
+  var_pop?: Maybe<Geofences_Var_Pop_Order_By>;
+  var_samp?: Maybe<Geofences_Var_Samp_Order_By>;
+  variance?: Maybe<Geofences_Variance_Order_By>;
 };
 
-export type Challenge_Type_Arr_Rel_Insert_Input = {
-  data: Array<Challenge_Type_Insert_Input>;
-  on_conflict?: Maybe<Challenge_Type_On_Conflict>;
+export type Geofences_Arr_Rel_Insert_Input = {
+  data: Array<Geofences_Insert_Input>;
+  on_conflict?: Maybe<Geofences_On_Conflict>;
 };
 
-export type Challenge_Type_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Challenge_Type_Bool_Exp>>>;
-  _not?: Maybe<Challenge_Type_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Challenge_Type_Bool_Exp>>>;
-  challenges?: Maybe<Challenge_Bool_Exp>;
+export type Geofences_Avg_Fields = {
+  __typename?: 'geofences_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  radius?: Maybe<Scalars['Float']>;
+};
+
+export type Geofences_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
+};
+
+export type Geofences_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Geofences_Bool_Exp>>>;
+  _not?: Maybe<Geofences_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Geofences_Bool_Exp>>>;
+  activities?: Maybe<Activities_Bool_Exp>;
+  category?: Maybe<String_Comparison_Exp>;
+  coordinates?: Maybe<String_Comparison_Exp>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
   description?: Maybe<String_Comparison_Exp>;
+  geofenceByCategory?: Maybe<Categories_Bool_Exp>;
+  geofence_variant?: Maybe<Geofence_Variants_Bool_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  latitude?: Maybe<Float8_Comparison_Exp>;
+  longitude?: Maybe<Float8_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  radius?: Maybe<Float8_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  variant?: Maybe<Geofence_Variants_Enum_Comparison_Exp>;
 };
 
 export enum Geofences_Constraint {
@@ -3505,102 +3497,127 @@ export enum Geofences_Constraint {
   GeofencesPkey = 'geofences_pkey'
 }
 
-export enum Challenge_Type_Enum {
-  Score = 'SCORE',
-  ScoreCategory = 'SCORE_CATEGORY',
-  Time = 'TIME',
-  TimeCategory = 'TIME_CATEGORY'
-}
-
-export type Challenge_Type_Enum_Comparison_Exp = {
-  _eq?: Maybe<Challenge_Type_Enum>;
-  _in?: Maybe<Array<Challenge_Type_Enum>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Challenge_Type_Enum>;
-  _nin?: Maybe<Array<Challenge_Type_Enum>>;
+export type Geofences_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['float8']>;
+  longitude?: Maybe<Scalars['float8']>;
+  radius?: Maybe<Scalars['float8']>;
 };
 
-export type Challenge_Type_Insert_Input = {
-  challenges?: Maybe<Challenge_Arr_Rel_Insert_Input>;
+export type Geofences_Insert_Input = {
+  activities?: Maybe<Activities_Arr_Rel_Insert_Input>;
+  category?: Maybe<Scalars['String']>;
+  coordinates?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
+  geofenceByCategory?: Maybe<Categories_Obj_Rel_Insert_Input>;
+  geofence_variant?: Maybe<Geofence_Variants_Obj_Rel_Insert_Input>;
+  id?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['float8']>;
+  longitude?: Maybe<Scalars['float8']>;
   name?: Maybe<Scalars['String']>;
+  radius?: Maybe<Scalars['float8']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  variant?: Maybe<Geofence_Variants_Enum>;
 };
 
-export type Challenge_Type_Max_Fields = {
-  __typename?: 'challenge_type_max_fields';
+export type Geofences_Max_Fields = {
+  __typename?: 'geofences_max_fields';
+  category?: Maybe<Scalars['String']>;
+  coordinates?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['float8']>;
+  longitude?: Maybe<Scalars['float8']>;
   name?: Maybe<Scalars['String']>;
+  radius?: Maybe<Scalars['float8']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
-export type Challenge_Type_Max_Order_By = {
+export type Geofences_Max_Order_By = {
+  category?: Maybe<Order_By>;
+  coordinates?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
 };
 
-export type Challenge_Type_Min_Fields = {
-  __typename?: 'challenge_type_min_fields';
+export type Geofences_Min_Fields = {
+  __typename?: 'geofences_min_fields';
+  category?: Maybe<Scalars['String']>;
+  coordinates?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
   description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['float8']>;
+  longitude?: Maybe<Scalars['float8']>;
   name?: Maybe<Scalars['String']>;
+  radius?: Maybe<Scalars['float8']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
-export type Challenge_Type_Min_Order_By = {
+export type Geofences_Min_Order_By = {
+  category?: Maybe<Order_By>;
+  coordinates?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
 };
 
-export type Challenge_Type_Mutation_Response = {
-  __typename?: 'challenge_type_mutation_response';
+export type Geofences_Mutation_Response = {
+  __typename?: 'geofences_mutation_response';
   affected_rows: Scalars['Int'];
-  returning: Array<Challenge_Type>;
+  returning: Array<Geofences>;
 };
 
-export type Challenge_Type_Obj_Rel_Insert_Input = {
-  data: Challenge_Type_Insert_Input;
-  on_conflict?: Maybe<Challenge_Type_On_Conflict>;
+export type Geofences_Obj_Rel_Insert_Input = {
+  data: Geofences_Insert_Input;
+  on_conflict?: Maybe<Geofences_On_Conflict>;
 };
 
-export type Challenge_Type_On_Conflict = {
-  constraint: Challenge_Type_Constraint;
-  update_columns: Array<Challenge_Type_Update_Column>;
-  where?: Maybe<Challenge_Type_Bool_Exp>;
+export type Geofences_On_Conflict = {
+  constraint: Geofences_Constraint;
+  update_columns: Array<Geofences_Update_Column>;
+  where?: Maybe<Geofences_Bool_Exp>;
 };
 
-export type Challenge_Type_Order_By = {
-  challenges_aggregate?: Maybe<Challenge_Aggregate_Order_By>;
+export type Geofences_Order_By = {
+  activities_aggregate?: Maybe<Activities_Aggregate_Order_By>;
+  category?: Maybe<Order_By>;
+  coordinates?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
   description?: Maybe<Order_By>;
+  geofenceByCategory?: Maybe<Categories_Order_By>;
+  geofence_variant?: Maybe<Geofence_Variants_Order_By>;
+  id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  variant?: Maybe<Order_By>;
 };
 
-export type Challenge_Type_Pk_Columns_Input = {
-  name: Scalars['String'];
+export type Geofences_Pk_Columns_Input = {
+  id: Scalars['Int'];
 };
 
-export enum Challenge_Type_Select_Column {
-  Description = 'description',
-  Id = 'id',
-  Latitude = 'latitude',
-  Longitude = 'longitude',
-  Name = 'name',
-  Radius = 'radius',
-  UpdatedAt = 'updated_at',
-  Variant = 'variant'
-}
-
-export type Challenge_Type_Set_Input = {
-  description?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-export enum Challenge_Type_Update_Column {
-  Description = 'description',
-  Name = 'name'
-}
-
-export enum Challenge_Update_Column {
-  ChallengeType = 'challenge_type',
+export enum Geofences_Select_Column {
+  Category = 'category',
+  Coordinates = 'coordinates',
   CreatedAt = 'created_at',
-  CreatedBy = 'created_by',
-  EndDate = 'end_date',
+  Description = 'description',
   Id = 'id',
   Latitude = 'latitude',
   Longitude = 'longitude',
@@ -3610,30 +3627,133 @@ export enum Challenge_Update_Column {
   Variant = 'variant'
 }
 
-export type Challenge_Var_Pop_Fields = {
-  __typename?: 'challenge_var_pop_fields';
-  id?: Maybe<Scalars['Float']>;
+export type Geofences_Set_Input = {
+  category?: Maybe<Scalars['String']>;
+  coordinates?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['float8']>;
+  longitude?: Maybe<Scalars['float8']>;
+  name?: Maybe<Scalars['String']>;
+  radius?: Maybe<Scalars['float8']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  variant?: Maybe<Geofence_Variants_Enum>;
 };
 
-export type Challenge_Var_Pop_Order_By = {
+export type Geofences_Stddev_Fields = {
+  __typename?: 'geofences_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  radius?: Maybe<Scalars['Float']>;
+};
+
+export type Geofences_Stddev_Order_By = {
   id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
 };
 
-export type Challenge_Var_Samp_Fields = {
-  __typename?: 'challenge_var_samp_fields';
+export type Geofences_Stddev_Pop_Fields = {
+  __typename?: 'geofences_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  radius?: Maybe<Scalars['Float']>;
 };
 
-export type Challenge_Var_Samp_Order_By = {
+export type Geofences_Stddev_Pop_Order_By = {
   id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
 };
 
-export type Challenge_Variance_Fields = {
-  __typename?: 'challenge_variance_fields';
+export type Geofences_Stddev_Samp_Fields = {
+  __typename?: 'geofences_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  radius?: Maybe<Scalars['Float']>;
 };
 
-export type Challenge_Variance_Order_By = {
+export type Geofences_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
+};
+
+export type Geofences_Sum_Fields = {
+  __typename?: 'geofences_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['float8']>;
+  longitude?: Maybe<Scalars['float8']>;
+  radius?: Maybe<Scalars['float8']>;
+};
+
+export type Geofences_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
+};
+
+export enum Geofences_Update_Column {
+  Category = 'category',
+  Coordinates = 'coordinates',
+  CreatedAt = 'created_at',
+  Description = 'description',
+  Id = 'id',
+  Latitude = 'latitude',
+  Longitude = 'longitude',
+  Name = 'name',
+  Radius = 'radius',
+  UpdatedAt = 'updated_at',
+  Variant = 'variant'
+}
+
+export type Geofences_Var_Pop_Fields = {
+  __typename?: 'geofences_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  radius?: Maybe<Scalars['Float']>;
+};
+
+export type Geofences_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
+};
+
+export type Geofences_Var_Samp_Fields = {
+  __typename?: 'geofences_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  radius?: Maybe<Scalars['Float']>;
+};
+
+export type Geofences_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  latitude?: Maybe<Order_By>;
+  longitude?: Maybe<Order_By>;
+  radius?: Maybe<Order_By>;
+};
+
+export type Geofences_Variance_Fields = {
+  __typename?: 'geofences_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+  radius?: Maybe<Scalars['Float']>;
+};
+
+export type Geofences_Variance_Order_By = {
   id?: Maybe<Order_By>;
   latitude?: Maybe<Order_By>;
   longitude?: Maybe<Order_By>;
@@ -3682,33 +3802,31 @@ export type Likes = {
   __typename?: 'likes';
   activity: Activities;
   activity_id: Scalars['Int'];
-  comment_id: Scalars['Int'];
-  content: Scalars['String'];
   created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user: Users;
   user_id: Scalars['String'];
 };
 
-export type Comments_Aggregate = {
-  __typename?: 'comments_aggregate';
-  aggregate?: Maybe<Comments_Aggregate_Fields>;
-  nodes: Array<Comments>;
+export type Likes_Aggregate = {
+  __typename?: 'likes_aggregate';
+  aggregate?: Maybe<Likes_Aggregate_Fields>;
+  nodes: Array<Likes>;
 };
 
-export type Comments_Aggregate_Fields = {
-  __typename?: 'comments_aggregate_fields';
-  avg?: Maybe<Comments_Avg_Fields>;
+export type Likes_Aggregate_Fields = {
+  __typename?: 'likes_aggregate_fields';
+  avg?: Maybe<Likes_Avg_Fields>;
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Comments_Max_Fields>;
-  min?: Maybe<Comments_Min_Fields>;
-  stddev?: Maybe<Comments_Stddev_Fields>;
-  stddev_pop?: Maybe<Comments_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Comments_Stddev_Samp_Fields>;
-  sum?: Maybe<Comments_Sum_Fields>;
-  var_pop?: Maybe<Comments_Var_Pop_Fields>;
-  var_samp?: Maybe<Comments_Var_Samp_Fields>;
-  variance?: Maybe<Comments_Variance_Fields>;
+  max?: Maybe<Likes_Max_Fields>;
+  min?: Maybe<Likes_Min_Fields>;
+  stddev?: Maybe<Likes_Stddev_Fields>;
+  stddev_pop?: Maybe<Likes_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Likes_Stddev_Samp_Fields>;
+  sum?: Maybe<Likes_Sum_Fields>;
+  var_pop?: Maybe<Likes_Var_Pop_Fields>;
+  var_samp?: Maybe<Likes_Var_Samp_Fields>;
+  variance?: Maybe<Likes_Variance_Fields>;
 };
 
 
@@ -3717,46 +3835,42 @@ export type Likes_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-export type Comments_Aggregate_Order_By = {
-  avg?: Maybe<Comments_Avg_Order_By>;
+export type Likes_Aggregate_Order_By = {
+  avg?: Maybe<Likes_Avg_Order_By>;
   count?: Maybe<Order_By>;
-  max?: Maybe<Comments_Max_Order_By>;
-  min?: Maybe<Comments_Min_Order_By>;
-  stddev?: Maybe<Comments_Stddev_Order_By>;
-  stddev_pop?: Maybe<Comments_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Comments_Stddev_Samp_Order_By>;
-  sum?: Maybe<Comments_Sum_Order_By>;
-  var_pop?: Maybe<Comments_Var_Pop_Order_By>;
-  var_samp?: Maybe<Comments_Var_Samp_Order_By>;
-  variance?: Maybe<Comments_Variance_Order_By>;
+  max?: Maybe<Likes_Max_Order_By>;
+  min?: Maybe<Likes_Min_Order_By>;
+  stddev?: Maybe<Likes_Stddev_Order_By>;
+  stddev_pop?: Maybe<Likes_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Likes_Stddev_Samp_Order_By>;
+  sum?: Maybe<Likes_Sum_Order_By>;
+  var_pop?: Maybe<Likes_Var_Pop_Order_By>;
+  var_samp?: Maybe<Likes_Var_Samp_Order_By>;
+  variance?: Maybe<Likes_Variance_Order_By>;
 };
 
-export type Comments_Arr_Rel_Insert_Input = {
-  data: Array<Comments_Insert_Input>;
-  on_conflict?: Maybe<Comments_On_Conflict>;
+export type Likes_Arr_Rel_Insert_Input = {
+  data: Array<Likes_Insert_Input>;
+  on_conflict?: Maybe<Likes_On_Conflict>;
 };
 
-export type Comments_Avg_Fields = {
-  __typename?: 'comments_avg_fields';
+export type Likes_Avg_Fields = {
+  __typename?: 'likes_avg_fields';
   activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Comments_Avg_Order_By = {
+export type Likes_Avg_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
-export type Comments_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Comments_Bool_Exp>>>;
-  _not?: Maybe<Comments_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Comments_Bool_Exp>>>;
+export type Likes_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Likes_Bool_Exp>>>;
+  _not?: Maybe<Likes_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Likes_Bool_Exp>>>;
   activity?: Maybe<Activities_Bool_Exp>;
   activity_id?: Maybe<Int_Comparison_Exp>;
-  comment_id?: Maybe<Int_Comparison_Exp>;
-  content?: Maybe<String_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  updated_at?: Maybe<Timestamp_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
@@ -3766,194 +3880,162 @@ export enum Likes_Constraint {
   LikesUserIdActivityIdKey = 'Likes_user_id_activity_id_key'
 }
 
-export type Comments_Inc_Input = {
+export type Likes_Inc_Input = {
   activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
 };
 
-export type Comments_Insert_Input = {
+export type Likes_Insert_Input = {
   activity?: Maybe<Activities_Obj_Rel_Insert_Input>;
   activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-  content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Comments_Max_Fields = {
-  __typename?: 'comments_max_fields';
+export type Likes_Max_Fields = {
+  __typename?: 'likes_max_fields';
   activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-  content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Comments_Max_Order_By = {
+export type Likes_Max_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-  content?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
-export type Comments_Min_Fields = {
-  __typename?: 'comments_min_fields';
+export type Likes_Min_Fields = {
+  __typename?: 'likes_min_fields';
   activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-  content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Comments_Min_Order_By = {
+export type Likes_Min_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-  content?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
-export type Comments_Mutation_Response = {
-  __typename?: 'comments_mutation_response';
+export type Likes_Mutation_Response = {
+  __typename?: 'likes_mutation_response';
   affected_rows: Scalars['Int'];
-  returning: Array<Comments>;
+  returning: Array<Likes>;
 };
 
-export type Comments_Obj_Rel_Insert_Input = {
-  data: Comments_Insert_Input;
-  on_conflict?: Maybe<Comments_On_Conflict>;
+export type Likes_Obj_Rel_Insert_Input = {
+  data: Likes_Insert_Input;
+  on_conflict?: Maybe<Likes_On_Conflict>;
 };
 
-export type Comments_On_Conflict = {
-  constraint: Comments_Constraint;
-  update_columns: Array<Comments_Update_Column>;
-  where?: Maybe<Comments_Bool_Exp>;
+export type Likes_On_Conflict = {
+  constraint: Likes_Constraint;
+  update_columns: Array<Likes_Update_Column>;
+  where?: Maybe<Likes_Bool_Exp>;
 };
 
-export type Comments_Order_By = {
+export type Likes_Order_By = {
   activity?: Maybe<Activities_Order_By>;
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-  content?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user?: Maybe<Users_Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
-export type Comments_Pk_Columns_Input = {
-  comment_id: Scalars['Int'];
+export type Likes_Pk_Columns_Input = {
+  activity_id: Scalars['Int'];
+  user_id: Scalars['String'];
 };
 
-export enum Comments_Select_Column {
+export enum Likes_Select_Column {
   ActivityId = 'activity_id',
-  CommentId = 'comment_id',
-  Content = 'content',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
   UserId = 'user_id'
 }
 
-export type Comments_Set_Input = {
+export type Likes_Set_Input = {
   activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-  content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
-export type Comments_Stddev_Fields = {
-  __typename?: 'comments_stddev_fields';
+export type Likes_Stddev_Fields = {
+  __typename?: 'likes_stddev_fields';
   activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Comments_Stddev_Order_By = {
+export type Likes_Stddev_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
-export type Comments_Stddev_Pop_Fields = {
-  __typename?: 'comments_stddev_pop_fields';
+export type Likes_Stddev_Pop_Fields = {
+  __typename?: 'likes_stddev_pop_fields';
   activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Comments_Stddev_Pop_Order_By = {
+export type Likes_Stddev_Pop_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
-export type Comments_Stddev_Samp_Fields = {
-  __typename?: 'comments_stddev_samp_fields';
+export type Likes_Stddev_Samp_Fields = {
+  __typename?: 'likes_stddev_samp_fields';
   activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Comments_Stddev_Samp_Order_By = {
+export type Likes_Stddev_Samp_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
-export type Comments_Sum_Fields = {
-  __typename?: 'comments_sum_fields';
+export type Likes_Sum_Fields = {
+  __typename?: 'likes_sum_fields';
   activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
 };
 
-export type Comments_Sum_Order_By = {
+export type Likes_Sum_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
-export enum Comments_Update_Column {
+export enum Likes_Update_Column {
   ActivityId = 'activity_id',
-  CommentId = 'comment_id',
-  Content = 'content',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
   UserId = 'user_id'
 }
 
-export type Comments_Var_Pop_Fields = {
-  __typename?: 'comments_var_pop_fields';
+export type Likes_Var_Pop_Fields = {
+  __typename?: 'likes_var_pop_fields';
   activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Comments_Var_Pop_Order_By = {
+export type Likes_Var_Pop_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
-export type Comments_Var_Samp_Fields = {
-  __typename?: 'comments_var_samp_fields';
+export type Likes_Var_Samp_Fields = {
+  __typename?: 'likes_var_samp_fields';
   activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Comments_Var_Samp_Order_By = {
+export type Likes_Var_Samp_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
-export type Comments_Variance_Fields = {
-  __typename?: 'comments_variance_fields';
+export type Likes_Variance_Fields = {
+  __typename?: 'likes_variance_fields';
   activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
 };
 
-export type Comments_Variance_Order_By = {
+export type Likes_Variance_Order_By = {
   activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
 export type Mutation_Root = {
@@ -4082,10 +4164,6 @@ export type Mutation_RootDelete_AchievementArgs = {
 
 export type Mutation_RootDelete_Achievement_By_PkArgs = {
   id: Scalars['Int'];
-  user?: Maybe<Users>;
-  userAchievementByAchievementIdCreatedAtUserId?: Maybe<User_Achievement>;
-  user_achievement?: Maybe<User_Achievement>;
-  user_id?: Maybe<Scalars['String']>;
 };
 
 
@@ -4268,11 +4346,8 @@ export type Mutation_RootDelete_User_Achievement_By_PkArgs = {
 };
 
 
-export type Feed_Stddev_Pop_Fields = {
-  __typename?: 'feed_stddev_pop_fields';
-  achievement_id?: Maybe<Scalars['Float']>;
-  activity_id?: Maybe<Scalars['Float']>;
-  id?: Maybe<Scalars['Float']>;
+export type Mutation_RootDelete_UsersArgs = {
+  where: Users_Bool_Exp;
 };
 
 
@@ -4498,9 +4573,9 @@ export type Mutation_RootInsert_User_Achievement_OneArgs = {
 };
 
 
-export type Feed_Type_Order_By = {
-  feeds_aggregate?: Maybe<Feed_Aggregate_Order_By>;
-  name?: Maybe<Order_By>;
+export type Mutation_RootInsert_UsersArgs = {
+  objects: Array<Users_Insert_Input>;
+  on_conflict?: Maybe<Users_On_Conflict>;
 };
 
 
@@ -4748,10 +4823,9 @@ export type Mutation_RootUpdate_User_Achievement_By_PkArgs = {
 };
 
 
-export type Followings_On_Conflict = {
-  constraint: Followings_Constraint;
-  update_columns: Array<Followings_Update_Column>;
-  where?: Maybe<Followings_Bool_Exp>;
+export type Mutation_RootUpdate_UsersArgs = {
+  _set?: Maybe<Users_Set_Input>;
+  where: Users_Bool_Exp;
 };
 
 export enum Order_By {
@@ -4847,9 +4921,6 @@ export type Query_RootAchievement_AggregateArgs = {
 
 export type Query_RootAchievement_By_PkArgs = {
   id: Scalars['Int'];
-  linking_word: Scalars['String'];
-  user_join?: Maybe<Scalars['String']>;
-  user_start: Scalars['String'];
 };
 
 
@@ -5273,13 +5344,12 @@ export type Query_RootUser_Achievement_By_PkArgs = {
 };
 
 
-
-export type Geofence_VariantsGeofencesArgs = {
-  distinct_on?: Maybe<Array<Geofences_Select_Column>>;
+export type Query_RootUsersArgs = {
+  distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Geofences_Order_By>>;
-  where?: Maybe<Geofences_Bool_Exp>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
 };
 
 
@@ -5287,14 +5357,26 @@ export type Query_RootUsers_AggregateArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Geofences_Order_By>>;
-  where?: Maybe<Geofences_Bool_Exp>;
+  order_by?: Maybe<Array<Users_Order_By>>;
+  where?: Maybe<Users_Bool_Exp>;
 };
 
-export type Geofence_Variants_Aggregate = {
-  __typename?: 'geofence_variants_aggregate';
-  aggregate?: Maybe<Geofence_Variants_Aggregate_Fields>;
-  nodes: Array<Geofence_Variants>;
+export type String_Comparison_Exp = {
+  _eq?: Maybe<Scalars['String']>;
+  _gt?: Maybe<Scalars['String']>;
+  _gte?: Maybe<Scalars['String']>;
+  _ilike?: Maybe<Scalars['String']>;
+  _in?: Maybe<Array<Scalars['String']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _like?: Maybe<Scalars['String']>;
+  _lt?: Maybe<Scalars['String']>;
+  _lte?: Maybe<Scalars['String']>;
+  _neq?: Maybe<Scalars['String']>;
+  _nilike?: Maybe<Scalars['String']>;
+  _nin?: Maybe<Array<Scalars['String']>>;
+  _nlike?: Maybe<Scalars['String']>;
+  _nsimilar?: Maybe<Scalars['String']>;
+  _similar?: Maybe<Scalars['String']>;
 };
 
 export type Subscription_Root = {
@@ -5698,8 +5780,8 @@ export type Subscription_RootGeofence_Variants_AggregateArgs = {
   distinct_on?: Maybe<Array<Geofence_Variants_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Activities_Order_By>>;
-  where?: Maybe<Activities_Bool_Exp>;
+  order_by?: Maybe<Array<Geofence_Variants_Order_By>>;
+  where?: Maybe<Geofence_Variants_Bool_Exp>;
 };
 
 
@@ -5712,8 +5794,8 @@ export type Subscription_RootGeofencesArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Activities_Order_By>>;
-  where?: Maybe<Activities_Bool_Exp>;
+  order_by?: Maybe<Array<Geofences_Order_By>>;
+  where?: Maybe<Geofences_Bool_Exp>;
 };
 
 
@@ -5922,104 +6004,56 @@ export type User_Achievement_Bool_Exp = {
   achievement?: Maybe<Achievement_Bool_Exp>;
   achievement_id?: Maybe<Int_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  description?: Maybe<String_Comparison_Exp>;
-  geofenceByCategory?: Maybe<Categories_Bool_Exp>;
-  geofence_variant?: Maybe<Geofence_Variants_Bool_Exp>;
-  id?: Maybe<Int_Comparison_Exp>;
-  latitude?: Maybe<Float8_Comparison_Exp>;
-  longitude?: Maybe<Float8_Comparison_Exp>;
-  name?: Maybe<String_Comparison_Exp>;
-  radius?: Maybe<Float8_Comparison_Exp>;
-  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
-  variant?: Maybe<Geofence_Variants_Enum_Comparison_Exp>;
+  user?: Maybe<Users_Bool_Exp>;
+  user_id?: Maybe<String_Comparison_Exp>;
 };
 
 export enum User_Achievement_Constraint {
   UserAchievementPkey = 'user_achievement_pkey'
 }
 
-export type Geofences_Inc_Input = {
-  id?: Maybe<Scalars['Int']>;
-  latitude?: Maybe<Scalars['float8']>;
-  longitude?: Maybe<Scalars['float8']>;
-  radius?: Maybe<Scalars['float8']>;
+export type User_Achievement_Inc_Input = {
+  achievement_id?: Maybe<Scalars['Int']>;
 };
 
-export type Geofences_Insert_Input = {
-  activities?: Maybe<Activities_Arr_Rel_Insert_Input>;
-  category?: Maybe<Scalars['String']>;
-  coordinates?: Maybe<Scalars['String']>;
+export type User_Achievement_Insert_Input = {
+  achievement?: Maybe<Achievement_Obj_Rel_Insert_Input>;
+  achievement_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  geofenceByCategory?: Maybe<Categories_Obj_Rel_Insert_Input>;
-  geofence_variant?: Maybe<Geofence_Variants_Obj_Rel_Insert_Input>;
-  id?: Maybe<Scalars['Int']>;
-  latitude?: Maybe<Scalars['float8']>;
-  longitude?: Maybe<Scalars['float8']>;
-  name?: Maybe<Scalars['String']>;
-  radius?: Maybe<Scalars['float8']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
-  variant?: Maybe<Geofence_Variants_Enum>;
+  user?: Maybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: Maybe<Scalars['String']>;
 };
 
-export type Geofences_Max_Fields = {
-  __typename?: 'geofences_max_fields';
-  category?: Maybe<Scalars['String']>;
-  coordinates?: Maybe<Scalars['String']>;
+export type User_Achievement_Max_Fields = {
+  __typename?: 'user_achievement_max_fields';
+  achievement_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  latitude?: Maybe<Scalars['float8']>;
-  longitude?: Maybe<Scalars['float8']>;
-  name?: Maybe<Scalars['String']>;
-  radius?: Maybe<Scalars['float8']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['String']>;
 };
 
-export type Geofences_Max_Order_By = {
-  category?: Maybe<Order_By>;
-  coordinates?: Maybe<Order_By>;
+export type User_Achievement_Max_Order_By = {
+  achievement_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  latitude?: Maybe<Order_By>;
-  longitude?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  radius?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
 };
 
-export type Geofences_Min_Fields = {
-  __typename?: 'geofences_min_fields';
-  category?: Maybe<Scalars['String']>;
-  coordinates?: Maybe<Scalars['String']>;
+export type User_Achievement_Min_Fields = {
+  __typename?: 'user_achievement_min_fields';
+  achievement_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  description?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-  latitude?: Maybe<Scalars['float8']>;
-  longitude?: Maybe<Scalars['float8']>;
-  name?: Maybe<Scalars['String']>;
-  radius?: Maybe<Scalars['float8']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['String']>;
 };
 
-export type Geofences_Min_Order_By = {
-  category?: Maybe<Order_By>;
-  coordinates?: Maybe<Order_By>;
+export type User_Achievement_Min_Order_By = {
+  achievement_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
-  description?: Maybe<Order_By>;
-  id?: Maybe<Order_By>;
-  latitude?: Maybe<Order_By>;
-  longitude?: Maybe<Order_By>;
-  name?: Maybe<Order_By>;
-  radius?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
 };
 
-export type Geofences_Mutation_Response = {
-  __typename?: 'geofences_mutation_response';
+export type User_Achievement_Mutation_Response = {
+  __typename?: 'user_achievement_mutation_response';
   affected_rows: Scalars['Int'];
-  returning: Array<Geofences>;
+  returning: Array<User_Achievement>;
 };
 
 export type User_Achievement_Obj_Rel_Insert_Input = {
@@ -6239,14 +6273,17 @@ export type UsersUser_Achievement_AggregateArgs = {
   where?: Maybe<User_Achievement_Bool_Exp>;
 };
 
-
-export type Mutation_RootDelete_CategoriesArgs = {
-  where: Categories_Bool_Exp;
+export type Users_Aggregate = {
+  __typename?: 'users_aggregate';
+  aggregate?: Maybe<Users_Aggregate_Fields>;
+  nodes: Array<Users>;
 };
 
-
-export type Mutation_RootDelete_Categories_By_PkArgs = {
-  name: Scalars['String'];
+export type Users_Aggregate_Fields = {
+  __typename?: 'users_aggregate_fields';
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Users_Max_Fields>;
+  min?: Maybe<Users_Min_Fields>;
 };
 
 
@@ -6255,14 +6292,15 @@ export type Users_Aggregate_FieldsCountArgs = {
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-
-export type Mutation_RootDelete_Challenge_By_PkArgs = {
-  id: Scalars['Int'];
+export type Users_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Users_Max_Order_By>;
+  min?: Maybe<Users_Min_Order_By>;
 };
 
-
-export type Mutation_RootDelete_Challenge_ParticipantArgs = {
-  where: Challenge_Participant_Bool_Exp;
+export type Users_Arr_Rel_Insert_Input = {
+  data: Array<Users_Insert_Input>;
+  on_conflict?: Maybe<Users_On_Conflict>;
 };
 
 export type Users_Bool_Exp = {
@@ -6304,39 +6342,63 @@ export type Users_Insert_Input = {
   user_achievement?: Maybe<User_Achievement_Arr_Rel_Insert_Input>;
 };
 
-
-export type Mutation_RootDelete_Challenge_Participant_State_By_PkArgs = {
-  state: Scalars['String'];
+export type Users_Max_Fields = {
+  __typename?: 'users_max_fields';
+  bio?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
-
-export type Mutation_RootDelete_Challenge_StateArgs = {
-  where: Challenge_State_Bool_Exp;
+export type Users_Max_Order_By = {
+  bio?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  picture?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
 };
 
-
-export type Mutation_RootDelete_Challenge_State_By_PkArgs = {
-  state: Scalars['String'];
+export type Users_Min_Fields = {
+  __typename?: 'users_min_fields';
+  bio?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
-
-export type Mutation_RootDelete_Challenge_TypeArgs = {
-  where: Challenge_Type_Bool_Exp;
+export type Users_Min_Order_By = {
+  bio?: Maybe<Order_By>;
+  created_at?: Maybe<Order_By>;
+  email?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  name?: Maybe<Order_By>;
+  picture?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
 };
 
-
-export type Mutation_RootDelete_Challenge_Type_By_PkArgs = {
-  name: Scalars['String'];
+export type Users_Mutation_Response = {
+  __typename?: 'users_mutation_response';
+  affected_rows: Scalars['Int'];
+  returning: Array<Users>;
 };
 
-
-export type Mutation_RootDelete_CommentArgs = {
-  comment_id: Scalars['Int'];
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  on_conflict?: Maybe<Users_On_Conflict>;
 };
 
-
-export type Mutation_RootDelete_CommentsArgs = {
-  where: Comments_Bool_Exp;
+export type Users_On_Conflict = {
+  constraint: Users_Constraint;
+  update_columns: Array<Users_Update_Column>;
+  where?: Maybe<Users_Bool_Exp>;
 };
 
 export type Users_Order_By = {
@@ -6354,9 +6416,8 @@ export type Users_Order_By = {
   user_achievement_aggregate?: Maybe<User_Achievement_Aggregate_Order_By>;
 };
 
-
-export type Mutation_RootDelete_Feed_By_PkArgs = {
-  id: Scalars['Int'];
+export type Users_Pk_Columns_Input = {
+  id: Scalars['String'];
 };
 
 export enum Users_Select_Column {
@@ -6369,8 +6430,14 @@ export enum Users_Select_Column {
   UpdatedAt = 'updated_at'
 }
 
-export type Mutation_RootDelete_Feed_TypeArgs = {
-  where: Feed_Type_Bool_Exp;
+export type Users_Set_Input = {
+  bio?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
 export enum Users_Update_Column {
@@ -6384,13 +6451,6 @@ export enum Users_Update_Column {
 }
 
 
-export const AddAchievementDocument = gql`
-    mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
-  insert_user_achievement(objects: $objects) {
-    affected_rows
-  }
-}
-    `;
 export const CreateUserDocument = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -6476,6 +6536,13 @@ export const GetUserAndExistingAchievementsDocument = gql`
   }
 }
     `;
+export const InsertAchievementsDocument = gql`
+    mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
+  insert_feed(objects: $feed_achievements) {
+    affected_rows
+  }
+}
+    `;
 export const GetUserAndUnachievedAchievementsDocument = gql`
     query GetUserAndUnachievedAchievements($user_id: String!) {
   unachievedachievements(args: {uid: $user_id}) {
@@ -6540,9 +6607,6 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    AddAchievement(variables: AddAchievementMutationVariables): Promise<AddAchievementMutation> {
-      return withWrapper(() => client.request<AddAchievementMutation>(print(AddAchievementDocument), variables));
-    },
     CreateUser(variables: CreateUserMutationVariables): Promise<CreateUserMutation> {
       return withWrapper(() => client.request<CreateUserMutation>(print(CreateUserDocument), variables));
     },
@@ -6554,6 +6618,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetUserAndExistingAchievements(variables: GetUserAndExistingAchievementsQueryVariables): Promise<GetUserAndExistingAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndExistingAchievementsQuery>(print(GetUserAndExistingAchievementsDocument), variables));
+    },
+    InsertAchievements(variables: InsertAchievementsMutationVariables): Promise<InsertAchievementsMutation> {
+      return withWrapper(() => client.request<InsertAchievementsMutation>(print(InsertAchievementsDocument), variables));
     },
     GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
@@ -6606,36 +6673,18 @@ export interface SubscriptionSubscriberObject<TResult, TKey extends string, TPar
   resolve?: SubscriptionResolveFn<TResult, { [key in TKey]: TResult }, TContext, TArgs>;
 }
 
+export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
+  subscribe: SubscriptionSubscribeFn<any, TParent, TContext, TArgs>;
+  resolve: SubscriptionResolveFn<TResult, any, TContext, TArgs>;
+}
 
-export type Mutation_RootDelete_FollowingsArgs = {
-  where: Followings_Bool_Exp;
-};
+export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, TArgs> =
+  | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
+  | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-
-export type Mutation_RootDelete_Followings_By_PkArgs = {
-  following_id: Scalars['String'];
-  user_id: Scalars['String'];
-};
-
-
-export type Mutation_RootDelete_Friends_TrackingArgs = {
-  where: Friends_Tracking_Bool_Exp;
-};
-
-
-export type Mutation_RootDelete_Friends_Tracking_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Mutation_RootDelete_Geofence_VariantsArgs = {
-  where: Geofence_Variants_Bool_Exp;
-};
-
-
-export type Mutation_RootDelete_Geofence_Variants_By_PkArgs = {
-  name: Scalars['String'];
-};
+export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
+  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+  | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
@@ -6645,9 +6694,7 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
 
 export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
 
-export type Mutation_RootDelete_Geofences_By_PkArgs = {
-  id: Scalars['Int'];
-};
+export type NextResolverFn<T> = () => Promise<T>;
 
 export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
   next: NextResolverFn<TResult>,
@@ -7869,27 +7916,31 @@ export type Achievement_Min_FieldsResolvers<ContextType = any, ParentType extend
 
 export type Achievement_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_mutation_response'] = ResolversParentTypes['achievement_mutation_response']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['challenge_participant']>, ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['achievement']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_fields'] = ResolversParentTypes['achievement_stddev_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_pop_fields'] = ResolversParentTypes['achievement_stddev_pop_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_samp_fields'] = ResolversParentTypes['achievement_stddev_samp_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_sum_fields'] = ResolversParentTypes['achievement_sum_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -7928,22 +7979,25 @@ export type Achievement_Type_Min_FieldsResolvers<ContextType = any, ParentType e
 
 export type Achievement_Type_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_type_mutation_response'] = ResolversParentTypes['achievement_type_mutation_response']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['challenge_type']>, ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['achievement_type']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_var_pop_fields'] = ResolversParentTypes['achievement_var_pop_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_var_samp_fields'] = ResolversParentTypes['achievement_var_samp_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Achievement_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_variance_fields'] = ResolversParentTypes['achievement_variance_fields']> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -7989,80 +8043,92 @@ export type Activities_Aggregate_FieldsResolvers<ContextType = any, ParentType e
 
 export type Activities_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_avg_fields'] = ResolversParentTypes['activities_avg_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_max_fields'] = ResolversParentTypes['activities_max_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['timestamp']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  started_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_min_fields'] = ResolversParentTypes['activities_min_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['timestamp']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  started_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_mutation_response'] = ResolversParentTypes['activities_mutation_response']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['activities']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_fields'] = ResolversParentTypes['activities_stddev_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_pop_fields'] = ResolversParentTypes['activities_stddev_pop_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_samp_fields'] = ResolversParentTypes['activities_stddev_samp_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_sum_fields'] = ResolversParentTypes['activities_sum_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_var_pop_fields'] = ResolversParentTypes['activities_var_pop_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_var_samp_fields'] = ResolversParentTypes['activities_var_samp_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Activities_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_variance_fields'] = ResolversParentTypes['activities_variance_fields']> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['date'], any> {
-  name: 'date';
+export interface BigintScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['bigint'], any> {
+  name: 'bigint';
 }
 
 export type CategoriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories'] = ResolversParentTypes['categories']> = {
@@ -8114,7 +8180,7 @@ export type Categories_Min_FieldsResolvers<ContextType = any, ParentType extends
 
 export type Categories_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_mutation_response'] = ResolversParentTypes['categories_mutation_response']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['feed']>, ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['categories']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8510,8 +8576,7 @@ export type Comments_Max_FieldsResolvers<ContextType = any, ParentType extends R
   comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  following_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['timestamp']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8521,15 +8586,14 @@ export type Comments_Min_FieldsResolvers<ContextType = any, ParentType extends R
   comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  following_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['timestamp']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Comments_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_mutation_response'] = ResolversParentTypes['comments_mutation_response']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -9785,13 +9849,6 @@ export type Resolvers<ContextType = any> = {
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
 
-export const AddAchievement = gql`
-    mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
-  insert_user_achievement(objects: $objects) {
-    affected_rows
-  }
-}
-    `;
 export const CreateUser = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -9877,6 +9934,13 @@ export const GetUserAndExistingAchievements = gql`
   }
 }
     `;
+export const InsertAchievements = gql`
+    mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
+  insert_feed(objects: $feed_achievements) {
+    affected_rows
+  }
+}
+    `;
 export const GetUserAndUnachievedAchievements = gql`
     query GetUserAndUnachievedAchievements($user_id: String!) {
   unachievedachievements(args: {uid: $user_id}) {
@@ -9934,19 +9998,6 @@ export const GetUserAndUnachievedAchievements = gql`
   }
 }
     `;
-export type AddAchievementMutationVariables = Exact<{
-  objects: Array<User_Achievement_Insert_Input> | User_Achievement_Insert_Input;
-}>;
-
-
-export type AddAchievementMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_user_achievement?: Maybe<(
-    { __typename?: 'user_achievement_mutation_response' }
-    & Pick<User_Achievement_Mutation_Response, 'affected_rows'>
-  )> }
-);
-
 export type CreateUserMutationVariables = Exact<{
   id: Scalars['String'];
   email?: Maybe<Scalars['String']>;
@@ -10049,6 +10100,19 @@ export type GetUserAndExistingAchievementsQuery = (
         & Pick<Achievement, 'id' | 'name' | 'description' | 'achievement_type' | 'rule' | 'created_at'>
       ) }
     )> }
+  )> }
+);
+
+export type InsertAchievementsMutationVariables = Exact<{
+  feed_achievements: Array<Feed_Insert_Input> | Feed_Insert_Input;
+}>;
+
+
+export type InsertAchievementsMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_feed?: Maybe<(
+    { __typename?: 'feed_mutation_response' }
+    & Pick<Feed_Mutation_Response, 'affected_rows'>
   )> }
 );
 
