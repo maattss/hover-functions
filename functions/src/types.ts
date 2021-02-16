@@ -6450,7 +6450,39 @@ export enum Users_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-
+export const BasicActivityFragmentFragmentDoc = gql`
+    fragment basicActivityFragment on activities {
+  activity_id
+  duration
+  score
+  started_at
+}
+    `;
+export const ChallengeFragmentFragmentDoc = gql`
+    fragment challengeFragment on challenge {
+  id
+  challenge_type
+  created_at
+  start_date
+  end_date
+  state
+  rules
+  created_by_user {
+    id
+    name
+    picture
+  }
+}
+    `;
+export const ParticipantFragmentFragmentDoc = gql`
+    fragment participantFragment on challenge_participant {
+  state
+  progress
+  challenge {
+    ...challengeFragment
+  }
+}
+    ${ChallengeFragmentFragmentDoc}`;
 export const CreateUserDocument = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -6539,29 +6571,14 @@ export const GetUserAndExistingAchievementsDocument = gql`
 export const GetActivitiesAndChallengesDocument = gql`
     query GetActivitiesAndChallenges($id: String) {
   activities(where: {user_id: {_eq: $id}}) {
-    activity_id
-    duration
-    score
-    started_at
+    ...basicActivityFragment
   }
   challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
-    challenge {
-      id
-      challenge_type
-      created_at
-      start_date
-      end_date
-      state
-      rules
-      created_by_user {
-        id
-        name
-        picture
-      }
-    }
+    ...participantFragment
   }
 }
-    `;
+    ${BasicActivityFragmentFragmentDoc}
+${ParticipantFragmentFragmentDoc}`;
 export const InsertAchievementsDocument = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -9890,7 +9907,39 @@ export type Resolvers<ContextType = any> = {
  */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
-
+export const BasicActivityFragment = gql`
+    fragment basicActivityFragment on activities {
+  activity_id
+  duration
+  score
+  started_at
+}
+    `;
+export const ChallengeFragment = gql`
+    fragment challengeFragment on challenge {
+  id
+  challenge_type
+  created_at
+  start_date
+  end_date
+  state
+  rules
+  created_by_user {
+    id
+    name
+    picture
+  }
+}
+    `;
+export const ParticipantFragment = gql`
+    fragment participantFragment on challenge_participant {
+  state
+  progress
+  challenge {
+    ...challengeFragment
+  }
+}
+    ${ChallengeFragment}`;
 export const CreateUser = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -9979,29 +10028,14 @@ export const GetUserAndExistingAchievements = gql`
 export const GetActivitiesAndChallenges = gql`
     query GetActivitiesAndChallenges($id: String) {
   activities(where: {user_id: {_eq: $id}}) {
-    activity_id
-    duration
-    score
-    started_at
+    ...basicActivityFragment
   }
   challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
-    challenge {
-      id
-      challenge_type
-      created_at
-      start_date
-      end_date
-      state
-      rules
-      created_by_user {
-        id
-        name
-        picture
-      }
-    }
+    ...participantFragment
   }
 }
-    `;
+    ${BasicActivityFragment}
+${ParticipantFragment}`;
 export const InsertAchievements = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -10181,6 +10215,29 @@ export type GetUserAndExistingAchievementsQuery = (
   )> }
 );
 
+export type BasicActivityFragmentFragment = (
+  { __typename?: 'activities' }
+  & Pick<Activities, 'activity_id' | 'duration' | 'score' | 'started_at'>
+);
+
+export type ChallengeFragmentFragment = (
+  { __typename?: 'challenge' }
+  & Pick<Challenge, 'id' | 'challenge_type' | 'created_at' | 'start_date' | 'end_date' | 'state' | 'rules'>
+  & { created_by_user: (
+    { __typename?: 'users' }
+    & Pick<Users, 'id' | 'name' | 'picture'>
+  ) }
+);
+
+export type ParticipantFragmentFragment = (
+  { __typename?: 'challenge_participant' }
+  & Pick<Challenge_Participant, 'state' | 'progress'>
+  & { challenge: (
+    { __typename?: 'challenge' }
+    & ChallengeFragmentFragment
+  ) }
+);
+
 export type GetActivitiesAndChallengesQueryVariables = Exact<{
   id?: Maybe<Scalars['String']>;
 }>;
@@ -10190,17 +10247,10 @@ export type GetActivitiesAndChallengesQuery = (
   { __typename?: 'query_root' }
   & { activities: Array<(
     { __typename?: 'activities' }
-    & Pick<Activities, 'activity_id' | 'duration' | 'score' | 'started_at'>
+    & BasicActivityFragmentFragment
   )>, challenge_participant: Array<(
     { __typename?: 'challenge_participant' }
-    & { challenge: (
-      { __typename?: 'challenge' }
-      & Pick<Challenge, 'id' | 'challenge_type' | 'created_at' | 'start_date' | 'end_date' | 'state' | 'rules'>
-      & { created_by_user: (
-        { __typename?: 'users' }
-        & Pick<Users, 'id' | 'name' | 'picture'>
-      ) }
-    ) }
+    & ParticipantFragmentFragment
   )> }
 );
 
