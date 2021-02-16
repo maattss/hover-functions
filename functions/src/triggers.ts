@@ -83,8 +83,7 @@ async function deleteAchievment(achievement_id: number, user_id: string) {
 
 async function insertAchievments(objects: User_Achievement_Insert_Input[]) {
   const feed_objects: Feed_Insert_Input[] = objects.map(({ achievement_id, user_id }) => {
-    return {
-      achievements: {
+    return  {
         feed_type: Feed_Type_Enum.Achievement,
         user_achievement: {
           data: {
@@ -92,8 +91,7 @@ async function insertAchievments(objects: User_Achievement_Insert_Input[]) {
             user_id: user_id,
           },
         },
-      },
-    } as Feed_Insert_Input;
+      } as Feed_Insert_Input;
   });
   await client
     .InsertAchievements({ feed_achievements: feed_objects })
