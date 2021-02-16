@@ -6654,6 +6654,32 @@ export const GetUserAndExistingAchievementsDocument = gql`
   }
 }
     `;
+export const GetActivitiesAndChallengesDocument = gql`
+    query GetActivitiesAndChallenges($id: String) {
+  activities(where: {user_id: {_eq: $id}}) {
+    activity_id
+    duration
+    score
+    started_at
+  }
+  challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
+    challenge {
+      id
+      challenge_type
+      created_at
+      start_date
+      end_date
+      state
+      rules
+      created_by_user {
+        id
+        name
+        picture
+      }
+    }
+  }
+}
+    `;
 export const InsertAchievementsDocument = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -6736,6 +6762,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetUserAndExistingAchievements(variables: GetUserAndExistingAchievementsQueryVariables): Promise<GetUserAndExistingAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndExistingAchievementsQuery>(print(GetUserAndExistingAchievementsDocument), variables));
+    },
+    GetActivitiesAndChallenges(variables?: GetActivitiesAndChallengesQueryVariables): Promise<GetActivitiesAndChallengesQuery> {
+      return withWrapper(() => client.request<GetActivitiesAndChallengesQuery>(print(GetActivitiesAndChallengesDocument), variables));
     },
     InsertAchievements(variables: InsertAchievementsMutationVariables): Promise<InsertAchievementsMutation> {
       return withWrapper(() => client.request<InsertAchievementsMutation>(print(InsertAchievementsDocument), variables));
@@ -10088,6 +10117,32 @@ export const GetUserAndExistingAchievements = gql`
   }
 }
     `;
+export const GetActivitiesAndChallenges = gql`
+    query GetActivitiesAndChallenges($id: String) {
+  activities(where: {user_id: {_eq: $id}}) {
+    activity_id
+    duration
+    score
+    started_at
+  }
+  challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
+    challenge {
+      id
+      challenge_type
+      created_at
+      start_date
+      end_date
+      state
+      rules
+      created_by_user {
+        id
+        name
+        picture
+      }
+    }
+  }
+}
+    `;
 export const InsertAchievements = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -10254,6 +10309,29 @@ export type GetUserAndExistingAchievementsQuery = (
         & Pick<Achievement, 'id' | 'name' | 'description' | 'achievement_type' | 'rule' | 'created_at'>
       ) }
     )> }
+  )> }
+);
+
+export type GetActivitiesAndChallengesQueryVariables = Exact<{
+  id?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetActivitiesAndChallengesQuery = (
+  { __typename?: 'query_root' }
+  & { activities: Array<(
+    { __typename?: 'activities' }
+    & Pick<Activities, 'activity_id' | 'duration' | 'score' | 'started_at'>
+  )>, challenge_participant: Array<(
+    { __typename?: 'challenge_participant' }
+    & { challenge: (
+      { __typename?: 'challenge' }
+      & Pick<Challenge, 'id' | 'challenge_type' | 'created_at' | 'start_date' | 'end_date' | 'state' | 'rules'>
+      & { created_by_user: (
+        { __typename?: 'users' }
+        & Pick<Users, 'id' | 'name' | 'picture'>
+      ) }
+    ) }
   )> }
 );
 
