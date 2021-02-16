@@ -33,7 +33,7 @@ exports.registerUser = functions.https.onCall(async (data) => {
     const id = userRecord.uid;
     await client
       .CreateUser({ id, email, name, picture })
-      .then((data) => data)
+      .then((res) => res)
       .catch((e) => {
         throw new functions.https.HttpsError('invalid-argument', e.message);
       });
