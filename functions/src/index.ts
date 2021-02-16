@@ -6,12 +6,12 @@ import { client } from './client';
 admin.initializeApp(functions.config().firebase);
 
 exports.registerUser = functions.https.onCall(async (data) => {
-  const { email, password } = data;
+  const { email, password, name, picture } = data;
 
   if (email === null || password === null) {
     // We are throwing an error if either the email or the password is missing
     // We should also ideally validate these on the frontend so the request is never made if those fields are missing
-    throw new functions.https.HttpsError('invalid-argument', 'email and password are required fields');
+    throw new functions.https.HttpsError('invalid-argument', 'Email and password are required fields');
   }
 
   try {
@@ -30,6 +30,13 @@ exports.registerUser = functions.https.onCall(async (data) => {
     };
 
     await admin.auth().setCustomUserClaims(userRecord.uid, customClaims);
+    const id = userRecord.uid;
+    await client
+      .CreateUser({ id, email, name, picture })
+      .then((data) => data)
+      .catch((e) => {
+        throw new functions.https.HttpsError('invalid-argument', e.message);
+      });
     return userRecord.toJSON();
   } catch (e) {
     let errorCode = 'unknown';
@@ -42,18 +49,6 @@ exports.registerUser = functions.https.onCall(async (data) => {
     }
     throw new functions.https.HttpsError(errorCode as FunctionsErrorCode, msg, JSON.stringify(e));
   }
-});
-
-// This is automatically triggered by Firebase
-// whenever a new user is created
-exports.processSignUp = functions.auth.user().onCreate(async (user) => {
-  const { uid: id, email } = user;
-  await client
-    .CreateUser({ id, email })
-    .then((data) => data)
-    .catch((e) => {
-      throw new functions.https.HttpsError('invalid-argument', e.message);
-    });
 });
 
 // This again is automatically triggered

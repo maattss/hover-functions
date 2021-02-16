@@ -7,18 +7,19 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } &
+  { [P in K]-?: NonNullable<T[P]> };
 
-      export interface PossibleTypesResultData {
-        possibleTypes: {
-          [key: string]: string[]
-        }
-      }
-      const result: PossibleTypesResultData = {
-  "possibleTypes": {}
+export interface PossibleTypesResultData {
+  possibleTypes: {
+    [key: string]: string[];
+  };
+}
+const result: PossibleTypesResultData = {
+  possibleTypes: {},
 };
-      export default result;
-    
+export default result;
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -49,11 +50,9 @@ export type Achievement = {
   user_achievements_aggregate: User_Achievement_Aggregate;
 };
 
-
 export type AchievementRuleArgs = {
   path?: Maybe<Scalars['String']>;
 };
-
 
 export type AchievementUser_AchievementsArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
@@ -62,7 +61,6 @@ export type AchievementUser_AchievementsArgs = {
   order_by?: Maybe<Array<User_Achievement_Order_By>>;
   where?: Maybe<User_Achievement_Bool_Exp>;
 };
-
 
 export type AchievementUser_Achievements_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
@@ -92,7 +90,6 @@ export type Achievement_Aggregate_Fields = {
   var_samp?: Maybe<Achievement_Var_Samp_Fields>;
   variance?: Maybe<Achievement_Variance_Fields>;
 };
-
 
 export type Achievement_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Achievement_Select_Column>>;
@@ -146,7 +143,7 @@ export type Achievement_Bool_Exp = {
 
 export enum Achievement_Constraint {
   AcheivementNameKey = 'Acheivement_name_key',
-  AcheivementPkey = 'Acheivement_pkey'
+  AcheivementPkey = 'Acheivement_pkey',
 }
 
 export type Achievement_Inc_Input = {
@@ -240,7 +237,7 @@ export enum Achievement_Select_Column {
   Id = 'id',
   Level = 'level',
   Name = 'name',
-  Rule = 'rule'
+  Rule = 'rule',
 }
 
 export type Achievement_Set_Input = {
@@ -305,7 +302,6 @@ export type Achievement_Type = {
   name: Scalars['String'];
 };
 
-
 export type Achievement_TypeAchievementsArgs = {
   distinct_on?: Maybe<Array<Achievement_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -313,7 +309,6 @@ export type Achievement_TypeAchievementsArgs = {
   order_by?: Maybe<Array<Achievement_Order_By>>;
   where?: Maybe<Achievement_Bool_Exp>;
 };
-
 
 export type Achievement_TypeAchievements_AggregateArgs = {
   distinct_on?: Maybe<Array<Achievement_Select_Column>>;
@@ -335,7 +330,6 @@ export type Achievement_Type_Aggregate_Fields = {
   max?: Maybe<Achievement_Type_Max_Fields>;
   min?: Maybe<Achievement_Type_Min_Fields>;
 };
-
 
 export type Achievement_Type_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Achievement_Type_Select_Column>>;
@@ -363,13 +357,13 @@ export type Achievement_Type_Bool_Exp = {
 };
 
 export enum Achievement_Type_Constraint {
-  AchievementTypePkey = 'achievement_type_pkey'
+  AchievementTypePkey = 'achievement_type_pkey',
 }
 
 export enum Achievement_Type_Enum {
   FirstActivity = 'FIRST_ACTIVITY',
   Score = 'SCORE',
-  ScoreInCategory = 'SCORE_IN_CATEGORY'
+  ScoreInCategory = 'SCORE_IN_CATEGORY',
 }
 
 export type Achievement_Type_Enum_Comparison_Exp = {
@@ -437,7 +431,7 @@ export type Achievement_Type_Pk_Columns_Input = {
 
 export enum Achievement_Type_Select_Column {
   Description = 'description',
-  Name = 'name'
+  Name = 'name',
 }
 
 export type Achievement_Type_Set_Input = {
@@ -447,7 +441,7 @@ export type Achievement_Type_Set_Input = {
 
 export enum Achievement_Type_Update_Column {
   Description = 'description',
-  Name = 'name'
+  Name = 'name',
 }
 
 export enum Achievement_Update_Column {
@@ -457,7 +451,7 @@ export enum Achievement_Update_Column {
   Id = 'id',
   Level = 'level',
   Name = 'name',
-  Rule = 'rule'
+  Rule = 'rule',
 }
 
 export type Achievement_Var_Pop_Fields = {
@@ -513,7 +507,6 @@ export type Activities = {
   user_id: Scalars['String'];
 };
 
-
 export type ActivitiesCommentsArgs = {
   distinct_on?: Maybe<Array<Comments_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -521,7 +514,6 @@ export type ActivitiesCommentsArgs = {
   order_by?: Maybe<Array<Comments_Order_By>>;
   where?: Maybe<Comments_Bool_Exp>;
 };
-
 
 export type ActivitiesComments_AggregateArgs = {
   distinct_on?: Maybe<Array<Comments_Select_Column>>;
@@ -531,7 +523,6 @@ export type ActivitiesComments_AggregateArgs = {
   where?: Maybe<Comments_Bool_Exp>;
 };
 
-
 export type ActivitiesLikesArgs = {
   distinct_on?: Maybe<Array<Likes_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -539,7 +530,6 @@ export type ActivitiesLikesArgs = {
   order_by?: Maybe<Array<Likes_Order_By>>;
   where?: Maybe<Likes_Bool_Exp>;
 };
-
 
 export type ActivitiesLikes_AggregateArgs = {
   distinct_on?: Maybe<Array<Likes_Select_Column>>;
@@ -569,7 +559,6 @@ export type Activities_Aggregate_Fields = {
   var_samp?: Maybe<Activities_Var_Samp_Fields>;
   variance?: Maybe<Activities_Variance_Fields>;
 };
-
 
 export type Activities_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Activities_Select_Column>>;
@@ -628,7 +617,7 @@ export type Activities_Bool_Exp = {
 };
 
 export enum Activities_Constraint {
-  ActivityPkey = 'Activity_pkey'
+  ActivityPkey = 'Activity_pkey',
 }
 
 export type Activities_Inc_Input = {
@@ -745,7 +734,7 @@ export enum Activities_Select_Column {
   Score = 'score',
   StartedAt = 'started_at',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type Activities_Set_Input = {
@@ -821,7 +810,7 @@ export enum Activities_Update_Column {
   Score = 'score',
   StartedAt = 'started_at',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type Activities_Var_Pop_Fields = {
@@ -863,7 +852,6 @@ export type Activities_Variance_Order_By = {
   score?: Maybe<Order_By>;
 };
 
-
 export type Boolean_Comparison_Exp = {
   _eq?: Maybe<Scalars['Boolean']>;
   _gt?: Maybe<Scalars['Boolean']>;
@@ -903,7 +891,6 @@ export type Categories_Aggregate_Fields = {
   var_samp?: Maybe<Categories_Var_Samp_Fields>;
   variance?: Maybe<Categories_Variance_Fields>;
 };
-
 
 export type Categories_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Categories_Select_Column>>;
@@ -949,7 +936,7 @@ export type Categories_Bool_Exp = {
 
 export enum Categories_Constraint {
   CategoryNameKey = 'Category_name_key',
-  CategoriesPkey = 'categories_pkey'
+  CategoriesPkey = 'categories_pkey',
 }
 
 export type Categories_Inc_Input = {
@@ -1018,7 +1005,7 @@ export type Categories_Pk_Columns_Input = {
 export enum Categories_Select_Column {
   Description = 'description',
   Name = 'name',
-  PointsPerMinute = 'points_per_minute'
+  PointsPerMinute = 'points_per_minute',
 }
 
 export type Categories_Set_Input = {
@@ -1066,7 +1053,7 @@ export type Categories_Sum_Order_By = {
 export enum Categories_Update_Column {
   Description = 'description',
   Name = 'name',
-  PointsPerMinute = 'points_per_minute'
+  PointsPerMinute = 'points_per_minute',
 }
 
 export type Categories_Var_Pop_Fields = {
@@ -1103,7 +1090,6 @@ export type Challenge_Type = {
   rules?: Maybe<Scalars['json']>;
 };
 
-
 export type Challenge_TypeRulesArgs = {
   path?: Maybe<Scalars['String']>;
 };
@@ -1120,7 +1106,6 @@ export type Challenge_Type_Aggregate_Fields = {
   max?: Maybe<Challenge_Type_Max_Fields>;
   min?: Maybe<Challenge_Type_Min_Fields>;
 };
-
 
 export type Challenge_Type_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Challenge_Type_Select_Column>>;
@@ -1149,7 +1134,7 @@ export type Challenge_Type_Bool_Exp = {
 
 export enum Challenge_Type_Constraint {
   ChallengeTypeDescriptionKey = 'challenge_type_description_key',
-  ChallengeTypePkey = 'challenge_type_pkey'
+  ChallengeTypePkey = 'challenge_type_pkey',
 }
 
 export type Challenge_Type_Insert_Input = {
@@ -1210,7 +1195,7 @@ export type Challenge_Type_Pk_Columns_Input = {
 export enum Challenge_Type_Select_Column {
   Description = 'description',
   Name = 'name',
-  Rules = 'rules'
+  Rules = 'rules',
 }
 
 export type Challenge_Type_Set_Input = {
@@ -1222,7 +1207,7 @@ export type Challenge_Type_Set_Input = {
 export enum Challenge_Type_Update_Column {
   Description = 'description',
   Name = 'name',
-  Rules = 'rules'
+  Rules = 'rules',
 }
 
 export type Comments = {
@@ -1257,7 +1242,6 @@ export type Comments_Aggregate_Fields = {
   var_samp?: Maybe<Comments_Var_Samp_Fields>;
   variance?: Maybe<Comments_Variance_Fields>;
 };
-
 
 export type Comments_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Comments_Select_Column>>;
@@ -1309,7 +1293,7 @@ export type Comments_Bool_Exp = {
 };
 
 export enum Comments_Constraint {
-  CommentsPkey = 'Comments_pkey'
+  CommentsPkey = 'Comments_pkey',
 }
 
 export type Comments_Inc_Input = {
@@ -1404,7 +1388,7 @@ export enum Comments_Select_Column {
   Content = 'content',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type Comments_Set_Input = {
@@ -1466,7 +1450,7 @@ export enum Comments_Update_Column {
   Content = 'content',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type Comments_Var_Pop_Fields = {
@@ -1502,7 +1486,6 @@ export type Comments_Variance_Order_By = {
   comment_id?: Maybe<Order_By>;
 };
 
-
 export type Daterange_Comparison_Exp = {
   _eq?: Maybe<Scalars['daterange']>;
   _gt?: Maybe<Scalars['daterange']>;
@@ -1514,7 +1497,6 @@ export type Daterange_Comparison_Exp = {
   _neq?: Maybe<Scalars['daterange']>;
   _nin?: Maybe<Array<Scalars['daterange']>>;
 };
-
 
 export type Float8_Comparison_Exp = {
   _eq?: Maybe<Scalars['float8']>;
@@ -1551,7 +1533,6 @@ export type Followings_Aggregate_Fields = {
   min?: Maybe<Followings_Min_Fields>;
 };
 
-
 export type Followings_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Followings_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
@@ -1581,7 +1562,7 @@ export type Followings_Bool_Exp = {
 };
 
 export enum Followings_Constraint {
-  FollowingsPkey = 'Followings_pkey'
+  FollowingsPkey = 'Followings_pkey',
 }
 
 export type Followings_Insert_Input = {
@@ -1658,7 +1639,7 @@ export enum Followings_Select_Column {
   CreatedAt = 'created_at',
   FollowingId = 'following_id',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type Followings_Set_Input = {
@@ -1672,7 +1653,7 @@ export enum Followings_Update_Column {
   CreatedAt = 'created_at',
   FollowingId = 'following_id',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type Geofence_Variants = {
@@ -1683,7 +1664,6 @@ export type Geofence_Variants = {
   name: Scalars['String'];
 };
 
-
 export type Geofence_VariantsGeofencesArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1691,7 +1671,6 @@ export type Geofence_VariantsGeofencesArgs = {
   order_by?: Maybe<Array<Geofences_Order_By>>;
   where?: Maybe<Geofences_Bool_Exp>;
 };
-
 
 export type Geofence_VariantsGeofences_AggregateArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
@@ -1713,7 +1692,6 @@ export type Geofence_Variants_Aggregate_Fields = {
   max?: Maybe<Geofence_Variants_Max_Fields>;
   min?: Maybe<Geofence_Variants_Min_Fields>;
 };
-
 
 export type Geofence_Variants_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Geofence_Variants_Select_Column>>;
@@ -1741,12 +1719,12 @@ export type Geofence_Variants_Bool_Exp = {
 };
 
 export enum Geofence_Variants_Constraint {
-  GeoFenceCategoriesPkey = 'geo_fence_categories_pkey'
+  GeoFenceCategoriesPkey = 'geo_fence_categories_pkey',
 }
 
 export enum Geofence_Variants_Enum {
   Circle = 'CIRCLE',
-  Polygon = 'POLYGON'
+  Polygon = 'POLYGON',
 }
 
 export type Geofence_Variants_Enum_Comparison_Exp = {
@@ -1814,7 +1792,7 @@ export type Geofence_Variants_Pk_Columns_Input = {
 
 export enum Geofence_Variants_Select_Column {
   Description = 'description',
-  Name = 'name'
+  Name = 'name',
 }
 
 export type Geofence_Variants_Set_Input = {
@@ -1824,7 +1802,7 @@ export type Geofence_Variants_Set_Input = {
 
 export enum Geofence_Variants_Update_Column {
   Description = 'description',
-  Name = 'name'
+  Name = 'name',
 }
 
 export type Geofences = {
@@ -1846,7 +1824,6 @@ export type Geofences = {
   variant: Geofence_Variants_Enum;
 };
 
-
 export type GeofencesActivitiesArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1854,7 +1831,6 @@ export type GeofencesActivitiesArgs = {
   order_by?: Maybe<Array<Activities_Order_By>>;
   where?: Maybe<Activities_Bool_Exp>;
 };
-
 
 export type GeofencesActivities_AggregateArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
@@ -1884,7 +1860,6 @@ export type Geofences_Aggregate_Fields = {
   var_samp?: Maybe<Geofences_Var_Samp_Fields>;
   variance?: Maybe<Geofences_Variance_Fields>;
 };
-
 
 export type Geofences_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Geofences_Select_Column>>;
@@ -1949,7 +1924,7 @@ export enum Geofences_Constraint {
   GeofencesCoordinatesKey = 'geofences_coordinates_key',
   GeofencesLatitudeLongitudeKey = 'geofences_latitude_longitude_key',
   GeofencesNameKey = 'geofences_name_key',
-  GeofencesPkey = 'geofences_pkey'
+  GeofencesPkey = 'geofences_pkey',
 }
 
 export type Geofences_Inc_Input = {
@@ -2079,7 +2054,7 @@ export enum Geofences_Select_Column {
   Name = 'name',
   Radius = 'radius',
   UpdatedAt = 'updated_at',
-  Variant = 'variant'
+  Variant = 'variant',
 }
 
 export type Geofences_Set_Input = {
@@ -2167,7 +2142,7 @@ export enum Geofences_Update_Column {
   Name = 'name',
   Radius = 'radius',
   UpdatedAt = 'updated_at',
-  Variant = 'variant'
+  Variant = 'variant',
 }
 
 export type Geofences_Var_Pop_Fields = {
@@ -2227,7 +2202,6 @@ export type Int_Comparison_Exp = {
   _nin?: Maybe<Array<Scalars['Int']>>;
 };
 
-
 export type Interval_Comparison_Exp = {
   _eq?: Maybe<Scalars['interval']>;
   _gt?: Maybe<Scalars['interval']>;
@@ -2239,7 +2213,6 @@ export type Interval_Comparison_Exp = {
   _neq?: Maybe<Scalars['interval']>;
   _nin?: Maybe<Array<Scalars['interval']>>;
 };
-
 
 export type Json_Comparison_Exp = {
   _eq?: Maybe<Scalars['json']>;
@@ -2283,7 +2256,6 @@ export type Likes_Aggregate_Fields = {
   var_samp?: Maybe<Likes_Var_Samp_Fields>;
   variance?: Maybe<Likes_Variance_Fields>;
 };
-
 
 export type Likes_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Likes_Select_Column>>;
@@ -2332,7 +2304,7 @@ export type Likes_Bool_Exp = {
 
 export enum Likes_Constraint {
   LikesPkey = 'Likes_pkey',
-  LikesUserIdActivityIdKey = 'Likes_user_id_activity_id_key'
+  LikesUserIdActivityIdKey = 'Likes_user_id_activity_id_key',
 }
 
 export type Likes_Inc_Input = {
@@ -2413,7 +2385,7 @@ export enum Likes_Select_Column {
   ActivityId = 'activity_id',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type Likes_Set_Input = {
@@ -2463,7 +2435,7 @@ export enum Likes_Update_Column {
   ActivityId = 'activity_id',
   CreatedAt = 'created_at',
   UpdatedAt = 'updated_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type Likes_Var_Pop_Fields = {
@@ -2575,295 +2547,242 @@ export type Mutation_Root = {
   update_users?: Maybe<Users_Mutation_Response>;
 };
 
-
 export type Mutation_RootDelete_AchievementArgs = {
   where: Achievement_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Achievement_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 export type Mutation_RootDelete_Achievement_TypeArgs = {
   where: Achievement_Type_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Achievement_Type_By_PkArgs = {
   name: Scalars['String'];
 };
 
-
 export type Mutation_RootDelete_ActivitiesArgs = {
   where: Activities_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Activities_By_PkArgs = {
   activity_id: Scalars['Int'];
 };
 
-
 export type Mutation_RootDelete_CategoriesArgs = {
   where: Categories_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Categories_By_PkArgs = {
   name: Scalars['String'];
 };
 
-
 export type Mutation_RootDelete_Challenge_TypeArgs = {
   where: Challenge_Type_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Challenge_Type_By_PkArgs = {
   name: Scalars['String'];
 };
 
-
 export type Mutation_RootDelete_CommentArgs = {
   comment_id: Scalars['Int'];
 };
-
 
 export type Mutation_RootDelete_CommentsArgs = {
   where: Comments_Bool_Exp;
 };
 
-
 export type Mutation_RootDelete_FollowingsArgs = {
   where: Followings_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Followings_By_PkArgs = {
   following_id: Scalars['String'];
   user_id: Scalars['String'];
 };
 
-
 export type Mutation_RootDelete_Geofence_VariantsArgs = {
   where: Geofence_Variants_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Geofence_Variants_By_PkArgs = {
   name: Scalars['String'];
 };
 
-
 export type Mutation_RootDelete_GeofencesArgs = {
   where: Geofences_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Geofences_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 export type Mutation_RootDelete_LikesArgs = {
   where: Likes_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_Likes_By_PkArgs = {
   activity_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
 
-
 export type Mutation_RootDelete_UserArgs = {
   id: Scalars['String'];
 };
 
-
 export type Mutation_RootDelete_User_AchievementArgs = {
   where: User_Achievement_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_User_Achievement_By_PkArgs = {
   achievement_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
 
-
 export type Mutation_RootDelete_User_ChallengeArgs = {
   where: User_Challenge_Bool_Exp;
 };
-
 
 export type Mutation_RootDelete_User_Challenge_By_PkArgs = {
   id: Scalars['Int'];
 };
 
-
 export type Mutation_RootDelete_UsersArgs = {
   where: Users_Bool_Exp;
 };
-
 
 export type Mutation_RootInsert_AchievementArgs = {
   objects: Array<Achievement_Insert_Input>;
   on_conflict?: Maybe<Achievement_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Achievement_OneArgs = {
   object: Achievement_Insert_Input;
   on_conflict?: Maybe<Achievement_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_Achievement_TypeArgs = {
   objects: Array<Achievement_Type_Insert_Input>;
   on_conflict?: Maybe<Achievement_Type_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Achievement_Type_OneArgs = {
   object: Achievement_Type_Insert_Input;
   on_conflict?: Maybe<Achievement_Type_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_ActivitiesArgs = {
   objects: Array<Activities_Insert_Input>;
   on_conflict?: Maybe<Activities_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Activities_OneArgs = {
   object: Activities_Insert_Input;
   on_conflict?: Maybe<Activities_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_CategoriesArgs = {
   objects: Array<Categories_Insert_Input>;
   on_conflict?: Maybe<Categories_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Categories_OneArgs = {
   object: Categories_Insert_Input;
   on_conflict?: Maybe<Categories_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_Challenge_TypeArgs = {
   objects: Array<Challenge_Type_Insert_Input>;
   on_conflict?: Maybe<Challenge_Type_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Challenge_Type_OneArgs = {
   object: Challenge_Type_Insert_Input;
   on_conflict?: Maybe<Challenge_Type_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_CommentArgs = {
   object: Comments_Insert_Input;
   on_conflict?: Maybe<Comments_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_CommentsArgs = {
   objects: Array<Comments_Insert_Input>;
   on_conflict?: Maybe<Comments_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_FollowingsArgs = {
   objects: Array<Followings_Insert_Input>;
   on_conflict?: Maybe<Followings_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Followings_OneArgs = {
   object: Followings_Insert_Input;
   on_conflict?: Maybe<Followings_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_Geofence_VariantsArgs = {
   objects: Array<Geofence_Variants_Insert_Input>;
   on_conflict?: Maybe<Geofence_Variants_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Geofence_Variants_OneArgs = {
   object: Geofence_Variants_Insert_Input;
   on_conflict?: Maybe<Geofence_Variants_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_GeofencesArgs = {
   objects: Array<Geofences_Insert_Input>;
   on_conflict?: Maybe<Geofences_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Geofences_OneArgs = {
   object: Geofences_Insert_Input;
   on_conflict?: Maybe<Geofences_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_LikesArgs = {
   objects: Array<Likes_Insert_Input>;
   on_conflict?: Maybe<Likes_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_Likes_OneArgs = {
   object: Likes_Insert_Input;
   on_conflict?: Maybe<Likes_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_UserArgs = {
   object: Users_Insert_Input;
   on_conflict?: Maybe<Users_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_User_AchievementArgs = {
   objects: Array<User_Achievement_Insert_Input>;
   on_conflict?: Maybe<User_Achievement_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_User_Achievement_OneArgs = {
   object: User_Achievement_Insert_Input;
   on_conflict?: Maybe<User_Achievement_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_User_ChallengeArgs = {
   objects: Array<User_Challenge_Insert_Input>;
   on_conflict?: Maybe<User_Challenge_On_Conflict>;
 };
-
 
 export type Mutation_RootInsert_User_Challenge_OneArgs = {
   object: User_Challenge_Insert_Input;
   on_conflict?: Maybe<User_Challenge_On_Conflict>;
 };
 
-
 export type Mutation_RootInsert_UsersArgs = {
   objects: Array<Users_Insert_Input>;
   on_conflict?: Maybe<Users_On_Conflict>;
 };
-
 
 export type Mutation_RootUpdate_AchievementArgs = {
   _inc?: Maybe<Achievement_Inc_Input>;
@@ -2871,25 +2790,21 @@ export type Mutation_RootUpdate_AchievementArgs = {
   where: Achievement_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_Achievement_By_PkArgs = {
   _inc?: Maybe<Achievement_Inc_Input>;
   _set?: Maybe<Achievement_Set_Input>;
   pk_columns: Achievement_Pk_Columns_Input;
 };
 
-
 export type Mutation_RootUpdate_Achievement_TypeArgs = {
   _set?: Maybe<Achievement_Type_Set_Input>;
   where: Achievement_Type_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_Achievement_Type_By_PkArgs = {
   _set?: Maybe<Achievement_Type_Set_Input>;
   pk_columns: Achievement_Type_Pk_Columns_Input;
 };
-
 
 export type Mutation_RootUpdate_ActivitiesArgs = {
   _inc?: Maybe<Activities_Inc_Input>;
@@ -2897,13 +2812,11 @@ export type Mutation_RootUpdate_ActivitiesArgs = {
   where: Activities_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_Activities_By_PkArgs = {
   _inc?: Maybe<Activities_Inc_Input>;
   _set?: Maybe<Activities_Set_Input>;
   pk_columns: Activities_Pk_Columns_Input;
 };
-
 
 export type Mutation_RootUpdate_CategoriesArgs = {
   _inc?: Maybe<Categories_Inc_Input>;
@@ -2911,25 +2824,21 @@ export type Mutation_RootUpdate_CategoriesArgs = {
   where: Categories_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_Categories_By_PkArgs = {
   _inc?: Maybe<Categories_Inc_Input>;
   _set?: Maybe<Categories_Set_Input>;
   pk_columns: Categories_Pk_Columns_Input;
 };
 
-
 export type Mutation_RootUpdate_Challenge_TypeArgs = {
   _set?: Maybe<Challenge_Type_Set_Input>;
   where: Challenge_Type_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_Challenge_Type_By_PkArgs = {
   _set?: Maybe<Challenge_Type_Set_Input>;
   pk_columns: Challenge_Type_Pk_Columns_Input;
 };
-
 
 export type Mutation_RootUpdate_CommentArgs = {
   _inc?: Maybe<Comments_Inc_Input>;
@@ -2937,37 +2846,31 @@ export type Mutation_RootUpdate_CommentArgs = {
   pk_columns: Comments_Pk_Columns_Input;
 };
 
-
 export type Mutation_RootUpdate_CommentsArgs = {
   _inc?: Maybe<Comments_Inc_Input>;
   _set?: Maybe<Comments_Set_Input>;
   where: Comments_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_FollowingsArgs = {
   _set?: Maybe<Followings_Set_Input>;
   where: Followings_Bool_Exp;
 };
-
 
 export type Mutation_RootUpdate_Followings_By_PkArgs = {
   _set?: Maybe<Followings_Set_Input>;
   pk_columns: Followings_Pk_Columns_Input;
 };
 
-
 export type Mutation_RootUpdate_Geofence_VariantsArgs = {
   _set?: Maybe<Geofence_Variants_Set_Input>;
   where: Geofence_Variants_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_Geofence_Variants_By_PkArgs = {
   _set?: Maybe<Geofence_Variants_Set_Input>;
   pk_columns: Geofence_Variants_Pk_Columns_Input;
 };
-
 
 export type Mutation_RootUpdate_GeofencesArgs = {
   _inc?: Maybe<Geofences_Inc_Input>;
@@ -2975,13 +2878,11 @@ export type Mutation_RootUpdate_GeofencesArgs = {
   where: Geofences_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_Geofences_By_PkArgs = {
   _inc?: Maybe<Geofences_Inc_Input>;
   _set?: Maybe<Geofences_Set_Input>;
   pk_columns: Geofences_Pk_Columns_Input;
 };
-
 
 export type Mutation_RootUpdate_LikesArgs = {
   _inc?: Maybe<Likes_Inc_Input>;
@@ -2989,19 +2890,16 @@ export type Mutation_RootUpdate_LikesArgs = {
   where: Likes_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_Likes_By_PkArgs = {
   _inc?: Maybe<Likes_Inc_Input>;
   _set?: Maybe<Likes_Set_Input>;
   pk_columns: Likes_Pk_Columns_Input;
 };
 
-
 export type Mutation_RootUpdate_UserArgs = {
   _set?: Maybe<Users_Set_Input>;
   pk_columns: Users_Pk_Columns_Input;
 };
-
 
 export type Mutation_RootUpdate_User_AchievementArgs = {
   _inc?: Maybe<User_Achievement_Inc_Input>;
@@ -3009,13 +2907,11 @@ export type Mutation_RootUpdate_User_AchievementArgs = {
   where: User_Achievement_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_User_Achievement_By_PkArgs = {
   _inc?: Maybe<User_Achievement_Inc_Input>;
   _set?: Maybe<User_Achievement_Set_Input>;
   pk_columns: User_Achievement_Pk_Columns_Input;
 };
-
 
 export type Mutation_RootUpdate_User_ChallengeArgs = {
   _inc?: Maybe<User_Challenge_Inc_Input>;
@@ -3023,13 +2919,11 @@ export type Mutation_RootUpdate_User_ChallengeArgs = {
   where: User_Challenge_Bool_Exp;
 };
 
-
 export type Mutation_RootUpdate_User_Challenge_By_PkArgs = {
   _inc?: Maybe<User_Challenge_Inc_Input>;
   _set?: Maybe<User_Challenge_Set_Input>;
   pk_columns: User_Challenge_Pk_Columns_Input;
 };
-
 
 export type Mutation_RootUpdate_UsersArgs = {
   _set?: Maybe<Users_Set_Input>;
@@ -3042,7 +2936,7 @@ export enum Order_By {
   AscNullsLast = 'asc_nulls_last',
   Desc = 'desc',
   DescNullsFirst = 'desc_nulls_first',
-  DescNullsLast = 'desc_nulls_last'
+  DescNullsLast = 'desc_nulls_last',
 }
 
 export type Query_Root = {
@@ -3090,7 +2984,6 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
 };
 
-
 export type Query_RootAchievementArgs = {
   distinct_on?: Maybe<Array<Achievement_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3098,7 +2991,6 @@ export type Query_RootAchievementArgs = {
   order_by?: Maybe<Array<Achievement_Order_By>>;
   where?: Maybe<Achievement_Bool_Exp>;
 };
-
 
 export type Query_RootAchievement_AggregateArgs = {
   distinct_on?: Maybe<Array<Achievement_Select_Column>>;
@@ -3108,11 +3000,9 @@ export type Query_RootAchievement_AggregateArgs = {
   where?: Maybe<Achievement_Bool_Exp>;
 };
 
-
 export type Query_RootAchievement_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootAchievement_TypeArgs = {
   distinct_on?: Maybe<Array<Achievement_Type_Select_Column>>;
@@ -3122,7 +3012,6 @@ export type Query_RootAchievement_TypeArgs = {
   where?: Maybe<Achievement_Type_Bool_Exp>;
 };
 
-
 export type Query_RootAchievement_Type_AggregateArgs = {
   distinct_on?: Maybe<Array<Achievement_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3131,11 +3020,9 @@ export type Query_RootAchievement_Type_AggregateArgs = {
   where?: Maybe<Achievement_Type_Bool_Exp>;
 };
 
-
 export type Query_RootAchievement_Type_By_PkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Query_RootActivitiesArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
@@ -3145,7 +3032,6 @@ export type Query_RootActivitiesArgs = {
   where?: Maybe<Activities_Bool_Exp>;
 };
 
-
 export type Query_RootActivities_AggregateArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3154,11 +3040,9 @@ export type Query_RootActivities_AggregateArgs = {
   where?: Maybe<Activities_Bool_Exp>;
 };
 
-
 export type Query_RootActivities_By_PkArgs = {
   activity_id: Scalars['Int'];
 };
-
 
 export type Query_RootCategoriesArgs = {
   distinct_on?: Maybe<Array<Categories_Select_Column>>;
@@ -3168,7 +3052,6 @@ export type Query_RootCategoriesArgs = {
   where?: Maybe<Categories_Bool_Exp>;
 };
 
-
 export type Query_RootCategories_AggregateArgs = {
   distinct_on?: Maybe<Array<Categories_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3177,11 +3060,9 @@ export type Query_RootCategories_AggregateArgs = {
   where?: Maybe<Categories_Bool_Exp>;
 };
 
-
 export type Query_RootCategories_By_PkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Query_RootChallenge_TypeArgs = {
   distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
@@ -3191,7 +3072,6 @@ export type Query_RootChallenge_TypeArgs = {
   where?: Maybe<Challenge_Type_Bool_Exp>;
 };
 
-
 export type Query_RootChallenge_Type_AggregateArgs = {
   distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3200,16 +3080,13 @@ export type Query_RootChallenge_Type_AggregateArgs = {
   where?: Maybe<Challenge_Type_Bool_Exp>;
 };
 
-
 export type Query_RootChallenge_Type_By_PkArgs = {
   name: Scalars['String'];
 };
 
-
 export type Query_RootCommentArgs = {
   comment_id: Scalars['Int'];
 };
-
 
 export type Query_RootCommentsArgs = {
   distinct_on?: Maybe<Array<Comments_Select_Column>>;
@@ -3219,7 +3096,6 @@ export type Query_RootCommentsArgs = {
   where?: Maybe<Comments_Bool_Exp>;
 };
 
-
 export type Query_RootComments_AggregateArgs = {
   distinct_on?: Maybe<Array<Comments_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3227,7 +3103,6 @@ export type Query_RootComments_AggregateArgs = {
   order_by?: Maybe<Array<Comments_Order_By>>;
   where?: Maybe<Comments_Bool_Exp>;
 };
-
 
 export type Query_RootFollowingsArgs = {
   distinct_on?: Maybe<Array<Followings_Select_Column>>;
@@ -3237,7 +3112,6 @@ export type Query_RootFollowingsArgs = {
   where?: Maybe<Followings_Bool_Exp>;
 };
 
-
 export type Query_RootFollowings_AggregateArgs = {
   distinct_on?: Maybe<Array<Followings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3246,12 +3120,10 @@ export type Query_RootFollowings_AggregateArgs = {
   where?: Maybe<Followings_Bool_Exp>;
 };
 
-
 export type Query_RootFollowings_By_PkArgs = {
   following_id: Scalars['String'];
   user_id: Scalars['String'];
 };
-
 
 export type Query_RootGeofence_VariantsArgs = {
   distinct_on?: Maybe<Array<Geofence_Variants_Select_Column>>;
@@ -3261,7 +3133,6 @@ export type Query_RootGeofence_VariantsArgs = {
   where?: Maybe<Geofence_Variants_Bool_Exp>;
 };
 
-
 export type Query_RootGeofence_Variants_AggregateArgs = {
   distinct_on?: Maybe<Array<Geofence_Variants_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3270,11 +3141,9 @@ export type Query_RootGeofence_Variants_AggregateArgs = {
   where?: Maybe<Geofence_Variants_Bool_Exp>;
 };
 
-
 export type Query_RootGeofence_Variants_By_PkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Query_RootGeofencesArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
@@ -3284,7 +3153,6 @@ export type Query_RootGeofencesArgs = {
   where?: Maybe<Geofences_Bool_Exp>;
 };
 
-
 export type Query_RootGeofences_AggregateArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3293,11 +3161,9 @@ export type Query_RootGeofences_AggregateArgs = {
   where?: Maybe<Geofences_Bool_Exp>;
 };
 
-
 export type Query_RootGeofences_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootLikesArgs = {
   distinct_on?: Maybe<Array<Likes_Select_Column>>;
@@ -3307,7 +3173,6 @@ export type Query_RootLikesArgs = {
   where?: Maybe<Likes_Bool_Exp>;
 };
 
-
 export type Query_RootLikes_AggregateArgs = {
   distinct_on?: Maybe<Array<Likes_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3316,12 +3181,10 @@ export type Query_RootLikes_AggregateArgs = {
   where?: Maybe<Likes_Bool_Exp>;
 };
 
-
 export type Query_RootLikes_By_PkArgs = {
   activity_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
-
 
 export type Query_RootUnachievedachievementsArgs = {
   args: Unachievedachievements_Args;
@@ -3332,7 +3195,6 @@ export type Query_RootUnachievedachievementsArgs = {
   where?: Maybe<Achievement_Bool_Exp>;
 };
 
-
 export type Query_RootUnachievedachievements_AggregateArgs = {
   args: Unachievedachievements_Args;
   distinct_on?: Maybe<Array<Achievement_Select_Column>>;
@@ -3342,11 +3204,9 @@ export type Query_RootUnachievedachievements_AggregateArgs = {
   where?: Maybe<Achievement_Bool_Exp>;
 };
 
-
 export type Query_RootUserArgs = {
   id: Scalars['String'];
 };
-
 
 export type Query_RootUser_AchievementArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
@@ -3356,7 +3216,6 @@ export type Query_RootUser_AchievementArgs = {
   where?: Maybe<User_Achievement_Bool_Exp>;
 };
 
-
 export type Query_RootUser_Achievement_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3365,12 +3224,10 @@ export type Query_RootUser_Achievement_AggregateArgs = {
   where?: Maybe<User_Achievement_Bool_Exp>;
 };
 
-
 export type Query_RootUser_Achievement_By_PkArgs = {
   achievement_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
-
 
 export type Query_RootUser_ChallengeArgs = {
   distinct_on?: Maybe<Array<User_Challenge_Select_Column>>;
@@ -3380,7 +3237,6 @@ export type Query_RootUser_ChallengeArgs = {
   where?: Maybe<User_Challenge_Bool_Exp>;
 };
 
-
 export type Query_RootUser_Challenge_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Challenge_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3389,11 +3245,9 @@ export type Query_RootUser_Challenge_AggregateArgs = {
   where?: Maybe<User_Challenge_Bool_Exp>;
 };
 
-
 export type Query_RootUser_Challenge_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Query_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
@@ -3402,7 +3256,6 @@ export type Query_RootUsersArgs = {
   order_by?: Maybe<Array<Users_Order_By>>;
   where?: Maybe<Users_Bool_Exp>;
 };
-
 
 export type Query_RootUsers_AggregateArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
@@ -3475,7 +3328,6 @@ export type Subscription_Root = {
   users_aggregate: Users_Aggregate;
 };
 
-
 export type Subscription_RootAchievementArgs = {
   distinct_on?: Maybe<Array<Achievement_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3483,7 +3335,6 @@ export type Subscription_RootAchievementArgs = {
   order_by?: Maybe<Array<Achievement_Order_By>>;
   where?: Maybe<Achievement_Bool_Exp>;
 };
-
 
 export type Subscription_RootAchievement_AggregateArgs = {
   distinct_on?: Maybe<Array<Achievement_Select_Column>>;
@@ -3493,11 +3344,9 @@ export type Subscription_RootAchievement_AggregateArgs = {
   where?: Maybe<Achievement_Bool_Exp>;
 };
 
-
 export type Subscription_RootAchievement_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootAchievement_TypeArgs = {
   distinct_on?: Maybe<Array<Achievement_Type_Select_Column>>;
@@ -3507,7 +3356,6 @@ export type Subscription_RootAchievement_TypeArgs = {
   where?: Maybe<Achievement_Type_Bool_Exp>;
 };
 
-
 export type Subscription_RootAchievement_Type_AggregateArgs = {
   distinct_on?: Maybe<Array<Achievement_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3516,11 +3364,9 @@ export type Subscription_RootAchievement_Type_AggregateArgs = {
   where?: Maybe<Achievement_Type_Bool_Exp>;
 };
 
-
 export type Subscription_RootAchievement_Type_By_PkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Subscription_RootActivitiesArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
@@ -3530,7 +3376,6 @@ export type Subscription_RootActivitiesArgs = {
   where?: Maybe<Activities_Bool_Exp>;
 };
 
-
 export type Subscription_RootActivities_AggregateArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3539,11 +3384,9 @@ export type Subscription_RootActivities_AggregateArgs = {
   where?: Maybe<Activities_Bool_Exp>;
 };
 
-
 export type Subscription_RootActivities_By_PkArgs = {
   activity_id: Scalars['Int'];
 };
-
 
 export type Subscription_RootCategoriesArgs = {
   distinct_on?: Maybe<Array<Categories_Select_Column>>;
@@ -3553,7 +3396,6 @@ export type Subscription_RootCategoriesArgs = {
   where?: Maybe<Categories_Bool_Exp>;
 };
 
-
 export type Subscription_RootCategories_AggregateArgs = {
   distinct_on?: Maybe<Array<Categories_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3562,11 +3404,9 @@ export type Subscription_RootCategories_AggregateArgs = {
   where?: Maybe<Categories_Bool_Exp>;
 };
 
-
 export type Subscription_RootCategories_By_PkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Subscription_RootChallenge_TypeArgs = {
   distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
@@ -3576,7 +3416,6 @@ export type Subscription_RootChallenge_TypeArgs = {
   where?: Maybe<Challenge_Type_Bool_Exp>;
 };
 
-
 export type Subscription_RootChallenge_Type_AggregateArgs = {
   distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3585,16 +3424,13 @@ export type Subscription_RootChallenge_Type_AggregateArgs = {
   where?: Maybe<Challenge_Type_Bool_Exp>;
 };
 
-
 export type Subscription_RootChallenge_Type_By_PkArgs = {
   name: Scalars['String'];
 };
 
-
 export type Subscription_RootCommentArgs = {
   comment_id: Scalars['Int'];
 };
-
 
 export type Subscription_RootCommentsArgs = {
   distinct_on?: Maybe<Array<Comments_Select_Column>>;
@@ -3604,7 +3440,6 @@ export type Subscription_RootCommentsArgs = {
   where?: Maybe<Comments_Bool_Exp>;
 };
 
-
 export type Subscription_RootComments_AggregateArgs = {
   distinct_on?: Maybe<Array<Comments_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3612,7 +3447,6 @@ export type Subscription_RootComments_AggregateArgs = {
   order_by?: Maybe<Array<Comments_Order_By>>;
   where?: Maybe<Comments_Bool_Exp>;
 };
-
 
 export type Subscription_RootFollowingsArgs = {
   distinct_on?: Maybe<Array<Followings_Select_Column>>;
@@ -3622,7 +3456,6 @@ export type Subscription_RootFollowingsArgs = {
   where?: Maybe<Followings_Bool_Exp>;
 };
 
-
 export type Subscription_RootFollowings_AggregateArgs = {
   distinct_on?: Maybe<Array<Followings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3631,12 +3464,10 @@ export type Subscription_RootFollowings_AggregateArgs = {
   where?: Maybe<Followings_Bool_Exp>;
 };
 
-
 export type Subscription_RootFollowings_By_PkArgs = {
   following_id: Scalars['String'];
   user_id: Scalars['String'];
 };
-
 
 export type Subscription_RootGeofence_VariantsArgs = {
   distinct_on?: Maybe<Array<Geofence_Variants_Select_Column>>;
@@ -3646,7 +3477,6 @@ export type Subscription_RootGeofence_VariantsArgs = {
   where?: Maybe<Geofence_Variants_Bool_Exp>;
 };
 
-
 export type Subscription_RootGeofence_Variants_AggregateArgs = {
   distinct_on?: Maybe<Array<Geofence_Variants_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3655,11 +3485,9 @@ export type Subscription_RootGeofence_Variants_AggregateArgs = {
   where?: Maybe<Geofence_Variants_Bool_Exp>;
 };
 
-
 export type Subscription_RootGeofence_Variants_By_PkArgs = {
   name: Scalars['String'];
 };
-
 
 export type Subscription_RootGeofencesArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
@@ -3669,7 +3497,6 @@ export type Subscription_RootGeofencesArgs = {
   where?: Maybe<Geofences_Bool_Exp>;
 };
 
-
 export type Subscription_RootGeofences_AggregateArgs = {
   distinct_on?: Maybe<Array<Geofences_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3678,11 +3505,9 @@ export type Subscription_RootGeofences_AggregateArgs = {
   where?: Maybe<Geofences_Bool_Exp>;
 };
 
-
 export type Subscription_RootGeofences_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootLikesArgs = {
   distinct_on?: Maybe<Array<Likes_Select_Column>>;
@@ -3692,7 +3517,6 @@ export type Subscription_RootLikesArgs = {
   where?: Maybe<Likes_Bool_Exp>;
 };
 
-
 export type Subscription_RootLikes_AggregateArgs = {
   distinct_on?: Maybe<Array<Likes_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3701,12 +3525,10 @@ export type Subscription_RootLikes_AggregateArgs = {
   where?: Maybe<Likes_Bool_Exp>;
 };
 
-
 export type Subscription_RootLikes_By_PkArgs = {
   activity_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
-
 
 export type Subscription_RootUnachievedachievementsArgs = {
   args: Unachievedachievements_Args;
@@ -3717,7 +3539,6 @@ export type Subscription_RootUnachievedachievementsArgs = {
   where?: Maybe<Achievement_Bool_Exp>;
 };
 
-
 export type Subscription_RootUnachievedachievements_AggregateArgs = {
   args: Unachievedachievements_Args;
   distinct_on?: Maybe<Array<Achievement_Select_Column>>;
@@ -3727,11 +3548,9 @@ export type Subscription_RootUnachievedachievements_AggregateArgs = {
   where?: Maybe<Achievement_Bool_Exp>;
 };
 
-
 export type Subscription_RootUserArgs = {
   id: Scalars['String'];
 };
-
 
 export type Subscription_RootUser_AchievementArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
@@ -3741,7 +3560,6 @@ export type Subscription_RootUser_AchievementArgs = {
   where?: Maybe<User_Achievement_Bool_Exp>;
 };
 
-
 export type Subscription_RootUser_Achievement_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3750,12 +3568,10 @@ export type Subscription_RootUser_Achievement_AggregateArgs = {
   where?: Maybe<User_Achievement_Bool_Exp>;
 };
 
-
 export type Subscription_RootUser_Achievement_By_PkArgs = {
   achievement_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
-
 
 export type Subscription_RootUser_ChallengeArgs = {
   distinct_on?: Maybe<Array<User_Challenge_Select_Column>>;
@@ -3765,7 +3581,6 @@ export type Subscription_RootUser_ChallengeArgs = {
   where?: Maybe<User_Challenge_Bool_Exp>;
 };
 
-
 export type Subscription_RootUser_Challenge_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Challenge_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3774,11 +3589,9 @@ export type Subscription_RootUser_Challenge_AggregateArgs = {
   where?: Maybe<User_Challenge_Bool_Exp>;
 };
 
-
 export type Subscription_RootUser_Challenge_By_PkArgs = {
   id: Scalars['Int'];
 };
-
 
 export type Subscription_RootUsersArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
@@ -3788,7 +3601,6 @@ export type Subscription_RootUsersArgs = {
   where?: Maybe<Users_Bool_Exp>;
 };
 
-
 export type Subscription_RootUsers_AggregateArgs = {
   distinct_on?: Maybe<Array<Users_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -3796,7 +3608,6 @@ export type Subscription_RootUsers_AggregateArgs = {
   order_by?: Maybe<Array<Users_Order_By>>;
   where?: Maybe<Users_Bool_Exp>;
 };
-
 
 export type Timestamp_Comparison_Exp = {
   _eq?: Maybe<Scalars['timestamp']>;
@@ -3809,7 +3620,6 @@ export type Timestamp_Comparison_Exp = {
   _neq?: Maybe<Scalars['timestamp']>;
   _nin?: Maybe<Array<Scalars['timestamp']>>;
 };
-
 
 export type Timestamptz_Comparison_Exp = {
   _eq?: Maybe<Scalars['timestamptz']>;
@@ -3857,7 +3667,6 @@ export type User_Achievement_Aggregate_Fields = {
   variance?: Maybe<User_Achievement_Variance_Fields>;
 };
 
-
 export type User_Achievement_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<User_Achievement_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
@@ -3903,7 +3712,7 @@ export type User_Achievement_Bool_Exp = {
 };
 
 export enum User_Achievement_Constraint {
-  UserAchievmentPkey = 'user_achievment_pkey'
+  UserAchievmentPkey = 'user_achievment_pkey',
 }
 
 export type User_Achievement_Inc_Input = {
@@ -3977,7 +3786,7 @@ export type User_Achievement_Pk_Columns_Input = {
 export enum User_Achievement_Select_Column {
   AchievementId = 'achievement_id',
   CreatedAt = 'created_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type User_Achievement_Set_Input = {
@@ -4025,7 +3834,7 @@ export type User_Achievement_Sum_Order_By = {
 export enum User_Achievement_Update_Column {
   AchievementId = 'achievement_id',
   CreatedAt = 'created_at',
-  UserId = 'user_id'
+  UserId = 'user_id',
 }
 
 export type User_Achievement_Var_Pop_Fields = {
@@ -4067,7 +3876,6 @@ export type User_Challenge = {
   rules?: Maybe<Scalars['json']>;
 };
 
-
 export type User_ChallengeRulesArgs = {
   path?: Maybe<Scalars['String']>;
 };
@@ -4092,7 +3900,6 @@ export type User_Challenge_Aggregate_Fields = {
   var_samp?: Maybe<User_Challenge_Var_Samp_Fields>;
   variance?: Maybe<User_Challenge_Variance_Fields>;
 };
-
 
 export type User_Challenge_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<User_Challenge_Select_Column>>;
@@ -4142,7 +3949,7 @@ export type User_Challenge_Bool_Exp = {
 };
 
 export enum User_Challenge_Constraint {
-  UserChallengePkey = 'user_challenge_pkey'
+  UserChallengePkey = 'user_challenge_pkey',
 }
 
 export type User_Challenge_Inc_Input = {
@@ -4234,7 +4041,7 @@ export enum User_Challenge_Select_Column {
   Id = 'id',
   IsActive = 'is_active',
   ReceiverUid = 'receiver_uid',
-  Rules = 'rules'
+  Rules = 'rules',
 }
 
 export type User_Challenge_Set_Input = {
@@ -4292,7 +4099,7 @@ export enum User_Challenge_Update_Column {
   Id = 'id',
   IsActive = 'is_active',
   ReceiverUid = 'receiver_uid',
-  Rules = 'rules'
+  Rules = 'rules',
 }
 
 export type User_Challenge_Var_Pop_Fields = {
@@ -4342,7 +4149,6 @@ export type Users = {
   user_achievement_aggregate: User_Achievement_Aggregate;
 };
 
-
 export type UsersActivitiesArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -4350,7 +4156,6 @@ export type UsersActivitiesArgs = {
   order_by?: Maybe<Array<Activities_Order_By>>;
   where?: Maybe<Activities_Bool_Exp>;
 };
-
 
 export type UsersActivities_AggregateArgs = {
   distinct_on?: Maybe<Array<Activities_Select_Column>>;
@@ -4360,7 +4165,6 @@ export type UsersActivities_AggregateArgs = {
   where?: Maybe<Activities_Bool_Exp>;
 };
 
-
 export type UsersFollowersArgs = {
   distinct_on?: Maybe<Array<Followings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -4368,7 +4172,6 @@ export type UsersFollowersArgs = {
   order_by?: Maybe<Array<Followings_Order_By>>;
   where?: Maybe<Followings_Bool_Exp>;
 };
-
 
 export type UsersFollowers_AggregateArgs = {
   distinct_on?: Maybe<Array<Followings_Select_Column>>;
@@ -4378,7 +4181,6 @@ export type UsersFollowers_AggregateArgs = {
   where?: Maybe<Followings_Bool_Exp>;
 };
 
-
 export type UsersFollowingArgs = {
   distinct_on?: Maybe<Array<Followings_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -4386,7 +4188,6 @@ export type UsersFollowingArgs = {
   order_by?: Maybe<Array<Followings_Order_By>>;
   where?: Maybe<Followings_Bool_Exp>;
 };
-
 
 export type UsersFollowing_AggregateArgs = {
   distinct_on?: Maybe<Array<Followings_Select_Column>>;
@@ -4396,7 +4197,6 @@ export type UsersFollowing_AggregateArgs = {
   where?: Maybe<Followings_Bool_Exp>;
 };
 
-
 export type UsersUser_AchievementArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -4404,7 +4204,6 @@ export type UsersUser_AchievementArgs = {
   order_by?: Maybe<Array<User_Achievement_Order_By>>;
   where?: Maybe<User_Achievement_Bool_Exp>;
 };
-
 
 export type UsersUser_Achievement_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
@@ -4426,7 +4225,6 @@ export type Users_Aggregate_Fields = {
   max?: Maybe<Users_Max_Fields>;
   min?: Maybe<Users_Min_Fields>;
 };
-
 
 export type Users_Aggregate_FieldsCountArgs = {
   columns?: Maybe<Array<Users_Select_Column>>;
@@ -4464,7 +4262,7 @@ export type Users_Bool_Exp = {
 export enum Users_Constraint {
   UsersEmailKey = 'Users_email_key',
   UsersIdKey = 'Users_id_key',
-  UsersPkey = 'Users_pkey'
+  UsersPkey = 'Users_pkey',
 }
 
 export type Users_Insert_Input = {
@@ -4565,7 +4363,7 @@ export enum Users_Select_Column {
   Id = 'id',
   Name = 'name',
   Picture = 'picture',
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
 
 export type Users_Set_Input = {
@@ -4585,162 +4383,141 @@ export enum Users_Update_Column {
   Id = 'id',
   Name = 'name',
   Picture = 'picture',
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
 }
-
 
 export const AddAchievementDocument = gql`
-    mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
-  insert_user_achievement(objects: $objects) {
-    affected_rows
+  mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
+    insert_user_achievement(objects: $objects) {
+      affected_rows
+    }
   }
-}
-    `;
+`;
 export const CreateUserDocument = gql`
-    mutation CreateUser($id: String!, $email: String) {
-  insert_users(objects: [{id: $id, email: $email}]) {
-    affected_rows
+  mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
+    insert_users(objects: [{ id: $id, email: $email, name: $name, picture: $picture }]) {
+      affected_rows
+    }
   }
-}
-    `;
+`;
 export const DeleteAchievementDocument = gql`
-    mutation DeleteAchievement($achievement_id: Int!, $user_id: String!) {
-  delete_user_achievement_by_pk(
-    achievement_id: $achievement_id
-    user_id: $user_id
-  ) {
-    achievement_id
+  mutation DeleteAchievement($achievement_id: Int!, $user_id: String!) {
+    delete_user_achievement_by_pk(achievement_id: $achievement_id, user_id: $user_id) {
+      achievement_id
+    }
   }
-}
-    `;
+`;
 export const DeleteUserDocument = gql`
-    mutation DeleteUser($id: String!) {
-  delete_users(where: {id: {_eq: $id}}) {
-    affected_rows
+  mutation DeleteUser($id: String!) {
+    delete_users(where: { id: { _eq: $id } }) {
+      affected_rows
+    }
   }
-}
-    `;
+`;
 export const GetUserAndExistingAchievementsDocument = gql`
-    query GetUserAndExistingAchievements($user_id: String!) {
-  user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
-    }
-    education_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EDUCATION"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+  query GetUserAndExistingAchievements($user_id: String!) {
+    user(id: $user_id) {
+      id
+      totalScore
+      activity_count: activities_aggregate {
+        aggregate {
+          count(columns: activity_id)
         }
       }
-    }
-    culture_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "CULTURE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      education_score: activities_aggregate(where: { geofence: { category: { _eq: "EDUCATION" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    social_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "SOCIAL"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      culture_score: activities_aggregate(where: { geofence: { category: { _eq: "CULTURE" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    exercise_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EXERCISE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      social_score: activities_aggregate(where: { geofence: { category: { _eq: "SOCIAL" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    user_achievement {
-      achievement {
-        id
-        name
-        description
-        achievement_type
-        rule
-        created_at
+      exercise_score: activities_aggregate(where: { geofence: { category: { _eq: "EXERCISE" } } }) {
+        aggregate {
+          sum {
+            score
+          }
+        }
+      }
+      user_achievement {
+        achievement {
+          id
+          name
+          description
+          achievement_type
+          rule
+          created_at
+        }
       }
     }
   }
-}
-    `;
+`;
 export const GetUserAndUnachievedAchievementsDocument = gql`
-    query GetUserAndUnachievedAchievements($user_id: String!) {
-  unachievedachievements(args: {uid: $user_id}) {
-    id
-    name
-    description
-    created_at
-    achievement_type
-    rule
-  }
-  user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
+  query GetUserAndUnachievedAchievements($user_id: String!) {
+    unachievedachievements(args: { uid: $user_id }) {
+      id
+      name
+      description
+      created_at
+      achievement_type
+      rule
     }
-    education_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EDUCATION"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+    user(id: $user_id) {
+      id
+      totalScore
+      activity_count: activities_aggregate {
+        aggregate {
+          count(columns: activity_id)
         }
       }
-    }
-    culture_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "CULTURE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      education_score: activities_aggregate(where: { geofence: { category: { _eq: "EDUCATION" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    social_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "SOCIAL"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      culture_score: activities_aggregate(where: { geofence: { category: { _eq: "CULTURE" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    exercise_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EXERCISE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      social_score: activities_aggregate(where: { geofence: { category: { _eq: "SOCIAL" } } }) {
+        aggregate {
+          sum {
+            score
+          }
+        }
+      }
+      exercise_score: activities_aggregate(where: { geofence: { category: { _eq: "EXERCISE" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
     }
   }
-}
-    `;
+`;
 
 export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 
-
-const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
+const defaultWrapper: SdkFunctionWrapper = (sdkFunction) => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     AddAchievement(variables: AddAchievementMutationVariables): Promise<AddAchievementMutation> {
@@ -4755,19 +4532,28 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     DeleteUser(variables: DeleteUserMutationVariables): Promise<DeleteUserMutation> {
       return withWrapper(() => client.request<DeleteUserMutation>(print(DeleteUserDocument), variables));
     },
-    GetUserAndExistingAchievements(variables: GetUserAndExistingAchievementsQueryVariables): Promise<GetUserAndExistingAchievementsQuery> {
-      return withWrapper(() => client.request<GetUserAndExistingAchievementsQuery>(print(GetUserAndExistingAchievementsDocument), variables));
+    GetUserAndExistingAchievements(
+      variables: GetUserAndExistingAchievementsQueryVariables,
+    ): Promise<GetUserAndExistingAchievementsQuery> {
+      return withWrapper(() =>
+        client.request<GetUserAndExistingAchievementsQuery>(print(GetUserAndExistingAchievementsDocument), variables),
+      );
     },
-    GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
-      return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
-    }
+    GetUserAndUnachievedAchievements(
+      variables: GetUserAndUnachievedAchievementsQueryVariables,
+    ): Promise<GetUserAndUnachievedAchievementsQuery> {
+      return withWrapper(() =>
+        client.request<GetUserAndUnachievedAchievementsQuery>(
+          print(GetUserAndUnachievedAchievementsDocument),
+          variables,
+        ),
+      );
+    },
   };
 }
 export type Sdk = ReturnType<typeof getSdk>;
 
-
 export type ResolverTypeWrapper<T> = Promise<T> | T;
-
 
 export type LegacyStitchingResolver<TResult, TParent, TContext, TArgs> = {
   fragment: string;
@@ -4778,7 +4564,9 @@ export type NewStitchingResolver<TResult, TParent, TContext, TArgs> = {
   selectionSet: string;
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type StitchingResolver<TResult, TParent, TContext, TArgs> = LegacyStitchingResolver<TResult, TParent, TContext, TArgs> | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
+export type StitchingResolver<TResult, TParent, TContext, TArgs> =
+  | LegacyStitchingResolver<TResult, TParent, TContext, TArgs>
+  | NewStitchingResolver<TResult, TParent, TContext, TArgs>;
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
   | ResolverFn<TResult, TParent, TContext, TArgs>
   | StitchingResolver<TResult, TParent, TContext, TArgs>;
@@ -4787,21 +4575,21 @@ export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => AsyncIterator<TResult> | Promise<AsyncIterator<TResult>>;
 
 export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => TResult | Promise<TResult>;
 
 export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
@@ -4825,10 +4613,14 @@ export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TCo
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   parent: TParent,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+  obj: T,
+  context: TContext,
+  info: GraphQLResolveInfo,
+) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -4837,7 +4629,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   parent: TParent,
   args: TArgs,
   context: TContext,
-  info: GraphQLResolveInfo
+  info: GraphQLResolveInfo,
 ) => TResult | Promise<TResult>;
 
 /** Mapping between all available schema types and the resolvers types */
@@ -5656,7 +5448,10 @@ export type ResolversParentTypes = {
   users_set_input: Users_Set_Input;
 };
 
-export type AchievementResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement'] = ResolversParentTypes['achievement']> = {
+export type AchievementResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement'] = ResolversParentTypes['achievement']
+> = {
   achievementTypeByAchievementType?: Resolver<ResolversTypes['achievement_type'], ParentType, ContextType>;
   achievement_type?: Resolver<ResolversTypes['achievement_type_enum'], ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -5665,20 +5460,41 @@ export type AchievementResolvers<ContextType = any, ParentType extends Resolvers
   level?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   rule?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<AchievementRuleArgs, never>>;
-  user_achievements?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<AchievementUser_AchievementsArgs, never>>;
-  user_achievements_aggregate?: Resolver<ResolversTypes['user_achievement_aggregate'], ParentType, ContextType, RequireFields<AchievementUser_Achievements_AggregateArgs, never>>;
+  user_achievements?: Resolver<
+    Array<ResolversTypes['user_achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<AchievementUser_AchievementsArgs, never>
+  >;
+  user_achievements_aggregate?: Resolver<
+    ResolversTypes['user_achievement_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<AchievementUser_Achievements_AggregateArgs, never>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_aggregate'] = ResolversParentTypes['achievement_aggregate']> = {
+export type Achievement_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_aggregate'] = ResolversParentTypes['achievement_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['achievement_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['achievement']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_aggregate_fields'] = ResolversParentTypes['achievement_aggregate_fields']> = {
+export type Achievement_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_aggregate_fields'] = ResolversParentTypes['achievement_aggregate_fields']
+> = {
   avg?: Resolver<Maybe<ResolversTypes['achievement_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Achievement_Aggregate_FieldsCountArgs, never>>;
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Achievement_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['achievement_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['achievement_min_fields']>, ParentType, ContextType>;
   stddev?: Resolver<Maybe<ResolversTypes['achievement_stddev_fields']>, ParentType, ContextType>;
@@ -5691,13 +5507,19 @@ export type Achievement_Aggregate_FieldsResolvers<ContextType = any, ParentType 
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_avg_fields'] = ResolversParentTypes['achievement_avg_fields']> = {
+export type Achievement_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_avg_fields'] = ResolversParentTypes['achievement_avg_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_max_fields'] = ResolversParentTypes['achievement_max_fields']> = {
+export type Achievement_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_max_fields'] = ResolversParentTypes['achievement_max_fields']
+> = {
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -5706,7 +5528,10 @@ export type Achievement_Max_FieldsResolvers<ContextType = any, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_min_fields'] = ResolversParentTypes['achievement_min_fields']> = {
+export type Achievement_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_min_fields'] = ResolversParentTypes['achievement_min_fields']
+> = {
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -5715,104 +5540,179 @@ export type Achievement_Min_FieldsResolvers<ContextType = any, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_mutation_response'] = ResolversParentTypes['achievement_mutation_response']> = {
+export type Achievement_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_mutation_response'] = ResolversParentTypes['achievement_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['achievement']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_fields'] = ResolversParentTypes['achievement_stddev_fields']> = {
+export type Achievement_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_stddev_fields'] = ResolversParentTypes['achievement_stddev_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_pop_fields'] = ResolversParentTypes['achievement_stddev_pop_fields']> = {
+export type Achievement_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_stddev_pop_fields'] = ResolversParentTypes['achievement_stddev_pop_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_stddev_samp_fields'] = ResolversParentTypes['achievement_stddev_samp_fields']> = {
+export type Achievement_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_stddev_samp_fields'] = ResolversParentTypes['achievement_stddev_samp_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_sum_fields'] = ResolversParentTypes['achievement_sum_fields']> = {
+export type Achievement_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_sum_fields'] = ResolversParentTypes['achievement_sum_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_TypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_type'] = ResolversParentTypes['achievement_type']> = {
-  achievements?: Resolver<Array<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Achievement_TypeAchievementsArgs, never>>;
-  achievements_aggregate?: Resolver<ResolversTypes['achievement_aggregate'], ParentType, ContextType, RequireFields<Achievement_TypeAchievements_AggregateArgs, never>>;
+export type Achievement_TypeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_type'] = ResolversParentTypes['achievement_type']
+> = {
+  achievements?: Resolver<
+    Array<ResolversTypes['achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Achievement_TypeAchievementsArgs, never>
+  >;
+  achievements_aggregate?: Resolver<
+    ResolversTypes['achievement_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Achievement_TypeAchievements_AggregateArgs, never>
+  >;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Type_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_type_aggregate'] = ResolversParentTypes['achievement_type_aggregate']> = {
+export type Achievement_Type_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_type_aggregate'] = ResolversParentTypes['achievement_type_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['achievement_type_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['achievement_type']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Type_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_type_aggregate_fields'] = ResolversParentTypes['achievement_type_aggregate_fields']> = {
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Achievement_Type_Aggregate_FieldsCountArgs, never>>;
+export type Achievement_Type_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_type_aggregate_fields'] = ResolversParentTypes['achievement_type_aggregate_fields']
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Achievement_Type_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['achievement_type_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['achievement_type_min_fields']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Type_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_type_max_fields'] = ResolversParentTypes['achievement_type_max_fields']> = {
+export type Achievement_Type_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_type_max_fields'] = ResolversParentTypes['achievement_type_max_fields']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Type_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_type_min_fields'] = ResolversParentTypes['achievement_type_min_fields']> = {
+export type Achievement_Type_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_type_min_fields'] = ResolversParentTypes['achievement_type_min_fields']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Type_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_type_mutation_response'] = ResolversParentTypes['achievement_type_mutation_response']> = {
+export type Achievement_Type_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_type_mutation_response'] = ResolversParentTypes['achievement_type_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['achievement_type']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_var_pop_fields'] = ResolversParentTypes['achievement_var_pop_fields']> = {
+export type Achievement_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_var_pop_fields'] = ResolversParentTypes['achievement_var_pop_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_var_samp_fields'] = ResolversParentTypes['achievement_var_samp_fields']> = {
+export type Achievement_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_var_samp_fields'] = ResolversParentTypes['achievement_var_samp_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Achievement_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement_variance_fields'] = ResolversParentTypes['achievement_variance_fields']> = {
+export type Achievement_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['achievement_variance_fields'] = ResolversParentTypes['achievement_variance_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   level?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ActivitiesResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities'] = ResolversParentTypes['activities']> = {
+export type ActivitiesResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities'] = ResolversParentTypes['activities']
+> = {
   activity_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  comments?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<ActivitiesCommentsArgs, never>>;
-  comments_aggregate?: Resolver<ResolversTypes['comments_aggregate'], ParentType, ContextType, RequireFields<ActivitiesComments_AggregateArgs, never>>;
+  comments?: Resolver<
+    Array<ResolversTypes['comments']>,
+    ParentType,
+    ContextType,
+    RequireFields<ActivitiesCommentsArgs, never>
+  >;
+  comments_aggregate?: Resolver<
+    ResolversTypes['comments_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<ActivitiesComments_AggregateArgs, never>
+  >;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   duration?: Resolver<ResolversTypes['interval'], ParentType, ContextType>;
   geofence?: Resolver<ResolversTypes['geofences'], ParentType, ContextType>;
   geofence_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   likes?: Resolver<Array<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<ActivitiesLikesArgs, never>>;
-  likes_aggregate?: Resolver<ResolversTypes['likes_aggregate'], ParentType, ContextType, RequireFields<ActivitiesLikes_AggregateArgs, never>>;
+  likes_aggregate?: Resolver<
+    ResolversTypes['likes_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<ActivitiesLikes_AggregateArgs, never>
+  >;
   score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   started_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
   stopped_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -5822,15 +5722,26 @@ export type ActivitiesResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_aggregate'] = ResolversParentTypes['activities_aggregate']> = {
+export type Activities_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_aggregate'] = ResolversParentTypes['activities_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['activities_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['activities']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_aggregate_fields'] = ResolversParentTypes['activities_aggregate_fields']> = {
+export type Activities_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_aggregate_fields'] = ResolversParentTypes['activities_aggregate_fields']
+> = {
   avg?: Resolver<Maybe<ResolversTypes['activities_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Activities_Aggregate_FieldsCountArgs, never>>;
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Activities_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['activities_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['activities_min_fields']>, ParentType, ContextType>;
   stddev?: Resolver<Maybe<ResolversTypes['activities_stddev_fields']>, ParentType, ContextType>;
@@ -5843,14 +5754,20 @@ export type Activities_Aggregate_FieldsResolvers<ContextType = any, ParentType e
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_avg_fields'] = ResolversParentTypes['activities_avg_fields']> = {
+export type Activities_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_avg_fields'] = ResolversParentTypes['activities_avg_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_max_fields'] = ResolversParentTypes['activities_max_fields']> = {
+export type Activities_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_max_fields'] = ResolversParentTypes['activities_max_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -5862,7 +5779,10 @@ export type Activities_Max_FieldsResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_min_fields'] = ResolversParentTypes['activities_min_fields']> = {
+export type Activities_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_min_fields'] = ResolversParentTypes['activities_min_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -5874,55 +5794,79 @@ export type Activities_Min_FieldsResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_mutation_response'] = ResolversParentTypes['activities_mutation_response']> = {
+export type Activities_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_mutation_response'] = ResolversParentTypes['activities_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['activities']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_fields'] = ResolversParentTypes['activities_stddev_fields']> = {
+export type Activities_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_stddev_fields'] = ResolversParentTypes['activities_stddev_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_pop_fields'] = ResolversParentTypes['activities_stddev_pop_fields']> = {
+export type Activities_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_stddev_pop_fields'] = ResolversParentTypes['activities_stddev_pop_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_stddev_samp_fields'] = ResolversParentTypes['activities_stddev_samp_fields']> = {
+export type Activities_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_stddev_samp_fields'] = ResolversParentTypes['activities_stddev_samp_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_sum_fields'] = ResolversParentTypes['activities_sum_fields']> = {
+export type Activities_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_sum_fields'] = ResolversParentTypes['activities_sum_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_var_pop_fields'] = ResolversParentTypes['activities_var_pop_fields']> = {
+export type Activities_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_var_pop_fields'] = ResolversParentTypes['activities_var_pop_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_var_samp_fields'] = ResolversParentTypes['activities_var_samp_fields']> = {
+export type Activities_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_var_samp_fields'] = ResolversParentTypes['activities_var_samp_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Activities_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['activities_variance_fields'] = ResolversParentTypes['activities_variance_fields']> = {
+export type Activities_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['activities_variance_fields'] = ResolversParentTypes['activities_variance_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -5933,22 +5877,36 @@ export interface BigintScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
   name: 'bigint';
 }
 
-export type CategoriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories'] = ResolversParentTypes['categories']> = {
+export type CategoriesResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories'] = ResolversParentTypes['categories']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   points_per_minute?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_aggregate'] = ResolversParentTypes['categories_aggregate']> = {
+export type Categories_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_aggregate'] = ResolversParentTypes['categories_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['categories_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['categories']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_aggregate_fields'] = ResolversParentTypes['categories_aggregate_fields']> = {
+export type Categories_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_aggregate_fields'] = ResolversParentTypes['categories_aggregate_fields']
+> = {
   avg?: Resolver<Maybe<ResolversTypes['categories_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Categories_Aggregate_FieldsCountArgs, never>>;
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Categories_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['categories_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['categories_min_fields']>, ParentType, ContextType>;
   stddev?: Resolver<Maybe<ResolversTypes['categories_stddev_fields']>, ParentType, ContextType>;
@@ -5961,105 +5919,169 @@ export type Categories_Aggregate_FieldsResolvers<ContextType = any, ParentType e
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_avg_fields'] = ResolversParentTypes['categories_avg_fields']> = {
+export type Categories_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_avg_fields'] = ResolversParentTypes['categories_avg_fields']
+> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_max_fields'] = ResolversParentTypes['categories_max_fields']> = {
+export type Categories_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_max_fields'] = ResolversParentTypes['categories_max_fields']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   points_per_minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_min_fields'] = ResolversParentTypes['categories_min_fields']> = {
+export type Categories_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_min_fields'] = ResolversParentTypes['categories_min_fields']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   points_per_minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_mutation_response'] = ResolversParentTypes['categories_mutation_response']> = {
+export type Categories_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_mutation_response'] = ResolversParentTypes['categories_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['categories']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_stddev_fields'] = ResolversParentTypes['categories_stddev_fields']> = {
+export type Categories_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_stddev_fields'] = ResolversParentTypes['categories_stddev_fields']
+> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_stddev_pop_fields'] = ResolversParentTypes['categories_stddev_pop_fields']> = {
+export type Categories_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_stddev_pop_fields'] = ResolversParentTypes['categories_stddev_pop_fields']
+> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_stddev_samp_fields'] = ResolversParentTypes['categories_stddev_samp_fields']> = {
+export type Categories_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_stddev_samp_fields'] = ResolversParentTypes['categories_stddev_samp_fields']
+> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_sum_fields'] = ResolversParentTypes['categories_sum_fields']> = {
+export type Categories_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_sum_fields'] = ResolversParentTypes['categories_sum_fields']
+> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_var_pop_fields'] = ResolversParentTypes['categories_var_pop_fields']> = {
+export type Categories_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_var_pop_fields'] = ResolversParentTypes['categories_var_pop_fields']
+> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_var_samp_fields'] = ResolversParentTypes['categories_var_samp_fields']> = {
+export type Categories_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_var_samp_fields'] = ResolversParentTypes['categories_var_samp_fields']
+> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Categories_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_variance_fields'] = ResolversParentTypes['categories_variance_fields']> = {
+export type Categories_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['categories_variance_fields'] = ResolversParentTypes['categories_variance_fields']
+> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Challenge_TypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type'] = ResolversParentTypes['challenge_type']> = {
+export type Challenge_TypeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['challenge_type'] = ResolversParentTypes['challenge_type']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  rules?: Resolver<Maybe<ResolversTypes['json']>, ParentType, ContextType, RequireFields<Challenge_TypeRulesArgs, never>>;
+  rules?: Resolver<
+    Maybe<ResolversTypes['json']>,
+    ParentType,
+    ContextType,
+    RequireFields<Challenge_TypeRulesArgs, never>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Challenge_Type_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_aggregate'] = ResolversParentTypes['challenge_type_aggregate']> = {
+export type Challenge_Type_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['challenge_type_aggregate'] = ResolversParentTypes['challenge_type_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['challenge_type_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['challenge_type']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Challenge_Type_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_aggregate_fields'] = ResolversParentTypes['challenge_type_aggregate_fields']> = {
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Challenge_Type_Aggregate_FieldsCountArgs, never>>;
+export type Challenge_Type_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['challenge_type_aggregate_fields'] = ResolversParentTypes['challenge_type_aggregate_fields']
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Challenge_Type_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['challenge_type_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['challenge_type_min_fields']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Challenge_Type_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_max_fields'] = ResolversParentTypes['challenge_type_max_fields']> = {
+export type Challenge_Type_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['challenge_type_max_fields'] = ResolversParentTypes['challenge_type_max_fields']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Challenge_Type_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_min_fields'] = ResolversParentTypes['challenge_type_min_fields']> = {
+export type Challenge_Type_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['challenge_type_min_fields'] = ResolversParentTypes['challenge_type_min_fields']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Challenge_Type_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_type_mutation_response'] = ResolversParentTypes['challenge_type_mutation_response']> = {
+export type Challenge_Type_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['challenge_type_mutation_response'] = ResolversParentTypes['challenge_type_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['challenge_type']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CommentsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments'] = ResolversParentTypes['comments']> = {
+export type CommentsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments'] = ResolversParentTypes['comments']
+> = {
   activity?: Resolver<ResolversTypes['activities'], ParentType, ContextType>;
   activity_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   comment_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -6071,15 +6093,26 @@ export type CommentsResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_aggregate'] = ResolversParentTypes['comments_aggregate']> = {
+export type Comments_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_aggregate'] = ResolversParentTypes['comments_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['comments_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_aggregate_fields'] = ResolversParentTypes['comments_aggregate_fields']> = {
+export type Comments_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_aggregate_fields'] = ResolversParentTypes['comments_aggregate_fields']
+> = {
   avg?: Resolver<Maybe<ResolversTypes['comments_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Comments_Aggregate_FieldsCountArgs, never>>;
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Comments_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['comments_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['comments_min_fields']>, ParentType, ContextType>;
   stddev?: Resolver<Maybe<ResolversTypes['comments_stddev_fields']>, ParentType, ContextType>;
@@ -6092,13 +6125,19 @@ export type Comments_Aggregate_FieldsResolvers<ContextType = any, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_avg_fields'] = ResolversParentTypes['comments_avg_fields']> = {
+export type Comments_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_avg_fields'] = ResolversParentTypes['comments_avg_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_max_fields'] = ResolversParentTypes['comments_max_fields']> = {
+export type Comments_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_max_fields'] = ResolversParentTypes['comments_max_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -6108,7 +6147,10 @@ export type Comments_Max_FieldsResolvers<ContextType = any, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_min_fields'] = ResolversParentTypes['comments_min_fields']> = {
+export type Comments_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_min_fields'] = ResolversParentTypes['comments_min_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -6118,49 +6160,73 @@ export type Comments_Min_FieldsResolvers<ContextType = any, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_mutation_response'] = ResolversParentTypes['comments_mutation_response']> = {
+export type Comments_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_mutation_response'] = ResolversParentTypes['comments_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_stddev_fields'] = ResolversParentTypes['comments_stddev_fields']> = {
+export type Comments_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_stddev_fields'] = ResolversParentTypes['comments_stddev_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_stddev_pop_fields'] = ResolversParentTypes['comments_stddev_pop_fields']> = {
+export type Comments_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_stddev_pop_fields'] = ResolversParentTypes['comments_stddev_pop_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_stddev_samp_fields'] = ResolversParentTypes['comments_stddev_samp_fields']> = {
+export type Comments_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_stddev_samp_fields'] = ResolversParentTypes['comments_stddev_samp_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_sum_fields'] = ResolversParentTypes['comments_sum_fields']> = {
+export type Comments_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_sum_fields'] = ResolversParentTypes['comments_sum_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_var_pop_fields'] = ResolversParentTypes['comments_var_pop_fields']> = {
+export type Comments_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_var_pop_fields'] = ResolversParentTypes['comments_var_pop_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_var_samp_fields'] = ResolversParentTypes['comments_var_samp_fields']> = {
+export type Comments_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_var_samp_fields'] = ResolversParentTypes['comments_var_samp_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Comments_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_variance_fields'] = ResolversParentTypes['comments_variance_fields']> = {
+export type Comments_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['comments_variance_fields'] = ResolversParentTypes['comments_variance_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -6174,7 +6240,10 @@ export interface Float8ScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
   name: 'float8';
 }
 
-export type FollowingsResolvers<ContextType = any, ParentType extends ResolversParentTypes['followings'] = ResolversParentTypes['followings']> = {
+export type FollowingsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['followings'] = ResolversParentTypes['followings']
+> = {
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   follower?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
   following_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -6184,20 +6253,34 @@ export type FollowingsResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Followings_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['followings_aggregate'] = ResolversParentTypes['followings_aggregate']> = {
+export type Followings_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['followings_aggregate'] = ResolversParentTypes['followings_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['followings_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Followings_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['followings_aggregate_fields'] = ResolversParentTypes['followings_aggregate_fields']> = {
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Followings_Aggregate_FieldsCountArgs, never>>;
+export type Followings_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['followings_aggregate_fields'] = ResolversParentTypes['followings_aggregate_fields']
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Followings_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['followings_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['followings_min_fields']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Followings_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['followings_max_fields'] = ResolversParentTypes['followings_max_fields']> = {
+export type Followings_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['followings_max_fields'] = ResolversParentTypes['followings_max_fields']
+> = {
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   following_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6205,7 +6288,10 @@ export type Followings_Max_FieldsResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Followings_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['followings_min_fields'] = ResolversParentTypes['followings_min_fields']> = {
+export type Followings_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['followings_min_fields'] = ResolversParentTypes['followings_min_fields']
+> = {
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   following_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6213,54 +6299,103 @@ export type Followings_Min_FieldsResolvers<ContextType = any, ParentType extends
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Followings_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['followings_mutation_response'] = ResolversParentTypes['followings_mutation_response']> = {
+export type Followings_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['followings_mutation_response'] = ResolversParentTypes['followings_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofence_VariantsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofence_variants'] = ResolversParentTypes['geofence_variants']> = {
+export type Geofence_VariantsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofence_variants'] = ResolversParentTypes['geofence_variants']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  geofences?: Resolver<Array<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Geofence_VariantsGeofencesArgs, never>>;
-  geofences_aggregate?: Resolver<ResolversTypes['geofences_aggregate'], ParentType, ContextType, RequireFields<Geofence_VariantsGeofences_AggregateArgs, never>>;
+  geofences?: Resolver<
+    Array<ResolversTypes['geofences']>,
+    ParentType,
+    ContextType,
+    RequireFields<Geofence_VariantsGeofencesArgs, never>
+  >;
+  geofences_aggregate?: Resolver<
+    ResolversTypes['geofences_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Geofence_VariantsGeofences_AggregateArgs, never>
+  >;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofence_Variants_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofence_variants_aggregate'] = ResolversParentTypes['geofence_variants_aggregate']> = {
+export type Geofence_Variants_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofence_variants_aggregate'] = ResolversParentTypes['geofence_variants_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['geofence_variants_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['geofence_variants']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofence_Variants_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofence_variants_aggregate_fields'] = ResolversParentTypes['geofence_variants_aggregate_fields']> = {
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Geofence_Variants_Aggregate_FieldsCountArgs, never>>;
+export type Geofence_Variants_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofence_variants_aggregate_fields'] = ResolversParentTypes['geofence_variants_aggregate_fields']
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Geofence_Variants_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['geofence_variants_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['geofence_variants_min_fields']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofence_Variants_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofence_variants_max_fields'] = ResolversParentTypes['geofence_variants_max_fields']> = {
+export type Geofence_Variants_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofence_variants_max_fields'] = ResolversParentTypes['geofence_variants_max_fields']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofence_Variants_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofence_variants_min_fields'] = ResolversParentTypes['geofence_variants_min_fields']> = {
+export type Geofence_Variants_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofence_variants_min_fields'] = ResolversParentTypes['geofence_variants_min_fields']
+> = {
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofence_Variants_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofence_variants_mutation_response'] = ResolversParentTypes['geofence_variants_mutation_response']> = {
+export type Geofence_Variants_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofence_variants_mutation_response'] = ResolversParentTypes['geofence_variants_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['geofence_variants']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type GeofencesResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences'] = ResolversParentTypes['geofences']> = {
-  activities?: Resolver<Array<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<GeofencesActivitiesArgs, never>>;
-  activities_aggregate?: Resolver<ResolversTypes['activities_aggregate'], ParentType, ContextType, RequireFields<GeofencesActivities_AggregateArgs, never>>;
+export type GeofencesResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences'] = ResolversParentTypes['geofences']
+> = {
+  activities?: Resolver<
+    Array<ResolversTypes['activities']>,
+    ParentType,
+    ContextType,
+    RequireFields<GeofencesActivitiesArgs, never>
+  >;
+  activities_aggregate?: Resolver<
+    ResolversTypes['activities_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<GeofencesActivities_AggregateArgs, never>
+  >;
   category?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   coordinates?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
@@ -6277,15 +6412,26 @@ export type GeofencesResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_aggregate'] = ResolversParentTypes['geofences_aggregate']> = {
+export type Geofences_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_aggregate'] = ResolversParentTypes['geofences_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['geofences_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['geofences']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_aggregate_fields'] = ResolversParentTypes['geofences_aggregate_fields']> = {
+export type Geofences_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_aggregate_fields'] = ResolversParentTypes['geofences_aggregate_fields']
+> = {
   avg?: Resolver<Maybe<ResolversTypes['geofences_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Geofences_Aggregate_FieldsCountArgs, never>>;
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Geofences_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['geofences_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['geofences_min_fields']>, ParentType, ContextType>;
   stddev?: Resolver<Maybe<ResolversTypes['geofences_stddev_fields']>, ParentType, ContextType>;
@@ -6298,7 +6444,10 @@ export type Geofences_Aggregate_FieldsResolvers<ContextType = any, ParentType ex
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_avg_fields'] = ResolversParentTypes['geofences_avg_fields']> = {
+export type Geofences_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_avg_fields'] = ResolversParentTypes['geofences_avg_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -6306,7 +6455,10 @@ export type Geofences_Avg_FieldsResolvers<ContextType = any, ParentType extends 
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_max_fields'] = ResolversParentTypes['geofences_max_fields']> = {
+export type Geofences_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_max_fields'] = ResolversParentTypes['geofences_max_fields']
+> = {
   category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   coordinates?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6320,7 +6472,10 @@ export type Geofences_Max_FieldsResolvers<ContextType = any, ParentType extends 
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_min_fields'] = ResolversParentTypes['geofences_min_fields']> = {
+export type Geofences_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_min_fields'] = ResolversParentTypes['geofences_min_fields']
+> = {
   category?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   coordinates?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6334,13 +6489,19 @@ export type Geofences_Min_FieldsResolvers<ContextType = any, ParentType extends 
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_mutation_response'] = ResolversParentTypes['geofences_mutation_response']> = {
+export type Geofences_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_mutation_response'] = ResolversParentTypes['geofences_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['geofences']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_stddev_fields'] = ResolversParentTypes['geofences_stddev_fields']> = {
+export type Geofences_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_stddev_fields'] = ResolversParentTypes['geofences_stddev_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -6348,7 +6509,10 @@ export type Geofences_Stddev_FieldsResolvers<ContextType = any, ParentType exten
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_stddev_pop_fields'] = ResolversParentTypes['geofences_stddev_pop_fields']> = {
+export type Geofences_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_stddev_pop_fields'] = ResolversParentTypes['geofences_stddev_pop_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -6356,7 +6520,10 @@ export type Geofences_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType e
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_stddev_samp_fields'] = ResolversParentTypes['geofences_stddev_samp_fields']> = {
+export type Geofences_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_stddev_samp_fields'] = ResolversParentTypes['geofences_stddev_samp_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -6364,7 +6531,10 @@ export type Geofences_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType 
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_sum_fields'] = ResolversParentTypes['geofences_sum_fields']> = {
+export type Geofences_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_sum_fields'] = ResolversParentTypes['geofences_sum_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   latitude?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   longitude?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
@@ -6372,7 +6542,10 @@ export type Geofences_Sum_FieldsResolvers<ContextType = any, ParentType extends 
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_var_pop_fields'] = ResolversParentTypes['geofences_var_pop_fields']> = {
+export type Geofences_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_var_pop_fields'] = ResolversParentTypes['geofences_var_pop_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -6380,7 +6553,10 @@ export type Geofences_Var_Pop_FieldsResolvers<ContextType = any, ParentType exte
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_var_samp_fields'] = ResolversParentTypes['geofences_var_samp_fields']> = {
+export type Geofences_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_var_samp_fields'] = ResolversParentTypes['geofences_var_samp_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -6388,7 +6564,10 @@ export type Geofences_Var_Samp_FieldsResolvers<ContextType = any, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Geofences_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['geofences_variance_fields'] = ResolversParentTypes['geofences_variance_fields']> = {
+export type Geofences_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['geofences_variance_fields'] = ResolversParentTypes['geofences_variance_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   latitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   longitude?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -6404,7 +6583,10 @@ export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'json';
 }
 
-export type LikesResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes'] = ResolversParentTypes['likes']> = {
+export type LikesResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes'] = ResolversParentTypes['likes']
+> = {
   activity?: Resolver<ResolversTypes['activities'], ParentType, ContextType>;
   activity_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6414,15 +6596,26 @@ export type LikesResolvers<ContextType = any, ParentType extends ResolversParent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_aggregate'] = ResolversParentTypes['likes_aggregate']> = {
+export type Likes_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_aggregate'] = ResolversParentTypes['likes_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['likes_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['likes']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_aggregate_fields'] = ResolversParentTypes['likes_aggregate_fields']> = {
+export type Likes_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_aggregate_fields'] = ResolversParentTypes['likes_aggregate_fields']
+> = {
   avg?: Resolver<Maybe<ResolversTypes['likes_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Likes_Aggregate_FieldsCountArgs, never>>;
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Likes_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['likes_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['likes_min_fields']>, ParentType, ContextType>;
   stddev?: Resolver<Maybe<ResolversTypes['likes_stddev_fields']>, ParentType, ContextType>;
@@ -6435,12 +6628,18 @@ export type Likes_Aggregate_FieldsResolvers<ContextType = any, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_avg_fields'] = ResolversParentTypes['likes_avg_fields']> = {
+export type Likes_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_avg_fields'] = ResolversParentTypes['likes_avg_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_max_fields'] = ResolversParentTypes['likes_max_fields']> = {
+export type Likes_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_max_fields'] = ResolversParentTypes['likes_max_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6448,7 +6647,10 @@ export type Likes_Max_FieldsResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_min_fields'] = ResolversParentTypes['likes_min_fields']> = {
+export type Likes_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_min_fields'] = ResolversParentTypes['likes_min_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6456,214 +6658,1073 @@ export type Likes_Min_FieldsResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_mutation_response'] = ResolversParentTypes['likes_mutation_response']> = {
+export type Likes_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_mutation_response'] = ResolversParentTypes['likes_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['likes']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_stddev_fields'] = ResolversParentTypes['likes_stddev_fields']> = {
+export type Likes_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_stddev_fields'] = ResolversParentTypes['likes_stddev_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_stddev_pop_fields'] = ResolversParentTypes['likes_stddev_pop_fields']> = {
+export type Likes_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_stddev_pop_fields'] = ResolversParentTypes['likes_stddev_pop_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_stddev_samp_fields'] = ResolversParentTypes['likes_stddev_samp_fields']> = {
+export type Likes_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_stddev_samp_fields'] = ResolversParentTypes['likes_stddev_samp_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_sum_fields'] = ResolversParentTypes['likes_sum_fields']> = {
+export type Likes_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_sum_fields'] = ResolversParentTypes['likes_sum_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_var_pop_fields'] = ResolversParentTypes['likes_var_pop_fields']> = {
+export type Likes_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_var_pop_fields'] = ResolversParentTypes['likes_var_pop_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_var_samp_fields'] = ResolversParentTypes['likes_var_samp_fields']> = {
+export type Likes_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_var_samp_fields'] = ResolversParentTypes['likes_var_samp_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Likes_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_variance_fields'] = ResolversParentTypes['likes_variance_fields']> = {
+export type Likes_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['likes_variance_fields'] = ResolversParentTypes['likes_variance_fields']
+> = {
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Mutation_RootResolvers<ContextType = any, ParentType extends ResolversParentTypes['mutation_root'] = ResolversParentTypes['mutation_root']> = {
-  delete_achievement?: Resolver<Maybe<ResolversTypes['achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_AchievementArgs, 'where'>>;
-  delete_achievement_by_pk?: Resolver<Maybe<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Achievement_By_PkArgs, 'id'>>;
-  delete_achievement_type?: Resolver<Maybe<ResolversTypes['achievement_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Achievement_TypeArgs, 'where'>>;
-  delete_achievement_type_by_pk?: Resolver<Maybe<ResolversTypes['achievement_type']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Achievement_Type_By_PkArgs, 'name'>>;
-  delete_activities?: Resolver<Maybe<ResolversTypes['activities_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_ActivitiesArgs, 'where'>>;
-  delete_activities_by_pk?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Activities_By_PkArgs, 'activity_id'>>;
-  delete_categories?: Resolver<Maybe<ResolversTypes['categories_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_CategoriesArgs, 'where'>>;
-  delete_categories_by_pk?: Resolver<Maybe<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Categories_By_PkArgs, 'name'>>;
-  delete_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Challenge_TypeArgs, 'where'>>;
-  delete_challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Challenge_Type_By_PkArgs, 'name'>>;
-  delete_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_CommentArgs, 'comment_id'>>;
-  delete_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_CommentsArgs, 'where'>>;
-  delete_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_FollowingsArgs, 'where'>>;
-  delete_followings_by_pk?: Resolver<Maybe<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Followings_By_PkArgs, 'following_id' | 'user_id'>>;
-  delete_geofence_variants?: Resolver<Maybe<ResolversTypes['geofence_variants_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Geofence_VariantsArgs, 'where'>>;
-  delete_geofence_variants_by_pk?: Resolver<Maybe<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Geofence_Variants_By_PkArgs, 'name'>>;
-  delete_geofences?: Resolver<Maybe<ResolversTypes['geofences_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_GeofencesArgs, 'where'>>;
-  delete_geofences_by_pk?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Geofences_By_PkArgs, 'id'>>;
-  delete_likes?: Resolver<Maybe<ResolversTypes['likes_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_LikesArgs, 'where'>>;
-  delete_likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Likes_By_PkArgs, 'activity_id' | 'user_id'>>;
-  delete_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_UserArgs, 'id'>>;
-  delete_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_AchievementArgs, 'where'>>;
-  delete_user_achievement_by_pk?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>>;
-  delete_user_challenge?: Resolver<Maybe<ResolversTypes['user_challenge_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_ChallengeArgs, 'where'>>;
-  delete_user_challenge_by_pk?: Resolver<Maybe<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_Challenge_By_PkArgs, 'id'>>;
-  delete_users?: Resolver<Maybe<ResolversTypes['users_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_UsersArgs, 'where'>>;
-  insert_achievement?: Resolver<Maybe<ResolversTypes['achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_AchievementArgs, 'objects'>>;
-  insert_achievement_one?: Resolver<Maybe<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Achievement_OneArgs, 'object'>>;
-  insert_achievement_type?: Resolver<Maybe<ResolversTypes['achievement_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Achievement_TypeArgs, 'objects'>>;
-  insert_achievement_type_one?: Resolver<Maybe<ResolversTypes['achievement_type']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Achievement_Type_OneArgs, 'object'>>;
-  insert_activities?: Resolver<Maybe<ResolversTypes['activities_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_ActivitiesArgs, 'objects'>>;
-  insert_activities_one?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Activities_OneArgs, 'object'>>;
-  insert_categories?: Resolver<Maybe<ResolversTypes['categories_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_CategoriesArgs, 'objects'>>;
-  insert_categories_one?: Resolver<Maybe<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Categories_OneArgs, 'object'>>;
-  insert_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Challenge_TypeArgs, 'objects'>>;
-  insert_challenge_type_one?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Challenge_Type_OneArgs, 'object'>>;
-  insert_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_CommentArgs, 'object'>>;
-  insert_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_CommentsArgs, 'objects'>>;
-  insert_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_FollowingsArgs, 'objects'>>;
-  insert_followings_one?: Resolver<Maybe<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Followings_OneArgs, 'object'>>;
-  insert_geofence_variants?: Resolver<Maybe<ResolversTypes['geofence_variants_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Geofence_VariantsArgs, 'objects'>>;
-  insert_geofence_variants_one?: Resolver<Maybe<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Geofence_Variants_OneArgs, 'object'>>;
-  insert_geofences?: Resolver<Maybe<ResolversTypes['geofences_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_GeofencesArgs, 'objects'>>;
-  insert_geofences_one?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Geofences_OneArgs, 'object'>>;
-  insert_likes?: Resolver<Maybe<ResolversTypes['likes_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_LikesArgs, 'objects'>>;
-  insert_likes_one?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Likes_OneArgs, 'object'>>;
-  insert_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_UserArgs, 'object'>>;
-  insert_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_AchievementArgs, 'objects'>>;
-  insert_user_achievement_one?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_Achievement_OneArgs, 'object'>>;
-  insert_user_challenge?: Resolver<Maybe<ResolversTypes['user_challenge_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_ChallengeArgs, 'objects'>>;
-  insert_user_challenge_one?: Resolver<Maybe<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_Challenge_OneArgs, 'object'>>;
-  insert_users?: Resolver<Maybe<ResolversTypes['users_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_UsersArgs, 'objects'>>;
-  update_achievement?: Resolver<Maybe<ResolversTypes['achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_AchievementArgs, 'where'>>;
-  update_achievement_by_pk?: Resolver<Maybe<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Achievement_By_PkArgs, 'pk_columns'>>;
-  update_achievement_type?: Resolver<Maybe<ResolversTypes['achievement_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Achievement_TypeArgs, 'where'>>;
-  update_achievement_type_by_pk?: Resolver<Maybe<ResolversTypes['achievement_type']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Achievement_Type_By_PkArgs, 'pk_columns'>>;
-  update_activities?: Resolver<Maybe<ResolversTypes['activities_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_ActivitiesArgs, 'where'>>;
-  update_activities_by_pk?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Activities_By_PkArgs, 'pk_columns'>>;
-  update_categories?: Resolver<Maybe<ResolversTypes['categories_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_CategoriesArgs, 'where'>>;
-  update_categories_by_pk?: Resolver<Maybe<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Categories_By_PkArgs, 'pk_columns'>>;
-  update_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Challenge_TypeArgs, 'where'>>;
-  update_challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Challenge_Type_By_PkArgs, 'pk_columns'>>;
-  update_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_CommentArgs, 'pk_columns'>>;
-  update_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_CommentsArgs, 'where'>>;
-  update_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_FollowingsArgs, 'where'>>;
-  update_followings_by_pk?: Resolver<Maybe<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Followings_By_PkArgs, 'pk_columns'>>;
-  update_geofence_variants?: Resolver<Maybe<ResolversTypes['geofence_variants_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Geofence_VariantsArgs, 'where'>>;
-  update_geofence_variants_by_pk?: Resolver<Maybe<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Geofence_Variants_By_PkArgs, 'pk_columns'>>;
-  update_geofences?: Resolver<Maybe<ResolversTypes['geofences_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_GeofencesArgs, 'where'>>;
-  update_geofences_by_pk?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Geofences_By_PkArgs, 'pk_columns'>>;
-  update_likes?: Resolver<Maybe<ResolversTypes['likes_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_LikesArgs, 'where'>>;
-  update_likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Likes_By_PkArgs, 'pk_columns'>>;
-  update_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_UserArgs, 'pk_columns'>>;
-  update_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_AchievementArgs, 'where'>>;
-  update_user_achievement_by_pk?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_Achievement_By_PkArgs, 'pk_columns'>>;
-  update_user_challenge?: Resolver<Maybe<ResolversTypes['user_challenge_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_ChallengeArgs, 'where'>>;
-  update_user_challenge_by_pk?: Resolver<Maybe<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_Challenge_By_PkArgs, 'pk_columns'>>;
-  update_users?: Resolver<Maybe<ResolversTypes['users_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_UsersArgs, 'where'>>;
+export type Mutation_RootResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['mutation_root'] = ResolversParentTypes['mutation_root']
+> = {
+  delete_achievement?: Resolver<
+    Maybe<ResolversTypes['achievement_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_AchievementArgs, 'where'>
+  >;
+  delete_achievement_by_pk?: Resolver<
+    Maybe<ResolversTypes['achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Achievement_By_PkArgs, 'id'>
+  >;
+  delete_achievement_type?: Resolver<
+    Maybe<ResolversTypes['achievement_type_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Achievement_TypeArgs, 'where'>
+  >;
+  delete_achievement_type_by_pk?: Resolver<
+    Maybe<ResolversTypes['achievement_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Achievement_Type_By_PkArgs, 'name'>
+  >;
+  delete_activities?: Resolver<
+    Maybe<ResolversTypes['activities_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_ActivitiesArgs, 'where'>
+  >;
+  delete_activities_by_pk?: Resolver<
+    Maybe<ResolversTypes['activities']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Activities_By_PkArgs, 'activity_id'>
+  >;
+  delete_categories?: Resolver<
+    Maybe<ResolversTypes['categories_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_CategoriesArgs, 'where'>
+  >;
+  delete_categories_by_pk?: Resolver<
+    Maybe<ResolversTypes['categories']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Categories_By_PkArgs, 'name'>
+  >;
+  delete_challenge_type?: Resolver<
+    Maybe<ResolversTypes['challenge_type_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Challenge_TypeArgs, 'where'>
+  >;
+  delete_challenge_type_by_pk?: Resolver<
+    Maybe<ResolversTypes['challenge_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Challenge_Type_By_PkArgs, 'name'>
+  >;
+  delete_comment?: Resolver<
+    Maybe<ResolversTypes['comments']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_CommentArgs, 'comment_id'>
+  >;
+  delete_comments?: Resolver<
+    Maybe<ResolversTypes['comments_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_CommentsArgs, 'where'>
+  >;
+  delete_followings?: Resolver<
+    Maybe<ResolversTypes['followings_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_FollowingsArgs, 'where'>
+  >;
+  delete_followings_by_pk?: Resolver<
+    Maybe<ResolversTypes['followings']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Followings_By_PkArgs, 'following_id' | 'user_id'>
+  >;
+  delete_geofence_variants?: Resolver<
+    Maybe<ResolversTypes['geofence_variants_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Geofence_VariantsArgs, 'where'>
+  >;
+  delete_geofence_variants_by_pk?: Resolver<
+    Maybe<ResolversTypes['geofence_variants']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Geofence_Variants_By_PkArgs, 'name'>
+  >;
+  delete_geofences?: Resolver<
+    Maybe<ResolversTypes['geofences_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_GeofencesArgs, 'where'>
+  >;
+  delete_geofences_by_pk?: Resolver<
+    Maybe<ResolversTypes['geofences']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Geofences_By_PkArgs, 'id'>
+  >;
+  delete_likes?: Resolver<
+    Maybe<ResolversTypes['likes_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_LikesArgs, 'where'>
+  >;
+  delete_likes_by_pk?: Resolver<
+    Maybe<ResolversTypes['likes']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_Likes_By_PkArgs, 'activity_id' | 'user_id'>
+  >;
+  delete_user?: Resolver<
+    Maybe<ResolversTypes['users']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_UserArgs, 'id'>
+  >;
+  delete_user_achievement?: Resolver<
+    Maybe<ResolversTypes['user_achievement_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_User_AchievementArgs, 'where'>
+  >;
+  delete_user_achievement_by_pk?: Resolver<
+    Maybe<ResolversTypes['user_achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_User_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>
+  >;
+  delete_user_challenge?: Resolver<
+    Maybe<ResolversTypes['user_challenge_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_User_ChallengeArgs, 'where'>
+  >;
+  delete_user_challenge_by_pk?: Resolver<
+    Maybe<ResolversTypes['user_challenge']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_User_Challenge_By_PkArgs, 'id'>
+  >;
+  delete_users?: Resolver<
+    Maybe<ResolversTypes['users_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootDelete_UsersArgs, 'where'>
+  >;
+  insert_achievement?: Resolver<
+    Maybe<ResolversTypes['achievement_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_AchievementArgs, 'objects'>
+  >;
+  insert_achievement_one?: Resolver<
+    Maybe<ResolversTypes['achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Achievement_OneArgs, 'object'>
+  >;
+  insert_achievement_type?: Resolver<
+    Maybe<ResolversTypes['achievement_type_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Achievement_TypeArgs, 'objects'>
+  >;
+  insert_achievement_type_one?: Resolver<
+    Maybe<ResolversTypes['achievement_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Achievement_Type_OneArgs, 'object'>
+  >;
+  insert_activities?: Resolver<
+    Maybe<ResolversTypes['activities_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_ActivitiesArgs, 'objects'>
+  >;
+  insert_activities_one?: Resolver<
+    Maybe<ResolversTypes['activities']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Activities_OneArgs, 'object'>
+  >;
+  insert_categories?: Resolver<
+    Maybe<ResolversTypes['categories_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_CategoriesArgs, 'objects'>
+  >;
+  insert_categories_one?: Resolver<
+    Maybe<ResolversTypes['categories']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Categories_OneArgs, 'object'>
+  >;
+  insert_challenge_type?: Resolver<
+    Maybe<ResolversTypes['challenge_type_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Challenge_TypeArgs, 'objects'>
+  >;
+  insert_challenge_type_one?: Resolver<
+    Maybe<ResolversTypes['challenge_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Challenge_Type_OneArgs, 'object'>
+  >;
+  insert_comment?: Resolver<
+    Maybe<ResolversTypes['comments']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_CommentArgs, 'object'>
+  >;
+  insert_comments?: Resolver<
+    Maybe<ResolversTypes['comments_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_CommentsArgs, 'objects'>
+  >;
+  insert_followings?: Resolver<
+    Maybe<ResolversTypes['followings_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_FollowingsArgs, 'objects'>
+  >;
+  insert_followings_one?: Resolver<
+    Maybe<ResolversTypes['followings']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Followings_OneArgs, 'object'>
+  >;
+  insert_geofence_variants?: Resolver<
+    Maybe<ResolversTypes['geofence_variants_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Geofence_VariantsArgs, 'objects'>
+  >;
+  insert_geofence_variants_one?: Resolver<
+    Maybe<ResolversTypes['geofence_variants']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Geofence_Variants_OneArgs, 'object'>
+  >;
+  insert_geofences?: Resolver<
+    Maybe<ResolversTypes['geofences_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_GeofencesArgs, 'objects'>
+  >;
+  insert_geofences_one?: Resolver<
+    Maybe<ResolversTypes['geofences']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Geofences_OneArgs, 'object'>
+  >;
+  insert_likes?: Resolver<
+    Maybe<ResolversTypes['likes_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_LikesArgs, 'objects'>
+  >;
+  insert_likes_one?: Resolver<
+    Maybe<ResolversTypes['likes']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_Likes_OneArgs, 'object'>
+  >;
+  insert_user?: Resolver<
+    Maybe<ResolversTypes['users']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_UserArgs, 'object'>
+  >;
+  insert_user_achievement?: Resolver<
+    Maybe<ResolversTypes['user_achievement_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_User_AchievementArgs, 'objects'>
+  >;
+  insert_user_achievement_one?: Resolver<
+    Maybe<ResolversTypes['user_achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_User_Achievement_OneArgs, 'object'>
+  >;
+  insert_user_challenge?: Resolver<
+    Maybe<ResolversTypes['user_challenge_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_User_ChallengeArgs, 'objects'>
+  >;
+  insert_user_challenge_one?: Resolver<
+    Maybe<ResolversTypes['user_challenge']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_User_Challenge_OneArgs, 'object'>
+  >;
+  insert_users?: Resolver<
+    Maybe<ResolversTypes['users_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootInsert_UsersArgs, 'objects'>
+  >;
+  update_achievement?: Resolver<
+    Maybe<ResolversTypes['achievement_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_AchievementArgs, 'where'>
+  >;
+  update_achievement_by_pk?: Resolver<
+    Maybe<ResolversTypes['achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Achievement_By_PkArgs, 'pk_columns'>
+  >;
+  update_achievement_type?: Resolver<
+    Maybe<ResolversTypes['achievement_type_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Achievement_TypeArgs, 'where'>
+  >;
+  update_achievement_type_by_pk?: Resolver<
+    Maybe<ResolversTypes['achievement_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Achievement_Type_By_PkArgs, 'pk_columns'>
+  >;
+  update_activities?: Resolver<
+    Maybe<ResolversTypes['activities_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_ActivitiesArgs, 'where'>
+  >;
+  update_activities_by_pk?: Resolver<
+    Maybe<ResolversTypes['activities']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Activities_By_PkArgs, 'pk_columns'>
+  >;
+  update_categories?: Resolver<
+    Maybe<ResolversTypes['categories_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_CategoriesArgs, 'where'>
+  >;
+  update_categories_by_pk?: Resolver<
+    Maybe<ResolversTypes['categories']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Categories_By_PkArgs, 'pk_columns'>
+  >;
+  update_challenge_type?: Resolver<
+    Maybe<ResolversTypes['challenge_type_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Challenge_TypeArgs, 'where'>
+  >;
+  update_challenge_type_by_pk?: Resolver<
+    Maybe<ResolversTypes['challenge_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Challenge_Type_By_PkArgs, 'pk_columns'>
+  >;
+  update_comment?: Resolver<
+    Maybe<ResolversTypes['comments']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_CommentArgs, 'pk_columns'>
+  >;
+  update_comments?: Resolver<
+    Maybe<ResolversTypes['comments_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_CommentsArgs, 'where'>
+  >;
+  update_followings?: Resolver<
+    Maybe<ResolversTypes['followings_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_FollowingsArgs, 'where'>
+  >;
+  update_followings_by_pk?: Resolver<
+    Maybe<ResolversTypes['followings']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Followings_By_PkArgs, 'pk_columns'>
+  >;
+  update_geofence_variants?: Resolver<
+    Maybe<ResolversTypes['geofence_variants_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Geofence_VariantsArgs, 'where'>
+  >;
+  update_geofence_variants_by_pk?: Resolver<
+    Maybe<ResolversTypes['geofence_variants']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Geofence_Variants_By_PkArgs, 'pk_columns'>
+  >;
+  update_geofences?: Resolver<
+    Maybe<ResolversTypes['geofences_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_GeofencesArgs, 'where'>
+  >;
+  update_geofences_by_pk?: Resolver<
+    Maybe<ResolversTypes['geofences']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Geofences_By_PkArgs, 'pk_columns'>
+  >;
+  update_likes?: Resolver<
+    Maybe<ResolversTypes['likes_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_LikesArgs, 'where'>
+  >;
+  update_likes_by_pk?: Resolver<
+    Maybe<ResolversTypes['likes']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_Likes_By_PkArgs, 'pk_columns'>
+  >;
+  update_user?: Resolver<
+    Maybe<ResolversTypes['users']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_UserArgs, 'pk_columns'>
+  >;
+  update_user_achievement?: Resolver<
+    Maybe<ResolversTypes['user_achievement_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_User_AchievementArgs, 'where'>
+  >;
+  update_user_achievement_by_pk?: Resolver<
+    Maybe<ResolversTypes['user_achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_User_Achievement_By_PkArgs, 'pk_columns'>
+  >;
+  update_user_challenge?: Resolver<
+    Maybe<ResolversTypes['user_challenge_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_User_ChallengeArgs, 'where'>
+  >;
+  update_user_challenge_by_pk?: Resolver<
+    Maybe<ResolversTypes['user_challenge']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_User_Challenge_By_PkArgs, 'pk_columns'>
+  >;
+  update_users?: Resolver<
+    Maybe<ResolversTypes['users_mutation_response']>,
+    ParentType,
+    ContextType,
+    RequireFields<Mutation_RootUpdate_UsersArgs, 'where'>
+  >;
 };
 
-export type Query_RootResolvers<ContextType = any, ParentType extends ResolversParentTypes['query_root'] = ResolversParentTypes['query_root']> = {
-  achievement?: Resolver<Array<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Query_RootAchievementArgs, never>>;
-  achievement_aggregate?: Resolver<ResolversTypes['achievement_aggregate'], ParentType, ContextType, RequireFields<Query_RootAchievement_AggregateArgs, never>>;
-  achievement_by_pk?: Resolver<Maybe<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Query_RootAchievement_By_PkArgs, 'id'>>;
-  achievement_type?: Resolver<Array<ResolversTypes['achievement_type']>, ParentType, ContextType, RequireFields<Query_RootAchievement_TypeArgs, never>>;
-  achievement_type_aggregate?: Resolver<ResolversTypes['achievement_type_aggregate'], ParentType, ContextType, RequireFields<Query_RootAchievement_Type_AggregateArgs, never>>;
-  achievement_type_by_pk?: Resolver<Maybe<ResolversTypes['achievement_type']>, ParentType, ContextType, RequireFields<Query_RootAchievement_Type_By_PkArgs, 'name'>>;
-  activities?: Resolver<Array<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<Query_RootActivitiesArgs, never>>;
-  activities_aggregate?: Resolver<ResolversTypes['activities_aggregate'], ParentType, ContextType, RequireFields<Query_RootActivities_AggregateArgs, never>>;
-  activities_by_pk?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<Query_RootActivities_By_PkArgs, 'activity_id'>>;
-  categories?: Resolver<Array<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Query_RootCategoriesArgs, never>>;
-  categories_aggregate?: Resolver<ResolversTypes['categories_aggregate'], ParentType, ContextType, RequireFields<Query_RootCategories_AggregateArgs, never>>;
-  categories_by_pk?: Resolver<Maybe<ResolversTypes['categories']>, ParentType, ContextType, RequireFields<Query_RootCategories_By_PkArgs, 'name'>>;
-  challenge_type?: Resolver<Array<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Query_RootChallenge_TypeArgs, never>>;
-  challenge_type_aggregate?: Resolver<ResolversTypes['challenge_type_aggregate'], ParentType, ContextType, RequireFields<Query_RootChallenge_Type_AggregateArgs, never>>;
-  challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Query_RootChallenge_Type_By_PkArgs, 'name'>>;
-  comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Query_RootCommentArgs, 'comment_id'>>;
-  comments?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Query_RootCommentsArgs, never>>;
-  comments_aggregate?: Resolver<ResolversTypes['comments_aggregate'], ParentType, ContextType, RequireFields<Query_RootComments_AggregateArgs, never>>;
-  followings?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Query_RootFollowingsArgs, never>>;
-  followings_aggregate?: Resolver<ResolversTypes['followings_aggregate'], ParentType, ContextType, RequireFields<Query_RootFollowings_AggregateArgs, never>>;
-  followings_by_pk?: Resolver<Maybe<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Query_RootFollowings_By_PkArgs, 'following_id' | 'user_id'>>;
-  geofence_variants?: Resolver<Array<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Query_RootGeofence_VariantsArgs, never>>;
-  geofence_variants_aggregate?: Resolver<ResolversTypes['geofence_variants_aggregate'], ParentType, ContextType, RequireFields<Query_RootGeofence_Variants_AggregateArgs, never>>;
-  geofence_variants_by_pk?: Resolver<Maybe<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Query_RootGeofence_Variants_By_PkArgs, 'name'>>;
-  geofences?: Resolver<Array<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Query_RootGeofencesArgs, never>>;
-  geofences_aggregate?: Resolver<ResolversTypes['geofences_aggregate'], ParentType, ContextType, RequireFields<Query_RootGeofences_AggregateArgs, never>>;
-  geofences_by_pk?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Query_RootGeofences_By_PkArgs, 'id'>>;
+export type Query_RootResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['query_root'] = ResolversParentTypes['query_root']
+> = {
+  achievement?: Resolver<
+    Array<ResolversTypes['achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAchievementArgs, never>
+  >;
+  achievement_aggregate?: Resolver<
+    ResolversTypes['achievement_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAchievement_AggregateArgs, never>
+  >;
+  achievement_by_pk?: Resolver<
+    Maybe<ResolversTypes['achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAchievement_By_PkArgs, 'id'>
+  >;
+  achievement_type?: Resolver<
+    Array<ResolversTypes['achievement_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAchievement_TypeArgs, never>
+  >;
+  achievement_type_aggregate?: Resolver<
+    ResolversTypes['achievement_type_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAchievement_Type_AggregateArgs, never>
+  >;
+  achievement_type_by_pk?: Resolver<
+    Maybe<ResolversTypes['achievement_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootAchievement_Type_By_PkArgs, 'name'>
+  >;
+  activities?: Resolver<
+    Array<ResolversTypes['activities']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootActivitiesArgs, never>
+  >;
+  activities_aggregate?: Resolver<
+    ResolversTypes['activities_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootActivities_AggregateArgs, never>
+  >;
+  activities_by_pk?: Resolver<
+    Maybe<ResolversTypes['activities']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootActivities_By_PkArgs, 'activity_id'>
+  >;
+  categories?: Resolver<
+    Array<ResolversTypes['categories']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootCategoriesArgs, never>
+  >;
+  categories_aggregate?: Resolver<
+    ResolversTypes['categories_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootCategories_AggregateArgs, never>
+  >;
+  categories_by_pk?: Resolver<
+    Maybe<ResolversTypes['categories']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootCategories_By_PkArgs, 'name'>
+  >;
+  challenge_type?: Resolver<
+    Array<ResolversTypes['challenge_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootChallenge_TypeArgs, never>
+  >;
+  challenge_type_aggregate?: Resolver<
+    ResolversTypes['challenge_type_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootChallenge_Type_AggregateArgs, never>
+  >;
+  challenge_type_by_pk?: Resolver<
+    Maybe<ResolversTypes['challenge_type']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootChallenge_Type_By_PkArgs, 'name'>
+  >;
+  comment?: Resolver<
+    Maybe<ResolversTypes['comments']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootCommentArgs, 'comment_id'>
+  >;
+  comments?: Resolver<
+    Array<ResolversTypes['comments']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootCommentsArgs, never>
+  >;
+  comments_aggregate?: Resolver<
+    ResolversTypes['comments_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootComments_AggregateArgs, never>
+  >;
+  followings?: Resolver<
+    Array<ResolversTypes['followings']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootFollowingsArgs, never>
+  >;
+  followings_aggregate?: Resolver<
+    ResolversTypes['followings_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootFollowings_AggregateArgs, never>
+  >;
+  followings_by_pk?: Resolver<
+    Maybe<ResolversTypes['followings']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootFollowings_By_PkArgs, 'following_id' | 'user_id'>
+  >;
+  geofence_variants?: Resolver<
+    Array<ResolversTypes['geofence_variants']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootGeofence_VariantsArgs, never>
+  >;
+  geofence_variants_aggregate?: Resolver<
+    ResolversTypes['geofence_variants_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootGeofence_Variants_AggregateArgs, never>
+  >;
+  geofence_variants_by_pk?: Resolver<
+    Maybe<ResolversTypes['geofence_variants']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootGeofence_Variants_By_PkArgs, 'name'>
+  >;
+  geofences?: Resolver<
+    Array<ResolversTypes['geofences']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootGeofencesArgs, never>
+  >;
+  geofences_aggregate?: Resolver<
+    ResolversTypes['geofences_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootGeofences_AggregateArgs, never>
+  >;
+  geofences_by_pk?: Resolver<
+    Maybe<ResolversTypes['geofences']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootGeofences_By_PkArgs, 'id'>
+  >;
   likes?: Resolver<Array<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Query_RootLikesArgs, never>>;
-  likes_aggregate?: Resolver<ResolversTypes['likes_aggregate'], ParentType, ContextType, RequireFields<Query_RootLikes_AggregateArgs, never>>;
-  likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Query_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>>;
-  unachievedachievements?: Resolver<Array<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Query_RootUnachievedachievementsArgs, 'args'>>;
-  unachievedachievements_aggregate?: Resolver<ResolversTypes['achievement_aggregate'], ParentType, ContextType, RequireFields<Query_RootUnachievedachievements_AggregateArgs, 'args'>>;
+  likes_aggregate?: Resolver<
+    ResolversTypes['likes_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootLikes_AggregateArgs, never>
+  >;
+  likes_by_pk?: Resolver<
+    Maybe<ResolversTypes['likes']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>
+  >;
+  unachievedachievements?: Resolver<
+    Array<ResolversTypes['achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUnachievedachievementsArgs, 'args'>
+  >;
+  unachievedachievements_aggregate?: Resolver<
+    ResolversTypes['achievement_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUnachievedachievements_AggregateArgs, 'args'>
+  >;
   user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Query_RootUserArgs, 'id'>>;
-  user_achievement?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Query_RootUser_AchievementArgs, never>>;
-  user_achievement_aggregate?: Resolver<ResolversTypes['user_achievement_aggregate'], ParentType, ContextType, RequireFields<Query_RootUser_Achievement_AggregateArgs, never>>;
-  user_achievement_by_pk?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Query_RootUser_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>>;
-  user_challenge?: Resolver<Array<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Query_RootUser_ChallengeArgs, never>>;
-  user_challenge_aggregate?: Resolver<ResolversTypes['user_challenge_aggregate'], ParentType, ContextType, RequireFields<Query_RootUser_Challenge_AggregateArgs, never>>;
-  user_challenge_by_pk?: Resolver<Maybe<ResolversTypes['user_challenge']>, ParentType, ContextType, RequireFields<Query_RootUser_Challenge_By_PkArgs, 'id'>>;
+  user_achievement?: Resolver<
+    Array<ResolversTypes['user_achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUser_AchievementArgs, never>
+  >;
+  user_achievement_aggregate?: Resolver<
+    ResolversTypes['user_achievement_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUser_Achievement_AggregateArgs, never>
+  >;
+  user_achievement_by_pk?: Resolver<
+    Maybe<ResolversTypes['user_achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUser_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>
+  >;
+  user_challenge?: Resolver<
+    Array<ResolversTypes['user_challenge']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUser_ChallengeArgs, never>
+  >;
+  user_challenge_aggregate?: Resolver<
+    ResolversTypes['user_challenge_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUser_Challenge_AggregateArgs, never>
+  >;
+  user_challenge_by_pk?: Resolver<
+    Maybe<ResolversTypes['user_challenge']>,
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUser_Challenge_By_PkArgs, 'id'>
+  >;
   users?: Resolver<Array<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Query_RootUsersArgs, never>>;
-  users_aggregate?: Resolver<ResolversTypes['users_aggregate'], ParentType, ContextType, RequireFields<Query_RootUsers_AggregateArgs, never>>;
+  users_aggregate?: Resolver<
+    ResolversTypes['users_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<Query_RootUsers_AggregateArgs, never>
+  >;
 };
 
-export type Subscription_RootResolvers<ContextType = any, ParentType extends ResolversParentTypes['subscription_root'] = ResolversParentTypes['subscription_root']> = {
-  achievement?: SubscriptionResolver<Array<ResolversTypes['achievement']>, "achievement", ParentType, ContextType, RequireFields<Subscription_RootAchievementArgs, never>>;
-  achievement_aggregate?: SubscriptionResolver<ResolversTypes['achievement_aggregate'], "achievement_aggregate", ParentType, ContextType, RequireFields<Subscription_RootAchievement_AggregateArgs, never>>;
-  achievement_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['achievement']>, "achievement_by_pk", ParentType, ContextType, RequireFields<Subscription_RootAchievement_By_PkArgs, 'id'>>;
-  achievement_type?: SubscriptionResolver<Array<ResolversTypes['achievement_type']>, "achievement_type", ParentType, ContextType, RequireFields<Subscription_RootAchievement_TypeArgs, never>>;
-  achievement_type_aggregate?: SubscriptionResolver<ResolversTypes['achievement_type_aggregate'], "achievement_type_aggregate", ParentType, ContextType, RequireFields<Subscription_RootAchievement_Type_AggregateArgs, never>>;
-  achievement_type_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['achievement_type']>, "achievement_type_by_pk", ParentType, ContextType, RequireFields<Subscription_RootAchievement_Type_By_PkArgs, 'name'>>;
-  activities?: SubscriptionResolver<Array<ResolversTypes['activities']>, "activities", ParentType, ContextType, RequireFields<Subscription_RootActivitiesArgs, never>>;
-  activities_aggregate?: SubscriptionResolver<ResolversTypes['activities_aggregate'], "activities_aggregate", ParentType, ContextType, RequireFields<Subscription_RootActivities_AggregateArgs, never>>;
-  activities_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['activities']>, "activities_by_pk", ParentType, ContextType, RequireFields<Subscription_RootActivities_By_PkArgs, 'activity_id'>>;
-  categories?: SubscriptionResolver<Array<ResolversTypes['categories']>, "categories", ParentType, ContextType, RequireFields<Subscription_RootCategoriesArgs, never>>;
-  categories_aggregate?: SubscriptionResolver<ResolversTypes['categories_aggregate'], "categories_aggregate", ParentType, ContextType, RequireFields<Subscription_RootCategories_AggregateArgs, never>>;
-  categories_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['categories']>, "categories_by_pk", ParentType, ContextType, RequireFields<Subscription_RootCategories_By_PkArgs, 'name'>>;
-  challenge_type?: SubscriptionResolver<Array<ResolversTypes['challenge_type']>, "challenge_type", ParentType, ContextType, RequireFields<Subscription_RootChallenge_TypeArgs, never>>;
-  challenge_type_aggregate?: SubscriptionResolver<ResolversTypes['challenge_type_aggregate'], "challenge_type_aggregate", ParentType, ContextType, RequireFields<Subscription_RootChallenge_Type_AggregateArgs, never>>;
-  challenge_type_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['challenge_type']>, "challenge_type_by_pk", ParentType, ContextType, RequireFields<Subscription_RootChallenge_Type_By_PkArgs, 'name'>>;
-  comment?: SubscriptionResolver<Maybe<ResolversTypes['comments']>, "comment", ParentType, ContextType, RequireFields<Subscription_RootCommentArgs, 'comment_id'>>;
-  comments?: SubscriptionResolver<Array<ResolversTypes['comments']>, "comments", ParentType, ContextType, RequireFields<Subscription_RootCommentsArgs, never>>;
-  comments_aggregate?: SubscriptionResolver<ResolversTypes['comments_aggregate'], "comments_aggregate", ParentType, ContextType, RequireFields<Subscription_RootComments_AggregateArgs, never>>;
-  followings?: SubscriptionResolver<Array<ResolversTypes['followings']>, "followings", ParentType, ContextType, RequireFields<Subscription_RootFollowingsArgs, never>>;
-  followings_aggregate?: SubscriptionResolver<ResolversTypes['followings_aggregate'], "followings_aggregate", ParentType, ContextType, RequireFields<Subscription_RootFollowings_AggregateArgs, never>>;
-  followings_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['followings']>, "followings_by_pk", ParentType, ContextType, RequireFields<Subscription_RootFollowings_By_PkArgs, 'following_id' | 'user_id'>>;
-  geofence_variants?: SubscriptionResolver<Array<ResolversTypes['geofence_variants']>, "geofence_variants", ParentType, ContextType, RequireFields<Subscription_RootGeofence_VariantsArgs, never>>;
-  geofence_variants_aggregate?: SubscriptionResolver<ResolversTypes['geofence_variants_aggregate'], "geofence_variants_aggregate", ParentType, ContextType, RequireFields<Subscription_RootGeofence_Variants_AggregateArgs, never>>;
-  geofence_variants_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['geofence_variants']>, "geofence_variants_by_pk", ParentType, ContextType, RequireFields<Subscription_RootGeofence_Variants_By_PkArgs, 'name'>>;
-  geofences?: SubscriptionResolver<Array<ResolversTypes['geofences']>, "geofences", ParentType, ContextType, RequireFields<Subscription_RootGeofencesArgs, never>>;
-  geofences_aggregate?: SubscriptionResolver<ResolversTypes['geofences_aggregate'], "geofences_aggregate", ParentType, ContextType, RequireFields<Subscription_RootGeofences_AggregateArgs, never>>;
-  geofences_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['geofences']>, "geofences_by_pk", ParentType, ContextType, RequireFields<Subscription_RootGeofences_By_PkArgs, 'id'>>;
-  likes?: SubscriptionResolver<Array<ResolversTypes['likes']>, "likes", ParentType, ContextType, RequireFields<Subscription_RootLikesArgs, never>>;
-  likes_aggregate?: SubscriptionResolver<ResolversTypes['likes_aggregate'], "likes_aggregate", ParentType, ContextType, RequireFields<Subscription_RootLikes_AggregateArgs, never>>;
-  likes_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['likes']>, "likes_by_pk", ParentType, ContextType, RequireFields<Subscription_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>>;
-  unachievedachievements?: SubscriptionResolver<Array<ResolversTypes['achievement']>, "unachievedachievements", ParentType, ContextType, RequireFields<Subscription_RootUnachievedachievementsArgs, 'args'>>;
-  unachievedachievements_aggregate?: SubscriptionResolver<ResolversTypes['achievement_aggregate'], "unachievedachievements_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUnachievedachievements_AggregateArgs, 'args'>>;
-  user?: SubscriptionResolver<Maybe<ResolversTypes['users']>, "user", ParentType, ContextType, RequireFields<Subscription_RootUserArgs, 'id'>>;
-  user_achievement?: SubscriptionResolver<Array<ResolversTypes['user_achievement']>, "user_achievement", ParentType, ContextType, RequireFields<Subscription_RootUser_AchievementArgs, never>>;
-  user_achievement_aggregate?: SubscriptionResolver<ResolversTypes['user_achievement_aggregate'], "user_achievement_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUser_Achievement_AggregateArgs, never>>;
-  user_achievement_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['user_achievement']>, "user_achievement_by_pk", ParentType, ContextType, RequireFields<Subscription_RootUser_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>>;
-  user_challenge?: SubscriptionResolver<Array<ResolversTypes['user_challenge']>, "user_challenge", ParentType, ContextType, RequireFields<Subscription_RootUser_ChallengeArgs, never>>;
-  user_challenge_aggregate?: SubscriptionResolver<ResolversTypes['user_challenge_aggregate'], "user_challenge_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUser_Challenge_AggregateArgs, never>>;
-  user_challenge_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['user_challenge']>, "user_challenge_by_pk", ParentType, ContextType, RequireFields<Subscription_RootUser_Challenge_By_PkArgs, 'id'>>;
-  users?: SubscriptionResolver<Array<ResolversTypes['users']>, "users", ParentType, ContextType, RequireFields<Subscription_RootUsersArgs, never>>;
-  users_aggregate?: SubscriptionResolver<ResolversTypes['users_aggregate'], "users_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUsers_AggregateArgs, never>>;
+export type Subscription_RootResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['subscription_root'] = ResolversParentTypes['subscription_root']
+> = {
+  achievement?: SubscriptionResolver<
+    Array<ResolversTypes['achievement']>,
+    'achievement',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAchievementArgs, never>
+  >;
+  achievement_aggregate?: SubscriptionResolver<
+    ResolversTypes['achievement_aggregate'],
+    'achievement_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAchievement_AggregateArgs, never>
+  >;
+  achievement_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['achievement']>,
+    'achievement_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAchievement_By_PkArgs, 'id'>
+  >;
+  achievement_type?: SubscriptionResolver<
+    Array<ResolversTypes['achievement_type']>,
+    'achievement_type',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAchievement_TypeArgs, never>
+  >;
+  achievement_type_aggregate?: SubscriptionResolver<
+    ResolversTypes['achievement_type_aggregate'],
+    'achievement_type_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAchievement_Type_AggregateArgs, never>
+  >;
+  achievement_type_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['achievement_type']>,
+    'achievement_type_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootAchievement_Type_By_PkArgs, 'name'>
+  >;
+  activities?: SubscriptionResolver<
+    Array<ResolversTypes['activities']>,
+    'activities',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootActivitiesArgs, never>
+  >;
+  activities_aggregate?: SubscriptionResolver<
+    ResolversTypes['activities_aggregate'],
+    'activities_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootActivities_AggregateArgs, never>
+  >;
+  activities_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['activities']>,
+    'activities_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootActivities_By_PkArgs, 'activity_id'>
+  >;
+  categories?: SubscriptionResolver<
+    Array<ResolversTypes['categories']>,
+    'categories',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootCategoriesArgs, never>
+  >;
+  categories_aggregate?: SubscriptionResolver<
+    ResolversTypes['categories_aggregate'],
+    'categories_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootCategories_AggregateArgs, never>
+  >;
+  categories_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['categories']>,
+    'categories_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootCategories_By_PkArgs, 'name'>
+  >;
+  challenge_type?: SubscriptionResolver<
+    Array<ResolversTypes['challenge_type']>,
+    'challenge_type',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootChallenge_TypeArgs, never>
+  >;
+  challenge_type_aggregate?: SubscriptionResolver<
+    ResolversTypes['challenge_type_aggregate'],
+    'challenge_type_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootChallenge_Type_AggregateArgs, never>
+  >;
+  challenge_type_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['challenge_type']>,
+    'challenge_type_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootChallenge_Type_By_PkArgs, 'name'>
+  >;
+  comment?: SubscriptionResolver<
+    Maybe<ResolversTypes['comments']>,
+    'comment',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootCommentArgs, 'comment_id'>
+  >;
+  comments?: SubscriptionResolver<
+    Array<ResolversTypes['comments']>,
+    'comments',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootCommentsArgs, never>
+  >;
+  comments_aggregate?: SubscriptionResolver<
+    ResolversTypes['comments_aggregate'],
+    'comments_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootComments_AggregateArgs, never>
+  >;
+  followings?: SubscriptionResolver<
+    Array<ResolversTypes['followings']>,
+    'followings',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootFollowingsArgs, never>
+  >;
+  followings_aggregate?: SubscriptionResolver<
+    ResolversTypes['followings_aggregate'],
+    'followings_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootFollowings_AggregateArgs, never>
+  >;
+  followings_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['followings']>,
+    'followings_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootFollowings_By_PkArgs, 'following_id' | 'user_id'>
+  >;
+  geofence_variants?: SubscriptionResolver<
+    Array<ResolversTypes['geofence_variants']>,
+    'geofence_variants',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootGeofence_VariantsArgs, never>
+  >;
+  geofence_variants_aggregate?: SubscriptionResolver<
+    ResolversTypes['geofence_variants_aggregate'],
+    'geofence_variants_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootGeofence_Variants_AggregateArgs, never>
+  >;
+  geofence_variants_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['geofence_variants']>,
+    'geofence_variants_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootGeofence_Variants_By_PkArgs, 'name'>
+  >;
+  geofences?: SubscriptionResolver<
+    Array<ResolversTypes['geofences']>,
+    'geofences',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootGeofencesArgs, never>
+  >;
+  geofences_aggregate?: SubscriptionResolver<
+    ResolversTypes['geofences_aggregate'],
+    'geofences_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootGeofences_AggregateArgs, never>
+  >;
+  geofences_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['geofences']>,
+    'geofences_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootGeofences_By_PkArgs, 'id'>
+  >;
+  likes?: SubscriptionResolver<
+    Array<ResolversTypes['likes']>,
+    'likes',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootLikesArgs, never>
+  >;
+  likes_aggregate?: SubscriptionResolver<
+    ResolversTypes['likes_aggregate'],
+    'likes_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootLikes_AggregateArgs, never>
+  >;
+  likes_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['likes']>,
+    'likes_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>
+  >;
+  unachievedachievements?: SubscriptionResolver<
+    Array<ResolversTypes['achievement']>,
+    'unachievedachievements',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUnachievedachievementsArgs, 'args'>
+  >;
+  unachievedachievements_aggregate?: SubscriptionResolver<
+    ResolversTypes['achievement_aggregate'],
+    'unachievedachievements_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUnachievedachievements_AggregateArgs, 'args'>
+  >;
+  user?: SubscriptionResolver<
+    Maybe<ResolversTypes['users']>,
+    'user',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUserArgs, 'id'>
+  >;
+  user_achievement?: SubscriptionResolver<
+    Array<ResolversTypes['user_achievement']>,
+    'user_achievement',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUser_AchievementArgs, never>
+  >;
+  user_achievement_aggregate?: SubscriptionResolver<
+    ResolversTypes['user_achievement_aggregate'],
+    'user_achievement_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUser_Achievement_AggregateArgs, never>
+  >;
+  user_achievement_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['user_achievement']>,
+    'user_achievement_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUser_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>
+  >;
+  user_challenge?: SubscriptionResolver<
+    Array<ResolversTypes['user_challenge']>,
+    'user_challenge',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUser_ChallengeArgs, never>
+  >;
+  user_challenge_aggregate?: SubscriptionResolver<
+    ResolversTypes['user_challenge_aggregate'],
+    'user_challenge_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUser_Challenge_AggregateArgs, never>
+  >;
+  user_challenge_by_pk?: SubscriptionResolver<
+    Maybe<ResolversTypes['user_challenge']>,
+    'user_challenge_by_pk',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUser_Challenge_By_PkArgs, 'id'>
+  >;
+  users?: SubscriptionResolver<
+    Array<ResolversTypes['users']>,
+    'users',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUsersArgs, never>
+  >;
+  users_aggregate?: SubscriptionResolver<
+    ResolversTypes['users_aggregate'],
+    'users_aggregate',
+    ParentType,
+    ContextType,
+    RequireFields<Subscription_RootUsers_AggregateArgs, never>
+  >;
 };
 
 export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['timestamp'], any> {
@@ -6674,7 +7735,10 @@ export interface TimestamptzScalarConfig extends GraphQLScalarTypeConfig<Resolve
   name: 'timestamptz';
 }
 
-export type User_AchievementResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement'] = ResolversParentTypes['user_achievement']> = {
+export type User_AchievementResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement'] = ResolversParentTypes['user_achievement']
+> = {
   achievement?: Resolver<ResolversTypes['achievement'], ParentType, ContextType>;
   achievement_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
@@ -6683,15 +7747,26 @@ export type User_AchievementResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_aggregate'] = ResolversParentTypes['user_achievement_aggregate']> = {
+export type User_Achievement_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_aggregate'] = ResolversParentTypes['user_achievement_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['user_achievement_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_aggregate_fields'] = ResolversParentTypes['user_achievement_aggregate_fields']> = {
+export type User_Achievement_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_aggregate_fields'] = ResolversParentTypes['user_achievement_aggregate_fields']
+> = {
   avg?: Resolver<Maybe<ResolversTypes['user_achievement_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<User_Achievement_Aggregate_FieldsCountArgs, never>>;
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<User_Achievement_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['user_achievement_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['user_achievement_min_fields']>, ParentType, ContextType>;
   stddev?: Resolver<Maybe<ResolversTypes['user_achievement_stddev_fields']>, ParentType, ContextType>;
@@ -6704,67 +7779,103 @@ export type User_Achievement_Aggregate_FieldsResolvers<ContextType = any, Parent
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_avg_fields'] = ResolversParentTypes['user_achievement_avg_fields']> = {
+export type User_Achievement_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_avg_fields'] = ResolversParentTypes['user_achievement_avg_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_max_fields'] = ResolversParentTypes['user_achievement_max_fields']> = {
+export type User_Achievement_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_max_fields'] = ResolversParentTypes['user_achievement_max_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_min_fields'] = ResolversParentTypes['user_achievement_min_fields']> = {
+export type User_Achievement_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_min_fields'] = ResolversParentTypes['user_achievement_min_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_mutation_response'] = ResolversParentTypes['user_achievement_mutation_response']> = {
+export type User_Achievement_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_mutation_response'] = ResolversParentTypes['user_achievement_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_stddev_fields'] = ResolversParentTypes['user_achievement_stddev_fields']> = {
+export type User_Achievement_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_stddev_fields'] = ResolversParentTypes['user_achievement_stddev_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_stddev_pop_fields'] = ResolversParentTypes['user_achievement_stddev_pop_fields']> = {
+export type User_Achievement_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_stddev_pop_fields'] = ResolversParentTypes['user_achievement_stddev_pop_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_stddev_samp_fields'] = ResolversParentTypes['user_achievement_stddev_samp_fields']> = {
+export type User_Achievement_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_stddev_samp_fields'] = ResolversParentTypes['user_achievement_stddev_samp_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_sum_fields'] = ResolversParentTypes['user_achievement_sum_fields']> = {
+export type User_Achievement_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_sum_fields'] = ResolversParentTypes['user_achievement_sum_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_var_pop_fields'] = ResolversParentTypes['user_achievement_var_pop_fields']> = {
+export type User_Achievement_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_var_pop_fields'] = ResolversParentTypes['user_achievement_var_pop_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_var_samp_fields'] = ResolversParentTypes['user_achievement_var_samp_fields']> = {
+export type User_Achievement_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_var_samp_fields'] = ResolversParentTypes['user_achievement_var_samp_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Achievement_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_achievement_variance_fields'] = ResolversParentTypes['user_achievement_variance_fields']> = {
+export type User_Achievement_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_achievement_variance_fields'] = ResolversParentTypes['user_achievement_variance_fields']
+> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_ChallengeResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge'] = ResolversParentTypes['user_challenge']> = {
+export type User_ChallengeResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge'] = ResolversParentTypes['user_challenge']
+> = {
   challenge_type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   challenger_uid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
@@ -6772,19 +7883,35 @@ export type User_ChallengeResolvers<ContextType = any, ParentType extends Resolv
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   is_active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   receiver_uid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  rules?: Resolver<Maybe<ResolversTypes['json']>, ParentType, ContextType, RequireFields<User_ChallengeRulesArgs, never>>;
+  rules?: Resolver<
+    Maybe<ResolversTypes['json']>,
+    ParentType,
+    ContextType,
+    RequireFields<User_ChallengeRulesArgs, never>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_aggregate'] = ResolversParentTypes['user_challenge_aggregate']> = {
+export type User_Challenge_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_aggregate'] = ResolversParentTypes['user_challenge_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['user_challenge_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['user_challenge']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_aggregate_fields'] = ResolversParentTypes['user_challenge_aggregate_fields']> = {
+export type User_Challenge_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_aggregate_fields'] = ResolversParentTypes['user_challenge_aggregate_fields']
+> = {
   avg?: Resolver<Maybe<ResolversTypes['user_challenge_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<User_Challenge_Aggregate_FieldsCountArgs, never>>;
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<User_Challenge_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['user_challenge_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['user_challenge_min_fields']>, ParentType, ContextType>;
   stddev?: Resolver<Maybe<ResolversTypes['user_challenge_stddev_fields']>, ParentType, ContextType>;
@@ -6797,12 +7924,18 @@ export type User_Challenge_Aggregate_FieldsResolvers<ContextType = any, ParentTy
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_avg_fields'] = ResolversParentTypes['user_challenge_avg_fields']> = {
+export type User_Challenge_Avg_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_avg_fields'] = ResolversParentTypes['user_challenge_avg_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_max_fields'] = ResolversParentTypes['user_challenge_max_fields']> = {
+export type User_Challenge_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_max_fields'] = ResolversParentTypes['user_challenge_max_fields']
+> = {
   challenge_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   challenger_uid?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6811,7 +7944,10 @@ export type User_Challenge_Max_FieldsResolvers<ContextType = any, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_min_fields'] = ResolversParentTypes['user_challenge_min_fields']> = {
+export type User_Challenge_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_min_fields'] = ResolversParentTypes['user_challenge_min_fields']
+> = {
   challenge_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   challenger_uid?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -6820,81 +7956,162 @@ export type User_Challenge_Min_FieldsResolvers<ContextType = any, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_mutation_response'] = ResolversParentTypes['user_challenge_mutation_response']> = {
+export type User_Challenge_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_mutation_response'] = ResolversParentTypes['user_challenge_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['user_challenge']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_stddev_fields'] = ResolversParentTypes['user_challenge_stddev_fields']> = {
+export type User_Challenge_Stddev_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_stddev_fields'] = ResolversParentTypes['user_challenge_stddev_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_stddev_pop_fields'] = ResolversParentTypes['user_challenge_stddev_pop_fields']> = {
+export type User_Challenge_Stddev_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_stddev_pop_fields'] = ResolversParentTypes['user_challenge_stddev_pop_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_stddev_samp_fields'] = ResolversParentTypes['user_challenge_stddev_samp_fields']> = {
+export type User_Challenge_Stddev_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_stddev_samp_fields'] = ResolversParentTypes['user_challenge_stddev_samp_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_sum_fields'] = ResolversParentTypes['user_challenge_sum_fields']> = {
+export type User_Challenge_Sum_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_sum_fields'] = ResolversParentTypes['user_challenge_sum_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_var_pop_fields'] = ResolversParentTypes['user_challenge_var_pop_fields']> = {
+export type User_Challenge_Var_Pop_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_var_pop_fields'] = ResolversParentTypes['user_challenge_var_pop_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_var_samp_fields'] = ResolversParentTypes['user_challenge_var_samp_fields']> = {
+export type User_Challenge_Var_Samp_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_var_samp_fields'] = ResolversParentTypes['user_challenge_var_samp_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type User_Challenge_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['user_challenge_variance_fields'] = ResolversParentTypes['user_challenge_variance_fields']> = {
+export type User_Challenge_Variance_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['user_challenge_variance_fields'] = ResolversParentTypes['user_challenge_variance_fields']
+> = {
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type UsersResolvers<ContextType = any, ParentType extends ResolversParentTypes['users'] = ResolversParentTypes['users']> = {
-  activities?: Resolver<Array<ResolversTypes['activities']>, ParentType, ContextType, RequireFields<UsersActivitiesArgs, never>>;
-  activities_aggregate?: Resolver<ResolversTypes['activities_aggregate'], ParentType, ContextType, RequireFields<UsersActivities_AggregateArgs, never>>;
+export type UsersResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['users'] = ResolversParentTypes['users']
+> = {
+  activities?: Resolver<
+    Array<ResolversTypes['activities']>,
+    ParentType,
+    ContextType,
+    RequireFields<UsersActivitiesArgs, never>
+  >;
+  activities_aggregate?: Resolver<
+    ResolversTypes['activities_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<UsersActivities_AggregateArgs, never>
+  >;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  followers?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<UsersFollowersArgs, never>>;
-  followers_aggregate?: Resolver<ResolversTypes['followings_aggregate'], ParentType, ContextType, RequireFields<UsersFollowers_AggregateArgs, never>>;
-  following?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<UsersFollowingArgs, never>>;
-  following_aggregate?: Resolver<ResolversTypes['followings_aggregate'], ParentType, ContextType, RequireFields<UsersFollowing_AggregateArgs, never>>;
+  followers?: Resolver<
+    Array<ResolversTypes['followings']>,
+    ParentType,
+    ContextType,
+    RequireFields<UsersFollowersArgs, never>
+  >;
+  followers_aggregate?: Resolver<
+    ResolversTypes['followings_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<UsersFollowers_AggregateArgs, never>
+  >;
+  following?: Resolver<
+    Array<ResolversTypes['followings']>,
+    ParentType,
+    ContextType,
+    RequireFields<UsersFollowingArgs, never>
+  >;
+  following_aggregate?: Resolver<
+    ResolversTypes['followings_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<UsersFollowing_AggregateArgs, never>
+  >;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   picture?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   totalScore?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  user_achievement?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<UsersUser_AchievementArgs, never>>;
-  user_achievement_aggregate?: Resolver<ResolversTypes['user_achievement_aggregate'], ParentType, ContextType, RequireFields<UsersUser_Achievement_AggregateArgs, never>>;
+  user_achievement?: Resolver<
+    Array<ResolversTypes['user_achievement']>,
+    ParentType,
+    ContextType,
+    RequireFields<UsersUser_AchievementArgs, never>
+  >;
+  user_achievement_aggregate?: Resolver<
+    ResolversTypes['user_achievement_aggregate'],
+    ParentType,
+    ContextType,
+    RequireFields<UsersUser_Achievement_AggregateArgs, never>
+  >;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Users_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_aggregate'] = ResolversParentTypes['users_aggregate']> = {
+export type Users_AggregateResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['users_aggregate'] = ResolversParentTypes['users_aggregate']
+> = {
   aggregate?: Resolver<Maybe<ResolversTypes['users_aggregate_fields']>, ParentType, ContextType>;
   nodes?: Resolver<Array<ResolversTypes['users']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Users_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_aggregate_fields'] = ResolversParentTypes['users_aggregate_fields']> = {
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Users_Aggregate_FieldsCountArgs, never>>;
+export type Users_Aggregate_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['users_aggregate_fields'] = ResolversParentTypes['users_aggregate_fields']
+> = {
+  count?: Resolver<
+    Maybe<ResolversTypes['Int']>,
+    ParentType,
+    ContextType,
+    RequireFields<Users_Aggregate_FieldsCountArgs, never>
+  >;
   max?: Resolver<Maybe<ResolversTypes['users_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['users_min_fields']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Users_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_max_fields'] = ResolversParentTypes['users_max_fields']> = {
+export type Users_Max_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['users_max_fields'] = ResolversParentTypes['users_max_fields']
+> = {
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -6905,7 +8122,10 @@ export type Users_Max_FieldsResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Users_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_min_fields'] = ResolversParentTypes['users_min_fields']> = {
+export type Users_Min_FieldsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['users_min_fields'] = ResolversParentTypes['users_min_fields']
+> = {
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -6916,7 +8136,10 @@ export type Users_Min_FieldsResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Users_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_mutation_response'] = ResolversParentTypes['users_mutation_response']> = {
+export type Users_Mutation_ResponseResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['users_mutation_response'] = ResolversParentTypes['users_mutation_response']
+> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['users']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -7077,332 +8300,276 @@ export type Resolvers<ContextType = any> = {
   users_mutation_response?: Users_Mutation_ResponseResolvers<ContextType>;
 };
 
-
 /**
  * @deprecated
  * Use "Resolvers" root object instead. If you wish to get "IResolvers", add "typesPrefix: I" to your config.
  */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
-
 export const AddAchievement = gql`
-    mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
-  insert_user_achievement(objects: $objects) {
-    affected_rows
+  mutation AddAchievement($objects: [user_achievement_insert_input!]!) {
+    insert_user_achievement(objects: $objects) {
+      affected_rows
+    }
   }
-}
-    `;
+`;
 export const CreateUser = gql`
-    mutation CreateUser($id: String!, $email: String) {
-  insert_users(objects: [{id: $id, email: $email}]) {
-    affected_rows
+  mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
+    insert_users(objects: [{ id: $id, email: $email, name: $name, picture: $picture }]) {
+      affected_rows
+    }
   }
-}
-    `;
+`;
 export const DeleteAchievement = gql`
-    mutation DeleteAchievement($achievement_id: Int!, $user_id: String!) {
-  delete_user_achievement_by_pk(
-    achievement_id: $achievement_id
-    user_id: $user_id
-  ) {
-    achievement_id
+  mutation DeleteAchievement($achievement_id: Int!, $user_id: String!) {
+    delete_user_achievement_by_pk(achievement_id: $achievement_id, user_id: $user_id) {
+      achievement_id
+    }
   }
-}
-    `;
+`;
 export const DeleteUser = gql`
-    mutation DeleteUser($id: String!) {
-  delete_users(where: {id: {_eq: $id}}) {
-    affected_rows
+  mutation DeleteUser($id: String!) {
+    delete_users(where: { id: { _eq: $id } }) {
+      affected_rows
+    }
   }
-}
-    `;
+`;
 export const GetUserAndExistingAchievements = gql`
-    query GetUserAndExistingAchievements($user_id: String!) {
-  user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
-    }
-    education_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EDUCATION"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+  query GetUserAndExistingAchievements($user_id: String!) {
+    user(id: $user_id) {
+      id
+      totalScore
+      activity_count: activities_aggregate {
+        aggregate {
+          count(columns: activity_id)
         }
       }
-    }
-    culture_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "CULTURE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      education_score: activities_aggregate(where: { geofence: { category: { _eq: "EDUCATION" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    social_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "SOCIAL"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      culture_score: activities_aggregate(where: { geofence: { category: { _eq: "CULTURE" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    exercise_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EXERCISE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      social_score: activities_aggregate(where: { geofence: { category: { _eq: "SOCIAL" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    user_achievement {
-      achievement {
-        id
-        name
-        description
-        achievement_type
-        rule
-        created_at
+      exercise_score: activities_aggregate(where: { geofence: { category: { _eq: "EXERCISE" } } }) {
+        aggregate {
+          sum {
+            score
+          }
+        }
+      }
+      user_achievement {
+        achievement {
+          id
+          name
+          description
+          achievement_type
+          rule
+          created_at
+        }
       }
     }
   }
-}
-    `;
+`;
 export const GetUserAndUnachievedAchievements = gql`
-    query GetUserAndUnachievedAchievements($user_id: String!) {
-  unachievedachievements(args: {uid: $user_id}) {
-    id
-    name
-    description
-    created_at
-    achievement_type
-    rule
-  }
-  user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
+  query GetUserAndUnachievedAchievements($user_id: String!) {
+    unachievedachievements(args: { uid: $user_id }) {
+      id
+      name
+      description
+      created_at
+      achievement_type
+      rule
     }
-    education_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EDUCATION"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+    user(id: $user_id) {
+      id
+      totalScore
+      activity_count: activities_aggregate {
+        aggregate {
+          count(columns: activity_id)
         }
       }
-    }
-    culture_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "CULTURE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      education_score: activities_aggregate(where: { geofence: { category: { _eq: "EDUCATION" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    social_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "SOCIAL"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      culture_score: activities_aggregate(where: { geofence: { category: { _eq: "CULTURE" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
-    }
-    exercise_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EXERCISE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
+      social_score: activities_aggregate(where: { geofence: { category: { _eq: "SOCIAL" } } }) {
+        aggregate {
+          sum {
+            score
+          }
+        }
+      }
+      exercise_score: activities_aggregate(where: { geofence: { category: { _eq: "EXERCISE" } } }) {
+        aggregate {
+          sum {
+            score
+          }
         }
       }
     }
   }
-}
-    `;
+`;
 export type AddAchievementMutationVariables = Exact<{
   objects: Array<User_Achievement_Insert_Input> | User_Achievement_Insert_Input;
 }>;
 
-
-export type AddAchievementMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_user_achievement?: Maybe<(
-    { __typename?: 'user_achievement_mutation_response' }
-    & Pick<User_Achievement_Mutation_Response, 'affected_rows'>
-  )> }
-);
+export type AddAchievementMutation = { __typename?: 'mutation_root' } & {
+  insert_user_achievement?: Maybe<
+    { __typename?: 'user_achievement_mutation_response' } & Pick<User_Achievement_Mutation_Response, 'affected_rows'>
+  >;
+};
 
 export type CreateUserMutationVariables = Exact<{
   id: Scalars['String'];
   email?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  picture?: Maybe<Scalars['String']>;
 }>;
 
-
-export type CreateUserMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_users?: Maybe<(
-    { __typename?: 'users_mutation_response' }
-    & Pick<Users_Mutation_Response, 'affected_rows'>
-  )> }
-);
+export type CreateUserMutation = { __typename?: 'mutation_root' } & {
+  insert_users?: Maybe<{ __typename?: 'users_mutation_response' } & Pick<Users_Mutation_Response, 'affected_rows'>>;
+};
 
 export type DeleteAchievementMutationVariables = Exact<{
   achievement_id: Scalars['Int'];
   user_id: Scalars['String'];
 }>;
 
-
-export type DeleteAchievementMutation = (
-  { __typename?: 'mutation_root' }
-  & { delete_user_achievement_by_pk?: Maybe<(
-    { __typename?: 'user_achievement' }
-    & Pick<User_Achievement, 'achievement_id'>
-  )> }
-);
+export type DeleteAchievementMutation = { __typename?: 'mutation_root' } & {
+  delete_user_achievement_by_pk?: Maybe<{ __typename?: 'user_achievement' } & Pick<User_Achievement, 'achievement_id'>>;
+};
 
 export type DeleteUserMutationVariables = Exact<{
   id: Scalars['String'];
 }>;
 
-
-export type DeleteUserMutation = (
-  { __typename?: 'mutation_root' }
-  & { delete_users?: Maybe<(
-    { __typename?: 'users_mutation_response' }
-    & Pick<Users_Mutation_Response, 'affected_rows'>
-  )> }
-);
+export type DeleteUserMutation = { __typename?: 'mutation_root' } & {
+  delete_users?: Maybe<{ __typename?: 'users_mutation_response' } & Pick<Users_Mutation_Response, 'affected_rows'>>;
+};
 
 export type GetUserAndExistingAchievementsQueryVariables = Exact<{
   user_id: Scalars['String'];
 }>;
 
-
-export type GetUserAndExistingAchievementsQuery = (
-  { __typename?: 'query_root' }
-  & { user?: Maybe<(
-    { __typename?: 'users' }
-    & Pick<Users, 'id' | 'totalScore'>
-    & { activity_count: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & Pick<Activities_Aggregate_Fields, 'count'>
-      )> }
-    ), education_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), culture_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), social_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), exercise_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), user_achievement: Array<(
-      { __typename?: 'user_achievement' }
-      & { achievement: (
-        { __typename?: 'achievement' }
-        & Pick<Achievement, 'id' | 'name' | 'description' | 'achievement_type' | 'rule' | 'created_at'>
-      ) }
-    )> }
-  )> }
-);
+export type GetUserAndExistingAchievementsQuery = { __typename?: 'query_root' } & {
+  user?: Maybe<
+    { __typename?: 'users' } & Pick<Users, 'id' | 'totalScore'> & {
+        activity_count: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & Pick<Activities_Aggregate_Fields, 'count'>
+          >;
+        };
+        education_score: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & {
+              sum?: Maybe<{ __typename?: 'activities_sum_fields' } & Pick<Activities_Sum_Fields, 'score'>>;
+            }
+          >;
+        };
+        culture_score: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & {
+              sum?: Maybe<{ __typename?: 'activities_sum_fields' } & Pick<Activities_Sum_Fields, 'score'>>;
+            }
+          >;
+        };
+        social_score: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & {
+              sum?: Maybe<{ __typename?: 'activities_sum_fields' } & Pick<Activities_Sum_Fields, 'score'>>;
+            }
+          >;
+        };
+        exercise_score: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & {
+              sum?: Maybe<{ __typename?: 'activities_sum_fields' } & Pick<Activities_Sum_Fields, 'score'>>;
+            }
+          >;
+        };
+        user_achievement: Array<
+          { __typename?: 'user_achievement' } & {
+            achievement: { __typename?: 'achievement' } & Pick<
+              Achievement,
+              'id' | 'name' | 'description' | 'achievement_type' | 'rule' | 'created_at'
+            >;
+          }
+        >;
+      }
+  >;
+};
 
 export type GetUserAndUnachievedAchievementsQueryVariables = Exact<{
   user_id: Scalars['String'];
 }>;
 
-
-export type GetUserAndUnachievedAchievementsQuery = (
-  { __typename?: 'query_root' }
-  & { unachievedachievements: Array<(
-    { __typename?: 'achievement' }
-    & Pick<Achievement, 'id' | 'name' | 'description' | 'created_at' | 'achievement_type' | 'rule'>
-  )>, user?: Maybe<(
-    { __typename?: 'users' }
-    & Pick<Users, 'id' | 'totalScore'>
-    & { activity_count: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & Pick<Activities_Aggregate_Fields, 'count'>
-      )> }
-    ), education_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), culture_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), social_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), exercise_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ) }
-  )> }
-);
+export type GetUserAndUnachievedAchievementsQuery = { __typename?: 'query_root' } & {
+  unachievedachievements: Array<
+    { __typename?: 'achievement' } & Pick<
+      Achievement,
+      'id' | 'name' | 'description' | 'created_at' | 'achievement_type' | 'rule'
+    >
+  >;
+  user?: Maybe<
+    { __typename?: 'users' } & Pick<Users, 'id' | 'totalScore'> & {
+        activity_count: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & Pick<Activities_Aggregate_Fields, 'count'>
+          >;
+        };
+        education_score: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & {
+              sum?: Maybe<{ __typename?: 'activities_sum_fields' } & Pick<Activities_Sum_Fields, 'score'>>;
+            }
+          >;
+        };
+        culture_score: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & {
+              sum?: Maybe<{ __typename?: 'activities_sum_fields' } & Pick<Activities_Sum_Fields, 'score'>>;
+            }
+          >;
+        };
+        social_score: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & {
+              sum?: Maybe<{ __typename?: 'activities_sum_fields' } & Pick<Activities_Sum_Fields, 'score'>>;
+            }
+          >;
+        };
+        exercise_score: { __typename?: 'activities_aggregate' } & {
+          aggregate?: Maybe<
+            { __typename?: 'activities_aggregate_fields' } & {
+              sum?: Maybe<{ __typename?: 'activities_sum_fields' } & Pick<Activities_Sum_Fields, 'score'>>;
+            }
+          >;
+        };
+      }
+  >;
+};
