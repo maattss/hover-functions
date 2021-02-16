@@ -6626,6 +6626,16 @@ export const GetUserAndUnachievedAchievementsDocument = gql`
   }
 }
     `;
+export const UpdateChallengeParticipationProgressDocument = gql`
+    mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: Int!) {
+  update_challenge_participant(
+    where: {challenge_id: {_eq: $challenge_id}, user_id: {_eq: $user_id}}
+    _set: {progress: $progress}
+  ) {
+    affected_rows
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 
@@ -6653,6 +6663,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
+    },
+    UpdateChallengeParticipationProgress(variables: UpdateChallengeParticipationProgressMutationVariables): Promise<UpdateChallengeParticipationProgressMutation> {
+      return withWrapper(() => client.request<UpdateChallengeParticipationProgressMutation>(print(UpdateChallengeParticipationProgressDocument), variables));
     }
   };
 }
@@ -10053,6 +10066,16 @@ export const GetUserAndUnachievedAchievements = gql`
   }
 }
     `;
+export const UpdateChallengeParticipationProgress = gql`
+    mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: Int!) {
+  update_challenge_participant(
+    where: {challenge_id: {_eq: $challenge_id}, user_id: {_eq: $user_id}}
+    _set: {progress: $progress}
+  ) {
+    affected_rows
+  }
+}
+    `;
 export type CreateUserMutationVariables = Exact<{
   id: Scalars['String'];
   email?: Maybe<Scalars['String']>;
@@ -10250,5 +10273,20 @@ export type GetUserAndUnachievedAchievementsQuery = (
         )> }
       )> }
     ) }
+  )> }
+);
+
+export type UpdateChallengeParticipationProgressMutationVariables = Exact<{
+  challenge_id: Scalars['Int'];
+  user_id: Scalars['String'];
+  progress: Scalars['Int'];
+}>;
+
+
+export type UpdateChallengeParticipationProgressMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_challenge_participant?: Maybe<(
+    { __typename?: 'challenge_participant_mutation_response' }
+    & Pick<Challenge_Participant_Mutation_Response, 'affected_rows'>
   )> }
 );
