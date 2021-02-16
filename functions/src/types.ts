@@ -5628,99 +5628,6 @@ export type Subscription_RootChallenge_State_By_PkArgs = {
 };
 
 
-export type Subscription_RootChallengeArgs = {
-  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Order_By>>;
-  where?: Maybe<Challenge_Bool_Exp>;
-};
-
-
-export type Subscription_RootChallenge_AggregateArgs = {
-  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Order_By>>;
-  where?: Maybe<Challenge_Bool_Exp>;
-};
-
-
-export type Subscription_RootChallenge_By_PkArgs = {
-  id: Scalars['Int'];
-};
-
-
-export type Subscription_RootChallenge_ParticipantArgs = {
-  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
-  where?: Maybe<Challenge_Participant_Bool_Exp>;
-};
-
-
-export type Subscription_RootChallenge_Participant_AggregateArgs = {
-  distinct_on?: Maybe<Array<Challenge_Participant_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
-  where?: Maybe<Challenge_Participant_Bool_Exp>;
-};
-
-
-export type Subscription_RootChallenge_Participant_By_PkArgs = {
-  challenge_id: Scalars['Int'];
-  user_id: Scalars['String'];
-};
-
-
-export type Subscription_RootChallenge_Participant_StateArgs = {
-  distinct_on?: Maybe<Array<Challenge_Participant_State_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Participant_State_Order_By>>;
-  where?: Maybe<Challenge_Participant_State_Bool_Exp>;
-};
-
-
-export type Subscription_RootChallenge_Participant_State_AggregateArgs = {
-  distinct_on?: Maybe<Array<Challenge_Participant_State_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_Participant_State_Order_By>>;
-  where?: Maybe<Challenge_Participant_State_Bool_Exp>;
-};
-
-
-export type Subscription_RootChallenge_Participant_State_By_PkArgs = {
-  state: Scalars['String'];
-};
-
-
-export type Subscription_RootChallenge_StateArgs = {
-  distinct_on?: Maybe<Array<Challenge_State_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_State_Order_By>>;
-  where?: Maybe<Challenge_State_Bool_Exp>;
-};
-
-
-export type Subscription_RootChallenge_State_AggregateArgs = {
-  distinct_on?: Maybe<Array<Challenge_State_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Challenge_State_Order_By>>;
-  where?: Maybe<Challenge_State_Bool_Exp>;
-};
-
-
-export type Subscription_RootChallenge_State_By_PkArgs = {
-  state: Scalars['String'];
-};
-
-
 export type Subscription_RootChallenge_TypeArgs = {
   distinct_on?: Maybe<Array<Challenge_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -6629,6 +6536,32 @@ export const GetUserAndExistingAchievementsDocument = gql`
   }
 }
     `;
+export const GetActivitiesAndChallengesDocument = gql`
+    query GetActivitiesAndChallenges($id: String) {
+  activities(where: {user_id: {_eq: $id}}) {
+    activity_id
+    duration
+    score
+    started_at
+  }
+  challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
+    challenge {
+      id
+      challenge_type
+      created_at
+      start_date
+      end_date
+      state
+      rules
+      created_by_user {
+        id
+        name
+        picture
+      }
+    }
+  }
+}
+    `;
 export const InsertAchievementsDocument = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -6711,6 +6644,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetUserAndExistingAchievements(variables: GetUserAndExistingAchievementsQueryVariables): Promise<GetUserAndExistingAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndExistingAchievementsQuery>(print(GetUserAndExistingAchievementsDocument), variables));
+    },
+    GetActivitiesAndChallenges(variables?: GetActivitiesAndChallengesQueryVariables): Promise<GetActivitiesAndChallengesQuery> {
+      return withWrapper(() => client.request<GetActivitiesAndChallengesQuery>(print(GetActivitiesAndChallengesDocument), variables));
     },
     InsertAchievements(variables: InsertAchievementsMutationVariables): Promise<InsertAchievementsMutation> {
       return withWrapper(() => client.request<InsertAchievementsMutation>(print(InsertAchievementsDocument), variables));
@@ -8309,256 +8245,6 @@ export type Categories_Var_Samp_FieldsResolvers<ContextType = any, ParentType ex
 
 export type Categories_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories_variance_fields'] = ResolversParentTypes['categories_variance_fields']> = {
   points_per_minute?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ChallengeResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge'] = ResolversParentTypes['challenge']> = {
-  challengeTypeByChallengeType?: Resolver<ResolversTypes['challenge_type'], ParentType, ContextType>;
-  challenge_participants?: Resolver<Array<ResolversTypes['challenge_participant']>, ParentType, ContextType, RequireFields<ChallengeChallenge_ParticipantsArgs, never>>;
-  challenge_participants_aggregate?: Resolver<ResolversTypes['challenge_participant_aggregate'], ParentType, ContextType, RequireFields<ChallengeChallenge_Participants_AggregateArgs, never>>;
-  challenge_state?: Resolver<ResolversTypes['challenge_state'], ParentType, ContextType>;
-  challenge_type?: Resolver<ResolversTypes['challenge_type_enum'], ParentType, ContextType>;
-  created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
-  created_by?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  created_by_user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
-  end_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  rules?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<ChallengeRulesArgs, never>>;
-  start_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
-  state?: Resolver<ResolversTypes['challenge_state_enum'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_aggregate'] = ResolversParentTypes['challenge_aggregate']> = {
-  aggregate?: Resolver<Maybe<ResolversTypes['challenge_aggregate_fields']>, ParentType, ContextType>;
-  nodes?: Resolver<Array<ResolversTypes['challenge']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_aggregate_fields'] = ResolversParentTypes['challenge_aggregate_fields']> = {
-  avg?: Resolver<Maybe<ResolversTypes['challenge_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Challenge_Aggregate_FieldsCountArgs, never>>;
-  max?: Resolver<Maybe<ResolversTypes['challenge_max_fields']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['challenge_min_fields']>, ParentType, ContextType>;
-  stddev?: Resolver<Maybe<ResolversTypes['challenge_stddev_fields']>, ParentType, ContextType>;
-  stddev_pop?: Resolver<Maybe<ResolversTypes['challenge_stddev_pop_fields']>, ParentType, ContextType>;
-  stddev_samp?: Resolver<Maybe<ResolversTypes['challenge_stddev_samp_fields']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['challenge_sum_fields']>, ParentType, ContextType>;
-  var_pop?: Resolver<Maybe<ResolversTypes['challenge_var_pop_fields']>, ParentType, ContextType>;
-  var_samp?: Resolver<Maybe<ResolversTypes['challenge_var_samp_fields']>, ParentType, ContextType>;
-  variance?: Resolver<Maybe<ResolversTypes['challenge_variance_fields']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_avg_fields'] = ResolversParentTypes['challenge_avg_fields']> = {
-  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_max_fields'] = ResolversParentTypes['challenge_max_fields']> = {
-  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  created_by?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  end_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  start_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_min_fields'] = ResolversParentTypes['challenge_min_fields']> = {
-  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  created_by?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  end_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  start_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_mutation_response'] = ResolversParentTypes['challenge_mutation_response']> = {
-  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['challenge']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_ParticipantResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant'] = ResolversParentTypes['challenge_participant']> = {
-  challenge?: Resolver<ResolversTypes['challenge'], ParentType, ContextType>;
-  challenge_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  challenge_participant_state?: Resolver<ResolversTypes['challenge_participant_state'], ParentType, ContextType>;
-  state?: Resolver<ResolversTypes['challenge_participant_state_enum'], ParentType, ContextType>;
-  user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
-  user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_aggregate'] = ResolversParentTypes['challenge_participant_aggregate']> = {
-  aggregate?: Resolver<Maybe<ResolversTypes['challenge_participant_aggregate_fields']>, ParentType, ContextType>;
-  nodes?: Resolver<Array<ResolversTypes['challenge_participant']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_aggregate_fields'] = ResolversParentTypes['challenge_participant_aggregate_fields']> = {
-  avg?: Resolver<Maybe<ResolversTypes['challenge_participant_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Challenge_Participant_Aggregate_FieldsCountArgs, never>>;
-  max?: Resolver<Maybe<ResolversTypes['challenge_participant_max_fields']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['challenge_participant_min_fields']>, ParentType, ContextType>;
-  stddev?: Resolver<Maybe<ResolversTypes['challenge_participant_stddev_fields']>, ParentType, ContextType>;
-  stddev_pop?: Resolver<Maybe<ResolversTypes['challenge_participant_stddev_pop_fields']>, ParentType, ContextType>;
-  stddev_samp?: Resolver<Maybe<ResolversTypes['challenge_participant_stddev_samp_fields']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['challenge_participant_sum_fields']>, ParentType, ContextType>;
-  var_pop?: Resolver<Maybe<ResolversTypes['challenge_participant_var_pop_fields']>, ParentType, ContextType>;
-  var_samp?: Resolver<Maybe<ResolversTypes['challenge_participant_var_samp_fields']>, ParentType, ContextType>;
-  variance?: Resolver<Maybe<ResolversTypes['challenge_participant_variance_fields']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_avg_fields'] = ResolversParentTypes['challenge_participant_avg_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_max_fields'] = ResolversParentTypes['challenge_participant_max_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_min_fields'] = ResolversParentTypes['challenge_participant_min_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_mutation_response'] = ResolversParentTypes['challenge_participant_mutation_response']> = {
-  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['challenge_participant']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_StateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_state'] = ResolversParentTypes['challenge_participant_state']> = {
-  challenge_participants?: Resolver<Array<ResolversTypes['challenge_participant']>, ParentType, ContextType, RequireFields<Challenge_Participant_StateChallenge_ParticipantsArgs, never>>;
-  challenge_participants_aggregate?: Resolver<ResolversTypes['challenge_participant_aggregate'], ParentType, ContextType, RequireFields<Challenge_Participant_StateChallenge_Participants_AggregateArgs, never>>;
-  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_State_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_state_aggregate'] = ResolversParentTypes['challenge_participant_state_aggregate']> = {
-  aggregate?: Resolver<Maybe<ResolversTypes['challenge_participant_state_aggregate_fields']>, ParentType, ContextType>;
-  nodes?: Resolver<Array<ResolversTypes['challenge_participant_state']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_State_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_state_aggregate_fields'] = ResolversParentTypes['challenge_participant_state_aggregate_fields']> = {
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Challenge_Participant_State_Aggregate_FieldsCountArgs, never>>;
-  max?: Resolver<Maybe<ResolversTypes['challenge_participant_state_max_fields']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['challenge_participant_state_min_fields']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_State_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_state_max_fields'] = ResolversParentTypes['challenge_participant_state_max_fields']> = {
-  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_State_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_state_min_fields'] = ResolversParentTypes['challenge_participant_state_min_fields']> = {
-  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_State_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_state_mutation_response'] = ResolversParentTypes['challenge_participant_state_mutation_response']> = {
-  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['challenge_participant_state']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_stddev_fields'] = ResolversParentTypes['challenge_participant_stddev_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_stddev_pop_fields'] = ResolversParentTypes['challenge_participant_stddev_pop_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_stddev_samp_fields'] = ResolversParentTypes['challenge_participant_stddev_samp_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type CategoriesResolvers<ContextType = any, ParentType extends ResolversParentTypes['categories'] = ResolversParentTypes['categories']> = {
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  points_per_minute?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_var_pop_fields'] = ResolversParentTypes['challenge_participant_var_pop_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_var_samp_fields'] = ResolversParentTypes['challenge_participant_var_samp_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Participant_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_variance_fields'] = ResolversParentTypes['challenge_participant_variance_fields']> = {
-  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_StateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state'] = ResolversParentTypes['challenge_state']> = {
-  challenges?: Resolver<Array<ResolversTypes['challenge']>, ParentType, ContextType, RequireFields<Challenge_StateChallengesArgs, never>>;
-  challenges_aggregate?: Resolver<ResolversTypes['challenge_aggregate'], ParentType, ContextType, RequireFields<Challenge_StateChallenges_AggregateArgs, never>>;
-  state?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_State_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_aggregate'] = ResolversParentTypes['challenge_state_aggregate']> = {
-  aggregate?: Resolver<Maybe<ResolversTypes['challenge_state_aggregate_fields']>, ParentType, ContextType>;
-  nodes?: Resolver<Array<ResolversTypes['challenge_state']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_State_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_aggregate_fields'] = ResolversParentTypes['challenge_state_aggregate_fields']> = {
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Challenge_State_Aggregate_FieldsCountArgs, never>>;
-  max?: Resolver<Maybe<ResolversTypes['challenge_state_max_fields']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['challenge_state_min_fields']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_State_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_max_fields'] = ResolversParentTypes['challenge_state_max_fields']> = {
-  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_State_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_min_fields'] = ResolversParentTypes['challenge_state_min_fields']> = {
-  state?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_State_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_state_mutation_response'] = ResolversParentTypes['challenge_state_mutation_response']> = {
-  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['challenge_state']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_stddev_fields'] = ResolversParentTypes['challenge_stddev_fields']> = {
-  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_stddev_pop_fields'] = ResolversParentTypes['challenge_stddev_pop_fields']> = {
-  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_stddev_samp_fields'] = ResolversParentTypes['challenge_stddev_samp_fields']> = {
-  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Challenge_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_sum_fields'] = ResolversParentTypes['challenge_sum_fields']> = {
-  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10277,6 +9963,32 @@ export const GetUserAndExistingAchievements = gql`
   }
 }
     `;
+export const GetActivitiesAndChallenges = gql`
+    query GetActivitiesAndChallenges($id: String) {
+  activities(where: {user_id: {_eq: $id}}) {
+    activity_id
+    duration
+    score
+    started_at
+  }
+  challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
+    challenge {
+      id
+      challenge_type
+      created_at
+      start_date
+      end_date
+      state
+      rules
+      created_by_user {
+        id
+        name
+        picture
+      }
+    }
+  }
+}
+    `;
 export const InsertAchievements = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -10443,6 +10155,29 @@ export type GetUserAndExistingAchievementsQuery = (
         & Pick<Achievement, 'id' | 'name' | 'description' | 'achievement_type' | 'rule' | 'created_at'>
       ) }
     )> }
+  )> }
+);
+
+export type GetActivitiesAndChallengesQueryVariables = Exact<{
+  id?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetActivitiesAndChallengesQuery = (
+  { __typename?: 'query_root' }
+  & { activities: Array<(
+    { __typename?: 'activities' }
+    & Pick<Activities, 'activity_id' | 'duration' | 'score' | 'started_at'>
+  )>, challenge_participant: Array<(
+    { __typename?: 'challenge_participant' }
+    & { challenge: (
+      { __typename?: 'challenge' }
+      & Pick<Challenge, 'id' | 'challenge_type' | 'created_at' | 'start_date' | 'end_date' | 'state' | 'rules'>
+      & { created_by_user: (
+        { __typename?: 'users' }
+        & Pick<Users, 'id' | 'name' | 'picture'>
+      ) }
+    ) }
   )> }
 );
 
