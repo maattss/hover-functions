@@ -1,0 +1,5 @@
+mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
+  insert_feed(objects: $feed_achievements) {
+    affected_rows
+  }
+}
