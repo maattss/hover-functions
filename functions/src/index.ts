@@ -64,4 +64,4 @@ exports.processDelete = functions.auth.user().onDelete(async (user) => {
     });
 });
 
-exports.triggers = require('./triggers');
+exports.achievementTriggers = require('./achievementTriggers');
