@@ -2,6 +2,8 @@ import * as functions from 'firebase-functions';
 import { client } from './client';
 import {
   Achievement,
+  Feed_Insert_Input,
+  Feed_Type_Enum,
   GetUserAndExistingAchievementsQuery,
   GetUserAndUnachievedAchievementsQuery,
   User_Achievement_Insert_Input,
@@ -27,7 +29,7 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
     });
 
     if (objects.length) {
-      await addAchievments(objects);
+      await insertAchievments(objects);
 
       res.status(200).json({
         status: 'Success',
@@ -79,9 +81,22 @@ async function deleteAchievment(achievement_id: number, user_id: string) {
     });
 }
 
-async function addAchievments(objects: User_Achievement_Insert_Input[]) {
+async function insertAchievments(objects: User_Achievement_Insert_Input[]) {
+  const feed_objects: Feed_Insert_Input[] = objects.map(({ achievement_id, user_id }) => {
+    return {
+      achievements: {
+        feed_type: Feed_Type_Enum.Achievement,
+        user_achievement: {
+          data: {
+            achievement_id: achievement_id,
+            user_id: user_id,
+          },
+        },
+      },
+    } as Feed_Insert_Input;
+  });
   await client
-    .AddAchievement({ objects })
+    .InsertAchievements({ feed_achievements: feed_objects })
     .then((response) => {
       return response;
     })
