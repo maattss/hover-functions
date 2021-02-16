@@ -24,9 +24,9 @@ exports.challengeValidation = functions.https.onRequest(async (req, res) => {
     queryData.challenge_participant.forEach(async (item) => {
       if (validateChallengeParticipation({} as Challenge_Participant, queryData)) {
         const updateData: Challenge_Participant = {
-          user_id: 'Srnquo5AgrfB1S8FD6PvdhoZLwe2',
-          challenge_id: 42,
-          progress: 343,
+          user_id: user_id,
+          challenge_id: item.challenge.id,
+          progress: 30,
         };
         await updateProgress(updateData);
       }
