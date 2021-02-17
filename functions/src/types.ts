@@ -6574,6 +6574,9 @@ export const BasicActivityFragmentFragmentDoc = gql`
   duration
   score
   started_at
+  geofence {
+    category
+  }
 }
     `;
 export const ChallengeFragmentFragmentDoc = gql`
@@ -10067,6 +10070,9 @@ export const BasicActivityFragment = gql`
   duration
   score
   started_at
+  geofence {
+    category
+  }
 }
     `;
 export const ChallengeFragment = gql`
@@ -10372,6 +10378,10 @@ export type GetUserAndExistingAchievementsQuery = (
 export type BasicActivityFragmentFragment = (
   { __typename?: 'activities' }
   & Pick<Activities, 'activity_id' | 'duration' | 'score' | 'started_at'>
+  & { geofence: (
+    { __typename?: 'geofences' }
+    & Pick<Geofences, 'category'>
+  ) }
 );
 
 export type ChallengeFragmentFragment = (
