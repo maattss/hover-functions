@@ -3,6 +3,9 @@ fragment basicActivityFragment on activities {
   duration
   score
   started_at
+  geofence {
+    category
+  }
 }
 
 fragment challengeFragment on challenge {
