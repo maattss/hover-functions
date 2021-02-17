@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 import { client } from './client';
-import { BasicActivityFragmentFragment, ParticipantFragmentFragment } from './types';
+import { BasicActivityFragmentFragment, Challenge_Type_Enum, ParticipantFragmentFragment } from './types';
 
 exports.sendChallengeNotification = functions.https.onRequest(async (req, res) => {
   res.status(200).json({
@@ -8,7 +8,20 @@ exports.sendChallengeNotification = functions.https.onRequest(async (req, res) =
   });
 });
 
-exports.challengeValidation = functions.https.onRequest(async (req, res) => {
+exports.validateChallenge = functions.https.onRequest(async (req, res) => {
+  // Should be triggered when an entry in challenge_participant is updated
+  res.status(200).json({
+    status: 'Challenge Valitated',
+  });
+});
+
+exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
+  res.status(200).json({
+    status: 'New Challenge Valitated',
+  });
+});
+
+exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
   const {
     event: { op, data },
     table,
@@ -21,18 +34,14 @@ exports.challengeValidation = functions.https.onRequest(async (req, res) => {
 
     const activities: BasicActivityFragmentFragment[] = queryData.activities;
     queryData.challenge_participant.forEach(async (item: ParticipantFragmentFragment) => {
-      
       const newProgress = calculateProgress(item, activities);
-      if (newProgress !== item.progress) {
+      if (newProgress != item.progress) {
         const updateData: Challenge_Participant = {
           user_id: user_id,
           challenge_id: item.challenge.id,
           progress: newProgress,
         };
-        //TODO if new progress is not equal to old progress, update progress
-        if (true) {
-          await updateProgress(updateData);
-        }
+        await updateProgress(updateData);
       }
     });
   }
@@ -58,7 +67,47 @@ async function updateProgress({ user_id, challenge_id, progress }: Challenge_Par
     });
 }
 
-// TODO calculate progress
+export enum GeoFenceCategory {
+  EDUCATION = 'EDUCATION',
+  EXERCISE = 'EXERCISE',
+  SOCIAL = 'SOCIAL',
+  CULTURE = 'CULTURE',
+}
+export type ChallengeRules = {
+  category?: GeoFenceCategory;
+  score?: number;
+  time?: number;
+};
+
 function calculateProgress(item: ParticipantFragmentFragment, activities: BasicActivityFragmentFragment[]): number {
-  return 5;
+  console.log("NEW ACTIVITY")
+  const start_date: Date = new Date(item.challenge.start_date);
+  start_date.setHours(0, 0, 0, 0);
+  const end_date: Date = new Date(item.challenge.end_date);
+  end_date.setHours(23, 59, 59, 999);
+  const { score, category, time }: ChallengeRules = item.challenge.rules;
+
+  const valid_activities = activities.filter((activity) => {
+    const activityDate = new Date(activity.started_at);
+    if (activityDate >= start_date && activityDate <= end_date) {
+      if (
+        item.challenge.challenge_type == Challenge_Type_Enum.ScoreCategory ||
+        item.challenge.challenge_type == Challenge_Type_Enum.TimeCategory
+      ) {
+        if (category && category == activity.geofence.category) return true;
+      } else return true;
+    }
+    return false;
+  });
+  
+  if (score) {
+    console.log(' score:', score);
+  }
+  if (category) console.log(' category:', category);
+  if (time) console.log(' time:', time);
+  let progress = 0;
+  valid_activities.forEach((activity) => (progress += activity.score ?? 0));
+  console.log(' progress:', progress);
+  console.log(' valid activities: ', valid_activities);
+  return progress;
 }
