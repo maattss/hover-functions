@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import { client } from './client';
+import { ChallengeRules, Challenge_Participant } from './customTypes';
 import { BasicActivityFragmentFragment, Challenge_Type_Enum, ParticipantFragmentFragment } from './types';
 
 exports.sendChallengeNotification = functions.https.onRequest(async (req, res) => {
@@ -9,15 +10,16 @@ exports.sendChallengeNotification = functions.https.onRequest(async (req, res) =
 });
 
 exports.endCheckChallengeEndDate = functions.https.onRequest(async (req, res) => {
+  // check all challenges, whose state is ACTIVE, if end_date < today => set CLOSED
   const challenge_id = 51;
-  // closeChallenge(challenge_id);
+  console.log(challenge_id)
   res.status(200).json({
     status: 'Challenge Notification Sent',
   });
 });
 
 exports.validateChallenge = functions.https.onRequest(async (req, res) => {
-  // Should be triggered when an entry in challenge_participant is updated and check if anyone have progress > rules.score or time 
+  // Should be triggered when an entry in challenge_participant is updated and check if anyone have progress > rules.score or time => set FINISHED && set winner
   const {
     event: { op, data },
     table,
@@ -26,7 +28,8 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
   if ((op === 'INSERT' || op === 'UPDATE') && table.name === 'challenge_participant' && table.schema === 'public') {
     const { challenge_id } = data.new ? data.new : data.old;
 
-    const queryData = await client.GetActivitiesAndChallenges({ id: challenge_id });
+    const queryData = await client.GetChallengesParticipants({ challenge_id });
+    console.log(queryData.challenge_by_pk);
 
   }
 
@@ -78,11 +81,6 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
     status: 'Success',
   });
 });
-type Challenge_Participant = {
-  user_id: string;
-  challenge_id: number;
-  progress: number;
-};
 
 async function updateProgress({ user_id, challenge_id, progress }: Challenge_Participant) {
   await client
@@ -95,18 +93,6 @@ async function updateProgress({ user_id, challenge_id, progress }: Challenge_Par
       throw new functions.https.HttpsError('invalid-argument', e.message);
     });
 }
-
-export enum GeoFenceCategory {
-  EDUCATION = 'EDUCATION',
-  EXERCISE = 'EXERCISE',
-  SOCIAL = 'SOCIAL',
-  CULTURE = 'CULTURE',
-}
-export type ChallengeRules = {
-  category?: GeoFenceCategory;
-  score?: number;
-  time?: number;
-};
 
 function calculateProgress(item: ParticipantFragmentFragment, activities: BasicActivityFragmentFragment[]): number {
   console.log('NEW ACTIVITY');
