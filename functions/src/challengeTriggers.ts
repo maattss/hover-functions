@@ -1,7 +1,15 @@
 import * as functions from 'firebase-functions';
 import { client } from './client';
 import { ChallengeRules, Challenge_Participant } from './customTypes';
-import { BasicActivityFragmentFragment, Challenge_Type_Enum, ParticipantFragmentFragment } from './types';
+import {
+  BasicActivityFragmentFragment,
+  BasicParticipantFragmentFragment,
+  Challenge_Participant_State_Enum,
+  Challenge_Set_Input,
+  Challenge_State_Enum,
+  Challenge_Type_Enum,
+  ParticipantFragmentFragment,
+} from './types';
 
 exports.sendChallengeNotification = functions.https.onRequest(async (req, res) => {
   res.status(200).json({
@@ -12,29 +20,49 @@ exports.sendChallengeNotification = functions.https.onRequest(async (req, res) =
 exports.endCheckChallengeEndDate = functions.https.onRequest(async (req, res) => {
   // check all challenges, whose state is ACTIVE, if end_date < today => set CLOSED
   const challenge_id = 51;
-  console.log(challenge_id)
+  console.log(challenge_id);
   res.status(200).json({
     status: 'Challenge Notification Sent',
   });
 });
 
 exports.validateChallenge = functions.https.onRequest(async (req, res) => {
-  // Should be triggered when an entry in challenge_participant is updated and check if anyone have progress > rules.score or time => set FINISHED && set winner
   const {
     event: { op, data },
     table,
   } = req.body;
 
-  if ((op === 'INSERT' || op === 'UPDATE') && table.name === 'challenge_participant' && table.schema === 'public') {
+  if ((op === 'UPDATE') && table.name === 'challenge_participant' && table.schema === 'public') {
     const { challenge_id } = data.new ? data.new : data.old;
 
     const queryData = await client.GetChallengesParticipants({ challenge_id });
-    console.log(queryData.challenge_by_pk);
-
+    const { score, time }: ChallengeRules = queryData.challenge_by_pk?.rules;
+    const winner: BasicParticipantFragmentFragment | undefined = queryData.challenge_by_pk?.challenge_participants.find(
+      (participant) => {
+        if (participant.progress && participant.state == Challenge_Participant_State_Enum.Accepted) {
+          if (score) return participant.progress >= score ?? false;
+          if (time) return participant.progress >= time ?? false;
+        }
+        return false;
+      },
+    );
+    if (winner) {
+      const update_values: Challenge_Set_Input = { state: Challenge_State_Enum.Finished, winner_id:winner.user_id };
+      await client
+        .UpdateChallenge({ challenge_id, update_values })
+        .then((response) => {
+          return response;
+        })
+        .catch((e) => {
+          throw new functions.https.HttpsError('invalid-argument', e.message);
+        });
+      res.status(200).json({
+        status: 'Challenge Valitated: challenge ' + challenge_id + ' is won by user ' + winner.user_id,
+      });
+    }
   }
-
   res.status(200).json({
-    status: 'Challenge Valitated',
+    status: 'Challenge Valitated: no winner yet',
   });
 });
 
