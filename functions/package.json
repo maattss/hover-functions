@@ -21,7 +21,8 @@
     "firebase-functions": "^3.13.1",
     "graphql": "^15.4.0",
     "graphql-request": "^3.3.0",
-    "graphql-tag": "^2.11.0"
+    "graphql-tag": "^2.11.0",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "@graphql-codegen/add": "^2.0.2",
