@@ -1,4 +1,5 @@
 import * as functions from 'firebase-functions';
+import moment = require('moment');
 import { client } from './client';
 import { ChallengeRules, Challenge_Participant } from './customTypes';
 import {
@@ -16,11 +17,9 @@ import {
 exports.checkChallengeExpiry = functions.https.onRequest(async (req, res) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  console.log('Today ', today.toISOString());
   const updateCount = await client
     .ExpireChallenges({ date: today.toISOString() })
     .then((response) => {
-      console.log('Response:', response);
       return response.update_challenge?.affected_rows;
     })
     .catch((e) => {
@@ -64,6 +63,7 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
       res.status(200).json({
         status: `Challenge Valitated: challenge ${challenge_id} is won by user ${winner.user_id}.`,
       });
+      return;
     }
   }
   res.status(200).json({
@@ -72,15 +72,13 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
 });
 
 exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
-  // should validate all participants in that challengs progress
   const {
     event: { op, data },
     table,
   } = req.body;
   let updateCount = 0;
   if (op === 'INSERT' && table.name === 'challenge' && table.schema === 'public') {
-    const { challenge_id } = data.new;
-    console.log(req.body, challenge_id);
+    const { challenge_id } = data.new ? data.new : data.old;
     const queryData = await client.GetChallengeParticipantsAndActivities({ challenge_id });
 
     queryData.challenge_by_pk?.challenge_participants.forEach(async (item: ParticipantActivityFragmentFragment) => {
@@ -89,12 +87,13 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
         item.user.activities,
       );
       if (newProgress != item.progress) {
+        updateCount++;
         const updateData: Challenge_Participant = {
           user_id: item.user_id,
           challenge_id: challenge_id,
           progress: newProgress,
         };
-        await updateProgress(updateData).then(() => updateCount++);
+        await updateProgress(updateData);
       }
     });
   }
@@ -117,12 +116,13 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
     queryData.challenge_participant.forEach(async (item: ParticipantFragmentFragment) => {
       const newProgress = calculateProgress(item.challenge, activities);
       if (newProgress != item.progress) {
+        updateCount++;
         const updateData: Challenge_Participant = {
           user_id: user_id,
           challenge_id: item.challenge.id,
           progress: newProgress,
         };
-        await updateProgress(updateData).then(() => updateCount++);
+        await updateProgress(updateData);
       }
     });
   }
@@ -135,7 +135,6 @@ async function updateProgress({ user_id, challenge_id, progress }: Challenge_Par
   await client
     .UpdateChallengeParticipationProgress({ user_id, challenge_id, progress })
     .then((response) => {
-      console.log('Response:', response);
       return response;
     })
     .catch((e) => {
@@ -148,7 +147,7 @@ function calculateProgress(challenge: ChallengeFragmentFragment, activities: Bas
   start_date.setHours(0, 0, 0, 0);
   const end_date: Date = new Date(challenge.end_date);
   end_date.setHours(23, 59, 59, 999);
-  const { category }: ChallengeRules = challenge.rules;
+  const { score, category, time }: ChallengeRules = challenge.rules;
   let progress = 0;
   activities
     .filter((activity) => {
@@ -163,6 +162,10 @@ function calculateProgress(challenge: ChallengeFragmentFragment, activities: Bas
       }
       return false;
     })
-    .forEach((activity) => (progress += activity.score ?? 0));
-  return progress;
+    .forEach((activity) => {
+      if (score) progress += activity.score ?? 0;
+      else if (time) progress += moment.duration(activity.duration).asHours() ?? 0;
+    });
+
+  return Math.floor(progress*100)/100;
 }
