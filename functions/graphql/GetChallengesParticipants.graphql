@@ -1,0 +1,8 @@
+query GetChallengesParticipants($challenge_id: Int!) {
+  challenge_by_pk(id: $challenge_id) {
+    ...challengeFragment
+    challenge_participants {
+      ...basicParticipantFragment
+    }
+  }
+}

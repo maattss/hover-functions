@@ -30,3 +30,9 @@ fragment participantFragment on challenge_participant {
     ...challengeFragment
   }
 }
+
+fragment basicParticipantFragment on challenge_participant {
+  user_id
+  state
+  progress
+}
