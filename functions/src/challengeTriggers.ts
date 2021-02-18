@@ -13,18 +13,21 @@ import {
   ParticipantFragmentFragment,
 } from './types';
 
-exports.sendChallengeNotification = functions.https.onRequest(async (req, res) => {
-  res.status(200).json({
-    status: 'Challenge Notification Sent',
-  });
-});
-
 exports.endCheckChallengeEndDate = functions.https.onRequest(async (req, res) => {
-  // check all challenges, whose state is ACTIVE, if end_date < today => set CLOSED
-  const challenge_id = 51;
-  console.log(challenge_id);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const updateCount = await client
+    .ExpireChallenges({ date: today.toISOString() })
+    .then((response) => {
+      console.log('Response:', response);
+      return response.update_challenge?.affected_rows;
+    })
+    .catch((e) => {
+      throw new functions.https.HttpsError('invalid-argument', e.message);
+    });
   res.status(200).json({
-    status: 'Challenge Notification Sent',
+    status: `${updateCount} have expired and are set to CLOSED.`,
   });
 });
 
@@ -59,7 +62,7 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
           throw new functions.https.HttpsError('invalid-argument', e.message);
         });
       res.status(200).json({
-        status: 'Challenge Valitated: challenge ' + challenge_id + ' is won by user ' + winner.user_id,
+        status: `Challenge Valitated: challenge ${challenge_id} is won by user ${winner.user_id}.`,
       });
     }
   }
@@ -96,7 +99,7 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
     });
   }
   res.status(200).json({
-    status: 'Success: New Challenge Valitated. \nUpdated ' + updateCount + ' rows.',
+    status: `Success: New Challenge Valitated. \nUpdated ${updateCount} rows.`,
   });
 });
 
@@ -124,7 +127,7 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
     });
   }
   res.status(200).json({
-    status: 'Success: Updated ' + updateCount + ' rows for user ' + user_id + '.',
+    status: `Success: Updated ${updateCount} rows for user ${user_id}.`,
   });
 });
 
