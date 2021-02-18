@@ -7,7 +7,7 @@ import {
   GetUserAndExistingAchievementsQuery,
   GetUserAndUnachievedAchievementsQuery,
   User_Achievement_Insert_Input,
-} from './types';
+} from './types/types';
 
 exports.achievementValidation = functions.https.onRequest(async (req, res) => {
   const {

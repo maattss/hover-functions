@@ -5,12 +5,12 @@ hooks:
   - afterOneFileWrite: 'prettier --write'
   - afterAllFileWrite: 'prettier --write'
 generates:
-  src/fragmentMatcher.ts: 
+  src/types/fragmentMatcher.ts: 
     plugins: 
       - 'fragment-matcher'
     config:
       - apolloClientVersion: 3  
-  src/types.ts: 
+  src/types/types.ts: 
     plugins:
       - add:
           content: '/* eslint-disable */'
