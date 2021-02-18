@@ -1085,6 +1085,8 @@ export type Challenge = {
   rules: Scalars['json'];
   start_date: Scalars['date'];
   state: Challenge_State_Enum;
+  winner?: Maybe<Users>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 
@@ -1181,6 +1183,8 @@ export type Challenge_Bool_Exp = {
   rules?: Maybe<Json_Comparison_Exp>;
   start_date?: Maybe<Date_Comparison_Exp>;
   state?: Maybe<Challenge_State_Enum_Comparison_Exp>;
+  winner?: Maybe<Users_Bool_Exp>;
+  winner_id?: Maybe<String_Comparison_Exp>;
 };
 
 export enum Challenge_Constraint {
@@ -1204,6 +1208,8 @@ export type Challenge_Insert_Input = {
   rules?: Maybe<Scalars['json']>;
   start_date?: Maybe<Scalars['date']>;
   state?: Maybe<Challenge_State_Enum>;
+  winner?: Maybe<Users_Obj_Rel_Insert_Input>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Max_Fields = {
@@ -1213,6 +1219,7 @@ export type Challenge_Max_Fields = {
   end_date?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['date']>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Max_Order_By = {
@@ -1221,6 +1228,7 @@ export type Challenge_Max_Order_By = {
   end_date?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Min_Fields = {
@@ -1230,6 +1238,7 @@ export type Challenge_Min_Fields = {
   end_date?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['date']>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Min_Order_By = {
@@ -1238,6 +1247,7 @@ export type Challenge_Min_Order_By = {
   end_date?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Mutation_Response = {
@@ -1270,6 +1280,8 @@ export type Challenge_Order_By = {
   rules?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
   state?: Maybe<Order_By>;
+  winner?: Maybe<Users_Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Participant = {
@@ -1682,7 +1694,8 @@ export enum Challenge_Select_Column {
   Id = 'id',
   Rules = 'rules',
   StartDate = 'start_date',
-  State = 'state'
+  State = 'state',
+  WinnerId = 'winner_id'
 }
 
 export type Challenge_Set_Input = {
@@ -1694,6 +1707,7 @@ export type Challenge_Set_Input = {
   rules?: Maybe<Scalars['json']>;
   start_date?: Maybe<Scalars['date']>;
   state?: Maybe<Challenge_State_Enum>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_State = {
@@ -2037,7 +2051,8 @@ export enum Challenge_Update_Column {
   Id = 'id',
   Rules = 'rules',
   StartDate = 'start_date',
-  State = 'state'
+  State = 'state',
+  WinnerId = 'winner_id'
 }
 
 export type Challenge_Var_Pop_Fields = {
@@ -6286,6 +6301,8 @@ export type Users = {
   bio?: Maybe<Scalars['String']>;
   challenge_participants: Array<Challenge_Participant>;
   challenge_participants_aggregate: Challenge_Participant_Aggregate;
+  challenges_won: Array<Challenge>;
+  challenges_won_aggregate: Challenge_Aggregate;
   created_at?: Maybe<Scalars['timestamptz']>;
   email: Scalars['String'];
   followers: Array<Followings>;
@@ -6335,6 +6352,24 @@ export type UsersChallenge_Participants_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
   where?: Maybe<Challenge_Participant_Bool_Exp>;
+};
+
+
+export type UsersChallenges_WonArgs = {
+  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
+};
+
+
+export type UsersChallenges_Won_AggregateArgs = {
+  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
 };
 
 
@@ -6428,6 +6463,7 @@ export type Users_Bool_Exp = {
   activities?: Maybe<Activities_Bool_Exp>;
   bio?: Maybe<String_Comparison_Exp>;
   challenge_participants?: Maybe<Challenge_Participant_Bool_Exp>;
+  challenges_won?: Maybe<Challenge_Bool_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   email?: Maybe<String_Comparison_Exp>;
   followers?: Maybe<Followings_Bool_Exp>;
@@ -6449,6 +6485,7 @@ export type Users_Insert_Input = {
   activities?: Maybe<Activities_Arr_Rel_Insert_Input>;
   bio?: Maybe<Scalars['String']>;
   challenge_participants?: Maybe<Challenge_Participant_Arr_Rel_Insert_Input>;
+  challenges_won?: Maybe<Challenge_Arr_Rel_Insert_Input>;
   created_at?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   followers?: Maybe<Followings_Arr_Rel_Insert_Input>;
@@ -6523,6 +6560,7 @@ export type Users_Order_By = {
   activities_aggregate?: Maybe<Activities_Aggregate_Order_By>;
   bio?: Maybe<Order_By>;
   challenge_participants_aggregate?: Maybe<Challenge_Participant_Aggregate_Order_By>;
+  challenges_won_aggregate?: Maybe<Challenge_Aggregate_Order_By>;
   created_at?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
   followers_aggregate?: Maybe<Followings_Aggregate_Order_By>;
@@ -8444,6 +8482,8 @@ export type ChallengeResolvers<ContextType = any, ParentType extends ResolversPa
   rules?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<ChallengeRulesArgs, never>>;
   start_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
   state?: Resolver<ResolversTypes['challenge_state_enum'], ParentType, ContextType>;
+  winner?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8479,6 +8519,7 @@ export type Challenge_Max_FieldsResolvers<ContextType = any, ParentType extends 
   end_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8488,6 +8529,7 @@ export type Challenge_Min_FieldsResolvers<ContextType = any, ParentType extends 
   end_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -9816,6 +9858,8 @@ export type UsersResolvers<ContextType = any, ParentType extends ResolversParent
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   challenge_participants?: Resolver<Array<ResolversTypes['challenge_participant']>, ParentType, ContextType, RequireFields<UsersChallenge_ParticipantsArgs, never>>;
   challenge_participants_aggregate?: Resolver<ResolversTypes['challenge_participant_aggregate'], ParentType, ContextType, RequireFields<UsersChallenge_Participants_AggregateArgs, never>>;
+  challenges_won?: Resolver<Array<ResolversTypes['challenge']>, ParentType, ContextType, RequireFields<UsersChallenges_WonArgs, never>>;
+  challenges_won_aggregate?: Resolver<ResolversTypes['challenge_aggregate'], ParentType, ContextType, RequireFields<UsersChallenges_Won_AggregateArgs, never>>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   followers?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<UsersFollowersArgs, never>>;
