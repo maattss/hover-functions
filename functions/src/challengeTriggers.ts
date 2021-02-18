@@ -4,10 +4,12 @@ import { ChallengeRules, Challenge_Participant } from './customTypes';
 import {
   BasicActivityFragmentFragment,
   BasicParticipantFragmentFragment,
+  ChallengeFragmentFragment,
   Challenge_Participant_State_Enum,
   Challenge_Set_Input,
   Challenge_State_Enum,
   Challenge_Type_Enum,
+  ParticipantActivityFragmentFragment,
   ParticipantFragmentFragment,
 } from './types';
 
@@ -32,7 +34,7 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
     table,
   } = req.body;
 
-  if (op === 'UPDATE' && table.name === 'challenge_participant' && table.schema === 'public') {
+  if ((op === 'UPDATE' || op === 'INSERT') && table.name === 'challenge_participant' && table.schema === 'public') {
     const { challenge_id } = data.new ? data.new : data.old;
 
     const queryData = await client.GetChallengesParticipants({ challenge_id });
@@ -72,9 +74,22 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
     event: { op, data },
     table,
   } = req.body;
-  const { challenge_id } = data.new;
   if (op === 'INSERT' && table.name === 'challenge' && table.schema === 'public') {
+    const { challenge_id } = data.new;
     console.log(req.body, challenge_id);
+    const queryData = await client.GetChallengeParticipantsAndActivities({ challenge_id });
+
+    queryData.challenge_by_pk?.challenge_participants.forEach(async (item: ParticipantActivityFragmentFragment) => {
+      const newProgress = calculateProgress(queryData.challenge_by_pk as ChallengeFragmentFragment, item.user.activities);
+      if (newProgress != item.progress) {
+        const updateData: Challenge_Participant = {
+          user_id: item.user_id,
+          challenge_id: challenge_id,
+          progress: newProgress,
+        };
+        await updateProgress(updateData);
+      }
+    });
   }
   res.status(200).json({
     status: 'New Challenge Valitated',
@@ -94,7 +109,7 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
 
     const activities: BasicActivityFragmentFragment[] = queryData.activities;
     queryData.challenge_participant.forEach(async (item: ParticipantFragmentFragment) => {
-      const newProgress = calculateProgress(item, activities);
+      const newProgress = calculateProgress(item.challenge, activities);
       if (newProgress != item.progress) {
         const updateData: Challenge_Participant = {
           user_id: user_id,
@@ -122,20 +137,20 @@ async function updateProgress({ user_id, challenge_id, progress }: Challenge_Par
     });
 }
 
-function calculateProgress(item: ParticipantFragmentFragment, activities: BasicActivityFragmentFragment[]): number {
-  const start_date: Date = new Date(item.challenge.start_date);
+function calculateProgress(challenge: ChallengeFragmentFragment, activities: BasicActivityFragmentFragment[]): number {
+  const start_date: Date = new Date(challenge.start_date);
   start_date.setHours(0, 0, 0, 0);
-  const end_date: Date = new Date(item.challenge.end_date);
+  const end_date: Date = new Date(challenge.end_date);
   end_date.setHours(23, 59, 59, 999);
-  const { category }: ChallengeRules = item.challenge.rules;
+  const { category }: ChallengeRules = challenge.rules;
   let progress = 0;
   activities
     .filter((activity) => {
       const activityDate = new Date(activity.started_at);
       if (activityDate >= start_date && activityDate <= end_date) {
         if (
-          item.challenge.challenge_type == Challenge_Type_Enum.ScoreCategory ||
-          item.challenge.challenge_type == Challenge_Type_Enum.TimeCategory
+          challenge.challenge_type == Challenge_Type_Enum.ScoreCategory ||
+          challenge.challenge_type == Challenge_Type_Enum.TimeCategory
         ) {
           if (category && category == activity.geofence.category) return true;
         } else return true;
