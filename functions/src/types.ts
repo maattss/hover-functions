@@ -6745,6 +6745,16 @@ export const GetUserAndExistingAchievementsDocument = gql`
   }
 }
     `;
+export const ExpireChallengesDocument = gql`
+    mutation ExpireChallenges($date: date!) {
+  update_challenge(
+    where: {end_date: {_lt: $date}, state: {_eq: ACTIVE}}
+    _set: {state: CLOSED}
+  ) {
+    affected_rows
+  }
+}
+    `;
 export const GetActivitiesAndChallengesDocument = gql`
     query GetActivitiesAndChallenges($id: String) {
   activities(where: {user_id: {_eq: $id}}) {
@@ -6877,6 +6887,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetUserAndExistingAchievements(variables: GetUserAndExistingAchievementsQueryVariables): Promise<GetUserAndExistingAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndExistingAchievementsQuery>(print(GetUserAndExistingAchievementsDocument), variables));
+    },
+    ExpireChallenges(variables: ExpireChallengesMutationVariables): Promise<ExpireChallengesMutation> {
+      return withWrapper(() => client.request<ExpireChallengesMutation>(print(ExpireChallengesDocument), variables));
     },
     GetActivitiesAndChallenges(variables?: GetActivitiesAndChallengesQueryVariables): Promise<GetActivitiesAndChallengesQuery> {
       return withWrapper(() => client.request<GetActivitiesAndChallengesQuery>(print(GetActivitiesAndChallengesDocument), variables));
@@ -10303,6 +10316,16 @@ export const GetUserAndExistingAchievements = gql`
   }
 }
     `;
+export const ExpireChallenges = gql`
+    mutation ExpireChallenges($date: date!) {
+  update_challenge(
+    where: {end_date: {_lt: $date}, state: {_eq: ACTIVE}}
+    _set: {state: CLOSED}
+  ) {
+    affected_rows
+  }
+}
+    `;
 export const GetActivitiesAndChallenges = gql`
     query GetActivitiesAndChallenges($id: String) {
   activities(where: {user_id: {_eq: $id}}) {
@@ -10519,6 +10542,19 @@ export type GetUserAndExistingAchievementsQuery = (
         & Pick<Achievement, 'id' | 'name' | 'description' | 'achievement_type' | 'rule' | 'created_at'>
       ) }
     )> }
+  )> }
+);
+
+export type ExpireChallengesMutationVariables = Exact<{
+  date: Scalars['date'];
+}>;
+
+
+export type ExpireChallengesMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_challenge?: Maybe<(
+    { __typename?: 'challenge_mutation_response' }
+    & Pick<Challenge_Mutation_Response, 'affected_rows'>
   )> }
 );
 
