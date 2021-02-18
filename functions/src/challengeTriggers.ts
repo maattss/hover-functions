@@ -13,10 +13,10 @@ import {
   ParticipantFragmentFragment,
 } from './types';
 
-exports.endCheckChallengeEndDate = functions.https.onRequest(async (req, res) => {
+exports.checkChallengeExpiry = functions.https.onRequest(async (req, res) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
+  console.log('Today ', today.toISOString());
   const updateCount = await client
     .ExpireChallenges({ date: today.toISOString() })
     .then((response) => {
