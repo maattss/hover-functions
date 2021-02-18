@@ -43,7 +43,7 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
     const { score, time }: ChallengeRules = queryData.challenge_by_pk?.rules;
     const winner: BasicParticipantFragmentFragment | undefined = queryData.challenge_by_pk?.challenge_participants.find(
       (participant) => {
-        if (participant.progress && participant.state == Challenge_Participant_State_Enum.Accepted) {
+        if (participant.progress && participant.state === Challenge_Participant_State_Enum.Accepted) {
           if (score) return participant.progress >= score ?? false;
           if (time) return participant.progress >= time ?? false;
         }
@@ -86,7 +86,7 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
         queryData.challenge_by_pk as ChallengeFragmentFragment,
         item.user.activities,
       );
-      if (newProgress != item.progress) {
+      if (newProgress !== item.progress) {
         updateCount++;
         const updateData: Challenge_Participant = {
           user_id: item.user_id,
@@ -115,7 +115,7 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
     const activities: BasicActivityFragmentFragment[] = queryData.activities;
     queryData.challenge_participant.forEach(async (item: ParticipantFragmentFragment) => {
       const newProgress = calculateProgress(item.challenge, activities);
-      if (newProgress != item.progress) {
+      if (newProgress !== item.progress) {
         updateCount++;
         const updateData: Challenge_Participant = {
           user_id: user_id,
@@ -154,10 +154,10 @@ function calculateProgress(challenge: ChallengeFragmentFragment, activities: Bas
       const activityDate = new Date(activity.started_at);
       if (activityDate >= start_date && activityDate <= end_date) {
         if (
-          challenge.challenge_type == Challenge_Type_Enum.ScoreCategory ||
-          challenge.challenge_type == Challenge_Type_Enum.TimeCategory
+          challenge.challenge_type === Challenge_Type_Enum.ScoreCategory ||
+          challenge.challenge_type === Challenge_Type_Enum.TimeCategory
         ) {
-          if (category && category == activity.geofence.category) return true;
+          if (category && category === activity.geofence.category) return true;
         } else return true;
       }
       return false;
@@ -167,5 +167,5 @@ function calculateProgress(challenge: ChallengeFragmentFragment, activities: Bas
       else if (time) progress += moment.duration(activity.duration).asHours() ?? 0;
     });
 
-  return Math.floor(progress*100)/100;
+  return Math.floor(progress * 100) / 100;
 }
