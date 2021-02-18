@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import moment = require('moment');
 import { client } from './client';
-import { ChallengeRules, Challenge_Participant } from './customTypes';
+import { ChallengeRules, Challenge_Participant } from './types/customTypes';
 import {
   BasicActivityFragmentFragment,
   BasicParticipantFragmentFragment,
@@ -12,7 +12,7 @@ import {
   Challenge_Type_Enum,
   ParticipantActivityFragmentFragment,
   ParticipantFragmentFragment,
-} from './types';
+} from './types/types';
 
 exports.checkChallengeExpiry = functions.https.onRequest(async (req, res) => {
   const today = new Date();

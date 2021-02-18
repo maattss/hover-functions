@@ -1,7 +1,7 @@
 // Make sure you update the endpoint and the secret
 import * as functions from 'firebase-functions';
 import { GraphQLClient } from 'graphql-request';
-import { getSdk, SdkFunctionWrapper } from './types';
+import { getSdk, SdkFunctionWrapper } from './types/types';
 
 // You can find both these values on the Graphql tab in Hasura
 const gqlClient = new GraphQLClient(functions.config().hasura.graphql_api, {
