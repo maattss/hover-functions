@@ -5,11 +5,6 @@ hooks:
   - afterOneFileWrite: 'prettier --write'
   - afterAllFileWrite: 'prettier --write'
 generates:
-  src/types/fragmentMatcher.ts: 
-    plugins: 
-      - 'fragment-matcher'
-    config:
-      - apolloClientVersion: 3  
   src/types/types.ts: 
     plugins:
       - add:
