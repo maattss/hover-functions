@@ -36,7 +36,11 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
     table,
   } = req.body;
 
-  if ((op === 'UPDATE' || op === 'INSERT') && table.name === 'challenge_participant' && table.schema === 'public') {
+  if (
+    (op === 'UPDATE' || op === 'INSERT' || op === 'MANUAL') &&
+    table.name === 'challenge_participant' &&
+    table.schema === 'public'
+  ) {
     const { challenge_id } = data.new ? data.new : data.old;
 
     const queryData = await client.GetChallengesParticipants({ challenge_id });
@@ -77,7 +81,7 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
     table,
   } = req.body;
   let updateCount = 0;
-  if (op === 'INSERT' && table.name === 'challenge' && table.schema === 'public') {
+  if ((op === 'INSERT' || op === 'MANUAL') && table.name === 'challenge' && table.schema === 'public') {
     const { challenge_id } = data.new ? data.new : data.old;
     const queryData = await client.GetChallengeParticipantsAndActivities({ challenge_id });
 
@@ -109,7 +113,11 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
   } = req.body;
   let updateCount = 0;
   const { user_id } = data.new ? data.new : data.old;
-  if ((op === 'INSERT' || op === 'UPDATE') && table.name === 'activities' && table.schema === 'public') {
+  if (
+    (op === 'INSERT' || op === 'UPDATE' || op === 'MANUAL') &&
+    table.name === 'activities' &&
+    table.schema === 'public'
+  ) {
     const queryData = await client.GetActivitiesAndChallenges({ id: user_id });
 
     const activities: BasicActivityFragmentFragment[] = queryData.activities;
