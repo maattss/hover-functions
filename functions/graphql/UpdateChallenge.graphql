@@ -1,0 +1,5 @@
+mutation UpdateChallenge($challenge_id: Int!, $update_values: challenge_set_input) {
+  update_challenge_by_pk(pk_columns: { id: $challenge_id }, _set: $update_values) {
+    state
+  }
+}

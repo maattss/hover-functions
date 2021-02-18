@@ -6664,6 +6664,13 @@ export const GetUserAndUnachievedAchievementsDocument = gql`
   }
 }
     `;
+export const UpdateChallengeDocument = gql`
+    mutation UpdateChallenge($challenge_id: Int!, $update_values: challenge_set_input) {
+  update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: $update_values) {
+    state
+  }
+}
+    `;
 export const UpdateChallengeParticipationProgressDocument = gql`
     mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: Int!) {
   update_challenge_participant(
@@ -6704,6 +6711,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
+    },
+    UpdateChallenge(variables: UpdateChallengeMutationVariables): Promise<UpdateChallengeMutation> {
+      return withWrapper(() => client.request<UpdateChallengeMutation>(print(UpdateChallengeDocument), variables));
     },
     UpdateChallengeParticipationProgress(variables: UpdateChallengeParticipationProgressMutationVariables): Promise<UpdateChallengeParticipationProgressMutation> {
       return withWrapper(() => client.request<UpdateChallengeParticipationProgressMutation>(print(UpdateChallengeParticipationProgressDocument), variables));
@@ -10145,6 +10155,13 @@ export const GetUserAndUnachievedAchievements = gql`
   }
 }
     `;
+export const UpdateChallenge = gql`
+    mutation UpdateChallenge($challenge_id: Int!, $update_values: challenge_set_input) {
+  update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: $update_values) {
+    state
+  }
+}
+    `;
 export const UpdateChallengeParticipationProgress = gql`
     mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: Int!) {
   update_challenge_participant(
@@ -10394,6 +10411,20 @@ export type GetUserAndUnachievedAchievementsQuery = (
         )> }
       )> }
     ) }
+  )> }
+);
+
+export type UpdateChallengeMutationVariables = Exact<{
+  challenge_id: Scalars['Int'];
+  update_values?: Maybe<Challenge_Set_Input>;
+}>;
+
+
+export type UpdateChallengeMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_challenge_by_pk?: Maybe<(
+    { __typename?: 'challenge' }
+    & Pick<Challenge, 'state'>
   )> }
 );
 
