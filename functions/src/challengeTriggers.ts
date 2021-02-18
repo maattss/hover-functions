@@ -74,25 +74,29 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
     event: { op, data },
     table,
   } = req.body;
+  let updateCount = 0;
   if (op === 'INSERT' && table.name === 'challenge' && table.schema === 'public') {
     const { challenge_id } = data.new;
     console.log(req.body, challenge_id);
     const queryData = await client.GetChallengeParticipantsAndActivities({ challenge_id });
 
     queryData.challenge_by_pk?.challenge_participants.forEach(async (item: ParticipantActivityFragmentFragment) => {
-      const newProgress = calculateProgress(queryData.challenge_by_pk as ChallengeFragmentFragment, item.user.activities);
+      const newProgress = calculateProgress(
+        queryData.challenge_by_pk as ChallengeFragmentFragment,
+        item.user.activities,
+      );
       if (newProgress != item.progress) {
         const updateData: Challenge_Participant = {
           user_id: item.user_id,
           challenge_id: challenge_id,
           progress: newProgress,
         };
-        await updateProgress(updateData);
+        await updateProgress(updateData).then(() => updateCount++);
       }
     });
   }
   res.status(200).json({
-    status: 'New Challenge Valitated',
+    status: 'Success: New Challenge Valitated. \nUpdated ' + updateCount + ' rows.',
   });
 });
 
@@ -101,10 +105,9 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
     event: { op, data },
     table,
   } = req.body;
-
+  let updateCount = 0;
+  const { user_id } = data.new ? data.new : data.old;
   if ((op === 'INSERT' || op === 'UPDATE') && table.name === 'activities' && table.schema === 'public') {
-    const { user_id } = data.new ? data.new : data.old;
-
     const queryData = await client.GetActivitiesAndChallenges({ id: user_id });
 
     const activities: BasicActivityFragmentFragment[] = queryData.activities;
@@ -116,12 +119,12 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
           challenge_id: item.challenge.id,
           progress: newProgress,
         };
-        await updateProgress(updateData);
+        await updateProgress(updateData).then(() => updateCount++);
       }
     });
   }
   res.status(200).json({
-    status: 'Success',
+    status: 'Success: Updated ' + updateCount + ' rows for user ' + user_id + '.',
   });
 });
 
