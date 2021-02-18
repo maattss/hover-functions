@@ -1085,6 +1085,7 @@ export type Challenge = {
   rules: Scalars['json'];
   start_date: Scalars['date'];
   state: Challenge_State_Enum;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 
@@ -1181,6 +1182,7 @@ export type Challenge_Bool_Exp = {
   rules?: Maybe<Json_Comparison_Exp>;
   start_date?: Maybe<Date_Comparison_Exp>;
   state?: Maybe<Challenge_State_Enum_Comparison_Exp>;
+  winner_id?: Maybe<String_Comparison_Exp>;
 };
 
 export enum Challenge_Constraint {
@@ -1204,6 +1206,7 @@ export type Challenge_Insert_Input = {
   rules?: Maybe<Scalars['json']>;
   start_date?: Maybe<Scalars['date']>;
   state?: Maybe<Challenge_State_Enum>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Max_Fields = {
@@ -1213,6 +1216,7 @@ export type Challenge_Max_Fields = {
   end_date?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['date']>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Max_Order_By = {
@@ -1221,6 +1225,7 @@ export type Challenge_Max_Order_By = {
   end_date?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Min_Fields = {
@@ -1230,6 +1235,7 @@ export type Challenge_Min_Fields = {
   end_date?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['date']>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Min_Order_By = {
@@ -1238,6 +1244,7 @@ export type Challenge_Min_Order_By = {
   end_date?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Mutation_Response = {
@@ -1270,6 +1277,7 @@ export type Challenge_Order_By = {
   rules?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
   state?: Maybe<Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Participant = {
@@ -1682,7 +1690,8 @@ export enum Challenge_Select_Column {
   Id = 'id',
   Rules = 'rules',
   StartDate = 'start_date',
-  State = 'state'
+  State = 'state',
+  WinnerId = 'winner_id'
 }
 
 export type Challenge_Set_Input = {
@@ -1694,6 +1703,7 @@ export type Challenge_Set_Input = {
   rules?: Maybe<Scalars['json']>;
   start_date?: Maybe<Scalars['date']>;
   state?: Maybe<Challenge_State_Enum>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_State = {
@@ -2037,7 +2047,8 @@ export enum Challenge_Update_Column {
   Id = 'id',
   Rules = 'rules',
   StartDate = 'start_date',
-  State = 'state'
+  State = 'state',
+  WinnerId = 'winner_id'
 }
 
 export type Challenge_Var_Pop_Fields = {
@@ -8326,6 +8337,7 @@ export type ChallengeResolvers<ContextType = any, ParentType extends ResolversPa
   rules?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<ChallengeRulesArgs, never>>;
   start_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
   state?: Resolver<ResolversTypes['challenge_state_enum'], ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8361,6 +8373,7 @@ export type Challenge_Max_FieldsResolvers<ContextType = any, ParentType extends 
   end_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8370,6 +8383,7 @@ export type Challenge_Min_FieldsResolvers<ContextType = any, ParentType extends 
   end_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

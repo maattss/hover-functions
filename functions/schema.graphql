@@ -1312,6 +1312,7 @@ type challenge {
   ): json!
   start_date: date!
   state: challenge_state_enum!
+  winner_id: String
 }
 
 # aggregated selection of "challenge"
@@ -1383,6 +1384,7 @@ input challenge_bool_exp {
   rules: json_comparison_exp
   start_date: date_comparison_exp
   state: challenge_state_enum_comparison_exp
+  winner_id: String_comparison_exp
 }
 
 # unique or primary key constraints on table "challenge"
@@ -1410,6 +1412,7 @@ input challenge_insert_input {
   rules: json
   start_date: date
   state: challenge_state_enum
+  winner_id: String
 }
 
 # aggregate max on columns
@@ -1419,6 +1422,7 @@ type challenge_max_fields {
   end_date: date
   id: Int
   start_date: date
+  winner_id: String
 }
 
 # order by max() on columns of table "challenge"
@@ -1428,6 +1432,7 @@ input challenge_max_order_by {
   end_date: order_by
   id: order_by
   start_date: order_by
+  winner_id: order_by
 }
 
 # aggregate min on columns
@@ -1437,6 +1442,7 @@ type challenge_min_fields {
   end_date: date
   id: Int
   start_date: date
+  winner_id: String
 }
 
 # order by min() on columns of table "challenge"
@@ -1446,6 +1452,7 @@ input challenge_min_order_by {
   end_date: order_by
   id: order_by
   start_date: order_by
+  winner_id: order_by
 }
 
 # response of any mutation on the table "challenge"
@@ -1484,6 +1491,7 @@ input challenge_order_by {
   rules: order_by
   start_date: order_by
   state: order_by
+  winner_id: order_by
 }
 
 # columns and relationships of "challenge_participant"
@@ -1985,6 +1993,9 @@ enum challenge_select_column {
 
   # column name
   state
+
+  # column name
+  winner_id
 }
 
 # input type for updating data in table "challenge"
@@ -1997,6 +2008,7 @@ input challenge_set_input {
   rules: json
   start_date: date
   state: challenge_state_enum
+  winner_id: String
 }
 
 # columns and relationships of "challenge_state"
@@ -2434,6 +2446,9 @@ enum challenge_update_column {
 
   # column name
   state
+
+  # column name
+  winner_id
 }
 
 # aggregate var_pop on columns
