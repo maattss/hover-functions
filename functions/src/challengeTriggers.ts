@@ -8,14 +8,43 @@ exports.sendChallengeNotification = functions.https.onRequest(async (req, res) =
   });
 });
 
+exports.endCheckChallengeEndDate = functions.https.onRequest(async (req, res) => {
+  const challenge_id = 51;
+  // closeChallenge(challenge_id);
+  res.status(200).json({
+    status: 'Challenge Notification Sent',
+  });
+});
+
 exports.validateChallenge = functions.https.onRequest(async (req, res) => {
-  // Should be triggered when an entry in challenge_participant is updated
+  // Should be triggered when an entry in challenge_participant is updated and check if anyone have progress > rules.score or time 
+  const {
+    event: { op, data },
+    table,
+  } = req.body;
+
+  if ((op === 'INSERT' || op === 'UPDATE') && table.name === 'challenge_participant' && table.schema === 'public') {
+    const { challenge_id } = data.new ? data.new : data.old;
+
+    const queryData = await client.GetActivitiesAndChallenges({ id: challenge_id });
+
+  }
+
   res.status(200).json({
     status: 'Challenge Valitated',
   });
 });
 
 exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
+  // should validate all participants in that challengs progress
+  const {
+    event: { op, data },
+    table,
+  } = req.body;
+  const { challenge_id } = data.new;
+  if (op === 'INSERT' && table.name === 'challenge' && table.schema === 'public') {
+    console.log(req.body, challenge_id);
+  }
   res.status(200).json({
     status: 'New Challenge Valitated',
   });
@@ -80,7 +109,7 @@ export type ChallengeRules = {
 };
 
 function calculateProgress(item: ParticipantFragmentFragment, activities: BasicActivityFragmentFragment[]): number {
-  console.log("NEW ACTIVITY")
+  console.log('NEW ACTIVITY');
   const start_date: Date = new Date(item.challenge.start_date);
   start_date.setHours(0, 0, 0, 0);
   const end_date: Date = new Date(item.challenge.end_date);
@@ -99,7 +128,7 @@ function calculateProgress(item: ParticipantFragmentFragment, activities: BasicA
     }
     return false;
   });
-  
+
   if (score) {
     console.log(' score:', score);
   }
