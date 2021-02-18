@@ -82,7 +82,7 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
   } = req.body;
   let updateCount = 0;
   if ((op === 'INSERT' || op === 'MANUAL') && table.name === 'challenge' && table.schema === 'public') {
-    const { challenge_id } = data.new ? data.new : data.old;
+    const challenge_id = data.new.id ? data.new.id : data.old.id;
     const queryData = await client.GetChallengeParticipantsAndActivities({ challenge_id });
 
     queryData.challenge_by_pk?.challenge_participants.forEach(async (item: ParticipantActivityFragmentFragment) => {
