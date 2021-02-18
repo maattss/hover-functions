@@ -32,7 +32,7 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
     table,
   } = req.body;
 
-  if ((op === 'UPDATE') && table.name === 'challenge_participant' && table.schema === 'public') {
+  if (op === 'UPDATE' && table.name === 'challenge_participant' && table.schema === 'public') {
     const { challenge_id } = data.new ? data.new : data.old;
 
     const queryData = await client.GetChallengesParticipants({ challenge_id });
@@ -47,7 +47,7 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
       },
     );
     if (winner) {
-      const update_values: Challenge_Set_Input = { state: Challenge_State_Enum.Finished, winner_id:winner.user_id };
+      const update_values: Challenge_Set_Input = { state: Challenge_State_Enum.Finished, winner_id: winner.user_id };
       await client
         .UpdateChallenge({ challenge_id, update_values })
         .then((response) => {
@@ -123,34 +123,25 @@ async function updateProgress({ user_id, challenge_id, progress }: Challenge_Par
 }
 
 function calculateProgress(item: ParticipantFragmentFragment, activities: BasicActivityFragmentFragment[]): number {
-  console.log('NEW ACTIVITY');
   const start_date: Date = new Date(item.challenge.start_date);
   start_date.setHours(0, 0, 0, 0);
   const end_date: Date = new Date(item.challenge.end_date);
   end_date.setHours(23, 59, 59, 999);
-  const { score, category, time }: ChallengeRules = item.challenge.rules;
-
-  const valid_activities = activities.filter((activity) => {
-    const activityDate = new Date(activity.started_at);
-    if (activityDate >= start_date && activityDate <= end_date) {
-      if (
-        item.challenge.challenge_type == Challenge_Type_Enum.ScoreCategory ||
-        item.challenge.challenge_type == Challenge_Type_Enum.TimeCategory
-      ) {
-        if (category && category == activity.geofence.category) return true;
-      } else return true;
-    }
-    return false;
-  });
-
-  if (score) {
-    console.log(' score:', score);
-  }
-  if (category) console.log(' category:', category);
-  if (time) console.log(' time:', time);
+  const { category }: ChallengeRules = item.challenge.rules;
   let progress = 0;
-  valid_activities.forEach((activity) => (progress += activity.score ?? 0));
-  console.log(' progress:', progress);
-  console.log(' valid activities: ', valid_activities);
+  activities
+    .filter((activity) => {
+      const activityDate = new Date(activity.started_at);
+      if (activityDate >= start_date && activityDate <= end_date) {
+        if (
+          item.challenge.challenge_type == Challenge_Type_Enum.ScoreCategory ||
+          item.challenge.challenge_type == Challenge_Type_Enum.TimeCategory
+        ) {
+          if (category && category == activity.geofence.category) return true;
+        } else return true;
+      }
+      return false;
+    })
+    .forEach((activity) => (progress += activity.score ?? 0));
   return progress;
 }
