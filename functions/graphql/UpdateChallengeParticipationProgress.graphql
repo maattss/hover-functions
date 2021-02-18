@@ -1,4 +1,4 @@
-mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: Int!) {
+mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: float8!) {
   update_challenge_participant(where: {challenge_id: {_eq: $challenge_id}, user_id: {_eq: $user_id}}, _set: {progress: $progress}) {
     affected_rows
   }

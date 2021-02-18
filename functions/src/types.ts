@@ -1289,7 +1289,7 @@ export type Challenge_Participant = {
   challenge: Challenge;
   challenge_id: Scalars['Int'];
   challenge_participant_state: Challenge_Participant_State;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   state: Challenge_Participant_State_Enum;
   user: Users;
   user_id: Scalars['String'];
@@ -1359,7 +1359,7 @@ export type Challenge_Participant_Bool_Exp = {
   challenge?: Maybe<Challenge_Bool_Exp>;
   challenge_id?: Maybe<Int_Comparison_Exp>;
   challenge_participant_state?: Maybe<Challenge_Participant_State_Bool_Exp>;
-  progress?: Maybe<Int_Comparison_Exp>;
+  progress?: Maybe<Float8_Comparison_Exp>;
   state?: Maybe<Challenge_Participant_State_Enum_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
@@ -1371,14 +1371,14 @@ export enum Challenge_Participant_Constraint {
 
 export type Challenge_Participant_Inc_Input = {
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
 };
 
 export type Challenge_Participant_Insert_Input = {
   challenge?: Maybe<Challenge_Obj_Rel_Insert_Input>;
   challenge_id?: Maybe<Scalars['Int']>;
   challenge_participant_state?: Maybe<Challenge_Participant_State_Obj_Rel_Insert_Input>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   state?: Maybe<Challenge_Participant_State_Enum>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
@@ -1387,7 +1387,7 @@ export type Challenge_Participant_Insert_Input = {
 export type Challenge_Participant_Max_Fields = {
   __typename?: 'challenge_participant_max_fields';
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
@@ -1400,7 +1400,7 @@ export type Challenge_Participant_Max_Order_By = {
 export type Challenge_Participant_Min_Fields = {
   __typename?: 'challenge_participant_min_fields';
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
@@ -1451,7 +1451,7 @@ export enum Challenge_Participant_Select_Column {
 
 export type Challenge_Participant_Set_Input = {
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   state?: Maybe<Challenge_Participant_State_Enum>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -1634,7 +1634,7 @@ export type Challenge_Participant_Stddev_Samp_Order_By = {
 export type Challenge_Participant_Sum_Fields = {
   __typename?: 'challenge_participant_sum_fields';
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
 };
 
 export type Challenge_Participant_Sum_Order_By = {
@@ -6742,7 +6742,7 @@ export const UpdateChallengeDocument = gql`
 }
     `;
 export const UpdateChallengeParticipationProgressDocument = gql`
-    mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: Int!) {
+    mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: float8!) {
   update_challenge_participant(
     where: {challenge_id: {_eq: $challenge_id}, user_id: {_eq: $user_id}}
     _set: {progress: $progress}
@@ -8463,7 +8463,7 @@ export type Challenge_ParticipantResolvers<ContextType = any, ParentType extends
   challenge?: Resolver<ResolversTypes['challenge'], ParentType, ContextType>;
   challenge_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   challenge_participant_state?: Resolver<ResolversTypes['challenge_participant_state'], ParentType, ContextType>;
-  progress?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  progress?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   state?: Resolver<ResolversTypes['challenge_participant_state_enum'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
   user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -8499,14 +8499,14 @@ export type Challenge_Participant_Avg_FieldsResolvers<ContextType = any, ParentT
 
 export type Challenge_Participant_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_max_fields'] = ResolversParentTypes['challenge_participant_max_fields']> = {
   challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  progress?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  progress?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Challenge_Participant_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_min_fields'] = ResolversParentTypes['challenge_participant_min_fields']> = {
   challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  progress?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  progress?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8573,7 +8573,7 @@ export type Challenge_Participant_Stddev_Samp_FieldsResolvers<ContextType = any,
 
 export type Challenge_Participant_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_sum_fields'] = ResolversParentTypes['challenge_participant_sum_fields']> = {
   challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  progress?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  progress?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10277,7 +10277,7 @@ export const UpdateChallenge = gql`
 }
     `;
 export const UpdateChallengeParticipationProgress = gql`
-    mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: Int!) {
+    mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: float8!) {
   update_challenge_participant(
     where: {challenge_id: {_eq: $challenge_id}, user_id: {_eq: $user_id}}
     _set: {progress: $progress}
@@ -10587,7 +10587,7 @@ export type UpdateChallengeMutation = (
 export type UpdateChallengeParticipationProgressMutationVariables = Exact<{
   challenge_id: Scalars['Int'];
   user_id: Scalars['String'];
-  progress: Scalars['Int'];
+  progress: Scalars['float8'];
 }>;
 
 

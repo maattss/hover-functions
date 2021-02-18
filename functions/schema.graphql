@@ -1508,7 +1508,7 @@ type challenge_participant {
 
   # An object relationship
   challenge_participant_state: challenge_participant_state!
-  progress: Int
+  progress: float8
   state: challenge_participant_state_enum!
 
   # An object relationship
@@ -1578,7 +1578,7 @@ input challenge_participant_bool_exp {
   challenge: challenge_bool_exp
   challenge_id: Int_comparison_exp
   challenge_participant_state: challenge_participant_state_bool_exp
-  progress: Int_comparison_exp
+  progress: float8_comparison_exp
   state: challenge_participant_state_enum_comparison_exp
   user: users_bool_exp
   user_id: String_comparison_exp
@@ -1593,7 +1593,7 @@ enum challenge_participant_constraint {
 # input type for incrementing integer column in table "challenge_participant"
 input challenge_participant_inc_input {
   challenge_id: Int
-  progress: Int
+  progress: float8
 }
 
 # input type for inserting data into table "challenge_participant"
@@ -1601,7 +1601,7 @@ input challenge_participant_insert_input {
   challenge: challenge_obj_rel_insert_input
   challenge_id: Int
   challenge_participant_state: challenge_participant_state_obj_rel_insert_input
-  progress: Int
+  progress: float8
   state: challenge_participant_state_enum
   user: users_obj_rel_insert_input
   user_id: String
@@ -1610,7 +1610,7 @@ input challenge_participant_insert_input {
 # aggregate max on columns
 type challenge_participant_max_fields {
   challenge_id: Int
-  progress: Int
+  progress: float8
   user_id: String
 }
 
@@ -1624,7 +1624,7 @@ input challenge_participant_max_order_by {
 # aggregate min on columns
 type challenge_participant_min_fields {
   challenge_id: Int
-  progress: Int
+  progress: float8
   user_id: String
 }
 
@@ -1692,7 +1692,7 @@ enum challenge_participant_select_column {
 # input type for updating data in table "challenge_participant"
 input challenge_participant_set_input {
   challenge_id: Int
-  progress: Int
+  progress: float8
   state: challenge_participant_state_enum
   user_id: String
 }
@@ -1909,7 +1909,7 @@ input challenge_participant_stddev_samp_order_by {
 # aggregate sum on columns
 type challenge_participant_sum_fields {
   challenge_id: Int
-  progress: Int
+  progress: float8
 }
 
 # order by sum() on columns of table "challenge_participant"
