@@ -6606,17 +6606,6 @@ export enum Users_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-export const BasicActivityFragmentFragmentDoc = gql`
-    fragment basicActivityFragment on activities {
-  activity_id
-  duration
-  score
-  started_at
-  geofence {
-    category
-  }
-}
-    `;
 export const ChallengeFragmentFragmentDoc = gql`
     fragment challengeFragment on challenge {
   id
@@ -6649,6 +6638,28 @@ export const BasicParticipantFragmentFragmentDoc = gql`
   progress
 }
     `;
+export const BasicActivityFragmentFragmentDoc = gql`
+    fragment basicActivityFragment on activities {
+  activity_id
+  duration
+  score
+  started_at
+  geofence {
+    category
+  }
+}
+    `;
+export const ParticipantActivityFragmentFragmentDoc = gql`
+    fragment participantActivityFragment on challenge_participant {
+  ...basicParticipantFragment
+  user {
+    activities {
+      ...basicActivityFragment
+    }
+  }
+}
+    ${BasicParticipantFragmentFragmentDoc}
+${BasicActivityFragmentFragmentDoc}`;
 export const CreateUserDocument = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -6745,6 +6756,17 @@ export const GetActivitiesAndChallengesDocument = gql`
 }
     ${BasicActivityFragmentFragmentDoc}
 ${ParticipantFragmentFragmentDoc}`;
+export const GetChallengeParticipantsAndActivitiesDocument = gql`
+    query GetChallengeParticipantsAndActivities($challenge_id: Int!) {
+  challenge_by_pk(id: $challenge_id) {
+    ...challengeFragment
+    challenge_participants {
+      ...participantActivityFragment
+    }
+  }
+}
+    ${ChallengeFragmentFragmentDoc}
+${ParticipantActivityFragmentFragmentDoc}`;
 export const GetChallengesParticipantsDocument = gql`
     query GetChallengesParticipants($challenge_id: Int!) {
   challenge_by_pk(id: $challenge_id) {
@@ -6858,6 +6880,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetActivitiesAndChallenges(variables?: GetActivitiesAndChallengesQueryVariables): Promise<GetActivitiesAndChallengesQuery> {
       return withWrapper(() => client.request<GetActivitiesAndChallengesQuery>(print(GetActivitiesAndChallengesDocument), variables));
+    },
+    GetChallengeParticipantsAndActivities(variables: GetChallengeParticipantsAndActivitiesQueryVariables): Promise<GetChallengeParticipantsAndActivitiesQuery> {
+      return withWrapper(() => client.request<GetChallengeParticipantsAndActivitiesQuery>(print(GetChallengeParticipantsAndActivitiesDocument), variables));
     },
     GetChallengesParticipants(variables: GetChallengesParticipantsQueryVariables): Promise<GetChallengesParticipantsQuery> {
       return withWrapper(() => client.request<GetChallengesParticipantsQuery>(print(GetChallengesParticipantsDocument), variables));
@@ -10139,17 +10164,6 @@ export type Resolvers<ContextType = any> = {
  */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
-export const BasicActivityFragment = gql`
-    fragment basicActivityFragment on activities {
-  activity_id
-  duration
-  score
-  started_at
-  geofence {
-    category
-  }
-}
-    `;
 export const ChallengeFragment = gql`
     fragment challengeFragment on challenge {
   id
@@ -10182,6 +10196,28 @@ export const BasicParticipantFragment = gql`
   progress
 }
     `;
+export const BasicActivityFragment = gql`
+    fragment basicActivityFragment on activities {
+  activity_id
+  duration
+  score
+  started_at
+  geofence {
+    category
+  }
+}
+    `;
+export const ParticipantActivityFragment = gql`
+    fragment participantActivityFragment on challenge_participant {
+  ...basicParticipantFragment
+  user {
+    activities {
+      ...basicActivityFragment
+    }
+  }
+}
+    ${BasicParticipantFragment}
+${BasicActivityFragment}`;
 export const CreateUser = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -10278,6 +10314,17 @@ export const GetActivitiesAndChallenges = gql`
 }
     ${BasicActivityFragment}
 ${ParticipantFragment}`;
+export const GetChallengeParticipantsAndActivities = gql`
+    query GetChallengeParticipantsAndActivities($challenge_id: Int!) {
+  challenge_by_pk(id: $challenge_id) {
+    ...challengeFragment
+    challenge_participants {
+      ...participantActivityFragment
+    }
+  }
+}
+    ${ChallengeFragment}
+${ParticipantActivityFragment}`;
 export const GetChallengesParticipants = gql`
     query GetChallengesParticipants($challenge_id: Int!) {
   challenge_by_pk(id: $challenge_id) {
@@ -10507,6 +10554,18 @@ export type BasicParticipantFragmentFragment = (
   & Pick<Challenge_Participant, 'user_id' | 'state' | 'progress'>
 );
 
+export type ParticipantActivityFragmentFragment = (
+  { __typename?: 'challenge_participant' }
+  & { user: (
+    { __typename?: 'users' }
+    & { activities: Array<(
+      { __typename?: 'activities' }
+      & BasicActivityFragmentFragment
+    )> }
+  ) }
+  & BasicParticipantFragmentFragment
+);
+
 export type GetActivitiesAndChallengesQueryVariables = Exact<{
   id?: Maybe<Scalars['String']>;
 }>;
@@ -10520,6 +10579,23 @@ export type GetActivitiesAndChallengesQuery = (
   )>, challenge_participant: Array<(
     { __typename?: 'challenge_participant' }
     & ParticipantFragmentFragment
+  )> }
+);
+
+export type GetChallengeParticipantsAndActivitiesQueryVariables = Exact<{
+  challenge_id: Scalars['Int'];
+}>;
+
+
+export type GetChallengeParticipantsAndActivitiesQuery = (
+  { __typename?: 'query_root' }
+  & { challenge_by_pk?: Maybe<(
+    { __typename?: 'challenge' }
+    & { challenge_participants: Array<(
+      { __typename?: 'challenge_participant' }
+      & ParticipantActivityFragmentFragment
+    )> }
+    & ChallengeFragmentFragment
   )> }
 );
 

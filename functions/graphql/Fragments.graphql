@@ -36,3 +36,12 @@ fragment basicParticipantFragment on challenge_participant {
   state
   progress
 }
+
+fragment participantActivityFragment on challenge_participant {
+  ...basicParticipantFragment
+  user {
+    activities {
+      ...basicActivityFragment
+    }
+  }
+}
