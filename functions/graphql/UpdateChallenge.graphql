@@ -1,5 +1,12 @@
-mutation UpdateChallenge($challenge_id: Int!, $update_values: challenge_set_input) {
-  update_challenge_by_pk(pk_columns: { id: $challenge_id }, _set: $update_values) {
+mutation UpdateChallengeWinner($challenge_id: Int!, $winner_id: String!) {
+  update_challenge_by_pk(pk_columns: { id: $challenge_id }, _set: { winner_id: $winner_id, state: FINISHED }) {
     state
+  }
+  insert_feed_one(
+    object: { feed_type: CHALLENGE, challenge_id: $challenge_id, user_id: $winner_id }
+    on_conflict: { constraint: feed_challenge_id_user_id_key, update_columns: user_id }
+  ) {
+    challenge_id
+    user_id
   }
 }

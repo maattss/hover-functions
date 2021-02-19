@@ -7,8 +7,6 @@ import {
   BasicParticipantFragmentFragment,
   ChallengeFragmentFragment,
   Challenge_Participant_State_Enum,
-  Challenge_Set_Input,
-  Challenge_State_Enum,
   Challenge_Type_Enum,
   ParticipantActivityFragmentFragment,
   ParticipantFragmentFragment,
@@ -55,9 +53,8 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
       },
     );
     if (winner) {
-      const update_values: Challenge_Set_Input = { state: Challenge_State_Enum.Finished, winner_id: winner.user_id };
       await client
-        .UpdateChallenge({ challenge_id, update_values })
+        .UpdateChallengeWinner({ challenge_id, winner_id: winner.user_id })
         .then((response) => {
           return response;
         })

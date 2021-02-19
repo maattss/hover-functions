@@ -1081,6 +1081,7 @@ export type Challenge = {
   created_by: Scalars['String'];
   created_by_user: Users;
   end_date: Scalars['date'];
+  feed?: Maybe<Feed>;
   id: Scalars['Int'];
   rules: Scalars['json'];
   start_date: Scalars['date'];
@@ -1179,6 +1180,7 @@ export type Challenge_Bool_Exp = {
   created_by?: Maybe<String_Comparison_Exp>;
   created_by_user?: Maybe<Users_Bool_Exp>;
   end_date?: Maybe<Date_Comparison_Exp>;
+  feed?: Maybe<Feed_Bool_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   rules?: Maybe<Json_Comparison_Exp>;
   start_date?: Maybe<Date_Comparison_Exp>;
@@ -1188,6 +1190,7 @@ export type Challenge_Bool_Exp = {
 };
 
 export enum Challenge_Constraint {
+  ChallengeIdWinnerIdKey = 'challenge_id_winner_id_key',
   UserChallengePkey = 'user_challenge_pkey'
 }
 
@@ -1204,6 +1207,7 @@ export type Challenge_Insert_Input = {
   created_by?: Maybe<Scalars['String']>;
   created_by_user?: Maybe<Users_Obj_Rel_Insert_Input>;
   end_date?: Maybe<Scalars['date']>;
+  feed?: Maybe<Feed_Obj_Rel_Insert_Input>;
   id?: Maybe<Scalars['Int']>;
   rules?: Maybe<Scalars['json']>;
   start_date?: Maybe<Scalars['date']>;
@@ -1276,6 +1280,7 @@ export type Challenge_Order_By = {
   created_by?: Maybe<Order_By>;
   created_by_user?: Maybe<Users_Order_By>;
   end_date?: Maybe<Order_By>;
+  feed?: Maybe<Feed_Order_By>;
   id?: Maybe<Order_By>;
   rules?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
@@ -2378,6 +2383,8 @@ export type Feed = {
   activity?: Maybe<Activities>;
   activityByActivityIdCreatedAtUserId?: Maybe<Activities>;
   activity_id?: Maybe<Scalars['Int']>;
+  challenge?: Maybe<Challenge>;
+  challenge_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   feedTypeByFeedType: Feed_Type;
   feed_type: Feed_Type_Enum;
@@ -2437,12 +2444,14 @@ export type Feed_Avg_Fields = {
   __typename?: 'feed_avg_fields';
   achievement_id?: Maybe<Scalars['Float']>;
   activity_id?: Maybe<Scalars['Float']>;
+  challenge_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
 export type Feed_Avg_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
@@ -2454,6 +2463,8 @@ export type Feed_Bool_Exp = {
   activity?: Maybe<Activities_Bool_Exp>;
   activityByActivityIdCreatedAtUserId?: Maybe<Activities_Bool_Exp>;
   activity_id?: Maybe<Int_Comparison_Exp>;
+  challenge?: Maybe<Challenge_Bool_Exp>;
+  challenge_id?: Maybe<Int_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   feedTypeByFeedType?: Maybe<Feed_Type_Bool_Exp>;
   feed_type?: Maybe<Feed_Type_Enum_Comparison_Exp>;
@@ -2466,12 +2477,14 @@ export type Feed_Bool_Exp = {
 export enum Feed_Constraint {
   FeedAchievementIdUserIdKey = 'feed_achievement_id_user_id_key',
   FeedActivityIdUserIdKey = 'feed_activity_id_user_id_key',
+  FeedChallengeIdUserIdKey = 'feed_challenge_id_user_id_key',
   FeedPkey = 'feed_pkey'
 }
 
 export type Feed_Inc_Input = {
   achievement_id?: Maybe<Scalars['Int']>;
   activity_id?: Maybe<Scalars['Int']>;
+  challenge_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
 };
 
@@ -2480,6 +2493,8 @@ export type Feed_Insert_Input = {
   activity?: Maybe<Activities_Obj_Rel_Insert_Input>;
   activityByActivityIdCreatedAtUserId?: Maybe<Activities_Obj_Rel_Insert_Input>;
   activity_id?: Maybe<Scalars['Int']>;
+  challenge?: Maybe<Challenge_Obj_Rel_Insert_Input>;
+  challenge_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   feedTypeByFeedType?: Maybe<Feed_Type_Obj_Rel_Insert_Input>;
   feed_type?: Maybe<Feed_Type_Enum>;
@@ -2493,6 +2508,7 @@ export type Feed_Max_Fields = {
   __typename?: 'feed_max_fields';
   achievement_id?: Maybe<Scalars['Int']>;
   activity_id?: Maybe<Scalars['Int']>;
+  challenge_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   user_id?: Maybe<Scalars['String']>;
@@ -2501,6 +2517,7 @@ export type Feed_Max_Fields = {
 export type Feed_Max_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
@@ -2510,6 +2527,7 @@ export type Feed_Min_Fields = {
   __typename?: 'feed_min_fields';
   achievement_id?: Maybe<Scalars['Int']>;
   activity_id?: Maybe<Scalars['Int']>;
+  challenge_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   user_id?: Maybe<Scalars['String']>;
@@ -2518,6 +2536,7 @@ export type Feed_Min_Fields = {
 export type Feed_Min_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
@@ -2545,6 +2564,8 @@ export type Feed_Order_By = {
   activity?: Maybe<Activities_Order_By>;
   activityByActivityIdCreatedAtUserId?: Maybe<Activities_Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge?: Maybe<Challenge_Order_By>;
+  challenge_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
   feedTypeByFeedType?: Maybe<Feed_Type_Order_By>;
   feed_type?: Maybe<Order_By>;
@@ -2561,6 +2582,7 @@ export type Feed_Pk_Columns_Input = {
 export enum Feed_Select_Column {
   AchievementId = 'achievement_id',
   ActivityId = 'activity_id',
+  ChallengeId = 'challenge_id',
   CreatedAt = 'created_at',
   FeedType = 'feed_type',
   Id = 'id',
@@ -2570,6 +2592,7 @@ export enum Feed_Select_Column {
 export type Feed_Set_Input = {
   achievement_id?: Maybe<Scalars['Int']>;
   activity_id?: Maybe<Scalars['Int']>;
+  challenge_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   feed_type?: Maybe<Feed_Type_Enum>;
   id?: Maybe<Scalars['Int']>;
@@ -2580,12 +2603,14 @@ export type Feed_Stddev_Fields = {
   __typename?: 'feed_stddev_fields';
   achievement_id?: Maybe<Scalars['Float']>;
   activity_id?: Maybe<Scalars['Float']>;
+  challenge_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
 export type Feed_Stddev_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
@@ -2593,12 +2618,14 @@ export type Feed_Stddev_Pop_Fields = {
   __typename?: 'feed_stddev_pop_fields';
   achievement_id?: Maybe<Scalars['Float']>;
   activity_id?: Maybe<Scalars['Float']>;
+  challenge_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
 export type Feed_Stddev_Pop_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
@@ -2606,12 +2633,14 @@ export type Feed_Stddev_Samp_Fields = {
   __typename?: 'feed_stddev_samp_fields';
   achievement_id?: Maybe<Scalars['Float']>;
   activity_id?: Maybe<Scalars['Float']>;
+  challenge_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
 export type Feed_Stddev_Samp_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
@@ -2619,12 +2648,14 @@ export type Feed_Sum_Fields = {
   __typename?: 'feed_sum_fields';
   achievement_id?: Maybe<Scalars['Int']>;
   activity_id?: Maybe<Scalars['Int']>;
+  challenge_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
 };
 
 export type Feed_Sum_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
@@ -2697,7 +2728,8 @@ export enum Feed_Type_Constraint {
 
 export enum Feed_Type_Enum {
   Achievement = 'ACHIEVEMENT',
-  Activity = 'ACTIVITY'
+  Activity = 'ACTIVITY',
+  Challenge = 'CHALLENGE'
 }
 
 export type Feed_Type_Enum_Comparison_Exp = {
@@ -2772,6 +2804,7 @@ export enum Feed_Type_Update_Column {
 export enum Feed_Update_Column {
   AchievementId = 'achievement_id',
   ActivityId = 'activity_id',
+  ChallengeId = 'challenge_id',
   CreatedAt = 'created_at',
   FeedType = 'feed_type',
   Id = 'id',
@@ -2782,12 +2815,14 @@ export type Feed_Var_Pop_Fields = {
   __typename?: 'feed_var_pop_fields';
   achievement_id?: Maybe<Scalars['Float']>;
   activity_id?: Maybe<Scalars['Float']>;
+  challenge_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
 export type Feed_Var_Pop_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
@@ -2795,12 +2830,14 @@ export type Feed_Var_Samp_Fields = {
   __typename?: 'feed_var_samp_fields';
   achievement_id?: Maybe<Scalars['Float']>;
   activity_id?: Maybe<Scalars['Float']>;
+  challenge_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
 export type Feed_Var_Samp_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
@@ -2808,12 +2845,14 @@ export type Feed_Variance_Fields = {
   __typename?: 'feed_variance_fields';
   achievement_id?: Maybe<Scalars['Float']>;
   activity_id?: Maybe<Scalars['Float']>;
+  challenge_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
 export type Feed_Variance_Order_By = {
   achievement_id?: Maybe<Order_By>;
   activity_id?: Maybe<Order_By>;
+  challenge_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
@@ -6734,10 +6773,20 @@ export const GetUserAndUnachievedAchievementsDocument = gql`
   }
 }
     `;
-export const UpdateChallengeDocument = gql`
-    mutation UpdateChallenge($challenge_id: Int!, $update_values: challenge_set_input) {
-  update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: $update_values) {
+export const UpdateChallengeWinnerDocument = gql`
+    mutation UpdateChallengeWinner($challenge_id: Int!, $winner_id: String!) {
+  update_challenge_by_pk(
+    pk_columns: {id: $challenge_id}
+    _set: {winner_id: $winner_id, state: FINISHED}
+  ) {
     state
+  }
+  insert_feed_one(
+    object: {feed_type: CHALLENGE, challenge_id: $challenge_id, user_id: $winner_id}
+    on_conflict: {constraint: feed_challenge_id_user_id_key, update_columns: user_id}
+  ) {
+    challenge_id
+    user_id
   }
 }
     `;
@@ -6788,8 +6837,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
     },
-    UpdateChallenge(variables: UpdateChallengeMutationVariables): Promise<UpdateChallengeMutation> {
-      return withWrapper(() => client.request<UpdateChallengeMutation>(print(UpdateChallengeDocument), variables));
+    UpdateChallengeWinner(variables: UpdateChallengeWinnerMutationVariables): Promise<UpdateChallengeWinnerMutation> {
+      return withWrapper(() => client.request<UpdateChallengeWinnerMutation>(print(UpdateChallengeWinnerDocument), variables));
     },
     UpdateChallengeParticipationProgress(variables: UpdateChallengeParticipationProgressMutationVariables): Promise<UpdateChallengeParticipationProgressMutation> {
       return withWrapper(() => client.request<UpdateChallengeParticipationProgressMutation>(print(UpdateChallengeParticipationProgressDocument), variables));
@@ -8398,6 +8447,7 @@ export type ChallengeResolvers<ContextType = any, ParentType extends ResolversPa
   created_by?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   created_by_user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
   end_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
+  feed?: Resolver<Maybe<ResolversTypes['feed']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   rules?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<ChallengeRulesArgs, never>>;
   start_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
@@ -8821,6 +8871,8 @@ export type FeedResolvers<ContextType = any, ParentType extends ResolversParentT
   activity?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType>;
   activityByActivityIdCreatedAtUserId?: Resolver<Maybe<ResolversTypes['activities']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  challenge?: Resolver<Maybe<ResolversTypes['challenge']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   feedTypeByFeedType?: Resolver<ResolversTypes['feed_type'], ParentType, ContextType>;
   feed_type?: Resolver<ResolversTypes['feed_type_enum'], ParentType, ContextType>;
@@ -8855,6 +8907,7 @@ export type Feed_Aggregate_FieldsResolvers<ContextType = any, ParentType extends
 export type Feed_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_avg_fields'] = ResolversParentTypes['feed_avg_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8862,6 +8915,7 @@ export type Feed_Avg_FieldsResolvers<ContextType = any, ParentType extends Resol
 export type Feed_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_max_fields'] = ResolversParentTypes['feed_max_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -8871,6 +8925,7 @@ export type Feed_Max_FieldsResolvers<ContextType = any, ParentType extends Resol
 export type Feed_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_min_fields'] = ResolversParentTypes['feed_min_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -8886,6 +8941,7 @@ export type Feed_Mutation_ResponseResolvers<ContextType = any, ParentType extend
 export type Feed_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_stddev_fields'] = ResolversParentTypes['feed_stddev_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8893,6 +8949,7 @@ export type Feed_Stddev_FieldsResolvers<ContextType = any, ParentType extends Re
 export type Feed_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_stddev_pop_fields'] = ResolversParentTypes['feed_stddev_pop_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8900,6 +8957,7 @@ export type Feed_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extend
 export type Feed_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_stddev_samp_fields'] = ResolversParentTypes['feed_stddev_samp_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8907,6 +8965,7 @@ export type Feed_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType exten
 export type Feed_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_sum_fields'] = ResolversParentTypes['feed_sum_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8950,6 +9009,7 @@ export type Feed_Type_Mutation_ResponseResolvers<ContextType = any, ParentType e
 export type Feed_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_var_pop_fields'] = ResolversParentTypes['feed_var_pop_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8957,6 +9017,7 @@ export type Feed_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends R
 export type Feed_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_var_samp_fields'] = ResolversParentTypes['feed_var_samp_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8964,6 +9025,7 @@ export type Feed_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends 
 export type Feed_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['feed_variance_fields'] = ResolversParentTypes['feed_variance_fields']> = {
   achievement_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  challenge_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -10269,10 +10331,20 @@ export const GetUserAndUnachievedAchievements = gql`
   }
 }
     `;
-export const UpdateChallenge = gql`
-    mutation UpdateChallenge($challenge_id: Int!, $update_values: challenge_set_input) {
-  update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: $update_values) {
+export const UpdateChallengeWinner = gql`
+    mutation UpdateChallengeWinner($challenge_id: Int!, $winner_id: String!) {
+  update_challenge_by_pk(
+    pk_columns: {id: $challenge_id}
+    _set: {winner_id: $winner_id, state: FINISHED}
+  ) {
     state
+  }
+  insert_feed_one(
+    object: {feed_type: CHALLENGE, challenge_id: $challenge_id, user_id: $winner_id}
+    on_conflict: {constraint: feed_challenge_id_user_id_key, update_columns: user_id}
+  ) {
+    challenge_id
+    user_id
   }
 }
     `;
@@ -10570,17 +10642,20 @@ export type GetUserAndUnachievedAchievementsQuery = (
   )> }
 );
 
-export type UpdateChallengeMutationVariables = Exact<{
+export type UpdateChallengeWinnerMutationVariables = Exact<{
   challenge_id: Scalars['Int'];
-  update_values?: Maybe<Challenge_Set_Input>;
+  winner_id: Scalars['String'];
 }>;
 
 
-export type UpdateChallengeMutation = (
+export type UpdateChallengeWinnerMutation = (
   { __typename?: 'mutation_root' }
   & { update_challenge_by_pk?: Maybe<(
     { __typename?: 'challenge' }
     & Pick<Challenge, 'state'>
+  )>, insert_feed_one?: Maybe<(
+    { __typename?: 'feed' }
+    & Pick<Feed, 'challenge_id' | 'user_id'>
   )> }
 );
 
