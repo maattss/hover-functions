@@ -5,7 +5,7 @@ hooks:
   - afterOneFileWrite: 'prettier --write'
   - afterAllFileWrite: 'prettier --write'
 generates:
-  src/types.ts: 
+  src/types/types.ts: 
     plugins:
       - add:
           content: '/* eslint-disable */'

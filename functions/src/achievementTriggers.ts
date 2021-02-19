@@ -7,7 +7,7 @@ import {
   GetUserAndExistingAchievementsQuery,
   GetUserAndUnachievedAchievementsQuery,
   User_Achievement_Insert_Input,
-} from './types';
+} from './types/types';
 
 exports.achievementValidation = functions.https.onRequest(async (req, res) => {
   const {
@@ -17,7 +17,11 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
 
   const objects: User_Achievement_Insert_Input[] = [];
 
-  if ((op === 'INSERT' || op === 'UPDATE') && table.name === 'activities' && table.schema === 'public') {
+  if (
+    (op === 'INSERT' || op === 'UPDATE' || op === 'MANUAL') &&
+    table.name === 'activities' &&
+    table.schema === 'public'
+  ) {
     const { user_id } = data.new ? data.new : data.old;
 
     const queryData = await client.GetUserAndUnachievedAchievements({ user_id });

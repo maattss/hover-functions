@@ -1085,6 +1085,8 @@ export type Challenge = {
   rules: Scalars['json'];
   start_date: Scalars['date'];
   state: Challenge_State_Enum;
+  winner?: Maybe<Users>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 
@@ -1181,6 +1183,8 @@ export type Challenge_Bool_Exp = {
   rules?: Maybe<Json_Comparison_Exp>;
   start_date?: Maybe<Date_Comparison_Exp>;
   state?: Maybe<Challenge_State_Enum_Comparison_Exp>;
+  winner?: Maybe<Users_Bool_Exp>;
+  winner_id?: Maybe<String_Comparison_Exp>;
 };
 
 export enum Challenge_Constraint {
@@ -1204,6 +1208,8 @@ export type Challenge_Insert_Input = {
   rules?: Maybe<Scalars['json']>;
   start_date?: Maybe<Scalars['date']>;
   state?: Maybe<Challenge_State_Enum>;
+  winner?: Maybe<Users_Obj_Rel_Insert_Input>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Max_Fields = {
@@ -1213,6 +1219,7 @@ export type Challenge_Max_Fields = {
   end_date?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['date']>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Max_Order_By = {
@@ -1221,6 +1228,7 @@ export type Challenge_Max_Order_By = {
   end_date?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Min_Fields = {
@@ -1230,6 +1238,7 @@ export type Challenge_Min_Fields = {
   end_date?: Maybe<Scalars['date']>;
   id?: Maybe<Scalars['Int']>;
   start_date?: Maybe<Scalars['date']>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_Min_Order_By = {
@@ -1238,6 +1247,7 @@ export type Challenge_Min_Order_By = {
   end_date?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Mutation_Response = {
@@ -1270,6 +1280,8 @@ export type Challenge_Order_By = {
   rules?: Maybe<Order_By>;
   start_date?: Maybe<Order_By>;
   state?: Maybe<Order_By>;
+  winner?: Maybe<Users_Order_By>;
+  winner_id?: Maybe<Order_By>;
 };
 
 export type Challenge_Participant = {
@@ -1277,7 +1289,7 @@ export type Challenge_Participant = {
   challenge: Challenge;
   challenge_id: Scalars['Int'];
   challenge_participant_state: Challenge_Participant_State;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   state: Challenge_Participant_State_Enum;
   user: Users;
   user_id: Scalars['String'];
@@ -1347,7 +1359,7 @@ export type Challenge_Participant_Bool_Exp = {
   challenge?: Maybe<Challenge_Bool_Exp>;
   challenge_id?: Maybe<Int_Comparison_Exp>;
   challenge_participant_state?: Maybe<Challenge_Participant_State_Bool_Exp>;
-  progress?: Maybe<Int_Comparison_Exp>;
+  progress?: Maybe<Float8_Comparison_Exp>;
   state?: Maybe<Challenge_Participant_State_Enum_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
@@ -1359,14 +1371,14 @@ export enum Challenge_Participant_Constraint {
 
 export type Challenge_Participant_Inc_Input = {
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
 };
 
 export type Challenge_Participant_Insert_Input = {
   challenge?: Maybe<Challenge_Obj_Rel_Insert_Input>;
   challenge_id?: Maybe<Scalars['Int']>;
   challenge_participant_state?: Maybe<Challenge_Participant_State_Obj_Rel_Insert_Input>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   state?: Maybe<Challenge_Participant_State_Enum>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
@@ -1375,7 +1387,7 @@ export type Challenge_Participant_Insert_Input = {
 export type Challenge_Participant_Max_Fields = {
   __typename?: 'challenge_participant_max_fields';
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
@@ -1388,7 +1400,7 @@ export type Challenge_Participant_Max_Order_By = {
 export type Challenge_Participant_Min_Fields = {
   __typename?: 'challenge_participant_min_fields';
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
@@ -1439,7 +1451,7 @@ export enum Challenge_Participant_Select_Column {
 
 export type Challenge_Participant_Set_Input = {
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
   state?: Maybe<Challenge_Participant_State_Enum>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -1622,7 +1634,7 @@ export type Challenge_Participant_Stddev_Samp_Order_By = {
 export type Challenge_Participant_Sum_Fields = {
   __typename?: 'challenge_participant_sum_fields';
   challenge_id?: Maybe<Scalars['Int']>;
-  progress?: Maybe<Scalars['Int']>;
+  progress?: Maybe<Scalars['float8']>;
 };
 
 export type Challenge_Participant_Sum_Order_By = {
@@ -1682,7 +1694,8 @@ export enum Challenge_Select_Column {
   Id = 'id',
   Rules = 'rules',
   StartDate = 'start_date',
-  State = 'state'
+  State = 'state',
+  WinnerId = 'winner_id'
 }
 
 export type Challenge_Set_Input = {
@@ -1694,6 +1707,7 @@ export type Challenge_Set_Input = {
   rules?: Maybe<Scalars['json']>;
   start_date?: Maybe<Scalars['date']>;
   state?: Maybe<Challenge_State_Enum>;
+  winner_id?: Maybe<Scalars['String']>;
 };
 
 export type Challenge_State = {
@@ -2037,7 +2051,8 @@ export enum Challenge_Update_Column {
   Id = 'id',
   Rules = 'rules',
   StartDate = 'start_date',
-  State = 'state'
+  State = 'state',
+  WinnerId = 'winner_id'
 }
 
 export type Challenge_Var_Pop_Fields = {
@@ -2368,7 +2383,6 @@ export type Feed = {
   feed_type: Feed_Type_Enum;
   id: Scalars['Int'];
   user?: Maybe<Users>;
-  userAchievementByAchievementIdCreatedAtUserId?: Maybe<User_Achievement>;
   user_achievement?: Maybe<User_Achievement>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -2445,14 +2459,13 @@ export type Feed_Bool_Exp = {
   feed_type?: Maybe<Feed_Type_Enum_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
-  userAchievementByAchievementIdCreatedAtUserId?: Maybe<User_Achievement_Bool_Exp>;
   user_achievement?: Maybe<User_Achievement_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
 
 export enum Feed_Constraint {
-  FeedAchievementIdKey = 'feed_achievement_id_key',
-  FeedActivityIdKey = 'feed_activity_id_key',
+  FeedAchievementIdUserIdKey = 'feed_achievement_id_user_id_key',
+  FeedActivityIdUserIdKey = 'feed_activity_id_user_id_key',
   FeedPkey = 'feed_pkey'
 }
 
@@ -2472,7 +2485,6 @@ export type Feed_Insert_Input = {
   feed_type?: Maybe<Feed_Type_Enum>;
   id?: Maybe<Scalars['Int']>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
-  userAchievementByAchievementIdCreatedAtUserId?: Maybe<User_Achievement_Obj_Rel_Insert_Input>;
   user_achievement?: Maybe<User_Achievement_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -2538,7 +2550,6 @@ export type Feed_Order_By = {
   feed_type?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   user?: Maybe<Users_Order_By>;
-  userAchievementByAchievementIdCreatedAtUserId?: Maybe<User_Achievement_Order_By>;
   user_achievement?: Maybe<User_Achievement_Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -6172,6 +6183,8 @@ export type Users = {
   bio?: Maybe<Scalars['String']>;
   challenge_participants: Array<Challenge_Participant>;
   challenge_participants_aggregate: Challenge_Participant_Aggregate;
+  challenges_won: Array<Challenge>;
+  challenges_won_aggregate: Challenge_Aggregate;
   created_at?: Maybe<Scalars['timestamptz']>;
   email: Scalars['String'];
   followers: Array<Followings>;
@@ -6221,6 +6234,24 @@ export type UsersChallenge_Participants_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Challenge_Participant_Order_By>>;
   where?: Maybe<Challenge_Participant_Bool_Exp>;
+};
+
+
+export type UsersChallenges_WonArgs = {
+  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
+};
+
+
+export type UsersChallenges_Won_AggregateArgs = {
+  distinct_on?: Maybe<Array<Challenge_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Challenge_Order_By>>;
+  where?: Maybe<Challenge_Bool_Exp>;
 };
 
 
@@ -6314,6 +6345,7 @@ export type Users_Bool_Exp = {
   activities?: Maybe<Activities_Bool_Exp>;
   bio?: Maybe<String_Comparison_Exp>;
   challenge_participants?: Maybe<Challenge_Participant_Bool_Exp>;
+  challenges_won?: Maybe<Challenge_Bool_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   email?: Maybe<String_Comparison_Exp>;
   followers?: Maybe<Followings_Bool_Exp>;
@@ -6335,6 +6367,7 @@ export type Users_Insert_Input = {
   activities?: Maybe<Activities_Arr_Rel_Insert_Input>;
   bio?: Maybe<Scalars['String']>;
   challenge_participants?: Maybe<Challenge_Participant_Arr_Rel_Insert_Input>;
+  challenges_won?: Maybe<Challenge_Arr_Rel_Insert_Input>;
   created_at?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   followers?: Maybe<Followings_Arr_Rel_Insert_Input>;
@@ -6409,6 +6442,7 @@ export type Users_Order_By = {
   activities_aggregate?: Maybe<Activities_Aggregate_Order_By>;
   bio?: Maybe<Order_By>;
   challenge_participants_aggregate?: Maybe<Challenge_Participant_Aggregate_Order_By>;
+  challenges_won_aggregate?: Maybe<Challenge_Aggregate_Order_By>;
   created_at?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
   followers_aggregate?: Maybe<Followings_Aggregate_Order_By>;
@@ -6454,7 +6488,60 @@ export enum Users_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-
+export const ChallengeFragmentFragmentDoc = gql`
+    fragment challengeFragment on challenge {
+  id
+  challenge_type
+  created_at
+  start_date
+  end_date
+  state
+  rules
+  created_by_user {
+    id
+    name
+    picture
+  }
+}
+    `;
+export const ParticipantFragmentFragmentDoc = gql`
+    fragment participantFragment on challenge_participant {
+  state
+  progress
+  challenge {
+    ...challengeFragment
+  }
+}
+    ${ChallengeFragmentFragmentDoc}`;
+export const BasicParticipantFragmentFragmentDoc = gql`
+    fragment basicParticipantFragment on challenge_participant {
+  user_id
+  state
+  progress
+}
+    `;
+export const BasicActivityFragmentFragmentDoc = gql`
+    fragment basicActivityFragment on activities {
+  activity_id
+  duration
+  score
+  started_at
+  geofence {
+    category
+  }
+}
+    `;
+export const ParticipantActivityFragmentFragmentDoc = gql`
+    fragment participantActivityFragment on challenge_participant {
+  ...basicParticipantFragment
+  user {
+    activities {
+      ...basicActivityFragment
+    }
+  }
+}
+    ${BasicParticipantFragmentFragmentDoc}
+${BasicActivityFragmentFragmentDoc}`;
 export const CreateUserDocument = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -6540,6 +6627,49 @@ export const GetUserAndExistingAchievementsDocument = gql`
   }
 }
     `;
+export const ExpireChallengesDocument = gql`
+    mutation ExpireChallenges($date: date!) {
+  update_challenge(
+    where: {end_date: {_lt: $date}, state: {_eq: ACTIVE}}
+    _set: {state: CLOSED}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export const GetActivitiesAndChallengesDocument = gql`
+    query GetActivitiesAndChallenges($id: String) {
+  activities(where: {user_id: {_eq: $id}}) {
+    ...basicActivityFragment
+  }
+  challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
+    ...participantFragment
+  }
+}
+    ${BasicActivityFragmentFragmentDoc}
+${ParticipantFragmentFragmentDoc}`;
+export const GetChallengeParticipantsAndActivitiesDocument = gql`
+    query GetChallengeParticipantsAndActivities($challenge_id: Int!) {
+  challenge_by_pk(id: $challenge_id) {
+    ...challengeFragment
+    challenge_participants {
+      ...participantActivityFragment
+    }
+  }
+}
+    ${ChallengeFragmentFragmentDoc}
+${ParticipantActivityFragmentFragmentDoc}`;
+export const GetChallengesParticipantsDocument = gql`
+    query GetChallengesParticipants($challenge_id: Int!) {
+  challenge_by_pk(id: $challenge_id) {
+    ...challengeFragment
+    challenge_participants {
+      ...basicParticipantFragment
+    }
+  }
+}
+    ${ChallengeFragmentFragmentDoc}
+${BasicParticipantFragmentFragmentDoc}`;
 export const InsertAchievementsDocument = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -6604,6 +6734,23 @@ export const GetUserAndUnachievedAchievementsDocument = gql`
   }
 }
     `;
+export const UpdateChallengeDocument = gql`
+    mutation UpdateChallenge($challenge_id: Int!, $update_values: challenge_set_input) {
+  update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: $update_values) {
+    state
+  }
+}
+    `;
+export const UpdateChallengeParticipationProgressDocument = gql`
+    mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: float8!) {
+  update_challenge_participant(
+    where: {challenge_id: {_eq: $challenge_id}, user_id: {_eq: $user_id}}
+    _set: {progress: $progress}
+  ) {
+    affected_rows
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 
@@ -6623,11 +6770,29 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetUserAndExistingAchievements(variables: GetUserAndExistingAchievementsQueryVariables): Promise<GetUserAndExistingAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndExistingAchievementsQuery>(print(GetUserAndExistingAchievementsDocument), variables));
     },
+    ExpireChallenges(variables: ExpireChallengesMutationVariables): Promise<ExpireChallengesMutation> {
+      return withWrapper(() => client.request<ExpireChallengesMutation>(print(ExpireChallengesDocument), variables));
+    },
+    GetActivitiesAndChallenges(variables?: GetActivitiesAndChallengesQueryVariables): Promise<GetActivitiesAndChallengesQuery> {
+      return withWrapper(() => client.request<GetActivitiesAndChallengesQuery>(print(GetActivitiesAndChallengesDocument), variables));
+    },
+    GetChallengeParticipantsAndActivities(variables: GetChallengeParticipantsAndActivitiesQueryVariables): Promise<GetChallengeParticipantsAndActivitiesQuery> {
+      return withWrapper(() => client.request<GetChallengeParticipantsAndActivitiesQuery>(print(GetChallengeParticipantsAndActivitiesDocument), variables));
+    },
+    GetChallengesParticipants(variables: GetChallengesParticipantsQueryVariables): Promise<GetChallengesParticipantsQuery> {
+      return withWrapper(() => client.request<GetChallengesParticipantsQuery>(print(GetChallengesParticipantsDocument), variables));
+    },
     InsertAchievements(variables: InsertAchievementsMutationVariables): Promise<InsertAchievementsMutation> {
       return withWrapper(() => client.request<InsertAchievementsMutation>(print(InsertAchievementsDocument), variables));
     },
     GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
+    },
+    UpdateChallenge(variables: UpdateChallengeMutationVariables): Promise<UpdateChallengeMutation> {
+      return withWrapper(() => client.request<UpdateChallengeMutation>(print(UpdateChallengeDocument), variables));
+    },
+    UpdateChallengeParticipationProgress(variables: UpdateChallengeParticipationProgressMutationVariables): Promise<UpdateChallengeParticipationProgressMutation> {
+      return withWrapper(() => client.request<UpdateChallengeParticipationProgressMutation>(print(UpdateChallengeParticipationProgressDocument), variables));
     }
   };
 }
@@ -8237,6 +8402,8 @@ export type ChallengeResolvers<ContextType = any, ParentType extends ResolversPa
   rules?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<ChallengeRulesArgs, never>>;
   start_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
   state?: Resolver<ResolversTypes['challenge_state_enum'], ParentType, ContextType>;
+  winner?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8272,6 +8439,7 @@ export type Challenge_Max_FieldsResolvers<ContextType = any, ParentType extends 
   end_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8281,6 +8449,7 @@ export type Challenge_Min_FieldsResolvers<ContextType = any, ParentType extends 
   end_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   start_date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
+  winner_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8294,7 +8463,7 @@ export type Challenge_ParticipantResolvers<ContextType = any, ParentType extends
   challenge?: Resolver<ResolversTypes['challenge'], ParentType, ContextType>;
   challenge_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   challenge_participant_state?: Resolver<ResolversTypes['challenge_participant_state'], ParentType, ContextType>;
-  progress?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  progress?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   state?: Resolver<ResolversTypes['challenge_participant_state_enum'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
   user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -8330,14 +8499,14 @@ export type Challenge_Participant_Avg_FieldsResolvers<ContextType = any, ParentT
 
 export type Challenge_Participant_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_max_fields'] = ResolversParentTypes['challenge_participant_max_fields']> = {
   challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  progress?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  progress?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Challenge_Participant_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_min_fields'] = ResolversParentTypes['challenge_participant_min_fields']> = {
   challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  progress?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  progress?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -8404,7 +8573,7 @@ export type Challenge_Participant_Stddev_Samp_FieldsResolvers<ContextType = any,
 
 export type Challenge_Participant_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['challenge_participant_sum_fields'] = ResolversParentTypes['challenge_participant_sum_fields']> = {
   challenge_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  progress?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  progress?: Resolver<Maybe<ResolversTypes['float8']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -8657,7 +8826,6 @@ export type FeedResolvers<ContextType = any, ParentType extends ResolversParentT
   feed_type?: Resolver<ResolversTypes['feed_type_enum'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType>;
-  userAchievementByAchievementIdCreatedAtUserId?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType>;
   user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -9574,6 +9742,8 @@ export type UsersResolvers<ContextType = any, ParentType extends ResolversParent
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   challenge_participants?: Resolver<Array<ResolversTypes['challenge_participant']>, ParentType, ContextType, RequireFields<UsersChallenge_ParticipantsArgs, never>>;
   challenge_participants_aggregate?: Resolver<ResolversTypes['challenge_participant_aggregate'], ParentType, ContextType, RequireFields<UsersChallenge_Participants_AggregateArgs, never>>;
+  challenges_won?: Resolver<Array<ResolversTypes['challenge']>, ParentType, ContextType, RequireFields<UsersChallenges_WonArgs, never>>;
+  challenges_won_aggregate?: Resolver<ResolversTypes['challenge_aggregate'], ParentType, ContextType, RequireFields<UsersChallenges_Won_AggregateArgs, never>>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   followers?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<UsersFollowersArgs, never>>;
@@ -9853,7 +10023,60 @@ export type Resolvers<ContextType = any> = {
  */
 export type IResolvers<ContextType = any> = Resolvers<ContextType>;
 
-
+export const ChallengeFragment = gql`
+    fragment challengeFragment on challenge {
+  id
+  challenge_type
+  created_at
+  start_date
+  end_date
+  state
+  rules
+  created_by_user {
+    id
+    name
+    picture
+  }
+}
+    `;
+export const ParticipantFragment = gql`
+    fragment participantFragment on challenge_participant {
+  state
+  progress
+  challenge {
+    ...challengeFragment
+  }
+}
+    ${ChallengeFragment}`;
+export const BasicParticipantFragment = gql`
+    fragment basicParticipantFragment on challenge_participant {
+  user_id
+  state
+  progress
+}
+    `;
+export const BasicActivityFragment = gql`
+    fragment basicActivityFragment on activities {
+  activity_id
+  duration
+  score
+  started_at
+  geofence {
+    category
+  }
+}
+    `;
+export const ParticipantActivityFragment = gql`
+    fragment participantActivityFragment on challenge_participant {
+  ...basicParticipantFragment
+  user {
+    activities {
+      ...basicActivityFragment
+    }
+  }
+}
+    ${BasicParticipantFragment}
+${BasicActivityFragment}`;
 export const CreateUser = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -9939,6 +10162,49 @@ export const GetUserAndExistingAchievements = gql`
   }
 }
     `;
+export const ExpireChallenges = gql`
+    mutation ExpireChallenges($date: date!) {
+  update_challenge(
+    where: {end_date: {_lt: $date}, state: {_eq: ACTIVE}}
+    _set: {state: CLOSED}
+  ) {
+    affected_rows
+  }
+}
+    `;
+export const GetActivitiesAndChallenges = gql`
+    query GetActivitiesAndChallenges($id: String) {
+  activities(where: {user_id: {_eq: $id}}) {
+    ...basicActivityFragment
+  }
+  challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
+    ...participantFragment
+  }
+}
+    ${BasicActivityFragment}
+${ParticipantFragment}`;
+export const GetChallengeParticipantsAndActivities = gql`
+    query GetChallengeParticipantsAndActivities($challenge_id: Int!) {
+  challenge_by_pk(id: $challenge_id) {
+    ...challengeFragment
+    challenge_participants {
+      ...participantActivityFragment
+    }
+  }
+}
+    ${ChallengeFragment}
+${ParticipantActivityFragment}`;
+export const GetChallengesParticipants = gql`
+    query GetChallengesParticipants($challenge_id: Int!) {
+  challenge_by_pk(id: $challenge_id) {
+    ...challengeFragment
+    challenge_participants {
+      ...basicParticipantFragment
+    }
+  }
+}
+    ${ChallengeFragment}
+${BasicParticipantFragment}`;
 export const InsertAchievements = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -10000,6 +10266,23 @@ export const GetUserAndUnachievedAchievements = gql`
         }
       }
     }
+  }
+}
+    `;
+export const UpdateChallenge = gql`
+    mutation UpdateChallenge($challenge_id: Int!, $update_values: challenge_set_input) {
+  update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: $update_values) {
+    state
+  }
+}
+    `;
+export const UpdateChallengeParticipationProgress = gql`
+    mutation UpdateChallengeParticipationProgress($challenge_id: Int!, $user_id: String!, $progress: float8!) {
+  update_challenge_participant(
+    where: {challenge_id: {_eq: $challenge_id}, user_id: {_eq: $user_id}}
+    _set: {progress: $progress}
+  ) {
+    affected_rows
   }
 }
     `;
@@ -10108,6 +10391,113 @@ export type GetUserAndExistingAchievementsQuery = (
   )> }
 );
 
+export type ExpireChallengesMutationVariables = Exact<{
+  date: Scalars['date'];
+}>;
+
+
+export type ExpireChallengesMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_challenge?: Maybe<(
+    { __typename?: 'challenge_mutation_response' }
+    & Pick<Challenge_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
+export type BasicActivityFragmentFragment = (
+  { __typename?: 'activities' }
+  & Pick<Activities, 'activity_id' | 'duration' | 'score' | 'started_at'>
+  & { geofence: (
+    { __typename?: 'geofences' }
+    & Pick<Geofences, 'category'>
+  ) }
+);
+
+export type ChallengeFragmentFragment = (
+  { __typename?: 'challenge' }
+  & Pick<Challenge, 'id' | 'challenge_type' | 'created_at' | 'start_date' | 'end_date' | 'state' | 'rules'>
+  & { created_by_user: (
+    { __typename?: 'users' }
+    & Pick<Users, 'id' | 'name' | 'picture'>
+  ) }
+);
+
+export type ParticipantFragmentFragment = (
+  { __typename?: 'challenge_participant' }
+  & Pick<Challenge_Participant, 'state' | 'progress'>
+  & { challenge: (
+    { __typename?: 'challenge' }
+    & ChallengeFragmentFragment
+  ) }
+);
+
+export type BasicParticipantFragmentFragment = (
+  { __typename?: 'challenge_participant' }
+  & Pick<Challenge_Participant, 'user_id' | 'state' | 'progress'>
+);
+
+export type ParticipantActivityFragmentFragment = (
+  { __typename?: 'challenge_participant' }
+  & { user: (
+    { __typename?: 'users' }
+    & { activities: Array<(
+      { __typename?: 'activities' }
+      & BasicActivityFragmentFragment
+    )> }
+  ) }
+  & BasicParticipantFragmentFragment
+);
+
+export type GetActivitiesAndChallengesQueryVariables = Exact<{
+  id?: Maybe<Scalars['String']>;
+}>;
+
+
+export type GetActivitiesAndChallengesQuery = (
+  { __typename?: 'query_root' }
+  & { activities: Array<(
+    { __typename?: 'activities' }
+    & BasicActivityFragmentFragment
+  )>, challenge_participant: Array<(
+    { __typename?: 'challenge_participant' }
+    & ParticipantFragmentFragment
+  )> }
+);
+
+export type GetChallengeParticipantsAndActivitiesQueryVariables = Exact<{
+  challenge_id: Scalars['Int'];
+}>;
+
+
+export type GetChallengeParticipantsAndActivitiesQuery = (
+  { __typename?: 'query_root' }
+  & { challenge_by_pk?: Maybe<(
+    { __typename?: 'challenge' }
+    & { challenge_participants: Array<(
+      { __typename?: 'challenge_participant' }
+      & ParticipantActivityFragmentFragment
+    )> }
+    & ChallengeFragmentFragment
+  )> }
+);
+
+export type GetChallengesParticipantsQueryVariables = Exact<{
+  challenge_id: Scalars['Int'];
+}>;
+
+
+export type GetChallengesParticipantsQuery = (
+  { __typename?: 'query_root' }
+  & { challenge_by_pk?: Maybe<(
+    { __typename?: 'challenge' }
+    & { challenge_participants: Array<(
+      { __typename?: 'challenge_participant' }
+      & BasicParticipantFragmentFragment
+    )> }
+    & ChallengeFragmentFragment
+  )> }
+);
+
 export type InsertAchievementsMutationVariables = Exact<{
   feed_achievements: Array<Feed_Insert_Input> | Feed_Insert_Input;
 }>;
@@ -10177,5 +10567,34 @@ export type GetUserAndUnachievedAchievementsQuery = (
         )> }
       )> }
     ) }
+  )> }
+);
+
+export type UpdateChallengeMutationVariables = Exact<{
+  challenge_id: Scalars['Int'];
+  update_values?: Maybe<Challenge_Set_Input>;
+}>;
+
+
+export type UpdateChallengeMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_challenge_by_pk?: Maybe<(
+    { __typename?: 'challenge' }
+    & Pick<Challenge, 'state'>
+  )> }
+);
+
+export type UpdateChallengeParticipationProgressMutationVariables = Exact<{
+  challenge_id: Scalars['Int'];
+  user_id: Scalars['String'];
+  progress: Scalars['float8'];
+}>;
+
+
+export type UpdateChallengeParticipationProgressMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_challenge_participant?: Maybe<(
+    { __typename?: 'challenge_participant_mutation_response' }
+    & Pick<Challenge_Participant_Mutation_Response, 'affected_rows'>
   )> }
 );
