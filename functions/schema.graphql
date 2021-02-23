@@ -5120,7 +5120,7 @@ type mutation_root {
   ): notification_type_mutation_response
 
   # delete single row from the table: "notification_type"
-  delete_notification_type_by_pk(name: String!): notification_type
+  delete_notification_type_by_pk(type: String!): notification_type
 
   # delete data from the table: "notifications"
   delete_notifications(
@@ -5938,7 +5938,8 @@ type mutation_root {
 
 # columns and relationships of "notification_type"
 type notification_type {
-  name: String!
+  title: String
+  type: String!
 }
 
 # aggregated selection of "notification_type"
@@ -5972,7 +5973,8 @@ input notification_type_bool_exp {
   _and: [notification_type_bool_exp]
   _not: notification_type_bool_exp
   _or: [notification_type_bool_exp]
-  name: String_comparison_exp
+  title: String_comparison_exp
+  type: String_comparison_exp
 }
 
 # unique or primary key constraints on table "notification_type"
@@ -5982,11 +5984,25 @@ enum notification_type_constraint {
 }
 
 enum notification_type_enum {
+  # Oh no...
   CHALLENGE_CLOSED
+
+  # Oh no...
+  CHALLENGE_EXPIRED
+
+  # We have a winner ...
   CHALLENGE_FINISHED
+
+  # You've been challenged!
   CHALLENGE_INVITE
+
+  # Congratulation
   CHALLENGE_WON
+
+  # Congratulation
   NEW_ACHIEVEMENT
+
+  # Someone responded to your challenge
   PARTICIPANT_UPDATE
 }
 
@@ -6001,27 +6017,32 @@ input notification_type_enum_comparison_exp {
 
 # input type for inserting data into table "notification_type"
 input notification_type_insert_input {
-  name: String
+  title: String
+  type: String
 }
 
 # aggregate max on columns
 type notification_type_max_fields {
-  name: String
+  title: String
+  type: String
 }
 
 # order by max() on columns of table "notification_type"
 input notification_type_max_order_by {
-  name: order_by
+  title: order_by
+  type: order_by
 }
 
 # aggregate min on columns
 type notification_type_min_fields {
-  name: String
+  title: String
+  type: String
 }
 
 # order by min() on columns of table "notification_type"
 input notification_type_min_order_by {
-  name: order_by
+  title: order_by
+  type: order_by
 }
 
 # response of any mutation on the table "notification_type"
@@ -6048,29 +6069,37 @@ input notification_type_on_conflict {
 
 # ordering options when selecting data from "notification_type"
 input notification_type_order_by {
-  name: order_by
+  title: order_by
+  type: order_by
 }
 
 # primary key columns input for table: "notification_type"
 input notification_type_pk_columns_input {
-  name: String!
+  type: String!
 }
 
 # select columns of table "notification_type"
 enum notification_type_select_column {
   # column name
-  name
+  title
+
+  # column name
+  type
 }
 
 # input type for updating data in table "notification_type"
 input notification_type_set_input {
-  name: String
+  title: String
+  type: String
 }
 
 # update columns of table "notification_type"
 enum notification_type_update_column {
   # column name
-  name
+  title
+
+  # column name
+  type
 }
 
 # columns and relationships of "notifications"
@@ -7068,7 +7097,7 @@ type query_root {
   ): notification_type_aggregate!
 
   # fetch data from the table: "notification_type" using primary key columns
-  notification_type_by_pk(name: String!): notification_type
+  notification_type_by_pk(type: String!): notification_type
 
   # fetch data from the table: "notifications"
   notifications(
@@ -7951,7 +7980,7 @@ type subscription_root {
   ): notification_type_aggregate!
 
   # fetch data from the table: "notification_type" using primary key columns
-  notification_type_by_pk(name: String!): notification_type
+  notification_type_by_pk(type: String!): notification_type
 
   # fetch data from the table: "notifications"
   notifications(

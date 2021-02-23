@@ -1,5 +1,10 @@
 mutation ExpireChallenges($date: date!) {
   update_challenge(where: { end_date: { _lt: $date }, state: { _eq: ACTIVE } }, _set: { state: CLOSED }) {
     affected_rows
+    returning {
+      id
+      challenge_type
+      created_by
+    }
   }
 }

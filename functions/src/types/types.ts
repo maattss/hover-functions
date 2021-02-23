@@ -4455,7 +4455,7 @@ export type Mutation_RootDelete_Notification_TypeArgs = {
 
 
 export type Mutation_RootDelete_Notification_Type_By_PkArgs = {
-  name: Scalars['String'];
+  type: Scalars['String'];
 };
 
 
@@ -5019,7 +5019,8 @@ export type Mutation_RootUpdate_UsersArgs = {
 
 export type Notification_Type = {
   __typename?: 'notification_type';
-  name: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  type: Scalars['String'];
 };
 
 export type Notification_Type_Aggregate = {
@@ -5056,7 +5057,8 @@ export type Notification_Type_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Notification_Type_Bool_Exp>>>;
   _not?: Maybe<Notification_Type_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Notification_Type_Bool_Exp>>>;
-  name?: Maybe<String_Comparison_Exp>;
+  title?: Maybe<String_Comparison_Exp>;
+  type?: Maybe<String_Comparison_Exp>;
 };
 
 export enum Notification_Type_Constraint {
@@ -5065,6 +5067,7 @@ export enum Notification_Type_Constraint {
 
 export enum Notification_Type_Enum {
   ChallengeClosed = 'CHALLENGE_CLOSED',
+  ChallengeExpired = 'CHALLENGE_EXPIRED',
   ChallengeFinished = 'CHALLENGE_FINISHED',
   ChallengeInvite = 'CHALLENGE_INVITE',
   ChallengeWon = 'CHALLENGE_WON',
@@ -5081,25 +5084,30 @@ export type Notification_Type_Enum_Comparison_Exp = {
 };
 
 export type Notification_Type_Insert_Input = {
-  name?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type Notification_Type_Max_Fields = {
   __typename?: 'notification_type_max_fields';
-  name?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type Notification_Type_Max_Order_By = {
-  name?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
 };
 
 export type Notification_Type_Min_Fields = {
   __typename?: 'notification_type_min_fields';
-  name?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type Notification_Type_Min_Order_By = {
-  name?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
 };
 
 export type Notification_Type_Mutation_Response = {
@@ -5120,23 +5128,27 @@ export type Notification_Type_On_Conflict = {
 };
 
 export type Notification_Type_Order_By = {
-  name?: Maybe<Order_By>;
+  title?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
 };
 
 export type Notification_Type_Pk_Columns_Input = {
-  name: Scalars['String'];
+  type: Scalars['String'];
 };
 
 export enum Notification_Type_Select_Column {
-  Name = 'name'
+  Title = 'title',
+  Type = 'type'
 }
 
 export type Notification_Type_Set_Input = {
-  name?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export enum Notification_Type_Update_Column {
-  Name = 'name'
+  Title = 'title',
+  Type = 'type'
 }
 
 export type Notifications = {
@@ -5864,7 +5876,7 @@ export type Query_RootNotification_Type_AggregateArgs = {
 
 
 export type Query_RootNotification_Type_By_PkArgs = {
-  name: Scalars['String'];
+  type: Scalars['String'];
 };
 
 
@@ -6458,7 +6470,7 @@ export type Subscription_RootNotification_Type_AggregateArgs = {
 
 
 export type Subscription_RootNotification_Type_By_PkArgs = {
-  name: Scalars['String'];
+  type: Scalars['String'];
 };
 
 
@@ -7289,6 +7301,11 @@ export const ExpireChallengesDocument = gql`
     _set: {state: CLOSED}
   ) {
     affected_rows
+    returning {
+      id
+      challenge_type
+      created_by
+    }
   }
 }
     `;
@@ -10202,7 +10219,7 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   delete_likes?: Resolver<Maybe<ResolversTypes['likes_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_LikesArgs, 'where'>>;
   delete_likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Likes_By_PkArgs, 'activity_id' | 'user_id'>>;
   delete_notification_type?: Resolver<Maybe<ResolversTypes['notification_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Notification_TypeArgs, 'where'>>;
-  delete_notification_type_by_pk?: Resolver<Maybe<ResolversTypes['notification_type']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Notification_Type_By_PkArgs, 'name'>>;
+  delete_notification_type_by_pk?: Resolver<Maybe<ResolversTypes['notification_type']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Notification_Type_By_PkArgs, 'type'>>;
   delete_notifications?: Resolver<Maybe<ResolversTypes['notifications_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_NotificationsArgs, 'where'>>;
   delete_notifications_by_pk?: Resolver<Maybe<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Notifications_By_PkArgs, 'id'>>;
   delete_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_UserArgs, 'id'>>;
@@ -10296,7 +10313,8 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
 };
 
 export type Notification_TypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['notification_type'] = ResolversParentTypes['notification_type']> = {
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10314,12 +10332,14 @@ export type Notification_Type_Aggregate_FieldsResolvers<ContextType = any, Paren
 };
 
 export type Notification_Type_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notification_type_max_fields'] = ResolversParentTypes['notification_type_max_fields']> = {
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Notification_Type_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notification_type_min_fields'] = ResolversParentTypes['notification_type_min_fields']> = {
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10473,7 +10493,7 @@ export type Query_RootResolvers<ContextType = any, ParentType extends ResolversP
   likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Query_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>>;
   notification_type?: Resolver<Array<ResolversTypes['notification_type']>, ParentType, ContextType, RequireFields<Query_RootNotification_TypeArgs, never>>;
   notification_type_aggregate?: Resolver<ResolversTypes['notification_type_aggregate'], ParentType, ContextType, RequireFields<Query_RootNotification_Type_AggregateArgs, never>>;
-  notification_type_by_pk?: Resolver<Maybe<ResolversTypes['notification_type']>, ParentType, ContextType, RequireFields<Query_RootNotification_Type_By_PkArgs, 'name'>>;
+  notification_type_by_pk?: Resolver<Maybe<ResolversTypes['notification_type']>, ParentType, ContextType, RequireFields<Query_RootNotification_Type_By_PkArgs, 'type'>>;
   notifications?: Resolver<Array<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<Query_RootNotificationsArgs, never>>;
   notifications_aggregate?: Resolver<ResolversTypes['notifications_aggregate'], ParentType, ContextType, RequireFields<Query_RootNotifications_AggregateArgs, never>>;
   notifications_by_pk?: Resolver<Maybe<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<Query_RootNotifications_By_PkArgs, 'id'>>;
@@ -10541,7 +10561,7 @@ export type Subscription_RootResolvers<ContextType = any, ParentType extends Res
   likes_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['likes']>, "likes_by_pk", ParentType, ContextType, RequireFields<Subscription_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>>;
   notification_type?: SubscriptionResolver<Array<ResolversTypes['notification_type']>, "notification_type", ParentType, ContextType, RequireFields<Subscription_RootNotification_TypeArgs, never>>;
   notification_type_aggregate?: SubscriptionResolver<ResolversTypes['notification_type_aggregate'], "notification_type_aggregate", ParentType, ContextType, RequireFields<Subscription_RootNotification_Type_AggregateArgs, never>>;
-  notification_type_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['notification_type']>, "notification_type_by_pk", ParentType, ContextType, RequireFields<Subscription_RootNotification_Type_By_PkArgs, 'name'>>;
+  notification_type_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['notification_type']>, "notification_type_by_pk", ParentType, ContextType, RequireFields<Subscription_RootNotification_Type_By_PkArgs, 'type'>>;
   notifications?: SubscriptionResolver<Array<ResolversTypes['notifications']>, "notifications", ParentType, ContextType, RequireFields<Subscription_RootNotificationsArgs, never>>;
   notifications_aggregate?: SubscriptionResolver<ResolversTypes['notifications_aggregate'], "notifications_aggregate", ParentType, ContextType, RequireFields<Subscription_RootNotifications_AggregateArgs, never>>;
   notifications_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['notifications']>, "notifications_by_pk", ParentType, ContextType, RequireFields<Subscription_RootNotifications_By_PkArgs, 'id'>>;
@@ -11128,6 +11148,11 @@ export const ExpireChallenges = gql`
     _set: {state: CLOSED}
   ) {
     affected_rows
+    returning {
+      id
+      challenge_type
+      created_by
+    }
   }
 }
     `;
@@ -11302,6 +11327,10 @@ export type ExpireChallengesMutation = (
   & { update_challenge?: Maybe<(
     { __typename?: 'challenge_mutation_response' }
     & Pick<Challenge_Mutation_Response, 'affected_rows'>
+    & { returning: Array<(
+      { __typename?: 'challenge' }
+      & Pick<Challenge, 'id' | 'challenge_type' | 'created_by'>
+    )> }
   )> }
 );
 
