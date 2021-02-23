@@ -5065,8 +5065,9 @@ export enum Notification_Type_Constraint {
 
 export enum Notification_Type_Enum {
   ChallengeClosed = 'CHALLENGE_CLOSED',
+  ChallengeFinished = 'CHALLENGE_FINISHED',
   ChallengeInvite = 'CHALLENGE_INVITE',
-  ChallengeWinner = 'CHALLENGE_WINNER',
+  ChallengeWon = 'CHALLENGE_WON',
   NewAchievement = 'NEW_ACHIEVEMENT',
   ParticipantUpdate = 'PARTICIPANT_UPDATE'
 }
@@ -7178,6 +7179,63 @@ export const ParticipantActivityFragmentFragmentDoc = gql`
 }
     ${BasicParticipantFragmentFragmentDoc}
 ${BasicActivityFragmentFragmentDoc}`;
+export const AchievementFragmentFragmentDoc = gql`
+    fragment achievementFragment on achievement {
+  id
+  name
+  description
+  created_at
+  achievement_type
+  rule
+}
+    `;
+export const UserScoreFragmentFragmentDoc = gql`
+    fragment userScoreFragment on users {
+  id
+  totalScore
+  activity_count: activities_aggregate {
+    aggregate {
+      count(columns: activity_id)
+    }
+  }
+  education_score: activities_aggregate(
+    where: {geofence: {category: {_eq: "EDUCATION"}}}
+  ) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  culture_score: activities_aggregate(
+    where: {geofence: {category: {_eq: "CULTURE"}}}
+  ) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  social_score: activities_aggregate(
+    where: {geofence: {category: {_eq: "SOCIAL"}}}
+  ) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  exercise_score: activities_aggregate(
+    where: {geofence: {category: {_eq: "EXERCISE"}}}
+  ) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+}
+    `;
 export const CloseChallengeDocument = gql`
     mutation CloseChallenge($challenge_id: Int!) {
   update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: {state: CLOSED}) {
@@ -7214,62 +7272,16 @@ export const DeleteUserDocument = gql`
 export const GetUserAndExistingAchievementsDocument = gql`
     query GetUserAndExistingAchievements($user_id: String!) {
   user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
-    }
-    education_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EDUCATION"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    culture_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "CULTURE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    social_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "SOCIAL"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    exercise_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EXERCISE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
+    ...userScoreFragment
     user_achievement {
       achievement {
-        id
-        name
-        description
-        achievement_type
-        rule
-        created_at
+        ...achievementFragment
       }
     }
   }
 }
-    `;
+    ${UserScoreFragmentFragmentDoc}
+${AchievementFragmentFragmentDoc}`;
 export const ExpireChallengesDocument = gql`
     mutation ExpireChallenges($date: date!) {
   update_challenge(
@@ -7330,60 +7342,14 @@ export const NotifyUserDocument = gql`
 export const GetUserAndUnachievedAchievementsDocument = gql`
     query GetUserAndUnachievedAchievements($user_id: String!) {
   unachievedachievements(args: {uid: $user_id}) {
-    id
-    name
-    description
-    created_at
-    achievement_type
-    rule
+    ...achievementFragment
   }
   user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
-    }
-    education_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EDUCATION"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    culture_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "CULTURE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    social_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "SOCIAL"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    exercise_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EXERCISE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
+    ...userScoreFragment
   }
 }
-    `;
+    ${AchievementFragmentFragmentDoc}
+${UserScoreFragmentFragmentDoc}`;
 export const UpdateChallengeWinnerDocument = gql`
     mutation UpdateChallengeWinner($challenge_id: Int!, $winner_id: String!) {
   update_challenge_by_pk(
@@ -11052,6 +11018,63 @@ export const ParticipantActivityFragment = gql`
 }
     ${BasicParticipantFragment}
 ${BasicActivityFragment}`;
+export const AchievementFragment = gql`
+    fragment achievementFragment on achievement {
+  id
+  name
+  description
+  created_at
+  achievement_type
+  rule
+}
+    `;
+export const UserScoreFragment = gql`
+    fragment userScoreFragment on users {
+  id
+  totalScore
+  activity_count: activities_aggregate {
+    aggregate {
+      count(columns: activity_id)
+    }
+  }
+  education_score: activities_aggregate(
+    where: {geofence: {category: {_eq: "EDUCATION"}}}
+  ) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  culture_score: activities_aggregate(
+    where: {geofence: {category: {_eq: "CULTURE"}}}
+  ) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  social_score: activities_aggregate(
+    where: {geofence: {category: {_eq: "SOCIAL"}}}
+  ) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  exercise_score: activities_aggregate(
+    where: {geofence: {category: {_eq: "EXERCISE"}}}
+  ) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+}
+    `;
 export const CloseChallenge = gql`
     mutation CloseChallenge($challenge_id: Int!) {
   update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: {state: CLOSED}) {
@@ -11088,62 +11111,16 @@ export const DeleteUser = gql`
 export const GetUserAndExistingAchievements = gql`
     query GetUserAndExistingAchievements($user_id: String!) {
   user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
-    }
-    education_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EDUCATION"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    culture_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "CULTURE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    social_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "SOCIAL"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    exercise_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EXERCISE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
+    ...userScoreFragment
     user_achievement {
       achievement {
-        id
-        name
-        description
-        achievement_type
-        rule
-        created_at
+        ...achievementFragment
       }
     }
   }
 }
-    `;
+    ${UserScoreFragment}
+${AchievementFragment}`;
 export const ExpireChallenges = gql`
     mutation ExpireChallenges($date: date!) {
   update_challenge(
@@ -11204,60 +11181,14 @@ export const NotifyUser = gql`
 export const GetUserAndUnachievedAchievements = gql`
     query GetUserAndUnachievedAchievements($user_id: String!) {
   unachievedachievements(args: {uid: $user_id}) {
-    id
-    name
-    description
-    created_at
-    achievement_type
-    rule
+    ...achievementFragment
   }
   user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
-    }
-    education_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EDUCATION"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    culture_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "CULTURE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    social_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "SOCIAL"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    exercise_score: activities_aggregate(
-      where: {geofence: {category: {_eq: "EXERCISE"}}}
-    ) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
+    ...userScoreFragment
   }
 }
-    `;
+    ${AchievementFragment}
+${UserScoreFragment}`;
 export const UpdateChallengeWinner = gql`
     mutation UpdateChallengeWinner($challenge_id: Int!, $winner_id: String!) {
   update_challenge_by_pk(
@@ -11350,56 +11281,14 @@ export type GetUserAndExistingAchievementsQuery = (
   { __typename?: 'query_root' }
   & { user?: Maybe<(
     { __typename?: 'users' }
-    & Pick<Users, 'id' | 'totalScore'>
-    & { activity_count: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & Pick<Activities_Aggregate_Fields, 'count'>
-      )> }
-    ), education_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), culture_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), social_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), exercise_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), user_achievement: Array<(
+    & { user_achievement: Array<(
       { __typename?: 'user_achievement' }
       & { achievement: (
         { __typename?: 'achievement' }
-        & Pick<Achievement, 'id' | 'name' | 'description' | 'achievement_type' | 'rule' | 'created_at'>
+        & AchievementFragmentFragment
       ) }
     )> }
+    & UserScoreFragmentFragment
   )> }
 );
 
@@ -11462,6 +11351,59 @@ export type ParticipantActivityFragmentFragment = (
     )> }
   ) }
   & BasicParticipantFragmentFragment
+);
+
+export type AchievementFragmentFragment = (
+  { __typename?: 'achievement' }
+  & Pick<Achievement, 'id' | 'name' | 'description' | 'created_at' | 'achievement_type' | 'rule'>
+);
+
+export type UserScoreFragmentFragment = (
+  { __typename?: 'users' }
+  & Pick<Users, 'id' | 'totalScore'>
+  & { activity_count: (
+    { __typename?: 'activities_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'activities_aggregate_fields' }
+      & Pick<Activities_Aggregate_Fields, 'count'>
+    )> }
+  ), education_score: (
+    { __typename?: 'activities_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'activities_aggregate_fields' }
+      & { sum?: Maybe<(
+        { __typename?: 'activities_sum_fields' }
+        & Pick<Activities_Sum_Fields, 'score'>
+      )> }
+    )> }
+  ), culture_score: (
+    { __typename?: 'activities_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'activities_aggregate_fields' }
+      & { sum?: Maybe<(
+        { __typename?: 'activities_sum_fields' }
+        & Pick<Activities_Sum_Fields, 'score'>
+      )> }
+    )> }
+  ), social_score: (
+    { __typename?: 'activities_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'activities_aggregate_fields' }
+      & { sum?: Maybe<(
+        { __typename?: 'activities_sum_fields' }
+        & Pick<Activities_Sum_Fields, 'score'>
+      )> }
+    )> }
+  ), exercise_score: (
+    { __typename?: 'activities_aggregate' }
+    & { aggregate?: Maybe<(
+      { __typename?: 'activities_aggregate_fields' }
+      & { sum?: Maybe<(
+        { __typename?: 'activities_sum_fields' }
+        & Pick<Activities_Sum_Fields, 'score'>
+      )> }
+    )> }
+  ) }
 );
 
 export type GetActivitiesAndChallengesQueryVariables = Exact<{
@@ -11551,53 +11493,10 @@ export type GetUserAndUnachievedAchievementsQuery = (
   { __typename?: 'query_root' }
   & { unachievedachievements: Array<(
     { __typename?: 'achievement' }
-    & Pick<Achievement, 'id' | 'name' | 'description' | 'created_at' | 'achievement_type' | 'rule'>
+    & AchievementFragmentFragment
   )>, user?: Maybe<(
     { __typename?: 'users' }
-    & Pick<Users, 'id' | 'totalScore'>
-    & { activity_count: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & Pick<Activities_Aggregate_Fields, 'count'>
-      )> }
-    ), education_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), culture_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), social_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ), exercise_score: (
-      { __typename?: 'activities_aggregate' }
-      & { aggregate?: Maybe<(
-        { __typename?: 'activities_aggregate_fields' }
-        & { sum?: Maybe<(
-          { __typename?: 'activities_sum_fields' }
-          & Pick<Activities_Sum_Fields, 'score'>
-        )> }
-      )> }
-    ) }
+    & UserScoreFragmentFragment
   )> }
 );
 

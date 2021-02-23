@@ -5983,8 +5983,9 @@ enum notification_type_constraint {
 
 enum notification_type_enum {
   CHALLENGE_CLOSED
+  CHALLENGE_FINISHED
   CHALLENGE_INVITE
-  CHALLENGE_WINNER
+  CHALLENGE_WON
   NEW_ACHIEVEMENT
   PARTICIPANT_UPDATE
 }

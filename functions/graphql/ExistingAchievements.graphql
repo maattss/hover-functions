@@ -1,48 +1,9 @@
 query GetUserAndExistingAchievements($user_id: String!) {
   user(id: $user_id) {
-    id
-    totalScore
-    activity_count: activities_aggregate {
-      aggregate {
-        count(columns: activity_id)
-      }
-    }
-    education_score: activities_aggregate(where: {geofence: {category: {_eq: "EDUCATION"}}}) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    culture_score: activities_aggregate(where: {geofence: {category: {_eq: "CULTURE"}}}) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    social_score: activities_aggregate(where: {geofence: {category: {_eq: "SOCIAL"}}}) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
-    exercise_score: activities_aggregate(where: {geofence: {category: {_eq: "EXERCISE"}}}) {
-      aggregate {
-        sum {
-          score
-        }
-      }
-    }
+    ...userScoreFragment
     user_achievement {
       achievement {
-        id
-        name
-        description
-        achievement_type
-        rule
-        created_at
+        ...achievementFragment
       }
     }
   }
