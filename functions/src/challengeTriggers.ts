@@ -18,7 +18,7 @@ import {
 exports.checkChallengeExpiry = functions.https.onRequest(async (req, res) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const response = await client
+  const data = await client
     .ExpireChallenges({ date: today.toISOString() })
     .then((response) => {
       return response.update_challenge;
@@ -26,14 +26,11 @@ exports.checkChallengeExpiry = functions.https.onRequest(async (req, res) => {
     .catch((e) => {
       throw new functions.https.HttpsError('invalid-argument', e.message);
     });
-    const updateCount = response?.affected_rows;
-    response?.returning.forEach(async (item) => {
+    const updateCount = data?.affected_rows;
+    data?.returning.forEach(async (item) => {
       const notificationText = `Your ${item.challenge_type
         .toLowerCase()
-        .replace(
-          '_',
-          ' in ',
-        )} challenge have have expired. Unfortunatly no one completed the challenge.`;
+        .replace('_', ' in ')} challenge have have expired. Unfortunately no one completed the challenge...`;
       await notifyUser(item.created_by, notificationText, Notification_Type_Enum.ChallengeExpired);
     });
   res.status(200).json({
