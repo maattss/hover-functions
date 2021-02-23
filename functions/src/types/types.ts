@@ -850,6 +850,18 @@ export type Activities_Variance_Order_By = {
 };
 
 
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
+};
+
 export type Categories = {
   __typename?: 'categories';
   description: Scalars['String'];
@@ -3016,260 +3028,301 @@ export enum Followings_Update_Column {
   UserId = 'user_id'
 }
 
-export type Friends_Tracking = {
-  __typename?: 'friends_tracking';
+export type Friend_Tracking = {
+  __typename?: 'friend_tracking';
+  created_at: Scalars['timestamptz'];
+  date: Scalars['date'];
   geofence_id: Scalars['Int'];
   id: Scalars['Int'];
   linking_word: Scalars['String'];
-  user_join?: Maybe<Scalars['String']>;
-  user_start: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+  user_join?: Maybe<Users>;
+  user_join_id?: Maybe<Scalars['String']>;
+  user_start: Users;
+  user_start_id: Scalars['String'];
 };
 
-export type Friends_Tracking_Aggregate = {
-  __typename?: 'friends_tracking_aggregate';
-  aggregate?: Maybe<Friends_Tracking_Aggregate_Fields>;
-  nodes: Array<Friends_Tracking>;
+export type Friend_Tracking_Aggregate = {
+  __typename?: 'friend_tracking_aggregate';
+  aggregate?: Maybe<Friend_Tracking_Aggregate_Fields>;
+  nodes: Array<Friend_Tracking>;
 };
 
-export type Friends_Tracking_Aggregate_Fields = {
-  __typename?: 'friends_tracking_aggregate_fields';
-  avg?: Maybe<Friends_Tracking_Avg_Fields>;
+export type Friend_Tracking_Aggregate_Fields = {
+  __typename?: 'friend_tracking_aggregate_fields';
+  avg?: Maybe<Friend_Tracking_Avg_Fields>;
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Friends_Tracking_Max_Fields>;
-  min?: Maybe<Friends_Tracking_Min_Fields>;
-  stddev?: Maybe<Friends_Tracking_Stddev_Fields>;
-  stddev_pop?: Maybe<Friends_Tracking_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Friends_Tracking_Stddev_Samp_Fields>;
-  sum?: Maybe<Friends_Tracking_Sum_Fields>;
-  var_pop?: Maybe<Friends_Tracking_Var_Pop_Fields>;
-  var_samp?: Maybe<Friends_Tracking_Var_Samp_Fields>;
-  variance?: Maybe<Friends_Tracking_Variance_Fields>;
+  max?: Maybe<Friend_Tracking_Max_Fields>;
+  min?: Maybe<Friend_Tracking_Min_Fields>;
+  stddev?: Maybe<Friend_Tracking_Stddev_Fields>;
+  stddev_pop?: Maybe<Friend_Tracking_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Friend_Tracking_Stddev_Samp_Fields>;
+  sum?: Maybe<Friend_Tracking_Sum_Fields>;
+  var_pop?: Maybe<Friend_Tracking_Var_Pop_Fields>;
+  var_samp?: Maybe<Friend_Tracking_Var_Samp_Fields>;
+  variance?: Maybe<Friend_Tracking_Variance_Fields>;
 };
 
 
-export type Friends_Tracking_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Friends_Tracking_Select_Column>>;
+export type Friend_Tracking_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Friend_Tracking_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-export type Friends_Tracking_Aggregate_Order_By = {
-  avg?: Maybe<Friends_Tracking_Avg_Order_By>;
+export type Friend_Tracking_Aggregate_Order_By = {
+  avg?: Maybe<Friend_Tracking_Avg_Order_By>;
   count?: Maybe<Order_By>;
-  max?: Maybe<Friends_Tracking_Max_Order_By>;
-  min?: Maybe<Friends_Tracking_Min_Order_By>;
-  stddev?: Maybe<Friends_Tracking_Stddev_Order_By>;
-  stddev_pop?: Maybe<Friends_Tracking_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Friends_Tracking_Stddev_Samp_Order_By>;
-  sum?: Maybe<Friends_Tracking_Sum_Order_By>;
-  var_pop?: Maybe<Friends_Tracking_Var_Pop_Order_By>;
-  var_samp?: Maybe<Friends_Tracking_Var_Samp_Order_By>;
-  variance?: Maybe<Friends_Tracking_Variance_Order_By>;
+  max?: Maybe<Friend_Tracking_Max_Order_By>;
+  min?: Maybe<Friend_Tracking_Min_Order_By>;
+  stddev?: Maybe<Friend_Tracking_Stddev_Order_By>;
+  stddev_pop?: Maybe<Friend_Tracking_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Friend_Tracking_Stddev_Samp_Order_By>;
+  sum?: Maybe<Friend_Tracking_Sum_Order_By>;
+  var_pop?: Maybe<Friend_Tracking_Var_Pop_Order_By>;
+  var_samp?: Maybe<Friend_Tracking_Var_Samp_Order_By>;
+  variance?: Maybe<Friend_Tracking_Variance_Order_By>;
 };
 
-export type Friends_Tracking_Arr_Rel_Insert_Input = {
-  data: Array<Friends_Tracking_Insert_Input>;
-  on_conflict?: Maybe<Friends_Tracking_On_Conflict>;
+export type Friend_Tracking_Arr_Rel_Insert_Input = {
+  data: Array<Friend_Tracking_Insert_Input>;
+  on_conflict?: Maybe<Friend_Tracking_On_Conflict>;
 };
 
-export type Friends_Tracking_Avg_Fields = {
-  __typename?: 'friends_tracking_avg_fields';
+export type Friend_Tracking_Avg_Fields = {
+  __typename?: 'friend_tracking_avg_fields';
   geofence_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
-export type Friends_Tracking_Avg_Order_By = {
+export type Friend_Tracking_Avg_Order_By = {
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Friends_Tracking_Bool_Exp>>>;
-  _not?: Maybe<Friends_Tracking_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Friends_Tracking_Bool_Exp>>>;
+export type Friend_Tracking_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Friend_Tracking_Bool_Exp>>>;
+  _not?: Maybe<Friend_Tracking_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Friend_Tracking_Bool_Exp>>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  date?: Maybe<Date_Comparison_Exp>;
   geofence_id?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   linking_word?: Maybe<String_Comparison_Exp>;
-  user_join?: Maybe<String_Comparison_Exp>;
-  user_start?: Maybe<String_Comparison_Exp>;
+  updated_at?: Maybe<Timestamptz_Comparison_Exp>;
+  user_join?: Maybe<Users_Bool_Exp>;
+  user_join_id?: Maybe<String_Comparison_Exp>;
+  user_start?: Maybe<Users_Bool_Exp>;
+  user_start_id?: Maybe<String_Comparison_Exp>;
 };
 
-export enum Friends_Tracking_Constraint {
+export enum Friend_Tracking_Constraint {
   FriendsTrackingPkey = 'friends_tracking_pkey'
 }
 
-export type Friends_Tracking_Inc_Input = {
+export type Friend_Tracking_Inc_Input = {
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
 };
 
-export type Friends_Tracking_Insert_Input = {
-  geofence_id?: Maybe<Scalars['Int']>;
-  id?: Maybe<Scalars['Int']>;
-  linking_word?: Maybe<Scalars['String']>;
-  user_join?: Maybe<Scalars['String']>;
-  user_start?: Maybe<Scalars['String']>;
-};
-
-export type Friends_Tracking_Max_Fields = {
-  __typename?: 'friends_tracking_max_fields';
+export type Friend_Tracking_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  date?: Maybe<Scalars['date']>;
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   linking_word?: Maybe<Scalars['String']>;
-  user_join?: Maybe<Scalars['String']>;
-  user_start?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_join?: Maybe<Users_Obj_Rel_Insert_Input>;
+  user_join_id?: Maybe<Scalars['String']>;
+  user_start?: Maybe<Users_Obj_Rel_Insert_Input>;
+  user_start_id?: Maybe<Scalars['String']>;
 };
 
-export type Friends_Tracking_Max_Order_By = {
+export type Friend_Tracking_Max_Fields = {
+  __typename?: 'friend_tracking_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  date?: Maybe<Scalars['date']>;
+  geofence_id?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['Int']>;
+  linking_word?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_join_id?: Maybe<Scalars['String']>;
+  user_start_id?: Maybe<Scalars['String']>;
+};
+
+export type Friend_Tracking_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
+  date?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   linking_word?: Maybe<Order_By>;
-  user_join?: Maybe<Order_By>;
-  user_start?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user_join_id?: Maybe<Order_By>;
+  user_start_id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Min_Fields = {
-  __typename?: 'friends_tracking_min_fields';
+export type Friend_Tracking_Min_Fields = {
+  __typename?: 'friend_tracking_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  date?: Maybe<Scalars['date']>;
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   linking_word?: Maybe<Scalars['String']>;
-  user_join?: Maybe<Scalars['String']>;
-  user_start?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_join_id?: Maybe<Scalars['String']>;
+  user_start_id?: Maybe<Scalars['String']>;
 };
 
-export type Friends_Tracking_Min_Order_By = {
+export type Friend_Tracking_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
+  date?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   linking_word?: Maybe<Order_By>;
-  user_join?: Maybe<Order_By>;
-  user_start?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user_join_id?: Maybe<Order_By>;
+  user_start_id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Mutation_Response = {
-  __typename?: 'friends_tracking_mutation_response';
+export type Friend_Tracking_Mutation_Response = {
+  __typename?: 'friend_tracking_mutation_response';
   affected_rows: Scalars['Int'];
-  returning: Array<Friends_Tracking>;
+  returning: Array<Friend_Tracking>;
 };
 
-export type Friends_Tracking_Obj_Rel_Insert_Input = {
-  data: Friends_Tracking_Insert_Input;
-  on_conflict?: Maybe<Friends_Tracking_On_Conflict>;
+export type Friend_Tracking_Obj_Rel_Insert_Input = {
+  data: Friend_Tracking_Insert_Input;
+  on_conflict?: Maybe<Friend_Tracking_On_Conflict>;
 };
 
-export type Friends_Tracking_On_Conflict = {
-  constraint: Friends_Tracking_Constraint;
-  update_columns: Array<Friends_Tracking_Update_Column>;
-  where?: Maybe<Friends_Tracking_Bool_Exp>;
+export type Friend_Tracking_On_Conflict = {
+  constraint: Friend_Tracking_Constraint;
+  update_columns: Array<Friend_Tracking_Update_Column>;
+  where?: Maybe<Friend_Tracking_Bool_Exp>;
 };
 
-export type Friends_Tracking_Order_By = {
+export type Friend_Tracking_Order_By = {
+  created_at?: Maybe<Order_By>;
+  date?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   linking_word?: Maybe<Order_By>;
-  user_join?: Maybe<Order_By>;
-  user_start?: Maybe<Order_By>;
+  updated_at?: Maybe<Order_By>;
+  user_join?: Maybe<Users_Order_By>;
+  user_join_id?: Maybe<Order_By>;
+  user_start?: Maybe<Users_Order_By>;
+  user_start_id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Pk_Columns_Input = {
+export type Friend_Tracking_Pk_Columns_Input = {
   id: Scalars['Int'];
 };
 
-export enum Friends_Tracking_Select_Column {
+export enum Friend_Tracking_Select_Column {
+  CreatedAt = 'created_at',
+  Date = 'date',
   GeofenceId = 'geofence_id',
   Id = 'id',
   LinkingWord = 'linking_word',
-  UserJoin = 'user_join',
-  UserStart = 'user_start'
+  UpdatedAt = 'updated_at',
+  UserJoinId = 'user_join_id',
+  UserStartId = 'user_start_id'
 }
 
-export type Friends_Tracking_Set_Input = {
+export type Friend_Tracking_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
+  date?: Maybe<Scalars['date']>;
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
   linking_word?: Maybe<Scalars['String']>;
-  user_join?: Maybe<Scalars['String']>;
-  user_start?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_join_id?: Maybe<Scalars['String']>;
+  user_start_id?: Maybe<Scalars['String']>;
 };
 
-export type Friends_Tracking_Stddev_Fields = {
-  __typename?: 'friends_tracking_stddev_fields';
+export type Friend_Tracking_Stddev_Fields = {
+  __typename?: 'friend_tracking_stddev_fields';
   geofence_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
-export type Friends_Tracking_Stddev_Order_By = {
+export type Friend_Tracking_Stddev_Order_By = {
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Stddev_Pop_Fields = {
-  __typename?: 'friends_tracking_stddev_pop_fields';
+export type Friend_Tracking_Stddev_Pop_Fields = {
+  __typename?: 'friend_tracking_stddev_pop_fields';
   geofence_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
-export type Friends_Tracking_Stddev_Pop_Order_By = {
+export type Friend_Tracking_Stddev_Pop_Order_By = {
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Stddev_Samp_Fields = {
-  __typename?: 'friends_tracking_stddev_samp_fields';
+export type Friend_Tracking_Stddev_Samp_Fields = {
+  __typename?: 'friend_tracking_stddev_samp_fields';
   geofence_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
-export type Friends_Tracking_Stddev_Samp_Order_By = {
+export type Friend_Tracking_Stddev_Samp_Order_By = {
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Sum_Fields = {
-  __typename?: 'friends_tracking_sum_fields';
+export type Friend_Tracking_Sum_Fields = {
+  __typename?: 'friend_tracking_sum_fields';
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
 };
 
-export type Friends_Tracking_Sum_Order_By = {
+export type Friend_Tracking_Sum_Order_By = {
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
-export enum Friends_Tracking_Update_Column {
+export enum Friend_Tracking_Update_Column {
+  CreatedAt = 'created_at',
+  Date = 'date',
   GeofenceId = 'geofence_id',
   Id = 'id',
   LinkingWord = 'linking_word',
-  UserJoin = 'user_join',
-  UserStart = 'user_start'
+  UpdatedAt = 'updated_at',
+  UserJoinId = 'user_join_id',
+  UserStartId = 'user_start_id'
 }
 
-export type Friends_Tracking_Var_Pop_Fields = {
-  __typename?: 'friends_tracking_var_pop_fields';
+export type Friend_Tracking_Var_Pop_Fields = {
+  __typename?: 'friend_tracking_var_pop_fields';
   geofence_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
-export type Friends_Tracking_Var_Pop_Order_By = {
+export type Friend_Tracking_Var_Pop_Order_By = {
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Var_Samp_Fields = {
-  __typename?: 'friends_tracking_var_samp_fields';
+export type Friend_Tracking_Var_Samp_Fields = {
+  __typename?: 'friend_tracking_var_samp_fields';
   geofence_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
-export type Friends_Tracking_Var_Samp_Order_By = {
+export type Friend_Tracking_Var_Samp_Order_By = {
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
 
-export type Friends_Tracking_Variance_Fields = {
-  __typename?: 'friends_tracking_variance_fields';
+export type Friend_Tracking_Variance_Fields = {
+  __typename?: 'friend_tracking_variance_fields';
   geofence_id?: Maybe<Scalars['Float']>;
   id?: Maybe<Scalars['Float']>;
 };
 
-export type Friends_Tracking_Variance_Order_By = {
+export type Friend_Tracking_Variance_Order_By = {
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
 };
@@ -4120,14 +4173,16 @@ export type Mutation_Root = {
   delete_feed_type_by_pk?: Maybe<Feed_Type>;
   delete_followings?: Maybe<Followings_Mutation_Response>;
   delete_followings_by_pk?: Maybe<Followings>;
-  delete_friends_tracking?: Maybe<Friends_Tracking_Mutation_Response>;
-  delete_friends_tracking_by_pk?: Maybe<Friends_Tracking>;
+  delete_friend_tracking?: Maybe<Friend_Tracking_Mutation_Response>;
+  delete_friend_tracking_by_pk?: Maybe<Friend_Tracking>;
   delete_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
   delete_geofence_variants_by_pk?: Maybe<Geofence_Variants>;
   delete_geofences?: Maybe<Geofences_Mutation_Response>;
   delete_geofences_by_pk?: Maybe<Geofences>;
   delete_likes?: Maybe<Likes_Mutation_Response>;
   delete_likes_by_pk?: Maybe<Likes>;
+  delete_notifications?: Maybe<Notifications_Mutation_Response>;
+  delete_notifications_by_pk?: Maybe<Notifications>;
   delete_user?: Maybe<Users>;
   delete_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
   delete_user_achievement_by_pk?: Maybe<User_Achievement>;
@@ -4158,14 +4213,16 @@ export type Mutation_Root = {
   insert_feed_type_one?: Maybe<Feed_Type>;
   insert_followings?: Maybe<Followings_Mutation_Response>;
   insert_followings_one?: Maybe<Followings>;
-  insert_friends_tracking?: Maybe<Friends_Tracking_Mutation_Response>;
-  insert_friends_tracking_one?: Maybe<Friends_Tracking>;
+  insert_friend_tracking?: Maybe<Friend_Tracking_Mutation_Response>;
+  insert_friend_tracking_one?: Maybe<Friend_Tracking>;
   insert_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
   insert_geofence_variants_one?: Maybe<Geofence_Variants>;
   insert_geofences?: Maybe<Geofences_Mutation_Response>;
   insert_geofences_one?: Maybe<Geofences>;
   insert_likes?: Maybe<Likes_Mutation_Response>;
   insert_likes_one?: Maybe<Likes>;
+  insert_notifications?: Maybe<Notifications_Mutation_Response>;
+  insert_notifications_one?: Maybe<Notifications>;
   insert_user?: Maybe<Users>;
   insert_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
   insert_user_achievement_one?: Maybe<User_Achievement>;
@@ -4196,14 +4253,16 @@ export type Mutation_Root = {
   update_feed_type_by_pk?: Maybe<Feed_Type>;
   update_followings?: Maybe<Followings_Mutation_Response>;
   update_followings_by_pk?: Maybe<Followings>;
-  update_friends_tracking?: Maybe<Friends_Tracking_Mutation_Response>;
-  update_friends_tracking_by_pk?: Maybe<Friends_Tracking>;
+  update_friend_tracking?: Maybe<Friend_Tracking_Mutation_Response>;
+  update_friend_tracking_by_pk?: Maybe<Friend_Tracking>;
   update_geofence_variants?: Maybe<Geofence_Variants_Mutation_Response>;
   update_geofence_variants_by_pk?: Maybe<Geofence_Variants>;
   update_geofences?: Maybe<Geofences_Mutation_Response>;
   update_geofences_by_pk?: Maybe<Geofences>;
   update_likes?: Maybe<Likes_Mutation_Response>;
   update_likes_by_pk?: Maybe<Likes>;
+  update_notifications?: Maybe<Notifications_Mutation_Response>;
+  update_notifications_by_pk?: Maybe<Notifications>;
   update_user?: Maybe<Users>;
   update_user_achievement?: Maybe<User_Achievement_Mutation_Response>;
   update_user_achievement_by_pk?: Maybe<User_Achievement>;
@@ -4343,12 +4402,12 @@ export type Mutation_RootDelete_Followings_By_PkArgs = {
 };
 
 
-export type Mutation_RootDelete_Friends_TrackingArgs = {
-  where: Friends_Tracking_Bool_Exp;
+export type Mutation_RootDelete_Friend_TrackingArgs = {
+  where: Friend_Tracking_Bool_Exp;
 };
 
 
-export type Mutation_RootDelete_Friends_Tracking_By_PkArgs = {
+export type Mutation_RootDelete_Friend_Tracking_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -4381,6 +4440,16 @@ export type Mutation_RootDelete_LikesArgs = {
 export type Mutation_RootDelete_Likes_By_PkArgs = {
   activity_id: Scalars['Int'];
   user_id: Scalars['String'];
+};
+
+
+export type Mutation_RootDelete_NotificationsArgs = {
+  where: Notifications_Bool_Exp;
+};
+
+
+export type Mutation_RootDelete_Notifications_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -4561,15 +4630,15 @@ export type Mutation_RootInsert_Followings_OneArgs = {
 };
 
 
-export type Mutation_RootInsert_Friends_TrackingArgs = {
-  objects: Array<Friends_Tracking_Insert_Input>;
-  on_conflict?: Maybe<Friends_Tracking_On_Conflict>;
+export type Mutation_RootInsert_Friend_TrackingArgs = {
+  objects: Array<Friend_Tracking_Insert_Input>;
+  on_conflict?: Maybe<Friend_Tracking_On_Conflict>;
 };
 
 
-export type Mutation_RootInsert_Friends_Tracking_OneArgs = {
-  object: Friends_Tracking_Insert_Input;
-  on_conflict?: Maybe<Friends_Tracking_On_Conflict>;
+export type Mutation_RootInsert_Friend_Tracking_OneArgs = {
+  object: Friend_Tracking_Insert_Input;
+  on_conflict?: Maybe<Friend_Tracking_On_Conflict>;
 };
 
 
@@ -4606,6 +4675,18 @@ export type Mutation_RootInsert_LikesArgs = {
 export type Mutation_RootInsert_Likes_OneArgs = {
   object: Likes_Insert_Input;
   on_conflict?: Maybe<Likes_On_Conflict>;
+};
+
+
+export type Mutation_RootInsert_NotificationsArgs = {
+  objects: Array<Notifications_Insert_Input>;
+  on_conflict?: Maybe<Notifications_On_Conflict>;
+};
+
+
+export type Mutation_RootInsert_Notifications_OneArgs = {
+  object: Notifications_Insert_Input;
+  on_conflict?: Maybe<Notifications_On_Conflict>;
 };
 
 
@@ -4803,17 +4884,17 @@ export type Mutation_RootUpdate_Followings_By_PkArgs = {
 };
 
 
-export type Mutation_RootUpdate_Friends_TrackingArgs = {
-  _inc?: Maybe<Friends_Tracking_Inc_Input>;
-  _set?: Maybe<Friends_Tracking_Set_Input>;
-  where: Friends_Tracking_Bool_Exp;
+export type Mutation_RootUpdate_Friend_TrackingArgs = {
+  _inc?: Maybe<Friend_Tracking_Inc_Input>;
+  _set?: Maybe<Friend_Tracking_Set_Input>;
+  where: Friend_Tracking_Bool_Exp;
 };
 
 
-export type Mutation_RootUpdate_Friends_Tracking_By_PkArgs = {
-  _inc?: Maybe<Friends_Tracking_Inc_Input>;
-  _set?: Maybe<Friends_Tracking_Set_Input>;
-  pk_columns: Friends_Tracking_Pk_Columns_Input;
+export type Mutation_RootUpdate_Friend_Tracking_By_PkArgs = {
+  _inc?: Maybe<Friend_Tracking_Inc_Input>;
+  _set?: Maybe<Friend_Tracking_Set_Input>;
+  pk_columns: Friend_Tracking_Pk_Columns_Input;
 };
 
 
@@ -4857,6 +4938,20 @@ export type Mutation_RootUpdate_Likes_By_PkArgs = {
 };
 
 
+export type Mutation_RootUpdate_NotificationsArgs = {
+  _inc?: Maybe<Notifications_Inc_Input>;
+  _set?: Maybe<Notifications_Set_Input>;
+  where: Notifications_Bool_Exp;
+};
+
+
+export type Mutation_RootUpdate_Notifications_By_PkArgs = {
+  _inc?: Maybe<Notifications_Inc_Input>;
+  _set?: Maybe<Notifications_Set_Input>;
+  pk_columns: Notifications_Pk_Columns_Input;
+};
+
+
 export type Mutation_RootUpdate_UserArgs = {
   _set?: Maybe<Users_Set_Input>;
   pk_columns: Users_Pk_Columns_Input;
@@ -4880,6 +4975,232 @@ export type Mutation_RootUpdate_User_Achievement_By_PkArgs = {
 export type Mutation_RootUpdate_UsersArgs = {
   _set?: Maybe<Users_Set_Input>;
   where: Users_Bool_Exp;
+};
+
+export type Notifications = {
+  __typename?: 'notifications';
+  id: Scalars['Int'];
+  seen: Scalars['Boolean'];
+  text: Scalars['String'];
+  user_id: Scalars['String'];
+};
+
+export type Notifications_Aggregate = {
+  __typename?: 'notifications_aggregate';
+  aggregate?: Maybe<Notifications_Aggregate_Fields>;
+  nodes: Array<Notifications>;
+};
+
+export type Notifications_Aggregate_Fields = {
+  __typename?: 'notifications_aggregate_fields';
+  avg?: Maybe<Notifications_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Notifications_Max_Fields>;
+  min?: Maybe<Notifications_Min_Fields>;
+  stddev?: Maybe<Notifications_Stddev_Fields>;
+  stddev_pop?: Maybe<Notifications_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Notifications_Stddev_Samp_Fields>;
+  sum?: Maybe<Notifications_Sum_Fields>;
+  var_pop?: Maybe<Notifications_Var_Pop_Fields>;
+  var_samp?: Maybe<Notifications_Var_Samp_Fields>;
+  variance?: Maybe<Notifications_Variance_Fields>;
+};
+
+
+export type Notifications_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Notifications_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+export type Notifications_Aggregate_Order_By = {
+  avg?: Maybe<Notifications_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Notifications_Max_Order_By>;
+  min?: Maybe<Notifications_Min_Order_By>;
+  stddev?: Maybe<Notifications_Stddev_Order_By>;
+  stddev_pop?: Maybe<Notifications_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Notifications_Stddev_Samp_Order_By>;
+  sum?: Maybe<Notifications_Sum_Order_By>;
+  var_pop?: Maybe<Notifications_Var_Pop_Order_By>;
+  var_samp?: Maybe<Notifications_Var_Samp_Order_By>;
+  variance?: Maybe<Notifications_Variance_Order_By>;
+};
+
+export type Notifications_Arr_Rel_Insert_Input = {
+  data: Array<Notifications_Insert_Input>;
+  on_conflict?: Maybe<Notifications_On_Conflict>;
+};
+
+export type Notifications_Avg_Fields = {
+  __typename?: 'notifications_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Notifications_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Notifications_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Notifications_Bool_Exp>>>;
+  _not?: Maybe<Notifications_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Notifications_Bool_Exp>>>;
+  id?: Maybe<Int_Comparison_Exp>;
+  seen?: Maybe<Boolean_Comparison_Exp>;
+  text?: Maybe<String_Comparison_Exp>;
+  user_id?: Maybe<String_Comparison_Exp>;
+};
+
+export enum Notifications_Constraint {
+  NotificationsPkey = 'notifications_pkey'
+}
+
+export type Notifications_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Notifications_Insert_Input = {
+  id?: Maybe<Scalars['Int']>;
+  seen?: Maybe<Scalars['Boolean']>;
+  text?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Notifications_Max_Fields = {
+  __typename?: 'notifications_max_fields';
+  id?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Notifications_Max_Order_By = {
+  id?: Maybe<Order_By>;
+  text?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+export type Notifications_Min_Fields = {
+  __typename?: 'notifications_min_fields';
+  id?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Notifications_Min_Order_By = {
+  id?: Maybe<Order_By>;
+  text?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+export type Notifications_Mutation_Response = {
+  __typename?: 'notifications_mutation_response';
+  affected_rows: Scalars['Int'];
+  returning: Array<Notifications>;
+};
+
+export type Notifications_Obj_Rel_Insert_Input = {
+  data: Notifications_Insert_Input;
+  on_conflict?: Maybe<Notifications_On_Conflict>;
+};
+
+export type Notifications_On_Conflict = {
+  constraint: Notifications_Constraint;
+  update_columns: Array<Notifications_Update_Column>;
+  where?: Maybe<Notifications_Bool_Exp>;
+};
+
+export type Notifications_Order_By = {
+  id?: Maybe<Order_By>;
+  seen?: Maybe<Order_By>;
+  text?: Maybe<Order_By>;
+  user_id?: Maybe<Order_By>;
+};
+
+export type Notifications_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+export enum Notifications_Select_Column {
+  Id = 'id',
+  Seen = 'seen',
+  Text = 'text',
+  UserId = 'user_id'
+}
+
+export type Notifications_Set_Input = {
+  id?: Maybe<Scalars['Int']>;
+  seen?: Maybe<Scalars['Boolean']>;
+  text?: Maybe<Scalars['String']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+export type Notifications_Stddev_Fields = {
+  __typename?: 'notifications_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Notifications_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Notifications_Stddev_Pop_Fields = {
+  __typename?: 'notifications_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Notifications_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Notifications_Stddev_Samp_Fields = {
+  __typename?: 'notifications_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Notifications_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Notifications_Sum_Fields = {
+  __typename?: 'notifications_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Notifications_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export enum Notifications_Update_Column {
+  Id = 'id',
+  Seen = 'seen',
+  Text = 'text',
+  UserId = 'user_id'
+}
+
+export type Notifications_Var_Pop_Fields = {
+  __typename?: 'notifications_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Notifications_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Notifications_Var_Samp_Fields = {
+  __typename?: 'notifications_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Notifications_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+export type Notifications_Variance_Fields = {
+  __typename?: 'notifications_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+export type Notifications_Variance_Order_By = {
+  id?: Maybe<Order_By>;
 };
 
 export enum Order_By {
@@ -4932,9 +5253,9 @@ export type Query_Root = {
   followings: Array<Followings>;
   followings_aggregate: Followings_Aggregate;
   followings_by_pk?: Maybe<Followings>;
-  friends_tracking: Array<Friends_Tracking>;
-  friends_tracking_aggregate: Friends_Tracking_Aggregate;
-  friends_tracking_by_pk?: Maybe<Friends_Tracking>;
+  friend_tracking: Array<Friend_Tracking>;
+  friend_tracking_aggregate: Friend_Tracking_Aggregate;
+  friend_tracking_by_pk?: Maybe<Friend_Tracking>;
   geofence_variants: Array<Geofence_Variants>;
   geofence_variants_aggregate: Geofence_Variants_Aggregate;
   geofence_variants_by_pk?: Maybe<Geofence_Variants>;
@@ -4944,6 +5265,9 @@ export type Query_Root = {
   likes: Array<Likes>;
   likes_aggregate: Likes_Aggregate;
   likes_by_pk?: Maybe<Likes>;
+  notifications: Array<Notifications>;
+  notifications_aggregate: Notifications_Aggregate;
+  notifications_by_pk?: Maybe<Notifications>;
   unachievedachievements: Array<Achievement>;
   unachievedachievements_aggregate: Achievement_Aggregate;
   user?: Maybe<Users>;
@@ -5256,25 +5580,25 @@ export type Query_RootFollowings_By_PkArgs = {
 };
 
 
-export type Query_RootFriends_TrackingArgs = {
-  distinct_on?: Maybe<Array<Friends_Tracking_Select_Column>>;
+export type Query_RootFriend_TrackingArgs = {
+  distinct_on?: Maybe<Array<Friend_Tracking_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Friends_Tracking_Order_By>>;
-  where?: Maybe<Friends_Tracking_Bool_Exp>;
+  order_by?: Maybe<Array<Friend_Tracking_Order_By>>;
+  where?: Maybe<Friend_Tracking_Bool_Exp>;
 };
 
 
-export type Query_RootFriends_Tracking_AggregateArgs = {
-  distinct_on?: Maybe<Array<Friends_Tracking_Select_Column>>;
+export type Query_RootFriend_Tracking_AggregateArgs = {
+  distinct_on?: Maybe<Array<Friend_Tracking_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Friends_Tracking_Order_By>>;
-  where?: Maybe<Friends_Tracking_Bool_Exp>;
+  order_by?: Maybe<Array<Friend_Tracking_Order_By>>;
+  where?: Maybe<Friend_Tracking_Bool_Exp>;
 };
 
 
-export type Query_RootFriends_Tracking_By_PkArgs = {
+export type Query_RootFriend_Tracking_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -5346,6 +5670,29 @@ export type Query_RootLikes_AggregateArgs = {
 export type Query_RootLikes_By_PkArgs = {
   activity_id: Scalars['Int'];
   user_id: Scalars['String'];
+};
+
+
+export type Query_RootNotificationsArgs = {
+  distinct_on?: Maybe<Array<Notifications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Notifications_Order_By>>;
+  where?: Maybe<Notifications_Bool_Exp>;
+};
+
+
+export type Query_RootNotifications_AggregateArgs = {
+  distinct_on?: Maybe<Array<Notifications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Notifications_Order_By>>;
+  where?: Maybe<Notifications_Bool_Exp>;
+};
+
+
+export type Query_RootNotifications_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -5474,9 +5821,9 @@ export type Subscription_Root = {
   followings: Array<Followings>;
   followings_aggregate: Followings_Aggregate;
   followings_by_pk?: Maybe<Followings>;
-  friends_tracking: Array<Friends_Tracking>;
-  friends_tracking_aggregate: Friends_Tracking_Aggregate;
-  friends_tracking_by_pk?: Maybe<Friends_Tracking>;
+  friend_tracking: Array<Friend_Tracking>;
+  friend_tracking_aggregate: Friend_Tracking_Aggregate;
+  friend_tracking_by_pk?: Maybe<Friend_Tracking>;
   geofence_variants: Array<Geofence_Variants>;
   geofence_variants_aggregate: Geofence_Variants_Aggregate;
   geofence_variants_by_pk?: Maybe<Geofence_Variants>;
@@ -5486,6 +5833,9 @@ export type Subscription_Root = {
   likes: Array<Likes>;
   likes_aggregate: Likes_Aggregate;
   likes_by_pk?: Maybe<Likes>;
+  notifications: Array<Notifications>;
+  notifications_aggregate: Notifications_Aggregate;
+  notifications_by_pk?: Maybe<Notifications>;
   unachievedachievements: Array<Achievement>;
   unachievedachievements_aggregate: Achievement_Aggregate;
   user?: Maybe<Users>;
@@ -5798,25 +6148,25 @@ export type Subscription_RootFollowings_By_PkArgs = {
 };
 
 
-export type Subscription_RootFriends_TrackingArgs = {
-  distinct_on?: Maybe<Array<Friends_Tracking_Select_Column>>;
+export type Subscription_RootFriend_TrackingArgs = {
+  distinct_on?: Maybe<Array<Friend_Tracking_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Friends_Tracking_Order_By>>;
-  where?: Maybe<Friends_Tracking_Bool_Exp>;
+  order_by?: Maybe<Array<Friend_Tracking_Order_By>>;
+  where?: Maybe<Friend_Tracking_Bool_Exp>;
 };
 
 
-export type Subscription_RootFriends_Tracking_AggregateArgs = {
-  distinct_on?: Maybe<Array<Friends_Tracking_Select_Column>>;
+export type Subscription_RootFriend_Tracking_AggregateArgs = {
+  distinct_on?: Maybe<Array<Friend_Tracking_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Friends_Tracking_Order_By>>;
-  where?: Maybe<Friends_Tracking_Bool_Exp>;
+  order_by?: Maybe<Array<Friend_Tracking_Order_By>>;
+  where?: Maybe<Friend_Tracking_Bool_Exp>;
 };
 
 
-export type Subscription_RootFriends_Tracking_By_PkArgs = {
+export type Subscription_RootFriend_Tracking_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -5888,6 +6238,29 @@ export type Subscription_RootLikes_AggregateArgs = {
 export type Subscription_RootLikes_By_PkArgs = {
   activity_id: Scalars['Int'];
   user_id: Scalars['String'];
+};
+
+
+export type Subscription_RootNotificationsArgs = {
+  distinct_on?: Maybe<Array<Notifications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Notifications_Order_By>>;
+  where?: Maybe<Notifications_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotifications_AggregateArgs = {
+  distinct_on?: Maybe<Array<Notifications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Notifications_Order_By>>;
+  where?: Maybe<Notifications_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotifications_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -6536,6 +6909,7 @@ export const ChallengeFragmentFragmentDoc = gql`
   end_date
   state
   rules
+  created_by
   created_by_user {
     id
     name
@@ -6555,6 +6929,9 @@ export const ParticipantFragmentFragmentDoc = gql`
 export const BasicParticipantFragmentFragmentDoc = gql`
     fragment basicParticipantFragment on challenge_participant {
   user_id
+  user {
+    name
+  }
   state
   progress
 }
@@ -6581,6 +6958,18 @@ export const ParticipantActivityFragmentFragmentDoc = gql`
 }
     ${BasicParticipantFragmentFragmentDoc}
 ${BasicActivityFragmentFragmentDoc}`;
+export const CloseChallengeDocument = gql`
+    mutation CloseChallenge($challenge_id: Int!, $created_by: String!, $text: String!) {
+  update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: {state: CLOSED}) {
+    state
+  }
+  insert_notifications_one(object: {user_id: $created_by, text: $text}) {
+    id
+    user_id
+    text
+  }
+}
+    `;
 export const CreateUserDocument = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -6716,6 +7105,15 @@ export const InsertAchievementsDocument = gql`
   }
 }
     `;
+export const NotifyWhenParticipationStateChangeDocument = gql`
+    mutation NotifyWhenParticipationStateChange($created_by: String!, $text: String!) {
+  insert_notifications_one(object: {user_id: $created_by, text: $text}) {
+    id
+    user_id
+    text
+  }
+}
+    `;
 export const GetUserAndUnachievedAchievementsDocument = gql`
     query GetUserAndUnachievedAchievements($user_id: String!) {
   unachievedachievements(args: {uid: $user_id}) {
@@ -6807,6 +7205,9 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    CloseChallenge(variables: CloseChallengeMutationVariables): Promise<CloseChallengeMutation> {
+      return withWrapper(() => client.request<CloseChallengeMutation>(print(CloseChallengeDocument), variables));
+    },
     CreateUser(variables: CreateUserMutationVariables): Promise<CreateUserMutation> {
       return withWrapper(() => client.request<CreateUserMutation>(print(CreateUserDocument), variables));
     },
@@ -6833,6 +7234,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     InsertAchievements(variables: InsertAchievementsMutationVariables): Promise<InsertAchievementsMutation> {
       return withWrapper(() => client.request<InsertAchievementsMutation>(print(InsertAchievementsDocument), variables));
+    },
+    NotifyWhenParticipationStateChange(variables: NotifyWhenParticipationStateChangeMutationVariables): Promise<NotifyWhenParticipationStateChangeMutation> {
+      return withWrapper(() => client.request<NotifyWhenParticipationStateChangeMutation>(print(NotifyWhenParticipationStateChangeDocument), variables));
     },
     GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
@@ -7025,6 +7429,7 @@ export type ResolversTypes = {
   activities_variance_fields: ResolverTypeWrapper<Activities_Variance_Fields>;
   activities_variance_order_by: Activities_Variance_Order_By;
   bigint: ResolverTypeWrapper<Scalars['bigint']>;
+  Boolean_comparison_exp: Boolean_Comparison_Exp;
   categories: ResolverTypeWrapper<Categories>;
   categories_aggregate: ResolverTypeWrapper<Categories_Aggregate>;
   categories_aggregate_fields: ResolverTypeWrapper<Categories_Aggregate_Fields>;
@@ -7322,43 +7727,43 @@ export type ResolversTypes = {
   followings_select_column: Followings_Select_Column;
   followings_set_input: Followings_Set_Input;
   followings_update_column: Followings_Update_Column;
-  friends_tracking: ResolverTypeWrapper<Friends_Tracking>;
-  friends_tracking_aggregate: ResolverTypeWrapper<Friends_Tracking_Aggregate>;
-  friends_tracking_aggregate_fields: ResolverTypeWrapper<Friends_Tracking_Aggregate_Fields>;
-  friends_tracking_aggregate_order_by: Friends_Tracking_Aggregate_Order_By;
-  friends_tracking_arr_rel_insert_input: Friends_Tracking_Arr_Rel_Insert_Input;
-  friends_tracking_avg_fields: ResolverTypeWrapper<Friends_Tracking_Avg_Fields>;
-  friends_tracking_avg_order_by: Friends_Tracking_Avg_Order_By;
-  friends_tracking_bool_exp: Friends_Tracking_Bool_Exp;
-  friends_tracking_constraint: Friends_Tracking_Constraint;
-  friends_tracking_inc_input: Friends_Tracking_Inc_Input;
-  friends_tracking_insert_input: Friends_Tracking_Insert_Input;
-  friends_tracking_max_fields: ResolverTypeWrapper<Friends_Tracking_Max_Fields>;
-  friends_tracking_max_order_by: Friends_Tracking_Max_Order_By;
-  friends_tracking_min_fields: ResolverTypeWrapper<Friends_Tracking_Min_Fields>;
-  friends_tracking_min_order_by: Friends_Tracking_Min_Order_By;
-  friends_tracking_mutation_response: ResolverTypeWrapper<Friends_Tracking_Mutation_Response>;
-  friends_tracking_obj_rel_insert_input: Friends_Tracking_Obj_Rel_Insert_Input;
-  friends_tracking_on_conflict: Friends_Tracking_On_Conflict;
-  friends_tracking_order_by: Friends_Tracking_Order_By;
-  friends_tracking_pk_columns_input: Friends_Tracking_Pk_Columns_Input;
-  friends_tracking_select_column: Friends_Tracking_Select_Column;
-  friends_tracking_set_input: Friends_Tracking_Set_Input;
-  friends_tracking_stddev_fields: ResolverTypeWrapper<Friends_Tracking_Stddev_Fields>;
-  friends_tracking_stddev_order_by: Friends_Tracking_Stddev_Order_By;
-  friends_tracking_stddev_pop_fields: ResolverTypeWrapper<Friends_Tracking_Stddev_Pop_Fields>;
-  friends_tracking_stddev_pop_order_by: Friends_Tracking_Stddev_Pop_Order_By;
-  friends_tracking_stddev_samp_fields: ResolverTypeWrapper<Friends_Tracking_Stddev_Samp_Fields>;
-  friends_tracking_stddev_samp_order_by: Friends_Tracking_Stddev_Samp_Order_By;
-  friends_tracking_sum_fields: ResolverTypeWrapper<Friends_Tracking_Sum_Fields>;
-  friends_tracking_sum_order_by: Friends_Tracking_Sum_Order_By;
-  friends_tracking_update_column: Friends_Tracking_Update_Column;
-  friends_tracking_var_pop_fields: ResolverTypeWrapper<Friends_Tracking_Var_Pop_Fields>;
-  friends_tracking_var_pop_order_by: Friends_Tracking_Var_Pop_Order_By;
-  friends_tracking_var_samp_fields: ResolverTypeWrapper<Friends_Tracking_Var_Samp_Fields>;
-  friends_tracking_var_samp_order_by: Friends_Tracking_Var_Samp_Order_By;
-  friends_tracking_variance_fields: ResolverTypeWrapper<Friends_Tracking_Variance_Fields>;
-  friends_tracking_variance_order_by: Friends_Tracking_Variance_Order_By;
+  friend_tracking: ResolverTypeWrapper<Friend_Tracking>;
+  friend_tracking_aggregate: ResolverTypeWrapper<Friend_Tracking_Aggregate>;
+  friend_tracking_aggregate_fields: ResolverTypeWrapper<Friend_Tracking_Aggregate_Fields>;
+  friend_tracking_aggregate_order_by: Friend_Tracking_Aggregate_Order_By;
+  friend_tracking_arr_rel_insert_input: Friend_Tracking_Arr_Rel_Insert_Input;
+  friend_tracking_avg_fields: ResolverTypeWrapper<Friend_Tracking_Avg_Fields>;
+  friend_tracking_avg_order_by: Friend_Tracking_Avg_Order_By;
+  friend_tracking_bool_exp: Friend_Tracking_Bool_Exp;
+  friend_tracking_constraint: Friend_Tracking_Constraint;
+  friend_tracking_inc_input: Friend_Tracking_Inc_Input;
+  friend_tracking_insert_input: Friend_Tracking_Insert_Input;
+  friend_tracking_max_fields: ResolverTypeWrapper<Friend_Tracking_Max_Fields>;
+  friend_tracking_max_order_by: Friend_Tracking_Max_Order_By;
+  friend_tracking_min_fields: ResolverTypeWrapper<Friend_Tracking_Min_Fields>;
+  friend_tracking_min_order_by: Friend_Tracking_Min_Order_By;
+  friend_tracking_mutation_response: ResolverTypeWrapper<Friend_Tracking_Mutation_Response>;
+  friend_tracking_obj_rel_insert_input: Friend_Tracking_Obj_Rel_Insert_Input;
+  friend_tracking_on_conflict: Friend_Tracking_On_Conflict;
+  friend_tracking_order_by: Friend_Tracking_Order_By;
+  friend_tracking_pk_columns_input: Friend_Tracking_Pk_Columns_Input;
+  friend_tracking_select_column: Friend_Tracking_Select_Column;
+  friend_tracking_set_input: Friend_Tracking_Set_Input;
+  friend_tracking_stddev_fields: ResolverTypeWrapper<Friend_Tracking_Stddev_Fields>;
+  friend_tracking_stddev_order_by: Friend_Tracking_Stddev_Order_By;
+  friend_tracking_stddev_pop_fields: ResolverTypeWrapper<Friend_Tracking_Stddev_Pop_Fields>;
+  friend_tracking_stddev_pop_order_by: Friend_Tracking_Stddev_Pop_Order_By;
+  friend_tracking_stddev_samp_fields: ResolverTypeWrapper<Friend_Tracking_Stddev_Samp_Fields>;
+  friend_tracking_stddev_samp_order_by: Friend_Tracking_Stddev_Samp_Order_By;
+  friend_tracking_sum_fields: ResolverTypeWrapper<Friend_Tracking_Sum_Fields>;
+  friend_tracking_sum_order_by: Friend_Tracking_Sum_Order_By;
+  friend_tracking_update_column: Friend_Tracking_Update_Column;
+  friend_tracking_var_pop_fields: ResolverTypeWrapper<Friend_Tracking_Var_Pop_Fields>;
+  friend_tracking_var_pop_order_by: Friend_Tracking_Var_Pop_Order_By;
+  friend_tracking_var_samp_fields: ResolverTypeWrapper<Friend_Tracking_Var_Samp_Fields>;
+  friend_tracking_var_samp_order_by: Friend_Tracking_Var_Samp_Order_By;
+  friend_tracking_variance_fields: ResolverTypeWrapper<Friend_Tracking_Variance_Fields>;
+  friend_tracking_variance_order_by: Friend_Tracking_Variance_Order_By;
   geofence_variants: ResolverTypeWrapper<Geofence_Variants>;
   geofence_variants_aggregate: ResolverTypeWrapper<Geofence_Variants_Aggregate>;
   geofence_variants_aggregate_fields: ResolverTypeWrapper<Geofence_Variants_Aggregate_Fields>;
@@ -7461,6 +7866,43 @@ export type ResolversTypes = {
   likes_variance_fields: ResolverTypeWrapper<Likes_Variance_Fields>;
   likes_variance_order_by: Likes_Variance_Order_By;
   mutation_root: ResolverTypeWrapper<{}>;
+  notifications: ResolverTypeWrapper<Notifications>;
+  notifications_aggregate: ResolverTypeWrapper<Notifications_Aggregate>;
+  notifications_aggregate_fields: ResolverTypeWrapper<Notifications_Aggregate_Fields>;
+  notifications_aggregate_order_by: Notifications_Aggregate_Order_By;
+  notifications_arr_rel_insert_input: Notifications_Arr_Rel_Insert_Input;
+  notifications_avg_fields: ResolverTypeWrapper<Notifications_Avg_Fields>;
+  notifications_avg_order_by: Notifications_Avg_Order_By;
+  notifications_bool_exp: Notifications_Bool_Exp;
+  notifications_constraint: Notifications_Constraint;
+  notifications_inc_input: Notifications_Inc_Input;
+  notifications_insert_input: Notifications_Insert_Input;
+  notifications_max_fields: ResolverTypeWrapper<Notifications_Max_Fields>;
+  notifications_max_order_by: Notifications_Max_Order_By;
+  notifications_min_fields: ResolverTypeWrapper<Notifications_Min_Fields>;
+  notifications_min_order_by: Notifications_Min_Order_By;
+  notifications_mutation_response: ResolverTypeWrapper<Notifications_Mutation_Response>;
+  notifications_obj_rel_insert_input: Notifications_Obj_Rel_Insert_Input;
+  notifications_on_conflict: Notifications_On_Conflict;
+  notifications_order_by: Notifications_Order_By;
+  notifications_pk_columns_input: Notifications_Pk_Columns_Input;
+  notifications_select_column: Notifications_Select_Column;
+  notifications_set_input: Notifications_Set_Input;
+  notifications_stddev_fields: ResolverTypeWrapper<Notifications_Stddev_Fields>;
+  notifications_stddev_order_by: Notifications_Stddev_Order_By;
+  notifications_stddev_pop_fields: ResolverTypeWrapper<Notifications_Stddev_Pop_Fields>;
+  notifications_stddev_pop_order_by: Notifications_Stddev_Pop_Order_By;
+  notifications_stddev_samp_fields: ResolverTypeWrapper<Notifications_Stddev_Samp_Fields>;
+  notifications_stddev_samp_order_by: Notifications_Stddev_Samp_Order_By;
+  notifications_sum_fields: ResolverTypeWrapper<Notifications_Sum_Fields>;
+  notifications_sum_order_by: Notifications_Sum_Order_By;
+  notifications_update_column: Notifications_Update_Column;
+  notifications_var_pop_fields: ResolverTypeWrapper<Notifications_Var_Pop_Fields>;
+  notifications_var_pop_order_by: Notifications_Var_Pop_Order_By;
+  notifications_var_samp_fields: ResolverTypeWrapper<Notifications_Var_Samp_Fields>;
+  notifications_var_samp_order_by: Notifications_Var_Samp_Order_By;
+  notifications_variance_fields: ResolverTypeWrapper<Notifications_Variance_Fields>;
+  notifications_variance_order_by: Notifications_Variance_Order_By;
   order_by: Order_By;
   query_root: ResolverTypeWrapper<{}>;
   String_comparison_exp: String_Comparison_Exp;
@@ -7622,6 +8064,7 @@ export type ResolversParentTypes = {
   activities_variance_fields: Activities_Variance_Fields;
   activities_variance_order_by: Activities_Variance_Order_By;
   bigint: Scalars['bigint'];
+  Boolean_comparison_exp: Boolean_Comparison_Exp;
   categories: Categories;
   categories_aggregate: Categories_Aggregate;
   categories_aggregate_fields: Categories_Aggregate_Fields;
@@ -7885,40 +8328,40 @@ export type ResolversParentTypes = {
   followings_order_by: Followings_Order_By;
   followings_pk_columns_input: Followings_Pk_Columns_Input;
   followings_set_input: Followings_Set_Input;
-  friends_tracking: Friends_Tracking;
-  friends_tracking_aggregate: Friends_Tracking_Aggregate;
-  friends_tracking_aggregate_fields: Friends_Tracking_Aggregate_Fields;
-  friends_tracking_aggregate_order_by: Friends_Tracking_Aggregate_Order_By;
-  friends_tracking_arr_rel_insert_input: Friends_Tracking_Arr_Rel_Insert_Input;
-  friends_tracking_avg_fields: Friends_Tracking_Avg_Fields;
-  friends_tracking_avg_order_by: Friends_Tracking_Avg_Order_By;
-  friends_tracking_bool_exp: Friends_Tracking_Bool_Exp;
-  friends_tracking_inc_input: Friends_Tracking_Inc_Input;
-  friends_tracking_insert_input: Friends_Tracking_Insert_Input;
-  friends_tracking_max_fields: Friends_Tracking_Max_Fields;
-  friends_tracking_max_order_by: Friends_Tracking_Max_Order_By;
-  friends_tracking_min_fields: Friends_Tracking_Min_Fields;
-  friends_tracking_min_order_by: Friends_Tracking_Min_Order_By;
-  friends_tracking_mutation_response: Friends_Tracking_Mutation_Response;
-  friends_tracking_obj_rel_insert_input: Friends_Tracking_Obj_Rel_Insert_Input;
-  friends_tracking_on_conflict: Friends_Tracking_On_Conflict;
-  friends_tracking_order_by: Friends_Tracking_Order_By;
-  friends_tracking_pk_columns_input: Friends_Tracking_Pk_Columns_Input;
-  friends_tracking_set_input: Friends_Tracking_Set_Input;
-  friends_tracking_stddev_fields: Friends_Tracking_Stddev_Fields;
-  friends_tracking_stddev_order_by: Friends_Tracking_Stddev_Order_By;
-  friends_tracking_stddev_pop_fields: Friends_Tracking_Stddev_Pop_Fields;
-  friends_tracking_stddev_pop_order_by: Friends_Tracking_Stddev_Pop_Order_By;
-  friends_tracking_stddev_samp_fields: Friends_Tracking_Stddev_Samp_Fields;
-  friends_tracking_stddev_samp_order_by: Friends_Tracking_Stddev_Samp_Order_By;
-  friends_tracking_sum_fields: Friends_Tracking_Sum_Fields;
-  friends_tracking_sum_order_by: Friends_Tracking_Sum_Order_By;
-  friends_tracking_var_pop_fields: Friends_Tracking_Var_Pop_Fields;
-  friends_tracking_var_pop_order_by: Friends_Tracking_Var_Pop_Order_By;
-  friends_tracking_var_samp_fields: Friends_Tracking_Var_Samp_Fields;
-  friends_tracking_var_samp_order_by: Friends_Tracking_Var_Samp_Order_By;
-  friends_tracking_variance_fields: Friends_Tracking_Variance_Fields;
-  friends_tracking_variance_order_by: Friends_Tracking_Variance_Order_By;
+  friend_tracking: Friend_Tracking;
+  friend_tracking_aggregate: Friend_Tracking_Aggregate;
+  friend_tracking_aggregate_fields: Friend_Tracking_Aggregate_Fields;
+  friend_tracking_aggregate_order_by: Friend_Tracking_Aggregate_Order_By;
+  friend_tracking_arr_rel_insert_input: Friend_Tracking_Arr_Rel_Insert_Input;
+  friend_tracking_avg_fields: Friend_Tracking_Avg_Fields;
+  friend_tracking_avg_order_by: Friend_Tracking_Avg_Order_By;
+  friend_tracking_bool_exp: Friend_Tracking_Bool_Exp;
+  friend_tracking_inc_input: Friend_Tracking_Inc_Input;
+  friend_tracking_insert_input: Friend_Tracking_Insert_Input;
+  friend_tracking_max_fields: Friend_Tracking_Max_Fields;
+  friend_tracking_max_order_by: Friend_Tracking_Max_Order_By;
+  friend_tracking_min_fields: Friend_Tracking_Min_Fields;
+  friend_tracking_min_order_by: Friend_Tracking_Min_Order_By;
+  friend_tracking_mutation_response: Friend_Tracking_Mutation_Response;
+  friend_tracking_obj_rel_insert_input: Friend_Tracking_Obj_Rel_Insert_Input;
+  friend_tracking_on_conflict: Friend_Tracking_On_Conflict;
+  friend_tracking_order_by: Friend_Tracking_Order_By;
+  friend_tracking_pk_columns_input: Friend_Tracking_Pk_Columns_Input;
+  friend_tracking_set_input: Friend_Tracking_Set_Input;
+  friend_tracking_stddev_fields: Friend_Tracking_Stddev_Fields;
+  friend_tracking_stddev_order_by: Friend_Tracking_Stddev_Order_By;
+  friend_tracking_stddev_pop_fields: Friend_Tracking_Stddev_Pop_Fields;
+  friend_tracking_stddev_pop_order_by: Friend_Tracking_Stddev_Pop_Order_By;
+  friend_tracking_stddev_samp_fields: Friend_Tracking_Stddev_Samp_Fields;
+  friend_tracking_stddev_samp_order_by: Friend_Tracking_Stddev_Samp_Order_By;
+  friend_tracking_sum_fields: Friend_Tracking_Sum_Fields;
+  friend_tracking_sum_order_by: Friend_Tracking_Sum_Order_By;
+  friend_tracking_var_pop_fields: Friend_Tracking_Var_Pop_Fields;
+  friend_tracking_var_pop_order_by: Friend_Tracking_Var_Pop_Order_By;
+  friend_tracking_var_samp_fields: Friend_Tracking_Var_Samp_Fields;
+  friend_tracking_var_samp_order_by: Friend_Tracking_Var_Samp_Order_By;
+  friend_tracking_variance_fields: Friend_Tracking_Variance_Fields;
+  friend_tracking_variance_order_by: Friend_Tracking_Variance_Order_By;
   geofence_variants: Geofence_Variants;
   geofence_variants_aggregate: Geofence_Variants_Aggregate;
   geofence_variants_aggregate_fields: Geofence_Variants_Aggregate_Fields;
@@ -8011,6 +8454,40 @@ export type ResolversParentTypes = {
   likes_variance_fields: Likes_Variance_Fields;
   likes_variance_order_by: Likes_Variance_Order_By;
   mutation_root: {};
+  notifications: Notifications;
+  notifications_aggregate: Notifications_Aggregate;
+  notifications_aggregate_fields: Notifications_Aggregate_Fields;
+  notifications_aggregate_order_by: Notifications_Aggregate_Order_By;
+  notifications_arr_rel_insert_input: Notifications_Arr_Rel_Insert_Input;
+  notifications_avg_fields: Notifications_Avg_Fields;
+  notifications_avg_order_by: Notifications_Avg_Order_By;
+  notifications_bool_exp: Notifications_Bool_Exp;
+  notifications_inc_input: Notifications_Inc_Input;
+  notifications_insert_input: Notifications_Insert_Input;
+  notifications_max_fields: Notifications_Max_Fields;
+  notifications_max_order_by: Notifications_Max_Order_By;
+  notifications_min_fields: Notifications_Min_Fields;
+  notifications_min_order_by: Notifications_Min_Order_By;
+  notifications_mutation_response: Notifications_Mutation_Response;
+  notifications_obj_rel_insert_input: Notifications_Obj_Rel_Insert_Input;
+  notifications_on_conflict: Notifications_On_Conflict;
+  notifications_order_by: Notifications_Order_By;
+  notifications_pk_columns_input: Notifications_Pk_Columns_Input;
+  notifications_set_input: Notifications_Set_Input;
+  notifications_stddev_fields: Notifications_Stddev_Fields;
+  notifications_stddev_order_by: Notifications_Stddev_Order_By;
+  notifications_stddev_pop_fields: Notifications_Stddev_Pop_Fields;
+  notifications_stddev_pop_order_by: Notifications_Stddev_Pop_Order_By;
+  notifications_stddev_samp_fields: Notifications_Stddev_Samp_Fields;
+  notifications_stddev_samp_order_by: Notifications_Stddev_Samp_Order_By;
+  notifications_sum_fields: Notifications_Sum_Fields;
+  notifications_sum_order_by: Notifications_Sum_Order_By;
+  notifications_var_pop_fields: Notifications_Var_Pop_Fields;
+  notifications_var_pop_order_by: Notifications_Var_Pop_Order_By;
+  notifications_var_samp_fields: Notifications_Var_Samp_Fields;
+  notifications_var_samp_order_by: Notifications_Var_Samp_Order_By;
+  notifications_variance_fields: Notifications_Variance_Fields;
+  notifications_variance_order_by: Notifications_Variance_Order_By;
   query_root: {};
   String_comparison_exp: String_Comparison_Exp;
   subscription_root: {};
@@ -9079,103 +9556,114 @@ export type Followings_Mutation_ResponseResolvers<ContextType = any, ParentType 
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_TrackingResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking'] = ResolversParentTypes['friends_tracking']> = {
+export type Friend_TrackingResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking'] = ResolversParentTypes['friend_tracking']> = {
+  created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
+  date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
   geofence_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   linking_word?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  user_join?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  user_start?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
+  user_join?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType>;
+  user_join_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_start?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
+  user_start_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_aggregate'] = ResolversParentTypes['friends_tracking_aggregate']> = {
-  aggregate?: Resolver<Maybe<ResolversTypes['friends_tracking_aggregate_fields']>, ParentType, ContextType>;
-  nodes?: Resolver<Array<ResolversTypes['friends_tracking']>, ParentType, ContextType>;
+export type Friend_Tracking_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_aggregate'] = ResolversParentTypes['friend_tracking_aggregate']> = {
+  aggregate?: Resolver<Maybe<ResolversTypes['friend_tracking_aggregate_fields']>, ParentType, ContextType>;
+  nodes?: Resolver<Array<ResolversTypes['friend_tracking']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_aggregate_fields'] = ResolversParentTypes['friends_tracking_aggregate_fields']> = {
-  avg?: Resolver<Maybe<ResolversTypes['friends_tracking_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Friends_Tracking_Aggregate_FieldsCountArgs, never>>;
-  max?: Resolver<Maybe<ResolversTypes['friends_tracking_max_fields']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['friends_tracking_min_fields']>, ParentType, ContextType>;
-  stddev?: Resolver<Maybe<ResolversTypes['friends_tracking_stddev_fields']>, ParentType, ContextType>;
-  stddev_pop?: Resolver<Maybe<ResolversTypes['friends_tracking_stddev_pop_fields']>, ParentType, ContextType>;
-  stddev_samp?: Resolver<Maybe<ResolversTypes['friends_tracking_stddev_samp_fields']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['friends_tracking_sum_fields']>, ParentType, ContextType>;
-  var_pop?: Resolver<Maybe<ResolversTypes['friends_tracking_var_pop_fields']>, ParentType, ContextType>;
-  var_samp?: Resolver<Maybe<ResolversTypes['friends_tracking_var_samp_fields']>, ParentType, ContextType>;
-  variance?: Resolver<Maybe<ResolversTypes['friends_tracking_variance_fields']>, ParentType, ContextType>;
+export type Friend_Tracking_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_aggregate_fields'] = ResolversParentTypes['friend_tracking_aggregate_fields']> = {
+  avg?: Resolver<Maybe<ResolversTypes['friend_tracking_avg_fields']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Friend_Tracking_Aggregate_FieldsCountArgs, never>>;
+  max?: Resolver<Maybe<ResolversTypes['friend_tracking_max_fields']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['friend_tracking_min_fields']>, ParentType, ContextType>;
+  stddev?: Resolver<Maybe<ResolversTypes['friend_tracking_stddev_fields']>, ParentType, ContextType>;
+  stddev_pop?: Resolver<Maybe<ResolversTypes['friend_tracking_stddev_pop_fields']>, ParentType, ContextType>;
+  stddev_samp?: Resolver<Maybe<ResolversTypes['friend_tracking_stddev_samp_fields']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['friend_tracking_sum_fields']>, ParentType, ContextType>;
+  var_pop?: Resolver<Maybe<ResolversTypes['friend_tracking_var_pop_fields']>, ParentType, ContextType>;
+  var_samp?: Resolver<Maybe<ResolversTypes['friend_tracking_var_samp_fields']>, ParentType, ContextType>;
+  variance?: Resolver<Maybe<ResolversTypes['friend_tracking_variance_fields']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_avg_fields'] = ResolversParentTypes['friends_tracking_avg_fields']> = {
+export type Friend_Tracking_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_avg_fields'] = ResolversParentTypes['friend_tracking_avg_fields']> = {
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_max_fields'] = ResolversParentTypes['friends_tracking_max_fields']> = {
+export type Friend_Tracking_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_max_fields'] = ResolversParentTypes['friend_tracking_max_fields']> = {
+  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   linking_word?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  user_join?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  user_start?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  user_join_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_start_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_min_fields'] = ResolversParentTypes['friends_tracking_min_fields']> = {
+export type Friend_Tracking_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_min_fields'] = ResolversParentTypes['friend_tracking_min_fields']> = {
+  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   linking_word?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  user_join?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  user_start?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  user_join_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_start_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_mutation_response'] = ResolversParentTypes['friends_tracking_mutation_response']> = {
+export type Friend_Tracking_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_mutation_response'] = ResolversParentTypes['friend_tracking_mutation_response']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['friends_tracking']>, ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['friend_tracking']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_stddev_fields'] = ResolversParentTypes['friends_tracking_stddev_fields']> = {
+export type Friend_Tracking_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_stddev_fields'] = ResolversParentTypes['friend_tracking_stddev_fields']> = {
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_stddev_pop_fields'] = ResolversParentTypes['friends_tracking_stddev_pop_fields']> = {
+export type Friend_Tracking_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_stddev_pop_fields'] = ResolversParentTypes['friend_tracking_stddev_pop_fields']> = {
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_stddev_samp_fields'] = ResolversParentTypes['friends_tracking_stddev_samp_fields']> = {
+export type Friend_Tracking_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_stddev_samp_fields'] = ResolversParentTypes['friend_tracking_stddev_samp_fields']> = {
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_sum_fields'] = ResolversParentTypes['friends_tracking_sum_fields']> = {
+export type Friend_Tracking_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_sum_fields'] = ResolversParentTypes['friend_tracking_sum_fields']> = {
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_var_pop_fields'] = ResolversParentTypes['friends_tracking_var_pop_fields']> = {
+export type Friend_Tracking_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_var_pop_fields'] = ResolversParentTypes['friend_tracking_var_pop_fields']> = {
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_var_samp_fields'] = ResolversParentTypes['friends_tracking_var_samp_fields']> = {
+export type Friend_Tracking_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_var_samp_fields'] = ResolversParentTypes['friend_tracking_var_samp_fields']> = {
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Friends_Tracking_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friends_tracking_variance_fields'] = ResolversParentTypes['friends_tracking_variance_fields']> = {
+export type Friend_Tracking_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_variance_fields'] = ResolversParentTypes['friend_tracking_variance_fields']> = {
   geofence_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -9486,14 +9974,16 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   delete_feed_type_by_pk?: Resolver<Maybe<ResolversTypes['feed_type']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Feed_Type_By_PkArgs, 'name'>>;
   delete_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_FollowingsArgs, 'where'>>;
   delete_followings_by_pk?: Resolver<Maybe<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Followings_By_PkArgs, 'following_id' | 'user_id'>>;
-  delete_friends_tracking?: Resolver<Maybe<ResolversTypes['friends_tracking_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Friends_TrackingArgs, 'where'>>;
-  delete_friends_tracking_by_pk?: Resolver<Maybe<ResolversTypes['friends_tracking']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Friends_Tracking_By_PkArgs, 'id'>>;
+  delete_friend_tracking?: Resolver<Maybe<ResolversTypes['friend_tracking_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Friend_TrackingArgs, 'where'>>;
+  delete_friend_tracking_by_pk?: Resolver<Maybe<ResolversTypes['friend_tracking']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Friend_Tracking_By_PkArgs, 'id'>>;
   delete_geofence_variants?: Resolver<Maybe<ResolversTypes['geofence_variants_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Geofence_VariantsArgs, 'where'>>;
   delete_geofence_variants_by_pk?: Resolver<Maybe<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Geofence_Variants_By_PkArgs, 'name'>>;
   delete_geofences?: Resolver<Maybe<ResolversTypes['geofences_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_GeofencesArgs, 'where'>>;
   delete_geofences_by_pk?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Geofences_By_PkArgs, 'id'>>;
   delete_likes?: Resolver<Maybe<ResolversTypes['likes_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_LikesArgs, 'where'>>;
   delete_likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Likes_By_PkArgs, 'activity_id' | 'user_id'>>;
+  delete_notifications?: Resolver<Maybe<ResolversTypes['notifications_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_NotificationsArgs, 'where'>>;
+  delete_notifications_by_pk?: Resolver<Maybe<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Notifications_By_PkArgs, 'id'>>;
   delete_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_UserArgs, 'id'>>;
   delete_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_AchievementArgs, 'where'>>;
   delete_user_achievement_by_pk?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_User_Achievement_By_PkArgs, 'achievement_id' | 'user_id'>>;
@@ -9524,14 +10014,16 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   insert_feed_type_one?: Resolver<Maybe<ResolversTypes['feed_type']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Feed_Type_OneArgs, 'object'>>;
   insert_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_FollowingsArgs, 'objects'>>;
   insert_followings_one?: Resolver<Maybe<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Followings_OneArgs, 'object'>>;
-  insert_friends_tracking?: Resolver<Maybe<ResolversTypes['friends_tracking_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Friends_TrackingArgs, 'objects'>>;
-  insert_friends_tracking_one?: Resolver<Maybe<ResolversTypes['friends_tracking']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Friends_Tracking_OneArgs, 'object'>>;
+  insert_friend_tracking?: Resolver<Maybe<ResolversTypes['friend_tracking_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Friend_TrackingArgs, 'objects'>>;
+  insert_friend_tracking_one?: Resolver<Maybe<ResolversTypes['friend_tracking']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Friend_Tracking_OneArgs, 'object'>>;
   insert_geofence_variants?: Resolver<Maybe<ResolversTypes['geofence_variants_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Geofence_VariantsArgs, 'objects'>>;
   insert_geofence_variants_one?: Resolver<Maybe<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Geofence_Variants_OneArgs, 'object'>>;
   insert_geofences?: Resolver<Maybe<ResolversTypes['geofences_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_GeofencesArgs, 'objects'>>;
   insert_geofences_one?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Geofences_OneArgs, 'object'>>;
   insert_likes?: Resolver<Maybe<ResolversTypes['likes_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_LikesArgs, 'objects'>>;
   insert_likes_one?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Likes_OneArgs, 'object'>>;
+  insert_notifications?: Resolver<Maybe<ResolversTypes['notifications_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_NotificationsArgs, 'objects'>>;
+  insert_notifications_one?: Resolver<Maybe<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Notifications_OneArgs, 'object'>>;
   insert_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_UserArgs, 'object'>>;
   insert_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_AchievementArgs, 'objects'>>;
   insert_user_achievement_one?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_User_Achievement_OneArgs, 'object'>>;
@@ -9562,18 +10054,109 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   update_feed_type_by_pk?: Resolver<Maybe<ResolversTypes['feed_type']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Feed_Type_By_PkArgs, 'pk_columns'>>;
   update_followings?: Resolver<Maybe<ResolversTypes['followings_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_FollowingsArgs, 'where'>>;
   update_followings_by_pk?: Resolver<Maybe<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Followings_By_PkArgs, 'pk_columns'>>;
-  update_friends_tracking?: Resolver<Maybe<ResolversTypes['friends_tracking_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Friends_TrackingArgs, 'where'>>;
-  update_friends_tracking_by_pk?: Resolver<Maybe<ResolversTypes['friends_tracking']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Friends_Tracking_By_PkArgs, 'pk_columns'>>;
+  update_friend_tracking?: Resolver<Maybe<ResolversTypes['friend_tracking_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Friend_TrackingArgs, 'where'>>;
+  update_friend_tracking_by_pk?: Resolver<Maybe<ResolversTypes['friend_tracking']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Friend_Tracking_By_PkArgs, 'pk_columns'>>;
   update_geofence_variants?: Resolver<Maybe<ResolversTypes['geofence_variants_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Geofence_VariantsArgs, 'where'>>;
   update_geofence_variants_by_pk?: Resolver<Maybe<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Geofence_Variants_By_PkArgs, 'pk_columns'>>;
   update_geofences?: Resolver<Maybe<ResolversTypes['geofences_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_GeofencesArgs, 'where'>>;
   update_geofences_by_pk?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Geofences_By_PkArgs, 'pk_columns'>>;
   update_likes?: Resolver<Maybe<ResolversTypes['likes_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_LikesArgs, 'where'>>;
   update_likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Likes_By_PkArgs, 'pk_columns'>>;
+  update_notifications?: Resolver<Maybe<ResolversTypes['notifications_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_NotificationsArgs, 'where'>>;
+  update_notifications_by_pk?: Resolver<Maybe<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Notifications_By_PkArgs, 'pk_columns'>>;
   update_user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_UserArgs, 'pk_columns'>>;
   update_user_achievement?: Resolver<Maybe<ResolversTypes['user_achievement_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_AchievementArgs, 'where'>>;
   update_user_achievement_by_pk?: Resolver<Maybe<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_User_Achievement_By_PkArgs, 'pk_columns'>>;
   update_users?: Resolver<Maybe<ResolversTypes['users_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_UsersArgs, 'where'>>;
+};
+
+export type NotificationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications'] = ResolversParentTypes['notifications']> = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  seen?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_aggregate'] = ResolversParentTypes['notifications_aggregate']> = {
+  aggregate?: Resolver<Maybe<ResolversTypes['notifications_aggregate_fields']>, ParentType, ContextType>;
+  nodes?: Resolver<Array<ResolversTypes['notifications']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_aggregate_fields'] = ResolversParentTypes['notifications_aggregate_fields']> = {
+  avg?: Resolver<Maybe<ResolversTypes['notifications_avg_fields']>, ParentType, ContextType>;
+  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Notifications_Aggregate_FieldsCountArgs, never>>;
+  max?: Resolver<Maybe<ResolversTypes['notifications_max_fields']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['notifications_min_fields']>, ParentType, ContextType>;
+  stddev?: Resolver<Maybe<ResolversTypes['notifications_stddev_fields']>, ParentType, ContextType>;
+  stddev_pop?: Resolver<Maybe<ResolversTypes['notifications_stddev_pop_fields']>, ParentType, ContextType>;
+  stddev_samp?: Resolver<Maybe<ResolversTypes['notifications_stddev_samp_fields']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['notifications_sum_fields']>, ParentType, ContextType>;
+  var_pop?: Resolver<Maybe<ResolversTypes['notifications_var_pop_fields']>, ParentType, ContextType>;
+  var_samp?: Resolver<Maybe<ResolversTypes['notifications_var_samp_fields']>, ParentType, ContextType>;
+  variance?: Resolver<Maybe<ResolversTypes['notifications_variance_fields']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_avg_fields'] = ResolversParentTypes['notifications_avg_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_max_fields'] = ResolversParentTypes['notifications_max_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_min_fields'] = ResolversParentTypes['notifications_min_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_mutation_response'] = ResolversParentTypes['notifications_mutation_response']> = {
+  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  returning?: Resolver<Array<ResolversTypes['notifications']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_stddev_fields'] = ResolversParentTypes['notifications_stddev_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_stddev_pop_fields'] = ResolversParentTypes['notifications_stddev_pop_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_stddev_samp_fields'] = ResolversParentTypes['notifications_stddev_samp_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_sum_fields'] = ResolversParentTypes['notifications_sum_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_var_pop_fields'] = ResolversParentTypes['notifications_var_pop_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_var_samp_fields'] = ResolversParentTypes['notifications_var_samp_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Notifications_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_variance_fields'] = ResolversParentTypes['notifications_variance_fields']> = {
+  id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Query_RootResolvers<ContextType = any, ParentType extends ResolversParentTypes['query_root'] = ResolversParentTypes['query_root']> = {
@@ -9616,9 +10199,9 @@ export type Query_RootResolvers<ContextType = any, ParentType extends ResolversP
   followings?: Resolver<Array<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Query_RootFollowingsArgs, never>>;
   followings_aggregate?: Resolver<ResolversTypes['followings_aggregate'], ParentType, ContextType, RequireFields<Query_RootFollowings_AggregateArgs, never>>;
   followings_by_pk?: Resolver<Maybe<ResolversTypes['followings']>, ParentType, ContextType, RequireFields<Query_RootFollowings_By_PkArgs, 'following_id' | 'user_id'>>;
-  friends_tracking?: Resolver<Array<ResolversTypes['friends_tracking']>, ParentType, ContextType, RequireFields<Query_RootFriends_TrackingArgs, never>>;
-  friends_tracking_aggregate?: Resolver<ResolversTypes['friends_tracking_aggregate'], ParentType, ContextType, RequireFields<Query_RootFriends_Tracking_AggregateArgs, never>>;
-  friends_tracking_by_pk?: Resolver<Maybe<ResolversTypes['friends_tracking']>, ParentType, ContextType, RequireFields<Query_RootFriends_Tracking_By_PkArgs, 'id'>>;
+  friend_tracking?: Resolver<Array<ResolversTypes['friend_tracking']>, ParentType, ContextType, RequireFields<Query_RootFriend_TrackingArgs, never>>;
+  friend_tracking_aggregate?: Resolver<ResolversTypes['friend_tracking_aggregate'], ParentType, ContextType, RequireFields<Query_RootFriend_Tracking_AggregateArgs, never>>;
+  friend_tracking_by_pk?: Resolver<Maybe<ResolversTypes['friend_tracking']>, ParentType, ContextType, RequireFields<Query_RootFriend_Tracking_By_PkArgs, 'id'>>;
   geofence_variants?: Resolver<Array<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Query_RootGeofence_VariantsArgs, never>>;
   geofence_variants_aggregate?: Resolver<ResolversTypes['geofence_variants_aggregate'], ParentType, ContextType, RequireFields<Query_RootGeofence_Variants_AggregateArgs, never>>;
   geofence_variants_by_pk?: Resolver<Maybe<ResolversTypes['geofence_variants']>, ParentType, ContextType, RequireFields<Query_RootGeofence_Variants_By_PkArgs, 'name'>>;
@@ -9628,6 +10211,9 @@ export type Query_RootResolvers<ContextType = any, ParentType extends ResolversP
   likes?: Resolver<Array<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Query_RootLikesArgs, never>>;
   likes_aggregate?: Resolver<ResolversTypes['likes_aggregate'], ParentType, ContextType, RequireFields<Query_RootLikes_AggregateArgs, never>>;
   likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Query_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>>;
+  notifications?: Resolver<Array<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<Query_RootNotificationsArgs, never>>;
+  notifications_aggregate?: Resolver<ResolversTypes['notifications_aggregate'], ParentType, ContextType, RequireFields<Query_RootNotifications_AggregateArgs, never>>;
+  notifications_by_pk?: Resolver<Maybe<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<Query_RootNotifications_By_PkArgs, 'id'>>;
   unachievedachievements?: Resolver<Array<ResolversTypes['achievement']>, ParentType, ContextType, RequireFields<Query_RootUnachievedachievementsArgs, 'args'>>;
   unachievedachievements_aggregate?: Resolver<ResolversTypes['achievement_aggregate'], ParentType, ContextType, RequireFields<Query_RootUnachievedachievements_AggregateArgs, 'args'>>;
   user?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType, RequireFields<Query_RootUserArgs, 'id'>>;
@@ -9678,9 +10264,9 @@ export type Subscription_RootResolvers<ContextType = any, ParentType extends Res
   followings?: SubscriptionResolver<Array<ResolversTypes['followings']>, "followings", ParentType, ContextType, RequireFields<Subscription_RootFollowingsArgs, never>>;
   followings_aggregate?: SubscriptionResolver<ResolversTypes['followings_aggregate'], "followings_aggregate", ParentType, ContextType, RequireFields<Subscription_RootFollowings_AggregateArgs, never>>;
   followings_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['followings']>, "followings_by_pk", ParentType, ContextType, RequireFields<Subscription_RootFollowings_By_PkArgs, 'following_id' | 'user_id'>>;
-  friends_tracking?: SubscriptionResolver<Array<ResolversTypes['friends_tracking']>, "friends_tracking", ParentType, ContextType, RequireFields<Subscription_RootFriends_TrackingArgs, never>>;
-  friends_tracking_aggregate?: SubscriptionResolver<ResolversTypes['friends_tracking_aggregate'], "friends_tracking_aggregate", ParentType, ContextType, RequireFields<Subscription_RootFriends_Tracking_AggregateArgs, never>>;
-  friends_tracking_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['friends_tracking']>, "friends_tracking_by_pk", ParentType, ContextType, RequireFields<Subscription_RootFriends_Tracking_By_PkArgs, 'id'>>;
+  friend_tracking?: SubscriptionResolver<Array<ResolversTypes['friend_tracking']>, "friend_tracking", ParentType, ContextType, RequireFields<Subscription_RootFriend_TrackingArgs, never>>;
+  friend_tracking_aggregate?: SubscriptionResolver<ResolversTypes['friend_tracking_aggregate'], "friend_tracking_aggregate", ParentType, ContextType, RequireFields<Subscription_RootFriend_Tracking_AggregateArgs, never>>;
+  friend_tracking_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['friend_tracking']>, "friend_tracking_by_pk", ParentType, ContextType, RequireFields<Subscription_RootFriend_Tracking_By_PkArgs, 'id'>>;
   geofence_variants?: SubscriptionResolver<Array<ResolversTypes['geofence_variants']>, "geofence_variants", ParentType, ContextType, RequireFields<Subscription_RootGeofence_VariantsArgs, never>>;
   geofence_variants_aggregate?: SubscriptionResolver<ResolversTypes['geofence_variants_aggregate'], "geofence_variants_aggregate", ParentType, ContextType, RequireFields<Subscription_RootGeofence_Variants_AggregateArgs, never>>;
   geofence_variants_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['geofence_variants']>, "geofence_variants_by_pk", ParentType, ContextType, RequireFields<Subscription_RootGeofence_Variants_By_PkArgs, 'name'>>;
@@ -9690,6 +10276,9 @@ export type Subscription_RootResolvers<ContextType = any, ParentType extends Res
   likes?: SubscriptionResolver<Array<ResolversTypes['likes']>, "likes", ParentType, ContextType, RequireFields<Subscription_RootLikesArgs, never>>;
   likes_aggregate?: SubscriptionResolver<ResolversTypes['likes_aggregate'], "likes_aggregate", ParentType, ContextType, RequireFields<Subscription_RootLikes_AggregateArgs, never>>;
   likes_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['likes']>, "likes_by_pk", ParentType, ContextType, RequireFields<Subscription_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>>;
+  notifications?: SubscriptionResolver<Array<ResolversTypes['notifications']>, "notifications", ParentType, ContextType, RequireFields<Subscription_RootNotificationsArgs, never>>;
+  notifications_aggregate?: SubscriptionResolver<ResolversTypes['notifications_aggregate'], "notifications_aggregate", ParentType, ContextType, RequireFields<Subscription_RootNotifications_AggregateArgs, never>>;
+  notifications_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['notifications']>, "notifications_by_pk", ParentType, ContextType, RequireFields<Subscription_RootNotifications_By_PkArgs, 'id'>>;
   unachievedachievements?: SubscriptionResolver<Array<ResolversTypes['achievement']>, "unachievedachievements", ParentType, ContextType, RequireFields<Subscription_RootUnachievedachievementsArgs, 'args'>>;
   unachievedachievements_aggregate?: SubscriptionResolver<ResolversTypes['achievement_aggregate'], "unachievedachievements_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUnachievedachievements_AggregateArgs, 'args'>>;
   user?: SubscriptionResolver<Maybe<ResolversTypes['users']>, "user", ParentType, ContextType, RequireFields<Subscription_RootUserArgs, 'id'>>;
@@ -10001,20 +10590,20 @@ export type Resolvers<ContextType = any> = {
   followings_max_fields?: Followings_Max_FieldsResolvers<ContextType>;
   followings_min_fields?: Followings_Min_FieldsResolvers<ContextType>;
   followings_mutation_response?: Followings_Mutation_ResponseResolvers<ContextType>;
-  friends_tracking?: Friends_TrackingResolvers<ContextType>;
-  friends_tracking_aggregate?: Friends_Tracking_AggregateResolvers<ContextType>;
-  friends_tracking_aggregate_fields?: Friends_Tracking_Aggregate_FieldsResolvers<ContextType>;
-  friends_tracking_avg_fields?: Friends_Tracking_Avg_FieldsResolvers<ContextType>;
-  friends_tracking_max_fields?: Friends_Tracking_Max_FieldsResolvers<ContextType>;
-  friends_tracking_min_fields?: Friends_Tracking_Min_FieldsResolvers<ContextType>;
-  friends_tracking_mutation_response?: Friends_Tracking_Mutation_ResponseResolvers<ContextType>;
-  friends_tracking_stddev_fields?: Friends_Tracking_Stddev_FieldsResolvers<ContextType>;
-  friends_tracking_stddev_pop_fields?: Friends_Tracking_Stddev_Pop_FieldsResolvers<ContextType>;
-  friends_tracking_stddev_samp_fields?: Friends_Tracking_Stddev_Samp_FieldsResolvers<ContextType>;
-  friends_tracking_sum_fields?: Friends_Tracking_Sum_FieldsResolvers<ContextType>;
-  friends_tracking_var_pop_fields?: Friends_Tracking_Var_Pop_FieldsResolvers<ContextType>;
-  friends_tracking_var_samp_fields?: Friends_Tracking_Var_Samp_FieldsResolvers<ContextType>;
-  friends_tracking_variance_fields?: Friends_Tracking_Variance_FieldsResolvers<ContextType>;
+  friend_tracking?: Friend_TrackingResolvers<ContextType>;
+  friend_tracking_aggregate?: Friend_Tracking_AggregateResolvers<ContextType>;
+  friend_tracking_aggregate_fields?: Friend_Tracking_Aggregate_FieldsResolvers<ContextType>;
+  friend_tracking_avg_fields?: Friend_Tracking_Avg_FieldsResolvers<ContextType>;
+  friend_tracking_max_fields?: Friend_Tracking_Max_FieldsResolvers<ContextType>;
+  friend_tracking_min_fields?: Friend_Tracking_Min_FieldsResolvers<ContextType>;
+  friend_tracking_mutation_response?: Friend_Tracking_Mutation_ResponseResolvers<ContextType>;
+  friend_tracking_stddev_fields?: Friend_Tracking_Stddev_FieldsResolvers<ContextType>;
+  friend_tracking_stddev_pop_fields?: Friend_Tracking_Stddev_Pop_FieldsResolvers<ContextType>;
+  friend_tracking_stddev_samp_fields?: Friend_Tracking_Stddev_Samp_FieldsResolvers<ContextType>;
+  friend_tracking_sum_fields?: Friend_Tracking_Sum_FieldsResolvers<ContextType>;
+  friend_tracking_var_pop_fields?: Friend_Tracking_Var_Pop_FieldsResolvers<ContextType>;
+  friend_tracking_var_samp_fields?: Friend_Tracking_Var_Samp_FieldsResolvers<ContextType>;
+  friend_tracking_variance_fields?: Friend_Tracking_Variance_FieldsResolvers<ContextType>;
   geofence_variants?: Geofence_VariantsResolvers<ContextType>;
   geofence_variants_aggregate?: Geofence_Variants_AggregateResolvers<ContextType>;
   geofence_variants_aggregate_fields?: Geofence_Variants_Aggregate_FieldsResolvers<ContextType>;
@@ -10052,6 +10641,20 @@ export type Resolvers<ContextType = any> = {
   likes_var_samp_fields?: Likes_Var_Samp_FieldsResolvers<ContextType>;
   likes_variance_fields?: Likes_Variance_FieldsResolvers<ContextType>;
   mutation_root?: Mutation_RootResolvers<ContextType>;
+  notifications?: NotificationsResolvers<ContextType>;
+  notifications_aggregate?: Notifications_AggregateResolvers<ContextType>;
+  notifications_aggregate_fields?: Notifications_Aggregate_FieldsResolvers<ContextType>;
+  notifications_avg_fields?: Notifications_Avg_FieldsResolvers<ContextType>;
+  notifications_max_fields?: Notifications_Max_FieldsResolvers<ContextType>;
+  notifications_min_fields?: Notifications_Min_FieldsResolvers<ContextType>;
+  notifications_mutation_response?: Notifications_Mutation_ResponseResolvers<ContextType>;
+  notifications_stddev_fields?: Notifications_Stddev_FieldsResolvers<ContextType>;
+  notifications_stddev_pop_fields?: Notifications_Stddev_Pop_FieldsResolvers<ContextType>;
+  notifications_stddev_samp_fields?: Notifications_Stddev_Samp_FieldsResolvers<ContextType>;
+  notifications_sum_fields?: Notifications_Sum_FieldsResolvers<ContextType>;
+  notifications_var_pop_fields?: Notifications_Var_Pop_FieldsResolvers<ContextType>;
+  notifications_var_samp_fields?: Notifications_Var_Samp_FieldsResolvers<ContextType>;
+  notifications_variance_fields?: Notifications_Variance_FieldsResolvers<ContextType>;
   query_root?: Query_RootResolvers<ContextType>;
   subscription_root?: Subscription_RootResolvers<ContextType>;
   timestamp?: GraphQLScalarType;
@@ -10094,6 +10697,7 @@ export const ChallengeFragment = gql`
   end_date
   state
   rules
+  created_by
   created_by_user {
     id
     name
@@ -10113,6 +10717,9 @@ export const ParticipantFragment = gql`
 export const BasicParticipantFragment = gql`
     fragment basicParticipantFragment on challenge_participant {
   user_id
+  user {
+    name
+  }
   state
   progress
 }
@@ -10139,6 +10746,18 @@ export const ParticipantActivityFragment = gql`
 }
     ${BasicParticipantFragment}
 ${BasicActivityFragment}`;
+export const CloseChallenge = gql`
+    mutation CloseChallenge($challenge_id: Int!, $created_by: String!, $text: String!) {
+  update_challenge_by_pk(pk_columns: {id: $challenge_id}, _set: {state: CLOSED}) {
+    state
+  }
+  insert_notifications_one(object: {user_id: $created_by, text: $text}) {
+    id
+    user_id
+    text
+  }
+}
+    `;
 export const CreateUser = gql`
     mutation CreateUser($id: String!, $email: String, $name: String, $picture: String) {
   insert_users(
@@ -10274,6 +10893,15 @@ export const InsertAchievements = gql`
   }
 }
     `;
+export const NotifyWhenParticipationStateChange = gql`
+    mutation NotifyWhenParticipationStateChange($created_by: String!, $text: String!) {
+  insert_notifications_one(object: {user_id: $created_by, text: $text}) {
+    id
+    user_id
+    text
+  }
+}
+    `;
 export const GetUserAndUnachievedAchievements = gql`
     query GetUserAndUnachievedAchievements($user_id: String!) {
   unachievedachievements(args: {uid: $user_id}) {
@@ -10358,6 +10986,24 @@ export const UpdateChallengeParticipationProgress = gql`
   }
 }
     `;
+export type CloseChallengeMutationVariables = Exact<{
+  challenge_id: Scalars['Int'];
+  created_by: Scalars['String'];
+  text: Scalars['String'];
+}>;
+
+
+export type CloseChallengeMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_challenge_by_pk?: Maybe<(
+    { __typename?: 'challenge' }
+    & Pick<Challenge, 'state'>
+  )>, insert_notifications_one?: Maybe<(
+    { __typename?: 'notifications' }
+    & Pick<Notifications, 'id' | 'user_id' | 'text'>
+  )> }
+);
+
 export type CreateUserMutationVariables = Exact<{
   id: Scalars['String'];
   email?: Maybe<Scalars['String']>;
@@ -10487,7 +11133,7 @@ export type BasicActivityFragmentFragment = (
 
 export type ChallengeFragmentFragment = (
   { __typename?: 'challenge' }
-  & Pick<Challenge, 'id' | 'challenge_type' | 'created_at' | 'start_date' | 'end_date' | 'state' | 'rules'>
+  & Pick<Challenge, 'id' | 'challenge_type' | 'created_at' | 'start_date' | 'end_date' | 'state' | 'rules' | 'created_by'>
   & { created_by_user: (
     { __typename?: 'users' }
     & Pick<Users, 'id' | 'name' | 'picture'>
@@ -10506,6 +11152,10 @@ export type ParticipantFragmentFragment = (
 export type BasicParticipantFragmentFragment = (
   { __typename?: 'challenge_participant' }
   & Pick<Challenge_Participant, 'user_id' | 'state' | 'progress'>
+  & { user: (
+    { __typename?: 'users' }
+    & Pick<Users, 'name'>
+  ) }
 );
 
 export type ParticipantActivityFragmentFragment = (
@@ -10580,6 +11230,20 @@ export type InsertAchievementsMutation = (
   & { insert_feed?: Maybe<(
     { __typename?: 'feed_mutation_response' }
     & Pick<Feed_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
+export type NotifyWhenParticipationStateChangeMutationVariables = Exact<{
+  created_by: Scalars['String'];
+  text: Scalars['String'];
+}>;
+
+
+export type NotifyWhenParticipationStateChangeMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_notifications_one?: Maybe<(
+    { __typename?: 'notifications' }
+    & Pick<Notifications, 'id' | 'user_id' | 'text'>
   )> }
 );
 
