@@ -18,16 +18,26 @@ import {
 exports.checkChallengeExpiry = functions.https.onRequest(async (req, res) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const updateCount = await client
+  const response = await client
     .ExpireChallenges({ date: today.toISOString() })
     .then((response) => {
-      return response.update_challenge?.affected_rows;
+      return response.update_challenge;
     })
     .catch((e) => {
       throw new functions.https.HttpsError('invalid-argument', e.message);
     });
+    const updateCount = response?.affected_rows;
+    response?.returning.forEach(async (item) => {
+      const notificationText = `Your ${item.challenge_type
+        .toLowerCase()
+        .replace(
+          '_',
+          ' in ',
+        )} challenge have have expired. Unfortunatly no one completed the challenge.`;
+      await notifyUser(item.created_by, notificationText, Notification_Type_Enum.ChallengeExpired);
+    });
   res.status(200).json({
-    status: `${updateCount} have expired and are set to CLOSED.`,
+    status: `${updateCount} have expired and are set to CLOSED. Notification sent to challenge owner.`,
   });
 });
 
@@ -64,10 +74,9 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
         .catch((e) => {
           throw new functions.https.HttpsError('invalid-argument', e.message);
         });
-      const notificationText: string =
-        ' won the ' +
-        queryData.challenge_by_pk?.challenge_type.toLowerCase().replace('_', ' in ') +
-        ' challenge! Check it out in the feed!';
+      const notificationText: string = ` won the ${queryData.challenge_by_pk?.challenge_type
+        .toLowerCase()
+        .replace('_', ' in ')} challenge! Check it out in the feed!`;
 
       let notificationCount = 0;
       queryData.challenge_by_pk?.challenge_participants.forEach(async (participant) => {
@@ -96,10 +105,12 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
       ).length <= 1
     ) {
       await closeChallenge(queryData, challenge_id);
-      const notificationText =
-        'Your ' +
-        queryData.challenge_by_pk?.challenge_type.toLowerCase().replace('_', ' in ') +
-        ' challenge have been closed due to insuficient number of participants. This may be because some participants have declined your challenge.';
+      const notificationText = `Your ${queryData.challenge_by_pk?.challenge_type
+        .toLowerCase()
+        .replace(
+          '_',
+          ' in ',
+        )} challenge have been closed due to insuficient number of participants. This may be because some participants have declined your challenge.`;
       await notifyUser(queryData.challenge_by_pk?.created_by, notificationText, Notification_Type_Enum.ChallengeClosed);
       res.status(200).json({
         status: `Challenge Valitated: challenge ${challenge_id} is CLOSED due to insuficient participants. Notification sent to challenge owner.`,
@@ -130,13 +141,11 @@ exports.updateChallengeParticipantState = functions.https.onRequest(async (req, 
       (state === Challenge_Participant_State_Enum.Declined || state === Challenge_Participant_State_Enum.Accepted) &&
       queryData.challenge_by_pk?.challenge_participants
     ) {
-      const notificationText: string =
-        queryData.challenge_by_pk?.challenge_participants.find((p) => p.user_id === user_id)?.user.name +
-        ' ' +
-        state.toLowerCase() +
-        ' your ' +
-        queryData.challenge_by_pk.challenge_type.toLowerCase().replace('_', ' in ') +
-        ' challenge.';
+      const notificationText: string = `${
+        queryData.challenge_by_pk?.challenge_participants.find((p) => p.user_id === user_id)?.user.name
+      } ${state.toLowerCase()} your ${queryData.challenge_by_pk.challenge_type
+        .toLowerCase()
+        .replace('_', ' in ')} challenge.`;
       await notifyUser(
         queryData.challenge_by_pk?.created_by,
         notificationText,
@@ -180,11 +189,7 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
       }
     });
     if (op === 'INSERT') {
-      const notificationText: string =
-        queryData.challenge_by_pk?.created_by_user.name +
-        ' invited you to a ' +
-        queryData.challenge_by_pk?.challenge_type.toLowerCase().replace('_', ' in ') +
-        ' challenge.';
+      const notificationText: string = `${queryData.challenge_by_pk?.created_by_user.name} invited you to participate in a challenge. Check it out!`;
       queryData.challenge_by_pk?.challenge_participants
         .filter((participant) => participant.user_id !== queryData.challenge_by_pk?.created_by)
         .forEach(async (participant) => {
