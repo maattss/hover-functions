@@ -1,7 +1,0 @@
-mutation NotifyWhenParticipationStateChange( $created_by: String!, $text: String!) {
-  insert_notifications_one(object: { user_id: $created_by, text: $text }) {
-    id
-    user_id
-    text
-  }
-}

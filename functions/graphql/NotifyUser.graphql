@@ -1,0 +1,7 @@
+mutation NotifyUser( $user_id: String!, $text: String!) {
+  insert_notifications_one(object: { user_id: $user_id, text: $text }) {
+    id
+    user_id
+    text
+  }
+}
