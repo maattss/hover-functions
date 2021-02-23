@@ -1,10 +1,5 @@
-mutation CloseChallenge($challenge_id: Int!, $created_by: String!, $text: String!) {
+mutation CloseChallenge($challenge_id: Int!) {
   update_challenge_by_pk(pk_columns: { id: $challenge_id }, _set: { state: CLOSED }) {
     state
-  }
-  insert_notifications_one(object: { user_id: $created_by, text: $text }) {
-    id
-    user_id
-    text
   }
 }
