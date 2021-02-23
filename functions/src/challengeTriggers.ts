@@ -127,11 +127,11 @@ exports.updateChallengeParticipantState = functions.https.onRequest(async (req, 
   if ((op === 'UPDATE' || op === 'MANUAL') && table.name === 'challenge_participant' && table.schema === 'public') {
     const queryData = await client.GetChallengesParticipants({ challenge_id });
     if (
-      (state == Challenge_Participant_State_Enum.Declined || state == Challenge_Participant_State_Enum.Accepted) &&
+      (state === Challenge_Participant_State_Enum.Declined || state === Challenge_Participant_State_Enum.Accepted) &&
       queryData.challenge_by_pk?.challenge_participants
     ) {
       const notificationText: string =
-        queryData.challenge_by_pk?.challenge_participants.find((p) => p.user_id == user_id)?.user.name +
+        queryData.challenge_by_pk?.challenge_participants.find((p) => p.user_id === user_id)?.user.name +
         ' ' +
         state.toLowerCase() +
         ' your ' +

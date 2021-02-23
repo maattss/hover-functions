@@ -56,7 +56,7 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
     const { user_id } = data.old;
     const queryData = await client.GetUserAndExistingAchievements({ user_id });
     queryData.user?.user_achievement.forEach(async ({ achievement }: { achievement: AchievementFragmentFragment }) => {
-      if (!isValidAchievment(achievement as AchievementFragmentFragment, queryData.user as UserScoreFragmentFragment)) {
+      if (!isValidAchievment(achievement, queryData.user as UserScoreFragmentFragment)) {
         objects.push({ achievement, user_id });
         await deleteAchievment(achievement.id, user_id);
       }
