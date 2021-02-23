@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import moment = require('moment');
 import { client } from './client';
+import { notifyUser } from './notifyUser';
 import { ChallengeRules, Challenge_Participant } from './types/customTypes';
 import {
   BasicActivityFragmentFragment,
@@ -9,6 +10,7 @@ import {
   Challenge_Participant_State_Enum,
   Challenge_Type_Enum,
   GetChallengesParticipantsQuery,
+  Notification_Type_Enum,
   ParticipantActivityFragmentFragment,
   ParticipantFragmentFragment,
 } from './types/types';
@@ -75,6 +77,11 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
       ).length <= 1
     ) {
       await closeChallenge(queryData, challenge_id);
+      const notificationText =
+        'Your ' +
+        queryData.challenge_by_pk?.challenge_type.toLowerCase().replace('_', ' in ') +
+        ' challenge have been closed due to insuficient number of participants. This may be because some participants have declined your challenge.';
+      await notifyUser(queryData.challenge_by_pk?.created_by, notificationText, Notification_Type_Enum.ChallengeClosed);
       res.status(200).json({
         status: `Challenge Valitated: challenge ${challenge_id} is CLOSED due to insuficient participants. Notification sent to challenge owner.`,
       });
@@ -111,7 +118,7 @@ exports.updateChallengeParticipantState = functions.https.onRequest(async (req, 
         ' your ' +
         queryData.challenge_by_pk.challenge_type.toLowerCase().replace('_', ' in ') +
         ' challenge.';
-      await notifyUser(queryData.challenge_by_pk?.created_by, notificationText);
+      await notifyUser(queryData.challenge_by_pk?.created_by, notificationText, Notification_Type_Enum.ParticipantUpdate);
       res.status(200).json({
         status: `Notification sent to user: ${queryData.challenge_by_pk?.created_by} `,
       });
@@ -156,12 +163,12 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
               ' challenge.';
       queryData.challenge_by_pk?.challenge_participants.filter((participant)=> participant.user_id !== queryData.challenge_by_pk?.created_by).forEach(async (participant) => {
         notificationCount++;
-        await notifyUser(participant.user_id, notificationText);
+        await notifyUser(participant.user_id, notificationText, Notification_Type_Enum.ChallengeInvite);
       });
     }
   }
   res.status(200).json({
-    status: `Success: New Challenge Valitated. \nUpdated ${updateCount} rows, and notified ${notificationCount} participants`,
+    status: `Success: New Challenge Valitated. Updated ${updateCount} rows, and notified ${notificationCount} participants`,
   });
 });
 
@@ -198,30 +205,10 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
   });
 });
 
-async function notifyUser(user_id: string, notificationText: string) {
-  await client
-    .NotifyUser({
-      user_id,
-      text: notificationText,
-    })
-    .then((response) => {
-      return response;
-    })
-    .catch((e) => {
-      throw new functions.https.HttpsError('invalid-argument', e.message);
-    });
-}
-
 async function closeChallenge(queryData: GetChallengesParticipantsQuery, challenge_id: number) {
-  const notificationText =
-    'Your ' +
-    queryData.challenge_by_pk?.challenge_type.toLowerCase().replace('_', ' in ') +
-    ' challenge have been closed due to insuficient number of participants. This may be because some participants have declined your challenge.';
   await client
     .CloseChallenge({
       challenge_id,
-      created_by: queryData.challenge_by_pk?.created_by as string,
-      text: notificationText,
     })
     .then((response) => {
       return response;

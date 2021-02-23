@@ -5113,6 +5113,15 @@ type mutation_root {
   # delete single row from the table: "likes"
   delete_likes_by_pk(activity_id: Int!, user_id: String!): likes
 
+  # delete data from the table: "notification_type"
+  delete_notification_type(
+    # filter the rows which have to be deleted
+    where: notification_type_bool_exp!
+  ): notification_type_mutation_response
+
+  # delete single row from the table: "notification_type"
+  delete_notification_type_by_pk(name: String!): notification_type
+
   # delete data from the table: "notifications"
   delete_notifications(
     # filter the rows which have to be deleted
@@ -5445,6 +5454,24 @@ type mutation_root {
     # on conflict condition
     on_conflict: likes_on_conflict
   ): likes
+
+  # insert data into the table: "notification_type"
+  insert_notification_type(
+    # the rows to be inserted
+    objects: [notification_type_insert_input!]!
+
+    # on conflict condition
+    on_conflict: notification_type_on_conflict
+  ): notification_type_mutation_response
+
+  # insert a single row into the table: "notification_type"
+  insert_notification_type_one(
+    # the row to be inserted
+    object: notification_type_insert_input!
+
+    # on conflict condition
+    on_conflict: notification_type_on_conflict
+  ): notification_type
 
   # insert data into the table: "notifications"
   insert_notifications(
@@ -5832,6 +5859,22 @@ type mutation_root {
     pk_columns: likes_pk_columns_input!
   ): likes
 
+  # update data of the table: "notification_type"
+  update_notification_type(
+    # sets the columns of the filtered rows to the given values
+    _set: notification_type_set_input
+
+    # filter the rows which have to be updated
+    where: notification_type_bool_exp!
+  ): notification_type_mutation_response
+
+  # update single row of the table: "notification_type"
+  update_notification_type_by_pk(
+    # sets the columns of the filtered rows to the given values
+    _set: notification_type_set_input
+    pk_columns: notification_type_pk_columns_input!
+  ): notification_type
+
   # update data of the table: "notifications"
   update_notifications(
     # increments the integer columns with given value of the filtered values
@@ -5893,11 +5936,148 @@ type mutation_root {
   ): users_mutation_response
 }
 
+# columns and relationships of "notification_type"
+type notification_type {
+  name: String!
+}
+
+# aggregated selection of "notification_type"
+type notification_type_aggregate {
+  aggregate: notification_type_aggregate_fields
+  nodes: [notification_type!]!
+}
+
+# aggregate fields of "notification_type"
+type notification_type_aggregate_fields {
+  count(columns: [notification_type_select_column!], distinct: Boolean): Int
+  max: notification_type_max_fields
+  min: notification_type_min_fields
+}
+
+# order by aggregate values of table "notification_type"
+input notification_type_aggregate_order_by {
+  count: order_by
+  max: notification_type_max_order_by
+  min: notification_type_min_order_by
+}
+
+# input type for inserting array relation for remote table "notification_type"
+input notification_type_arr_rel_insert_input {
+  data: [notification_type_insert_input!]!
+  on_conflict: notification_type_on_conflict
+}
+
+# Boolean expression to filter rows from the table "notification_type". All fields are combined with a logical 'AND'.
+input notification_type_bool_exp {
+  _and: [notification_type_bool_exp]
+  _not: notification_type_bool_exp
+  _or: [notification_type_bool_exp]
+  name: String_comparison_exp
+}
+
+# unique or primary key constraints on table "notification_type"
+enum notification_type_constraint {
+  # unique or primary key constraint
+  notification_type_pkey
+}
+
+enum notification_type_enum {
+  CHALLENGE_CLOSED
+  CHALLENGE_INVITE
+  CHALLENGE_WINNER
+  NEW_ACHIEVEMENT
+  PARTICIPANT_UPDATE
+}
+
+# expression to compare columns of type notification_type_enum. All fields are combined with logical 'AND'.
+input notification_type_enum_comparison_exp {
+  _eq: notification_type_enum
+  _in: [notification_type_enum!]
+  _is_null: Boolean
+  _neq: notification_type_enum
+  _nin: [notification_type_enum!]
+}
+
+# input type for inserting data into table "notification_type"
+input notification_type_insert_input {
+  name: String
+}
+
+# aggregate max on columns
+type notification_type_max_fields {
+  name: String
+}
+
+# order by max() on columns of table "notification_type"
+input notification_type_max_order_by {
+  name: order_by
+}
+
+# aggregate min on columns
+type notification_type_min_fields {
+  name: String
+}
+
+# order by min() on columns of table "notification_type"
+input notification_type_min_order_by {
+  name: order_by
+}
+
+# response of any mutation on the table "notification_type"
+type notification_type_mutation_response {
+  # number of affected rows by the mutation
+  affected_rows: Int!
+
+  # data of the affected rows by the mutation
+  returning: [notification_type!]!
+}
+
+# input type for inserting object relation for remote table "notification_type"
+input notification_type_obj_rel_insert_input {
+  data: notification_type_insert_input!
+  on_conflict: notification_type_on_conflict
+}
+
+# on conflict condition type for table "notification_type"
+input notification_type_on_conflict {
+  constraint: notification_type_constraint!
+  update_columns: [notification_type_update_column!]!
+  where: notification_type_bool_exp
+}
+
+# ordering options when selecting data from "notification_type"
+input notification_type_order_by {
+  name: order_by
+}
+
+# primary key columns input for table: "notification_type"
+input notification_type_pk_columns_input {
+  name: String!
+}
+
+# select columns of table "notification_type"
+enum notification_type_select_column {
+  # column name
+  name
+}
+
+# input type for updating data in table "notification_type"
+input notification_type_set_input {
+  name: String
+}
+
+# update columns of table "notification_type"
+enum notification_type_update_column {
+  # column name
+  name
+}
+
 # columns and relationships of "notifications"
 type notifications {
   id: Int!
   seen: Boolean!
   text: String!
+  type: notification_type_enum!
   user_id: String!
 }
 
@@ -5961,6 +6141,7 @@ input notifications_bool_exp {
   id: Int_comparison_exp
   seen: Boolean_comparison_exp
   text: String_comparison_exp
+  type: notification_type_enum_comparison_exp
   user_id: String_comparison_exp
 }
 
@@ -5980,6 +6161,7 @@ input notifications_insert_input {
   id: Int
   seen: Boolean
   text: String
+  type: notification_type_enum
   user_id: String
 }
 
@@ -6038,6 +6220,7 @@ input notifications_order_by {
   id: order_by
   seen: order_by
   text: order_by
+  type: order_by
   user_id: order_by
 }
 
@@ -6058,6 +6241,9 @@ enum notifications_select_column {
   text
 
   # column name
+  type
+
+  # column name
   user_id
 }
 
@@ -6066,6 +6252,7 @@ input notifications_set_input {
   id: Int
   seen: Boolean
   text: String
+  type: notification_type_enum
   user_id: String
 }
 
@@ -6119,6 +6306,9 @@ enum notifications_update_column {
 
   # column name
   text
+
+  # column name
+  type
 
   # column name
   user_id
@@ -6839,6 +7029,45 @@ type query_root {
 
   # fetch data from the table: "likes" using primary key columns
   likes_by_pk(activity_id: Int!, user_id: String!): likes
+
+  # fetch data from the table: "notification_type"
+  notification_type(
+    # distinct select on columns
+    distinct_on: [notification_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [notification_type_order_by!]
+
+    # filter the rows returned
+    where: notification_type_bool_exp
+  ): [notification_type!]!
+
+  # fetch aggregated fields from the table: "notification_type"
+  notification_type_aggregate(
+    # distinct select on columns
+    distinct_on: [notification_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [notification_type_order_by!]
+
+    # filter the rows returned
+    where: notification_type_bool_exp
+  ): notification_type_aggregate!
+
+  # fetch data from the table: "notification_type" using primary key columns
+  notification_type_by_pk(name: String!): notification_type
 
   # fetch data from the table: "notifications"
   notifications(
@@ -7683,6 +7912,45 @@ type subscription_root {
 
   # fetch data from the table: "likes" using primary key columns
   likes_by_pk(activity_id: Int!, user_id: String!): likes
+
+  # fetch data from the table: "notification_type"
+  notification_type(
+    # distinct select on columns
+    distinct_on: [notification_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [notification_type_order_by!]
+
+    # filter the rows returned
+    where: notification_type_bool_exp
+  ): [notification_type!]!
+
+  # fetch aggregated fields from the table: "notification_type"
+  notification_type_aggregate(
+    # distinct select on columns
+    distinct_on: [notification_type_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [notification_type_order_by!]
+
+    # filter the rows returned
+    where: notification_type_bool_exp
+  ): notification_type_aggregate!
+
+  # fetch data from the table: "notification_type" using primary key columns
+  notification_type_by_pk(name: String!): notification_type
 
   # fetch data from the table: "notifications"
   notifications(
