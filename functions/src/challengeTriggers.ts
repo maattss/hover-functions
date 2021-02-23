@@ -8,6 +8,7 @@ import {
   ChallengeFragmentFragment,
   Challenge_Participant_State_Enum,
   Challenge_Type_Enum,
+  GetChallengesParticipantsQuery,
   ParticipantActivityFragmentFragment,
   ParticipantFragmentFragment,
 } from './types/types';
@@ -67,19 +68,13 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
       return;
     }
   } else if (op === 'DELETE' && table.name === 'challenge_participant' && table.schema === 'public') {
-    if (queryData.challenge_by_pk && queryData.challenge_by_pk?.challenge_participants.length <= 1) {
-      const notificationText =
-        'Your ' +
-        queryData.challenge_by_pk.challenge_type.toLowerCase().replace('_', ' in ') +
-        ' challenge have been closed due to insuficient  number of participants. This may be because some participants have declined your challenge.';
-      await client
-        .CloseChallenge({ challenge_id, created_by: queryData.challenge_by_pk?.created_by, text: notificationText })
-        .then((response) => {
-          return response;
-        })
-        .catch((e) => {
-          throw new functions.https.HttpsError('invalid-argument', e.message);
-        });
+    if (
+      queryData.challenge_by_pk &&
+      queryData.challenge_by_pk?.challenge_participants.filter(
+        (x) => x.state !== Challenge_Participant_State_Enum.Declined,
+      ).length <= 1
+    ) {
+      await closeChallenge(queryData, challenge_id);
       res.status(200).json({
         status: `Challenge Valitated: challenge ${challenge_id} is CLOSED due to insuficient participants. Notification sent to challenge owner.`,
       });
@@ -110,22 +105,13 @@ exports.updateChallengeParticipantState = functions.https.onRequest(async (req, 
       queryData.challenge_by_pk?.challenge_participants
     ) {
       const notificationText: string =
-        queryData.challenge_by_pk?.challenge_participants.find((p) => p.user_id == user_id)?.user.name + ' '+
+        queryData.challenge_by_pk?.challenge_participants.find((p) => p.user_id == user_id)?.user.name +
+        ' ' +
         state.toLowerCase() +
         ' your ' +
         queryData.challenge_by_pk.challenge_type.toLowerCase().replace('_', ' in ') +
         ' challenge.';
-      await client
-        .NotifyWhenParticipationStateChange({
-          created_by: queryData.challenge_by_pk?.created_by,
-          text: notificationText,
-        })
-        .then((response) => {
-          return response;
-        })
-        .catch((e) => {
-          throw new functions.https.HttpsError('invalid-argument', e.message);
-        });
+      await notifyUser(queryData.challenge_by_pk?.created_by, notificationText);
       res.status(200).json({
         status: `Notification sent to user: ${queryData.challenge_by_pk?.created_by} `,
       });
@@ -142,7 +128,7 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
     event: { op, data },
     table,
   } = req.body;
-  let updateCount = 0;
+  let updateCount = 0, notificationCount = 0;
   if ((op === 'INSERT' || op === 'MANUAL') && table.name === 'challenge' && table.schema === 'public') {
     const challenge_id = data.new.id ? data.new.id : data.old.id;
     const queryData = await client.GetChallengeParticipantsAndActivities({ challenge_id });
@@ -162,9 +148,20 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
         await updateProgress(updateData);
       }
     });
+    if(op === 'INSERT'){
+      const notificationText: string =
+              queryData.challenge_by_pk?.created_by_user.name +
+              ' invited you to a ' +
+              queryData.challenge_by_pk?.challenge_type.toLowerCase().replace('_', ' in ') +
+              ' challenge.';
+      queryData.challenge_by_pk?.challenge_participants.filter((participant)=> participant.user_id !== queryData.challenge_by_pk?.created_by).forEach(async (participant) => {
+        notificationCount++;
+        await notifyUser(participant.user_id, notificationText);
+      });
+    }
   }
   res.status(200).json({
-    status: `Success: New Challenge Valitated. \nUpdated ${updateCount} rows.`,
+    status: `Success: New Challenge Valitated. \nUpdated ${updateCount} rows, and notified ${notificationCount} participants`,
   });
 });
 
@@ -200,6 +197,39 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
     status: `Success: Updated ${updateCount} rows for user ${user_id}.`,
   });
 });
+
+async function notifyUser(user_id: string, notificationText: string) {
+  await client
+    .NotifyUser({
+      user_id,
+      text: notificationText,
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((e) => {
+      throw new functions.https.HttpsError('invalid-argument', e.message);
+    });
+}
+
+async function closeChallenge(queryData: GetChallengesParticipantsQuery, challenge_id: number) {
+  const notificationText =
+    'Your ' +
+    queryData.challenge_by_pk?.challenge_type.toLowerCase().replace('_', ' in ') +
+    ' challenge have been closed due to insuficient number of participants. This may be because some participants have declined your challenge.';
+  await client
+    .CloseChallenge({
+      challenge_id,
+      created_by: queryData.challenge_by_pk?.created_by as string,
+      text: notificationText,
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((e) => {
+      throw new functions.https.HttpsError('invalid-argument', e.message);
+    });
+}
 
 async function updateProgress({ user_id, challenge_id, progress }: Challenge_Participant) {
   await client

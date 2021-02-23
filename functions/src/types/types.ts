@@ -7105,9 +7105,9 @@ export const InsertAchievementsDocument = gql`
   }
 }
     `;
-export const NotifyWhenParticipationStateChangeDocument = gql`
-    mutation NotifyWhenParticipationStateChange($created_by: String!, $text: String!) {
-  insert_notifications_one(object: {user_id: $created_by, text: $text}) {
+export const NotifyUserDocument = gql`
+    mutation NotifyUser($user_id: String!, $text: String!) {
+  insert_notifications_one(object: {user_id: $user_id, text: $text}) {
     id
     user_id
     text
@@ -7235,8 +7235,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     InsertAchievements(variables: InsertAchievementsMutationVariables): Promise<InsertAchievementsMutation> {
       return withWrapper(() => client.request<InsertAchievementsMutation>(print(InsertAchievementsDocument), variables));
     },
-    NotifyWhenParticipationStateChange(variables: NotifyWhenParticipationStateChangeMutationVariables): Promise<NotifyWhenParticipationStateChangeMutation> {
-      return withWrapper(() => client.request<NotifyWhenParticipationStateChangeMutation>(print(NotifyWhenParticipationStateChangeDocument), variables));
+    NotifyUser(variables: NotifyUserMutationVariables): Promise<NotifyUserMutation> {
+      return withWrapper(() => client.request<NotifyUserMutation>(print(NotifyUserDocument), variables));
     },
     GetUserAndUnachievedAchievements(variables: GetUserAndUnachievedAchievementsQueryVariables): Promise<GetUserAndUnachievedAchievementsQuery> {
       return withWrapper(() => client.request<GetUserAndUnachievedAchievementsQuery>(print(GetUserAndUnachievedAchievementsDocument), variables));
@@ -10893,9 +10893,9 @@ export const InsertAchievements = gql`
   }
 }
     `;
-export const NotifyWhenParticipationStateChange = gql`
-    mutation NotifyWhenParticipationStateChange($created_by: String!, $text: String!) {
-  insert_notifications_one(object: {user_id: $created_by, text: $text}) {
+export const NotifyUser = gql`
+    mutation NotifyUser($user_id: String!, $text: String!) {
+  insert_notifications_one(object: {user_id: $user_id, text: $text}) {
     id
     user_id
     text
@@ -11233,13 +11233,13 @@ export type InsertAchievementsMutation = (
   )> }
 );
 
-export type NotifyWhenParticipationStateChangeMutationVariables = Exact<{
-  created_by: Scalars['String'];
+export type NotifyUserMutationVariables = Exact<{
+  user_id: Scalars['String'];
   text: Scalars['String'];
 }>;
 
 
-export type NotifyWhenParticipationStateChangeMutation = (
+export type NotifyUserMutation = (
   { __typename?: 'mutation_root' }
   & { insert_notifications_one?: Maybe<(
     { __typename?: 'notifications' }
