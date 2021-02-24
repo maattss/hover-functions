@@ -1,3 +1,5 @@
+import { AchievementFragmentFragment } from './types';
+
 export type Challenge_Participant = {
   user_id: string;
   challenge_id: number;
@@ -13,4 +15,9 @@ export type ChallengeRules = {
   category?: GeoFenceCategory;
   score?: number;
   time?: number;
+};
+
+export type NewAchievement = {
+  achievement: AchievementFragmentFragment;
+  user_id: string;
 };

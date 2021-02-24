@@ -16,6 +16,7 @@ fragment challengeFragment on challenge {
   end_date
   state
   rules
+  created_by
   created_by_user {
     id
     name
@@ -33,6 +34,9 @@ fragment participantFragment on challenge_participant {
 
 fragment basicParticipantFragment on challenge_participant {
   user_id
+  user {
+    name
+  }
   state
   progress
 }
@@ -42,6 +46,53 @@ fragment participantActivityFragment on challenge_participant {
   user {
     activities {
       ...basicActivityFragment
+    }
+  }
+}
+
+fragment achievementFragment on achievement {
+  id
+  name
+  description
+  created_at
+  achievement_type
+  rule
+}
+
+fragment userScoreFragment on users {
+  id
+  totalScore
+  activity_count: activities_aggregate {
+    aggregate {
+      count(columns: activity_id)
+    }
+  }
+  education_score: activities_aggregate(where: { geofence: { category: { _eq: "EDUCATION" } } }) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  culture_score: activities_aggregate(where: { geofence: { category: { _eq: "CULTURE" } } }) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  social_score: activities_aggregate(where: { geofence: { category: { _eq: "SOCIAL" } } }) {
+    aggregate {
+      sum {
+        score
+      }
+    }
+  }
+  exercise_score: activities_aggregate(where: { geofence: { category: { _eq: "EXERCISE" } } }) {
+    aggregate {
+      sum {
+        score
+      }
     }
   }
 }

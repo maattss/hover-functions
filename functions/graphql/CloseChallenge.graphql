@@ -1,0 +1,5 @@
+mutation CloseChallenge($challenge_id: Int!) {
+  update_challenge_by_pk(pk_columns: { id: $challenge_id }, _set: { state: CLOSED }) {
+    state
+  }
+}
