@@ -107,10 +107,10 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
         .replace(
           '_',
           ' in ',
-        )} challenge have been closed due to insuficient number of participants. This may be because some participants have declined your challenge.`;
+        )} challenge have been closed due to insufficient number of participants. This may be because some participants have declined your challenge.`;
       await notifyUser(queryData.challenge_by_pk?.created_by, notificationText, Notification_Type_Enum.ChallengeClosed);
       res.status(200).json({
-        status: `Challenge Valitated: challenge ${challenge_id} is CLOSED due to insuficient participants. Notification sent to challenge owner.`,
+        status: `Challenge Validated: challenge ${challenge_id} is CLOSED due to insufficient participants. Notification sent to challenge owner.`,
       });
       return;
     }
@@ -196,7 +196,7 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
     }
   }
   res.status(200).json({
-    status: `Success: New Challenge Valitated. Updated ${updateCount} rows, and notified ${notificationCount} participants`,
+    status: `Success: New Challenge Validated. Updated ${updateCount} rows, and notified ${notificationCount} participants`,
   });
 });
 

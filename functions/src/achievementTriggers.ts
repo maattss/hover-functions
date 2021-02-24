@@ -32,7 +32,7 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
         objects.push({ achievement, user_id });
         await notifyUser(
           user_id,
-          `You achieved a new achievement! Check it out in the feed!`,
+          `You achieved a new achievement! Check it out in the feed or your profile page!`,
           Notification_Type_Enum.NewAchievement,
         );
       }
