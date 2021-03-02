@@ -1,5 +1,8 @@
 mutation NotifyUser($user_id: String!, $text: String!, $type: notification_type_enum = CHALLENGE_CLOSED) {
   insert_notifications_one(object: { user_id: $user_id, text: $text, type: $type }) {
     id
+    user {
+      push_token
+    }
   }
 }

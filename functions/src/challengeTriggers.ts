@@ -23,16 +23,16 @@ exports.checkChallengeExpiry = functions.https.onRequest(async (req, res) => {
     .then((response) => {
       return response.update_challenge;
     })
-    .catch((e) => {
-      throw new functions.https.HttpsError('invalid-argument', e.message);
+    .catch((reason) => {
+      throw new Error(`Failed to expire challenge in Hasura: ${reason}`);
     });
-    const updateCount = data?.affected_rows;
-    data?.returning.forEach(async (item) => {
-      const notificationText = `Your ${item.challenge_type
-        .toLowerCase()
-        .replace('_', ' in ')} challenge have have expired. Unfortunately no one completed the challenge...`;
-      await notifyUser(item.created_by, notificationText, Notification_Type_Enum.ChallengeExpired);
-    });
+  const updateCount = data?.affected_rows;
+  data?.returning.forEach(async (item) => {
+    const notificationText = `Your ${item.challenge_type
+      .toLowerCase()
+      .replace('_', ' in ')} challenge have have expired. Unfortunately no one completed the challenge...`;
+    await notifyUser(item.created_by, notificationText, Notification_Type_Enum.ChallengeExpired);
+  });
   res.status(200).json({
     status: `${updateCount} have expired and are set to CLOSED. Notification sent to challenge owner.`,
   });
@@ -45,7 +45,9 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
   } = req.body;
 
   const { challenge_id } = data.new ? data.new : data.old;
-  const queryData = await client.GetChallengesParticipants({ challenge_id });
+  const queryData = await client.GetChallengesParticipants({ challenge_id }).catch((reason) => {
+    throw new Error(`Failed to get challenges and participants from Hasura: ${reason}`);
+  });
 
   if (
     (op === 'UPDATE' || op === 'INSERT' || op === 'MANUAL') &&
@@ -68,8 +70,8 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
         .then((response) => {
           return response;
         })
-        .catch((e) => {
-          throw new functions.https.HttpsError('invalid-argument', e.message);
+        .catch((reason) => {
+          throw new Error(`Failed to update challenge winner in Hasura: ${reason}`);
         });
       const notificationText: string = ` won the ${queryData.challenge_by_pk?.challenge_type
         .toLowerCase()
@@ -88,7 +90,6 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
           );
         }
       });
-
       res.status(200).json({
         status: `Challenge Valitated: challenge ${challenge_id} is won by user ${winner.user_id}, ${notificationCount} participants were notified.`,
       });
@@ -108,10 +109,16 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
           '_',
           ' in ',
         )} challenge have been closed due to insufficient number of participants. This may be because some participants have declined your challenge.`;
-      await notifyUser(queryData.challenge_by_pk?.created_by, notificationText, Notification_Type_Enum.ChallengeClosed);
-      res.status(200).json({
-        status: `Challenge Validated: challenge ${challenge_id} is CLOSED due to insufficient participants. Notification sent to challenge owner.`,
-      });
+      await notifyUser(
+        queryData.challenge_by_pk?.created_by,
+        notificationText,
+        Notification_Type_Enum.ChallengeClosed,
+      ).then(async (resp) =>
+        res.status(200).json({
+          status: `Challenge Validated: challenge ${challenge_id} is CLOSED due to insufficient participants. 
+          Notification sent to challenge owner. ${resp}`,
+        }),
+      );
       return;
     }
   }
@@ -133,7 +140,10 @@ exports.updateChallengeParticipantState = functions.https.onRequest(async (req, 
   }: { state: Challenge_Participant_State_Enum; challenge_id: number; user_id: string } = data.new;
 
   if ((op === 'UPDATE' || op === 'MANUAL') && table.name === 'challenge_participant' && table.schema === 'public') {
-    const queryData = await client.GetChallengesParticipants({ challenge_id });
+    const queryData = await client.GetChallengesParticipants({ challenge_id }).catch((reason) => {
+      throw new Error(`Failed to get challenge participants from Hasura: ${reason}`);
+    });
+
     if (
       (state === Challenge_Participant_State_Enum.Declined || state === Challenge_Participant_State_Enum.Accepted) &&
       queryData.challenge_by_pk?.challenge_participants
@@ -147,10 +157,11 @@ exports.updateChallengeParticipantState = functions.https.onRequest(async (req, 
         queryData.challenge_by_pk?.created_by,
         notificationText,
         Notification_Type_Enum.ParticipantUpdate,
+      ).then(async (resp) =>
+        res.status(200).json({
+          status: `Success: ${resp}`,
+        }),
       );
-      res.status(200).json({
-        status: `Notification sent to user: ${queryData.challenge_by_pk?.created_by} `,
-      });
       return;
     }
   }
@@ -168,7 +179,9 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
     notificationCount = 0;
   if ((op === 'INSERT' || op === 'MANUAL') && table.name === 'challenge' && table.schema === 'public') {
     const challenge_id = data.new.id ? data.new.id : data.old.id;
-    const queryData = await client.GetChallengeParticipantsAndActivities({ challenge_id });
+    const queryData = await client.GetChallengeParticipantsAndActivities({ challenge_id }).catch((reason) => {
+      throw new Error(`Failed to get challenge participants and activities from Hasura: ${reason}`);
+    });
 
     queryData.challenge_by_pk?.challenge_participants.forEach(async (item: ParticipantActivityFragmentFragment) => {
       const newProgress = calculateProgress(
@@ -191,7 +204,9 @@ exports.newChallengeValidation = functions.https.onRequest(async (req, res) => {
         .filter((participant) => participant.user_id !== queryData.challenge_by_pk?.created_by)
         .forEach(async (participant) => {
           notificationCount++;
-          await notifyUser(participant.user_id, notificationText, Notification_Type_Enum.ChallengeInvite);
+          await notifyUser(participant.user_id, notificationText, Notification_Type_Enum.ChallengeInvite).then((resp) =>
+            console.log(resp),
+          );
         });
     }
   }
@@ -212,7 +227,9 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
     table.name === 'activities' &&
     table.schema === 'public'
   ) {
-    const queryData = await client.GetActivitiesAndChallenges({ id: user_id });
+    const queryData = await client.GetActivitiesAndChallenges({ id: user_id }).catch((reason) => {
+      throw new Error(`Failed to get activities and challenges from Hasura for user ${user_id}: ${reason}`);
+    });
 
     const activities: BasicActivityFragmentFragment[] = queryData.activities;
     queryData.challenge_participant.forEach(async (item: ParticipantFragmentFragment) => {
@@ -234,26 +251,26 @@ exports.newActivityValidation = functions.https.onRequest(async (req, res) => {
 });
 
 async function closeChallenge(queryData: GetChallengesParticipantsQuery, challenge_id: number) {
-  await client
+  return await client
     .CloseChallenge({
       challenge_id,
     })
     .then((response) => {
       return response;
     })
-    .catch((e) => {
-      throw new functions.https.HttpsError('invalid-argument', e.message);
+    .catch((reason) => {
+      throw new Error(`Failed to close challenge in Hasura: ${reason}`);
     });
 }
 
 async function updateProgress({ user_id, challenge_id, progress }: Challenge_Participant) {
-  await client
+  return await client
     .UpdateChallengeParticipationProgress({ user_id, challenge_id, progress })
     .then((response) => {
       return response;
     })
-    .catch((e) => {
-      throw new functions.https.HttpsError('invalid-argument', e.message);
+    .catch((reason) => {
+      throw new Error(`Failed to update progress in Hasura: ${reason}`);
     });
 }
 
