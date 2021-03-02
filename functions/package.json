@@ -41,6 +41,7 @@
     "eslint": "^7.6.0",
     "eslint-plugin-import": "^2.22.0",
     "firebase-functions-test": "^0.2.0",
+    "graphqurl": "^0.3.3",
     "prettier": "^2.2.1",
     "typescript": "^3.8.0"
   },

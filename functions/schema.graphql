@@ -611,6 +611,10 @@ type activities {
   ): feed_aggregate!
 
   # An object relationship
+  friend: users
+  friend_id: String
+
+  # An object relationship
   geofence: geofences!
   geofence_id: Int!
   score: Int
@@ -692,6 +696,8 @@ input activities_bool_exp {
   duration: interval_comparison_exp
   feed: feed_bool_exp
   feeds: feed_bool_exp
+  friend: users_bool_exp
+  friend_id: String_comparison_exp
   geofence: geofences_bool_exp
   geofence_id: Int_comparison_exp
   score: Int_comparison_exp
@@ -728,6 +734,8 @@ input activities_insert_input {
   duration: interval
   feed: feed_obj_rel_insert_input
   feeds: feed_arr_rel_insert_input
+  friend: users_obj_rel_insert_input
+  friend_id: String
   geofence: geofences_obj_rel_insert_input
   geofence_id: Int
   score: Int
@@ -742,6 +750,7 @@ type activities_max_fields {
   activity_id: Int
   caption: String
   created_at: timestamptz
+  friend_id: String
   geofence_id: Int
   score: Int
   started_at: timestamptz
@@ -754,6 +763,7 @@ input activities_max_order_by {
   activity_id: order_by
   caption: order_by
   created_at: order_by
+  friend_id: order_by
   geofence_id: order_by
   score: order_by
   started_at: order_by
@@ -766,6 +776,7 @@ type activities_min_fields {
   activity_id: Int
   caption: String
   created_at: timestamptz
+  friend_id: String
   geofence_id: Int
   score: Int
   started_at: timestamptz
@@ -778,6 +789,7 @@ input activities_min_order_by {
   activity_id: order_by
   caption: order_by
   created_at: order_by
+  friend_id: order_by
   geofence_id: order_by
   score: order_by
   started_at: order_by
@@ -815,6 +827,8 @@ input activities_order_by {
   duration: order_by
   feed: feed_order_by
   feeds_aggregate: feed_aggregate_order_by
+  friend: users_order_by
+  friend_id: order_by
   geofence: geofences_order_by
   geofence_id: order_by
   score: order_by
@@ -844,6 +858,9 @@ enum activities_select_column {
   duration
 
   # column name
+  friend_id
+
+  # column name
   geofence_id
 
   # column name
@@ -865,6 +882,7 @@ input activities_set_input {
   caption: String
   created_at: timestamptz
   duration: interval
+  friend_id: String
   geofence_id: Int
   score: Int
   started_at: timestamptz
@@ -941,6 +959,9 @@ enum activities_update_column {
 
   # column name
   duration
+
+  # column name
+  friend_id
 
   # column name
   geofence_id
@@ -2338,16 +2359,16 @@ enum challenge_type_constraint {
 }
 
 enum challenge_type_enum {
-  # Score challenge
+  # Total score
   SCORE
 
-  # Score in specific category challenge
+  # Total score in category
   SCORE_CATEGORY
 
-  # Time challenge
+  # Total time
   TIME
 
-  # Time in specific category challenge
+  # Total time in category
   TIME_CATEGORY
 }
 
@@ -3616,9 +3637,9 @@ enum followings_update_column {
 # columns and relationships of "friend_tracking"
 type friend_tracking {
   created_at: timestamptz!
-  date: date!
   geofence_id: Int!
   id: Int!
+  join_limit: timestamptz
   linking_word: String!
   updated_at: timestamptz!
 
@@ -3691,9 +3712,9 @@ input friend_tracking_bool_exp {
   _not: friend_tracking_bool_exp
   _or: [friend_tracking_bool_exp]
   created_at: timestamptz_comparison_exp
-  date: date_comparison_exp
   geofence_id: Int_comparison_exp
   id: Int_comparison_exp
+  join_limit: timestamptz_comparison_exp
   linking_word: String_comparison_exp
   updated_at: timestamptz_comparison_exp
   user_join: users_bool_exp
@@ -3717,9 +3738,9 @@ input friend_tracking_inc_input {
 # input type for inserting data into table "friend_tracking"
 input friend_tracking_insert_input {
   created_at: timestamptz
-  date: date
   geofence_id: Int
   id: Int
+  join_limit: timestamptz
   linking_word: String
   updated_at: timestamptz
   user_join: users_obj_rel_insert_input
@@ -3731,9 +3752,9 @@ input friend_tracking_insert_input {
 # aggregate max on columns
 type friend_tracking_max_fields {
   created_at: timestamptz
-  date: date
   geofence_id: Int
   id: Int
+  join_limit: timestamptz
   linking_word: String
   updated_at: timestamptz
   user_join_id: String
@@ -3743,9 +3764,9 @@ type friend_tracking_max_fields {
 # order by max() on columns of table "friend_tracking"
 input friend_tracking_max_order_by {
   created_at: order_by
-  date: order_by
   geofence_id: order_by
   id: order_by
+  join_limit: order_by
   linking_word: order_by
   updated_at: order_by
   user_join_id: order_by
@@ -3755,9 +3776,9 @@ input friend_tracking_max_order_by {
 # aggregate min on columns
 type friend_tracking_min_fields {
   created_at: timestamptz
-  date: date
   geofence_id: Int
   id: Int
+  join_limit: timestamptz
   linking_word: String
   updated_at: timestamptz
   user_join_id: String
@@ -3767,9 +3788,9 @@ type friend_tracking_min_fields {
 # order by min() on columns of table "friend_tracking"
 input friend_tracking_min_order_by {
   created_at: order_by
-  date: order_by
   geofence_id: order_by
   id: order_by
+  join_limit: order_by
   linking_word: order_by
   updated_at: order_by
   user_join_id: order_by
@@ -3801,9 +3822,9 @@ input friend_tracking_on_conflict {
 # ordering options when selecting data from "friend_tracking"
 input friend_tracking_order_by {
   created_at: order_by
-  date: order_by
   geofence_id: order_by
   id: order_by
+  join_limit: order_by
   linking_word: order_by
   updated_at: order_by
   user_join: users_order_by
@@ -3823,13 +3844,13 @@ enum friend_tracking_select_column {
   created_at
 
   # column name
-  date
-
-  # column name
   geofence_id
 
   # column name
   id
+
+  # column name
+  join_limit
 
   # column name
   linking_word
@@ -3847,9 +3868,9 @@ enum friend_tracking_select_column {
 # input type for updating data in table "friend_tracking"
 input friend_tracking_set_input {
   created_at: timestamptz
-  date: date
   geofence_id: Int
   id: Int
+  join_limit: timestamptz
   linking_word: String
   updated_at: timestamptz
   user_join_id: String
@@ -3910,13 +3931,13 @@ enum friend_tracking_update_column {
   created_at
 
   # column name
-  date
-
-  # column name
   geofence_id
 
   # column name
   id
+
+  # column name
+  join_limit
 
   # column name
   linking_word
@@ -4682,8 +4703,8 @@ input json_comparison_exp {
 type likes {
   # An object relationship
   activity: activities!
-  activity_id: Int!
   created_at: timestamptz
+  feed_id: Int!
   updated_at: timestamptz
 
   # An object relationship
@@ -4735,12 +4756,12 @@ input likes_arr_rel_insert_input {
 
 # aggregate avg on columns
 type likes_avg_fields {
-  activity_id: Float
+  feed_id: Float
 }
 
 # order by avg() on columns of table "likes"
 input likes_avg_order_by {
-  activity_id: order_by
+  feed_id: order_by
 }
 
 # Boolean expression to filter rows from the table "likes". All fields are combined with a logical 'AND'.
@@ -4749,8 +4770,8 @@ input likes_bool_exp {
   _not: likes_bool_exp
   _or: [likes_bool_exp]
   activity: activities_bool_exp
-  activity_id: Int_comparison_exp
   created_at: timestamptz_comparison_exp
+  feed_id: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
   user: users_bool_exp
   user_id: String_comparison_exp
@@ -4767,14 +4788,14 @@ enum likes_constraint {
 
 # input type for incrementing integer column in table "likes"
 input likes_inc_input {
-  activity_id: Int
+  feed_id: Int
 }
 
 # input type for inserting data into table "likes"
 input likes_insert_input {
   activity: activities_obj_rel_insert_input
-  activity_id: Int
   created_at: timestamptz
+  feed_id: Int
   updated_at: timestamptz
   user: users_obj_rel_insert_input
   user_id: String
@@ -4782,32 +4803,32 @@ input likes_insert_input {
 
 # aggregate max on columns
 type likes_max_fields {
-  activity_id: Int
   created_at: timestamptz
+  feed_id: Int
   updated_at: timestamptz
   user_id: String
 }
 
 # order by max() on columns of table "likes"
 input likes_max_order_by {
-  activity_id: order_by
   created_at: order_by
+  feed_id: order_by
   updated_at: order_by
   user_id: order_by
 }
 
 # aggregate min on columns
 type likes_min_fields {
-  activity_id: Int
   created_at: timestamptz
+  feed_id: Int
   updated_at: timestamptz
   user_id: String
 }
 
 # order by min() on columns of table "likes"
 input likes_min_order_by {
-  activity_id: order_by
   created_at: order_by
+  feed_id: order_by
   updated_at: order_by
   user_id: order_by
 }
@@ -4837,8 +4858,8 @@ input likes_on_conflict {
 # ordering options when selecting data from "likes"
 input likes_order_by {
   activity: activities_order_by
-  activity_id: order_by
   created_at: order_by
+  feed_id: order_by
   updated_at: order_by
   user: users_order_by
   user_id: order_by
@@ -4846,17 +4867,17 @@ input likes_order_by {
 
 # primary key columns input for table: "likes"
 input likes_pk_columns_input {
-  activity_id: Int!
+  feed_id: Int!
   user_id: String!
 }
 
 # select columns of table "likes"
 enum likes_select_column {
   # column name
-  activity_id
+  created_at
 
   # column name
-  created_at
+  feed_id
 
   # column name
   updated_at
@@ -4867,59 +4888,59 @@ enum likes_select_column {
 
 # input type for updating data in table "likes"
 input likes_set_input {
-  activity_id: Int
   created_at: timestamptz
+  feed_id: Int
   updated_at: timestamptz
   user_id: String
 }
 
 # aggregate stddev on columns
 type likes_stddev_fields {
-  activity_id: Float
+  feed_id: Float
 }
 
 # order by stddev() on columns of table "likes"
 input likes_stddev_order_by {
-  activity_id: order_by
+  feed_id: order_by
 }
 
 # aggregate stddev_pop on columns
 type likes_stddev_pop_fields {
-  activity_id: Float
+  feed_id: Float
 }
 
 # order by stddev_pop() on columns of table "likes"
 input likes_stddev_pop_order_by {
-  activity_id: order_by
+  feed_id: order_by
 }
 
 # aggregate stddev_samp on columns
 type likes_stddev_samp_fields {
-  activity_id: Float
+  feed_id: Float
 }
 
 # order by stddev_samp() on columns of table "likes"
 input likes_stddev_samp_order_by {
-  activity_id: order_by
+  feed_id: order_by
 }
 
 # aggregate sum on columns
 type likes_sum_fields {
-  activity_id: Int
+  feed_id: Int
 }
 
 # order by sum() on columns of table "likes"
 input likes_sum_order_by {
-  activity_id: order_by
+  feed_id: order_by
 }
 
 # update columns of table "likes"
 enum likes_update_column {
   # column name
-  activity_id
+  created_at
 
   # column name
-  created_at
+  feed_id
 
   # column name
   updated_at
@@ -4930,32 +4951,32 @@ enum likes_update_column {
 
 # aggregate var_pop on columns
 type likes_var_pop_fields {
-  activity_id: Float
+  feed_id: Float
 }
 
 # order by var_pop() on columns of table "likes"
 input likes_var_pop_order_by {
-  activity_id: order_by
+  feed_id: order_by
 }
 
 # aggregate var_samp on columns
 type likes_var_samp_fields {
-  activity_id: Float
+  feed_id: Float
 }
 
 # order by var_samp() on columns of table "likes"
 input likes_var_samp_order_by {
-  activity_id: order_by
+  feed_id: order_by
 }
 
 # aggregate variance on columns
 type likes_variance_fields {
-  activity_id: Float
+  feed_id: Float
 }
 
 # order by variance() on columns of table "likes"
 input likes_variance_order_by {
-  activity_id: order_by
+  feed_id: order_by
 }
 
 # mutation root
@@ -5111,7 +5132,7 @@ type mutation_root {
   ): likes_mutation_response
 
   # delete single row from the table: "likes"
-  delete_likes_by_pk(activity_id: Int!, user_id: String!): likes
+  delete_likes_by_pk(feed_id: Int!, user_id: String!): likes
 
   # delete data from the table: "notification_type"
   delete_notification_type(
@@ -6104,6 +6125,7 @@ enum notification_type_update_column {
 
 # columns and relationships of "notifications"
 type notifications {
+  created_at: timestamptz!
   id: Int!
   seen: Boolean!
   text: String!
@@ -6168,6 +6190,7 @@ input notifications_bool_exp {
   _and: [notifications_bool_exp]
   _not: notifications_bool_exp
   _or: [notifications_bool_exp]
+  created_at: timestamptz_comparison_exp
   id: Int_comparison_exp
   seen: Boolean_comparison_exp
   text: String_comparison_exp
@@ -6188,6 +6211,7 @@ input notifications_inc_input {
 
 # input type for inserting data into table "notifications"
 input notifications_insert_input {
+  created_at: timestamptz
   id: Int
   seen: Boolean
   text: String
@@ -6197,6 +6221,7 @@ input notifications_insert_input {
 
 # aggregate max on columns
 type notifications_max_fields {
+  created_at: timestamptz
   id: Int
   text: String
   user_id: String
@@ -6204,6 +6229,7 @@ type notifications_max_fields {
 
 # order by max() on columns of table "notifications"
 input notifications_max_order_by {
+  created_at: order_by
   id: order_by
   text: order_by
   user_id: order_by
@@ -6211,6 +6237,7 @@ input notifications_max_order_by {
 
 # aggregate min on columns
 type notifications_min_fields {
+  created_at: timestamptz
   id: Int
   text: String
   user_id: String
@@ -6218,6 +6245,7 @@ type notifications_min_fields {
 
 # order by min() on columns of table "notifications"
 input notifications_min_order_by {
+  created_at: order_by
   id: order_by
   text: order_by
   user_id: order_by
@@ -6247,6 +6275,7 @@ input notifications_on_conflict {
 
 # ordering options when selecting data from "notifications"
 input notifications_order_by {
+  created_at: order_by
   id: order_by
   seen: order_by
   text: order_by
@@ -6261,6 +6290,9 @@ input notifications_pk_columns_input {
 
 # select columns of table "notifications"
 enum notifications_select_column {
+  # column name
+  created_at
+
   # column name
   id
 
@@ -6279,6 +6311,7 @@ enum notifications_select_column {
 
 # input type for updating data in table "notifications"
 input notifications_set_input {
+  created_at: timestamptz
   id: Int
   seen: Boolean
   text: String
@@ -6328,6 +6361,9 @@ input notifications_sum_order_by {
 
 # update columns of table "notifications"
 enum notifications_update_column {
+  # column name
+  created_at
+
   # column name
   id
 
@@ -7058,7 +7094,7 @@ type query_root {
   ): likes_aggregate!
 
   # fetch data from the table: "likes" using primary key columns
-  likes_by_pk(activity_id: Int!, user_id: String!): likes
+  likes_by_pk(feed_id: Int!, user_id: String!): likes
 
   # fetch data from the table: "notification_type"
   notification_type(
@@ -7941,7 +7977,7 @@ type subscription_root {
   ): likes_aggregate!
 
   # fetch data from the table: "likes" using primary key columns
-  likes_by_pk(activity_id: Int!, user_id: String!): likes
+  likes_by_pk(feed_id: Int!, user_id: String!): likes
 
   # fetch data from the table: "notification_type"
   notification_type(
@@ -8625,6 +8661,7 @@ type users {
   id: String!
   name: String!
   picture: String
+  push_token: String
 
   # A computed field, executes function "totalscore"
   totalScore: bigint
@@ -8709,6 +8746,7 @@ input users_bool_exp {
   id: String_comparison_exp
   name: String_comparison_exp
   picture: String_comparison_exp
+  push_token: String_comparison_exp
   updated_at: timestamptz_comparison_exp
   user_achievement: user_achievement_bool_exp
 }
@@ -8738,6 +8776,7 @@ input users_insert_input {
   id: String
   name: String
   picture: String
+  push_token: String
   updated_at: timestamptz
   user_achievement: user_achievement_arr_rel_insert_input
 }
@@ -8750,6 +8789,7 @@ type users_max_fields {
   id: String
   name: String
   picture: String
+  push_token: String
   updated_at: timestamptz
 }
 
@@ -8761,6 +8801,7 @@ input users_max_order_by {
   id: order_by
   name: order_by
   picture: order_by
+  push_token: order_by
   updated_at: order_by
 }
 
@@ -8772,6 +8813,7 @@ type users_min_fields {
   id: String
   name: String
   picture: String
+  push_token: String
   updated_at: timestamptz
 }
 
@@ -8783,6 +8825,7 @@ input users_min_order_by {
   id: order_by
   name: order_by
   picture: order_by
+  push_token: order_by
   updated_at: order_by
 }
 
@@ -8821,6 +8864,7 @@ input users_order_by {
   id: order_by
   name: order_by
   picture: order_by
+  push_token: order_by
   updated_at: order_by
   user_achievement_aggregate: user_achievement_aggregate_order_by
 }
@@ -8851,6 +8895,9 @@ enum users_select_column {
   picture
 
   # column name
+  push_token
+
+  # column name
   updated_at
 }
 
@@ -8862,6 +8909,7 @@ input users_set_input {
   id: String
   name: String
   picture: String
+  push_token: String
   updated_at: timestamptz
 }
 
@@ -8884,6 +8932,9 @@ enum users_update_column {
 
   # column name
   picture
+
+  # column name
+  push_token
 
   # column name
   updated_at

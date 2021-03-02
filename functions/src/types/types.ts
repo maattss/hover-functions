@@ -505,6 +505,8 @@ export type Activities = {
   feed?: Maybe<Feed>;
   feeds: Array<Feed>;
   feeds_aggregate: Feed_Aggregate;
+  friend?: Maybe<Users>;
+  friend_id?: Maybe<Scalars['String']>;
   geofence: Geofences;
   geofence_id: Scalars['Int'];
   score?: Maybe<Scalars['Int']>;
@@ -602,6 +604,8 @@ export type Activities_Bool_Exp = {
   duration?: Maybe<Interval_Comparison_Exp>;
   feed?: Maybe<Feed_Bool_Exp>;
   feeds?: Maybe<Feed_Bool_Exp>;
+  friend?: Maybe<Users_Bool_Exp>;
+  friend_id?: Maybe<String_Comparison_Exp>;
   geofence?: Maybe<Geofences_Bool_Exp>;
   geofence_id?: Maybe<Int_Comparison_Exp>;
   score?: Maybe<Int_Comparison_Exp>;
@@ -630,6 +634,8 @@ export type Activities_Insert_Input = {
   duration?: Maybe<Scalars['interval']>;
   feed?: Maybe<Feed_Obj_Rel_Insert_Input>;
   feeds?: Maybe<Feed_Arr_Rel_Insert_Input>;
+  friend?: Maybe<Users_Obj_Rel_Insert_Input>;
+  friend_id?: Maybe<Scalars['String']>;
   geofence?: Maybe<Geofences_Obj_Rel_Insert_Input>;
   geofence_id?: Maybe<Scalars['Int']>;
   score?: Maybe<Scalars['Int']>;
@@ -644,6 +650,7 @@ export type Activities_Max_Fields = {
   activity_id?: Maybe<Scalars['Int']>;
   caption?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  friend_id?: Maybe<Scalars['String']>;
   geofence_id?: Maybe<Scalars['Int']>;
   score?: Maybe<Scalars['Int']>;
   started_at?: Maybe<Scalars['timestamptz']>;
@@ -655,6 +662,7 @@ export type Activities_Max_Order_By = {
   activity_id?: Maybe<Order_By>;
   caption?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  friend_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
   score?: Maybe<Order_By>;
   started_at?: Maybe<Order_By>;
@@ -667,6 +675,7 @@ export type Activities_Min_Fields = {
   activity_id?: Maybe<Scalars['Int']>;
   caption?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  friend_id?: Maybe<Scalars['String']>;
   geofence_id?: Maybe<Scalars['Int']>;
   score?: Maybe<Scalars['Int']>;
   started_at?: Maybe<Scalars['timestamptz']>;
@@ -678,6 +687,7 @@ export type Activities_Min_Order_By = {
   activity_id?: Maybe<Order_By>;
   caption?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  friend_id?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
   score?: Maybe<Order_By>;
   started_at?: Maybe<Order_By>;
@@ -709,6 +719,8 @@ export type Activities_Order_By = {
   duration?: Maybe<Order_By>;
   feed?: Maybe<Feed_Order_By>;
   feeds_aggregate?: Maybe<Feed_Aggregate_Order_By>;
+  friend?: Maybe<Users_Order_By>;
+  friend_id?: Maybe<Order_By>;
   geofence?: Maybe<Geofences_Order_By>;
   geofence_id?: Maybe<Order_By>;
   score?: Maybe<Order_By>;
@@ -727,6 +739,7 @@ export enum Activities_Select_Column {
   Caption = 'caption',
   CreatedAt = 'created_at',
   Duration = 'duration',
+  FriendId = 'friend_id',
   GeofenceId = 'geofence_id',
   Score = 'score',
   StartedAt = 'started_at',
@@ -739,6 +752,7 @@ export type Activities_Set_Input = {
   caption?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   duration?: Maybe<Scalars['interval']>;
+  friend_id?: Maybe<Scalars['String']>;
   geofence_id?: Maybe<Scalars['Int']>;
   score?: Maybe<Scalars['Int']>;
   started_at?: Maybe<Scalars['timestamptz']>;
@@ -803,6 +817,7 @@ export enum Activities_Update_Column {
   Caption = 'caption',
   CreatedAt = 'created_at',
   Duration = 'duration',
+  FriendId = 'friend_id',
   GeofenceId = 'geofence_id',
   Score = 'score',
   StartedAt = 'started_at',
@@ -3031,9 +3046,9 @@ export enum Followings_Update_Column {
 export type Friend_Tracking = {
   __typename?: 'friend_tracking';
   created_at: Scalars['timestamptz'];
-  date: Scalars['date'];
   geofence_id: Scalars['Int'];
   id: Scalars['Int'];
+  join_limit?: Maybe<Scalars['timestamptz']>;
   linking_word: Scalars['String'];
   updated_at: Scalars['timestamptz'];
   user_join?: Maybe<Users>;
@@ -3104,9 +3119,9 @@ export type Friend_Tracking_Bool_Exp = {
   _not?: Maybe<Friend_Tracking_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Friend_Tracking_Bool_Exp>>>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  date?: Maybe<Date_Comparison_Exp>;
   geofence_id?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  join_limit?: Maybe<Timestamptz_Comparison_Exp>;
   linking_word?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user_join?: Maybe<Users_Bool_Exp>;
@@ -3126,9 +3141,9 @@ export type Friend_Tracking_Inc_Input = {
 
 export type Friend_Tracking_Insert_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
-  date?: Maybe<Scalars['date']>;
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+  join_limit?: Maybe<Scalars['timestamptz']>;
   linking_word?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_join?: Maybe<Users_Obj_Rel_Insert_Input>;
@@ -3140,9 +3155,9 @@ export type Friend_Tracking_Insert_Input = {
 export type Friend_Tracking_Max_Fields = {
   __typename?: 'friend_tracking_max_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
-  date?: Maybe<Scalars['date']>;
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+  join_limit?: Maybe<Scalars['timestamptz']>;
   linking_word?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_join_id?: Maybe<Scalars['String']>;
@@ -3151,9 +3166,9 @@ export type Friend_Tracking_Max_Fields = {
 
 export type Friend_Tracking_Max_Order_By = {
   created_at?: Maybe<Order_By>;
-  date?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  join_limit?: Maybe<Order_By>;
   linking_word?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_join_id?: Maybe<Order_By>;
@@ -3163,9 +3178,9 @@ export type Friend_Tracking_Max_Order_By = {
 export type Friend_Tracking_Min_Fields = {
   __typename?: 'friend_tracking_min_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
-  date?: Maybe<Scalars['date']>;
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+  join_limit?: Maybe<Scalars['timestamptz']>;
   linking_word?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_join_id?: Maybe<Scalars['String']>;
@@ -3174,9 +3189,9 @@ export type Friend_Tracking_Min_Fields = {
 
 export type Friend_Tracking_Min_Order_By = {
   created_at?: Maybe<Order_By>;
-  date?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  join_limit?: Maybe<Order_By>;
   linking_word?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_join_id?: Maybe<Order_By>;
@@ -3202,9 +3217,9 @@ export type Friend_Tracking_On_Conflict = {
 
 export type Friend_Tracking_Order_By = {
   created_at?: Maybe<Order_By>;
-  date?: Maybe<Order_By>;
   geofence_id?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  join_limit?: Maybe<Order_By>;
   linking_word?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_join?: Maybe<Users_Order_By>;
@@ -3219,9 +3234,9 @@ export type Friend_Tracking_Pk_Columns_Input = {
 
 export enum Friend_Tracking_Select_Column {
   CreatedAt = 'created_at',
-  Date = 'date',
   GeofenceId = 'geofence_id',
   Id = 'id',
+  JoinLimit = 'join_limit',
   LinkingWord = 'linking_word',
   UpdatedAt = 'updated_at',
   UserJoinId = 'user_join_id',
@@ -3230,9 +3245,9 @@ export enum Friend_Tracking_Select_Column {
 
 export type Friend_Tracking_Set_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
-  date?: Maybe<Scalars['date']>;
   geofence_id?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['Int']>;
+  join_limit?: Maybe<Scalars['timestamptz']>;
   linking_word?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_join_id?: Maybe<Scalars['String']>;
@@ -3285,9 +3300,9 @@ export type Friend_Tracking_Sum_Order_By = {
 
 export enum Friend_Tracking_Update_Column {
   CreatedAt = 'created_at',
-  Date = 'date',
   GeofenceId = 'geofence_id',
   Id = 'id',
+  JoinLimit = 'join_limit',
   LinkingWord = 'linking_word',
   UpdatedAt = 'updated_at',
   UserJoinId = 'user_join_id',
@@ -3908,8 +3923,8 @@ export type Json_Comparison_Exp = {
 export type Likes = {
   __typename?: 'likes';
   activity: Activities;
-  activity_id: Scalars['Int'];
   created_at?: Maybe<Scalars['timestamptz']>;
+  feed_id: Scalars['Int'];
   updated_at?: Maybe<Scalars['timestamptz']>;
   user: Users;
   user_id: Scalars['String'];
@@ -3963,11 +3978,11 @@ export type Likes_Arr_Rel_Insert_Input = {
 
 export type Likes_Avg_Fields = {
   __typename?: 'likes_avg_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+  feed_id?: Maybe<Scalars['Float']>;
 };
 
 export type Likes_Avg_Order_By = {
-  activity_id?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
 };
 
 export type Likes_Bool_Exp = {
@@ -3975,8 +3990,8 @@ export type Likes_Bool_Exp = {
   _not?: Maybe<Likes_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Likes_Bool_Exp>>>;
   activity?: Maybe<Activities_Bool_Exp>;
-  activity_id?: Maybe<Int_Comparison_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
+  feed_id?: Maybe<Int_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user?: Maybe<Users_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
@@ -3988,13 +4003,13 @@ export enum Likes_Constraint {
 }
 
 export type Likes_Inc_Input = {
-  activity_id?: Maybe<Scalars['Int']>;
+  feed_id?: Maybe<Scalars['Int']>;
 };
 
 export type Likes_Insert_Input = {
   activity?: Maybe<Activities_Obj_Rel_Insert_Input>;
-  activity_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  feed_id?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<Users_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
@@ -4002,30 +4017,30 @@ export type Likes_Insert_Input = {
 
 export type Likes_Max_Fields = {
   __typename?: 'likes_max_fields';
-  activity_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  feed_id?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
 export type Likes_Max_Order_By = {
-  activity_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
 export type Likes_Min_Fields = {
   __typename?: 'likes_min_fields';
-  activity_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  feed_id?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
 export type Likes_Min_Order_By = {
-  activity_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
 };
@@ -4049,100 +4064,100 @@ export type Likes_On_Conflict = {
 
 export type Likes_Order_By = {
   activity?: Maybe<Activities_Order_By>;
-  activity_id?: Maybe<Order_By>;
   created_at?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user?: Maybe<Users_Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
 export type Likes_Pk_Columns_Input = {
-  activity_id: Scalars['Int'];
+  feed_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
 
 export enum Likes_Select_Column {
-  ActivityId = 'activity_id',
   CreatedAt = 'created_at',
+  FeedId = 'feed_id',
   UpdatedAt = 'updated_at',
   UserId = 'user_id'
 }
 
 export type Likes_Set_Input = {
-  activity_id?: Maybe<Scalars['Int']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  feed_id?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
 export type Likes_Stddev_Fields = {
   __typename?: 'likes_stddev_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+  feed_id?: Maybe<Scalars['Float']>;
 };
 
 export type Likes_Stddev_Order_By = {
-  activity_id?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
 };
 
 export type Likes_Stddev_Pop_Fields = {
   __typename?: 'likes_stddev_pop_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+  feed_id?: Maybe<Scalars['Float']>;
 };
 
 export type Likes_Stddev_Pop_Order_By = {
-  activity_id?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
 };
 
 export type Likes_Stddev_Samp_Fields = {
   __typename?: 'likes_stddev_samp_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+  feed_id?: Maybe<Scalars['Float']>;
 };
 
 export type Likes_Stddev_Samp_Order_By = {
-  activity_id?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
 };
 
 export type Likes_Sum_Fields = {
   __typename?: 'likes_sum_fields';
-  activity_id?: Maybe<Scalars['Int']>;
+  feed_id?: Maybe<Scalars['Int']>;
 };
 
 export type Likes_Sum_Order_By = {
-  activity_id?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
 };
 
 export enum Likes_Update_Column {
-  ActivityId = 'activity_id',
   CreatedAt = 'created_at',
+  FeedId = 'feed_id',
   UpdatedAt = 'updated_at',
   UserId = 'user_id'
 }
 
 export type Likes_Var_Pop_Fields = {
   __typename?: 'likes_var_pop_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+  feed_id?: Maybe<Scalars['Float']>;
 };
 
 export type Likes_Var_Pop_Order_By = {
-  activity_id?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
 };
 
 export type Likes_Var_Samp_Fields = {
   __typename?: 'likes_var_samp_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+  feed_id?: Maybe<Scalars['Float']>;
 };
 
 export type Likes_Var_Samp_Order_By = {
-  activity_id?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
 };
 
 export type Likes_Variance_Fields = {
   __typename?: 'likes_variance_fields';
-  activity_id?: Maybe<Scalars['Float']>;
+  feed_id?: Maybe<Scalars['Float']>;
 };
 
 export type Likes_Variance_Order_By = {
-  activity_id?: Maybe<Order_By>;
+  feed_id?: Maybe<Order_By>;
 };
 
 export type Mutation_Root = {
@@ -4444,7 +4459,7 @@ export type Mutation_RootDelete_LikesArgs = {
 
 
 export type Mutation_RootDelete_Likes_By_PkArgs = {
-  activity_id: Scalars['Int'];
+  feed_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
 
@@ -5153,6 +5168,7 @@ export enum Notification_Type_Update_Column {
 
 export type Notifications = {
   __typename?: 'notifications';
+  created_at: Scalars['timestamptz'];
   id: Scalars['Int'];
   seen: Scalars['Boolean'];
   text: Scalars['String'];
@@ -5219,6 +5235,7 @@ export type Notifications_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Notifications_Bool_Exp>>>;
   _not?: Maybe<Notifications_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Notifications_Bool_Exp>>>;
+  created_at?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
   seen?: Maybe<Boolean_Comparison_Exp>;
   text?: Maybe<String_Comparison_Exp>;
@@ -5235,6 +5252,7 @@ export type Notifications_Inc_Input = {
 };
 
 export type Notifications_Insert_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   seen?: Maybe<Scalars['Boolean']>;
   text?: Maybe<Scalars['String']>;
@@ -5244,12 +5262,14 @@ export type Notifications_Insert_Input = {
 
 export type Notifications_Max_Fields = {
   __typename?: 'notifications_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
 export type Notifications_Max_Order_By = {
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   text?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
@@ -5257,12 +5277,14 @@ export type Notifications_Max_Order_By = {
 
 export type Notifications_Min_Fields = {
   __typename?: 'notifications_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   text?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
 };
 
 export type Notifications_Min_Order_By = {
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   text?: Maybe<Order_By>;
   user_id?: Maybe<Order_By>;
@@ -5286,6 +5308,7 @@ export type Notifications_On_Conflict = {
 };
 
 export type Notifications_Order_By = {
+  created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   seen?: Maybe<Order_By>;
   text?: Maybe<Order_By>;
@@ -5298,6 +5321,7 @@ export type Notifications_Pk_Columns_Input = {
 };
 
 export enum Notifications_Select_Column {
+  CreatedAt = 'created_at',
   Id = 'id',
   Seen = 'seen',
   Text = 'text',
@@ -5306,6 +5330,7 @@ export enum Notifications_Select_Column {
 }
 
 export type Notifications_Set_Input = {
+  created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
   seen?: Maybe<Scalars['Boolean']>;
   text?: Maybe<Scalars['String']>;
@@ -5350,6 +5375,7 @@ export type Notifications_Sum_Order_By = {
 };
 
 export enum Notifications_Update_Column {
+  CreatedAt = 'created_at',
   Id = 'id',
   Seen = 'seen',
   Text = 'text',
@@ -5852,7 +5878,7 @@ export type Query_RootLikes_AggregateArgs = {
 
 
 export type Query_RootLikes_By_PkArgs = {
-  activity_id: Scalars['Int'];
+  feed_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
 
@@ -6446,7 +6472,7 @@ export type Subscription_RootLikes_AggregateArgs = {
 
 
 export type Subscription_RootLikes_By_PkArgs = {
-  activity_id: Scalars['Int'];
+  feed_id: Scalars['Int'];
   user_id: Scalars['String'];
 };
 
@@ -6839,6 +6865,7 @@ export type Users = {
   id: Scalars['String'];
   name: Scalars['String'];
   picture?: Maybe<Scalars['String']>;
+  push_token?: Maybe<Scalars['String']>;
   totalScore?: Maybe<Scalars['bigint']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_achievement: Array<User_Achievement>;
@@ -6998,6 +7025,7 @@ export type Users_Bool_Exp = {
   id?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   picture?: Maybe<String_Comparison_Exp>;
+  push_token?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user_achievement?: Maybe<User_Achievement_Bool_Exp>;
 };
@@ -7020,6 +7048,7 @@ export type Users_Insert_Input = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
+  push_token?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_achievement?: Maybe<User_Achievement_Arr_Rel_Insert_Input>;
 };
@@ -7032,6 +7061,7 @@ export type Users_Max_Fields = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
+  push_token?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -7042,6 +7072,7 @@ export type Users_Max_Order_By = {
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   picture?: Maybe<Order_By>;
+  push_token?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -7053,6 +7084,7 @@ export type Users_Min_Fields = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
+  push_token?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -7063,6 +7095,7 @@ export type Users_Min_Order_By = {
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   picture?: Maybe<Order_By>;
+  push_token?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -7095,6 +7128,7 @@ export type Users_Order_By = {
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   picture?: Maybe<Order_By>;
+  push_token?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_achievement_aggregate?: Maybe<User_Achievement_Aggregate_Order_By>;
 };
@@ -7110,6 +7144,7 @@ export enum Users_Select_Column {
   Id = 'id',
   Name = 'name',
   Picture = 'picture',
+  PushToken = 'push_token',
   UpdatedAt = 'updated_at'
 }
 
@@ -7120,6 +7155,7 @@ export type Users_Set_Input = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
+  push_token?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -7130,6 +7166,7 @@ export enum Users_Update_Column {
   Id = 'id',
   Name = 'name',
   Picture = 'picture',
+  PushToken = 'push_token',
   UpdatedAt = 'updated_at'
 }
 
@@ -8940,6 +8977,8 @@ export type ActivitiesResolvers<ContextType = any, ParentType extends ResolversP
   feed?: Resolver<Maybe<ResolversTypes['feed']>, ParentType, ContextType>;
   feeds?: Resolver<Array<ResolversTypes['feed']>, ParentType, ContextType, RequireFields<ActivitiesFeedsArgs, never>>;
   feeds_aggregate?: Resolver<ResolversTypes['feed_aggregate'], ParentType, ContextType, RequireFields<ActivitiesFeeds_AggregateArgs, never>>;
+  friend?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType>;
+  friend_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   geofence?: Resolver<ResolversTypes['geofences'], ParentType, ContextType>;
   geofence_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -8983,6 +9022,7 @@ export type Activities_Max_FieldsResolvers<ContextType = any, ParentType extends
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  friend_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   started_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -8995,6 +9035,7 @@ export type Activities_Min_FieldsResolvers<ContextType = any, ParentType extends
   activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   caption?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  friend_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   started_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
@@ -9794,9 +9835,9 @@ export type Followings_Mutation_ResponseResolvers<ContextType = any, ParentType 
 
 export type Friend_TrackingResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking'] = ResolversParentTypes['friend_tracking']> = {
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
-  date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
   geofence_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  join_limit?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   linking_word?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
   user_join?: Resolver<Maybe<ResolversTypes['users']>, ParentType, ContextType>;
@@ -9835,9 +9876,9 @@ export type Friend_Tracking_Avg_FieldsResolvers<ContextType = any, ParentType ex
 
 export type Friend_Tracking_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_max_fields'] = ResolversParentTypes['friend_tracking_max_fields']> = {
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  join_limit?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   linking_word?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_join_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -9847,9 +9888,9 @@ export type Friend_Tracking_Max_FieldsResolvers<ContextType = any, ParentType ex
 
 export type Friend_Tracking_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['friend_tracking_min_fields'] = ResolversParentTypes['friend_tracking_min_fields']> = {
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  date?: Resolver<Maybe<ResolversTypes['date']>, ParentType, ContextType>;
   geofence_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  join_limit?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   linking_word?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_join_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -10092,8 +10133,8 @@ export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 
 export type LikesResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes'] = ResolversParentTypes['likes']> = {
   activity?: Resolver<ResolversTypes['activities'], ParentType, ContextType>;
-  activity_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  feed_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
   user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -10122,21 +10163,21 @@ export type Likes_Aggregate_FieldsResolvers<ContextType = any, ParentType extend
 };
 
 export type Likes_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_avg_fields'] = ResolversParentTypes['likes_avg_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Likes_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_max_fields'] = ResolversParentTypes['likes_max_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Likes_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_min_fields'] = ResolversParentTypes['likes_min_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -10149,37 +10190,37 @@ export type Likes_Mutation_ResponseResolvers<ContextType = any, ParentType exten
 };
 
 export type Likes_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_stddev_fields'] = ResolversParentTypes['likes_stddev_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Likes_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_stddev_pop_fields'] = ResolversParentTypes['likes_stddev_pop_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Likes_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_stddev_samp_fields'] = ResolversParentTypes['likes_stddev_samp_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Likes_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_sum_fields'] = ResolversParentTypes['likes_sum_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Likes_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_var_pop_fields'] = ResolversParentTypes['likes_var_pop_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Likes_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_var_samp_fields'] = ResolversParentTypes['likes_var_samp_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Likes_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['likes_variance_fields'] = ResolversParentTypes['likes_variance_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  feed_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10217,7 +10258,7 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   delete_geofences?: Resolver<Maybe<ResolversTypes['geofences_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_GeofencesArgs, 'where'>>;
   delete_geofences_by_pk?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Geofences_By_PkArgs, 'id'>>;
   delete_likes?: Resolver<Maybe<ResolversTypes['likes_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_LikesArgs, 'where'>>;
-  delete_likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Likes_By_PkArgs, 'activity_id' | 'user_id'>>;
+  delete_likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Likes_By_PkArgs, 'feed_id' | 'user_id'>>;
   delete_notification_type?: Resolver<Maybe<ResolversTypes['notification_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Notification_TypeArgs, 'where'>>;
   delete_notification_type_by_pk?: Resolver<Maybe<ResolversTypes['notification_type']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Notification_Type_By_PkArgs, 'type'>>;
   delete_notifications?: Resolver<Maybe<ResolversTypes['notifications_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_NotificationsArgs, 'where'>>;
@@ -10350,6 +10391,7 @@ export type Notification_Type_Mutation_ResponseResolvers<ContextType = any, Pare
 };
 
 export type NotificationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications'] = ResolversParentTypes['notifications']> = {
+  created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   seen?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -10385,6 +10427,7 @@ export type Notifications_Avg_FieldsResolvers<ContextType = any, ParentType exte
 };
 
 export type Notifications_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_max_fields'] = ResolversParentTypes['notifications_max_fields']> = {
+  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -10392,6 +10435,7 @@ export type Notifications_Max_FieldsResolvers<ContextType = any, ParentType exte
 };
 
 export type Notifications_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications_min_fields'] = ResolversParentTypes['notifications_min_fields']> = {
+  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   text?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -10490,7 +10534,7 @@ export type Query_RootResolvers<ContextType = any, ParentType extends ResolversP
   geofences_by_pk?: Resolver<Maybe<ResolversTypes['geofences']>, ParentType, ContextType, RequireFields<Query_RootGeofences_By_PkArgs, 'id'>>;
   likes?: Resolver<Array<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Query_RootLikesArgs, never>>;
   likes_aggregate?: Resolver<ResolversTypes['likes_aggregate'], ParentType, ContextType, RequireFields<Query_RootLikes_AggregateArgs, never>>;
-  likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Query_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>>;
+  likes_by_pk?: Resolver<Maybe<ResolversTypes['likes']>, ParentType, ContextType, RequireFields<Query_RootLikes_By_PkArgs, 'feed_id' | 'user_id'>>;
   notification_type?: Resolver<Array<ResolversTypes['notification_type']>, ParentType, ContextType, RequireFields<Query_RootNotification_TypeArgs, never>>;
   notification_type_aggregate?: Resolver<ResolversTypes['notification_type_aggregate'], ParentType, ContextType, RequireFields<Query_RootNotification_Type_AggregateArgs, never>>;
   notification_type_by_pk?: Resolver<Maybe<ResolversTypes['notification_type']>, ParentType, ContextType, RequireFields<Query_RootNotification_Type_By_PkArgs, 'type'>>;
@@ -10558,7 +10602,7 @@ export type Subscription_RootResolvers<ContextType = any, ParentType extends Res
   geofences_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['geofences']>, "geofences_by_pk", ParentType, ContextType, RequireFields<Subscription_RootGeofences_By_PkArgs, 'id'>>;
   likes?: SubscriptionResolver<Array<ResolversTypes['likes']>, "likes", ParentType, ContextType, RequireFields<Subscription_RootLikesArgs, never>>;
   likes_aggregate?: SubscriptionResolver<ResolversTypes['likes_aggregate'], "likes_aggregate", ParentType, ContextType, RequireFields<Subscription_RootLikes_AggregateArgs, never>>;
-  likes_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['likes']>, "likes_by_pk", ParentType, ContextType, RequireFields<Subscription_RootLikes_By_PkArgs, 'activity_id' | 'user_id'>>;
+  likes_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['likes']>, "likes_by_pk", ParentType, ContextType, RequireFields<Subscription_RootLikes_By_PkArgs, 'feed_id' | 'user_id'>>;
   notification_type?: SubscriptionResolver<Array<ResolversTypes['notification_type']>, "notification_type", ParentType, ContextType, RequireFields<Subscription_RootNotification_TypeArgs, never>>;
   notification_type_aggregate?: SubscriptionResolver<ResolversTypes['notification_type_aggregate'], "notification_type_aggregate", ParentType, ContextType, RequireFields<Subscription_RootNotification_Type_AggregateArgs, never>>;
   notification_type_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['notification_type']>, "notification_type_by_pk", ParentType, ContextType, RequireFields<Subscription_RootNotification_Type_By_PkArgs, 'type'>>;
@@ -10690,6 +10734,7 @@ export type UsersResolvers<ContextType = any, ParentType extends ResolversParent
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  push_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   totalScore?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_achievement?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<UsersUser_AchievementArgs, never>>;
@@ -10717,6 +10762,7 @@ export type Users_Max_FieldsResolvers<ContextType = any, ParentType extends Reso
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  push_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -10728,6 +10774,7 @@ export type Users_Min_FieldsResolvers<ContextType = any, ParentType extends Reso
   id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  push_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
