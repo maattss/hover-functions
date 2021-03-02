@@ -6127,9 +6127,15 @@ enum notification_type_update_column {
 type notifications {
   created_at: timestamptz!
   id: Int!
+
+  # An object relationship
+  notification_type: notification_type!
   seen: Boolean!
   text: String!
   type: notification_type_enum!
+
+  # An object relationship
+  user: users!
   user_id: String!
 }
 
@@ -6192,9 +6198,11 @@ input notifications_bool_exp {
   _or: [notifications_bool_exp]
   created_at: timestamptz_comparison_exp
   id: Int_comparison_exp
+  notification_type: notification_type_bool_exp
   seen: Boolean_comparison_exp
   text: String_comparison_exp
   type: notification_type_enum_comparison_exp
+  user: users_bool_exp
   user_id: String_comparison_exp
 }
 
@@ -6213,9 +6221,11 @@ input notifications_inc_input {
 input notifications_insert_input {
   created_at: timestamptz
   id: Int
+  notification_type: notification_type_obj_rel_insert_input
   seen: Boolean
   text: String
   type: notification_type_enum
+  user: users_obj_rel_insert_input
   user_id: String
 }
 
@@ -6277,9 +6287,11 @@ input notifications_on_conflict {
 input notifications_order_by {
   created_at: order_by
   id: order_by
+  notification_type: notification_type_order_by
   seen: order_by
   text: order_by
   type: order_by
+  user: users_order_by
   user_id: order_by
 }
 

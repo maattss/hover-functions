@@ -15,9 +15,11 @@ export async function notifyUser(
       type: notificationType,
     })
     .then((response) => {
-      if (expoPushToken) {
+      if (response.insert_notifications_one?.user.push_token) {
         console.log('Sending push notification...')
-        sendPushNotification(expoPushToken, getNotificationTitle(notificationType), notificationText, true);
+        sendPushNotification(response.insert_notifications_one?.user.push_token , getNotificationTitle(notificationType), notificationText, true);
+      } else {
+         console.log(`User ${user_id} does not have a push_token`);
       }
       console.log('Response:', response);
       return response;

@@ -26,13 +26,13 @@ exports.checkChallengeExpiry = functions.https.onRequest(async (req, res) => {
     .catch((e) => {
       throw new functions.https.HttpsError('invalid-argument', e.message);
     });
-    const updateCount = data?.affected_rows;
-    data?.returning.forEach(async (item) => {
-      const notificationText = `Your ${item.challenge_type
-        .toLowerCase()
-        .replace('_', ' in ')} challenge have have expired. Unfortunately no one completed the challenge...`;
-      await notifyUser(item.created_by, notificationText, Notification_Type_Enum.ChallengeExpired);
-    });
+  const updateCount = data?.affected_rows;
+  data?.returning.forEach(async (item) => {
+    const notificationText = `Your ${item.challenge_type
+      .toLowerCase()
+      .replace('_', ' in ')} challenge have have expired. Unfortunately no one completed the challenge...`;
+    await notifyUser(item.created_by, notificationText, Notification_Type_Enum.ChallengeExpired);
+  });
   res.status(200).json({
     status: `${updateCount} have expired and are set to CLOSED. Notification sent to challenge owner.`,
   });

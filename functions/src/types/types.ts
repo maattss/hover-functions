@@ -5170,9 +5170,11 @@ export type Notifications = {
   __typename?: 'notifications';
   created_at: Scalars['timestamptz'];
   id: Scalars['Int'];
+  notification_type: Notification_Type;
   seen: Scalars['Boolean'];
   text: Scalars['String'];
   type: Notification_Type_Enum;
+  user: Users;
   user_id: Scalars['String'];
 };
 
@@ -5237,9 +5239,11 @@ export type Notifications_Bool_Exp = {
   _or?: Maybe<Array<Maybe<Notifications_Bool_Exp>>>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Int_Comparison_Exp>;
+  notification_type?: Maybe<Notification_Type_Bool_Exp>;
   seen?: Maybe<Boolean_Comparison_Exp>;
   text?: Maybe<String_Comparison_Exp>;
   type?: Maybe<Notification_Type_Enum_Comparison_Exp>;
+  user?: Maybe<Users_Bool_Exp>;
   user_id?: Maybe<String_Comparison_Exp>;
 };
 
@@ -5254,9 +5258,11 @@ export type Notifications_Inc_Input = {
 export type Notifications_Insert_Input = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  notification_type?: Maybe<Notification_Type_Obj_Rel_Insert_Input>;
   seen?: Maybe<Scalars['Boolean']>;
   text?: Maybe<Scalars['String']>;
   type?: Maybe<Notification_Type_Enum>;
+  user?: Maybe<Users_Obj_Rel_Insert_Input>;
   user_id?: Maybe<Scalars['String']>;
 };
 
@@ -5310,9 +5316,11 @@ export type Notifications_On_Conflict = {
 export type Notifications_Order_By = {
   created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  notification_type?: Maybe<Notification_Type_Order_By>;
   seen?: Maybe<Order_By>;
   text?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
+  user?: Maybe<Users_Order_By>;
   user_id?: Maybe<Order_By>;
 };
 
@@ -7390,6 +7398,9 @@ export const NotifyUserDocument = gql`
     mutation NotifyUser($user_id: String!, $text: String!, $type: notification_type_enum = CHALLENGE_CLOSED) {
   insert_notifications_one(object: {user_id: $user_id, text: $text, type: $type}) {
     id
+    user {
+      push_token
+    }
   }
 }
     `;
@@ -10393,9 +10404,11 @@ export type Notification_Type_Mutation_ResponseResolvers<ContextType = any, Pare
 export type NotificationsResolvers<ContextType = any, ParentType extends ResolversParentTypes['notifications'] = ResolversParentTypes['notifications']> = {
   created_at?: Resolver<ResolversTypes['timestamptz'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  notification_type?: Resolver<ResolversTypes['notification_type'], ParentType, ContextType>;
   seen?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   text?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['notification_type_enum'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
   user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -11247,6 +11260,9 @@ export const NotifyUser = gql`
     mutation NotifyUser($user_id: String!, $text: String!, $type: notification_type_enum = CHALLENGE_CLOSED) {
   insert_notifications_one(object: {user_id: $user_id, text: $text, type: $type}) {
     id
+    user {
+      push_token
+    }
   }
 }
     `;
@@ -11557,6 +11573,10 @@ export type NotifyUserMutation = (
   & { insert_notifications_one?: Maybe<(
     { __typename?: 'notifications' }
     & Pick<Notifications, 'id'>
+    & { user: (
+      { __typename?: 'users' }
+      & Pick<Users, 'push_token'>
+    ) }
   )> }
 );
 
