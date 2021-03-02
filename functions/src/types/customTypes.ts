@@ -21,3 +21,11 @@ export type NewAchievement = {
   achievement: AchievementFragmentFragment;
   user_id: string;
 };
+
+export type NotificationData = {
+  to: string;
+  sound: string | null;
+  title: string;
+  body: string;
+  openScreen: string;
+};

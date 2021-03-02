@@ -6025,6 +6025,9 @@ enum notification_type_enum {
 
   # Someone responded to your challenge
   PARTICIPANT_UPDATE
+
+  # This notification is a test
+  TEST_NOTIFICATION
 }
 
 # expression to compare columns of type notification_type_enum. All fields are combined with logical 'AND'.

@@ -5087,7 +5087,8 @@ export enum Notification_Type_Enum {
   ChallengeInvite = 'CHALLENGE_INVITE',
   ChallengeWon = 'CHALLENGE_WON',
   NewAchievement = 'NEW_ACHIEVEMENT',
-  ParticipantUpdate = 'PARTICIPANT_UPDATE'
+  ParticipantUpdate = 'PARTICIPANT_UPDATE',
+  TestNotification = 'TEST_NOTIFICATION'
 }
 
 export type Notification_Type_Enum_Comparison_Exp = {
