@@ -43,7 +43,7 @@ export async function notifyUser(user_id: string, notificationText: string, noti
       }
     })
     .catch((reason) => {
-      throw new Error(`Faild to insert notification into Hasura: ${reason}`);
+      throw new Error(`Failed to insert notification into Hasura: ${reason}`);
     });
 }
 

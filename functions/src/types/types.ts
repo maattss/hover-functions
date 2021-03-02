@@ -6873,6 +6873,8 @@ export type Users = {
   following_aggregate: Followings_Aggregate;
   id: Scalars['String'];
   name: Scalars['String'];
+  notifications: Array<Notifications>;
+  notifications_aggregate: Notifications_Aggregate;
   picture?: Maybe<Scalars['String']>;
   push_token?: Maybe<Scalars['String']>;
   totalScore?: Maybe<Scalars['bigint']>;
@@ -6972,6 +6974,24 @@ export type UsersFollowing_AggregateArgs = {
 };
 
 
+export type UsersNotificationsArgs = {
+  distinct_on?: Maybe<Array<Notifications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Notifications_Order_By>>;
+  where?: Maybe<Notifications_Bool_Exp>;
+};
+
+
+export type UsersNotifications_AggregateArgs = {
+  distinct_on?: Maybe<Array<Notifications_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Notifications_Order_By>>;
+  where?: Maybe<Notifications_Bool_Exp>;
+};
+
+
 export type UsersUser_AchievementArgs = {
   distinct_on?: Maybe<Array<User_Achievement_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -7033,6 +7053,7 @@ export type Users_Bool_Exp = {
   following?: Maybe<Followings_Bool_Exp>;
   id?: Maybe<String_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  notifications?: Maybe<Notifications_Bool_Exp>;
   picture?: Maybe<String_Comparison_Exp>;
   push_token?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
@@ -7056,6 +7077,7 @@ export type Users_Insert_Input = {
   following?: Maybe<Followings_Arr_Rel_Insert_Input>;
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  notifications?: Maybe<Notifications_Arr_Rel_Insert_Input>;
   picture?: Maybe<Scalars['String']>;
   push_token?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -7136,6 +7158,7 @@ export type Users_Order_By = {
   following_aggregate?: Maybe<Followings_Aggregate_Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  notifications_aggregate?: Maybe<Notifications_Aggregate_Order_By>;
   picture?: Maybe<Order_By>;
   push_token?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
@@ -10747,6 +10770,8 @@ export type UsersResolvers<ContextType = any, ParentType extends ResolversParent
   following_aggregate?: Resolver<ResolversTypes['followings_aggregate'], ParentType, ContextType, RequireFields<UsersFollowing_AggregateArgs, never>>;
   id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  notifications?: Resolver<Array<ResolversTypes['notifications']>, ParentType, ContextType, RequireFields<UsersNotificationsArgs, never>>;
+  notifications_aggregate?: Resolver<ResolversTypes['notifications_aggregate'], ParentType, ContextType, RequireFields<UsersNotifications_AggregateArgs, never>>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   push_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   totalScore?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>;

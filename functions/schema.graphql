@@ -8675,6 +8675,42 @@ type users {
   ): followings_aggregate!
   id: String!
   name: String!
+
+  # An array relationship
+  notifications(
+    # distinct select on columns
+    distinct_on: [notifications_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [notifications_order_by!]
+
+    # filter the rows returned
+    where: notifications_bool_exp
+  ): [notifications!]!
+
+  # An aggregated array relationship
+  notifications_aggregate(
+    # distinct select on columns
+    distinct_on: [notifications_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [notifications_order_by!]
+
+    # filter the rows returned
+    where: notifications_bool_exp
+  ): notifications_aggregate!
   picture: String
   push_token: String
 
@@ -8760,6 +8796,7 @@ input users_bool_exp {
   following: followings_bool_exp
   id: String_comparison_exp
   name: String_comparison_exp
+  notifications: notifications_bool_exp
   picture: String_comparison_exp
   push_token: String_comparison_exp
   updated_at: timestamptz_comparison_exp
@@ -8790,6 +8827,7 @@ input users_insert_input {
   following: followings_arr_rel_insert_input
   id: String
   name: String
+  notifications: notifications_arr_rel_insert_input
   picture: String
   push_token: String
   updated_at: timestamptz
@@ -8878,6 +8916,7 @@ input users_order_by {
   following_aggregate: followings_aggregate_order_by
   id: order_by
   name: order_by
+  notifications_aggregate: notifications_aggregate_order_by
   picture: order_by
   push_token: order_by
   updated_at: order_by
