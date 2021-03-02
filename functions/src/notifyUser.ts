@@ -34,6 +34,7 @@ export const sendPushNotification = async (expoPushToken: string, title: string,
     sound: sound ? 'default' : null,
     title: title,
     body: body,
+    openScreen: 'Notifications'
   };
 
   await fetch('https://exp.host/--/api/v2/push/send', {
