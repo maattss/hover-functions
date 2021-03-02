@@ -34,17 +34,18 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
           user_id,
           `You achieved a new achievement! Check it out in the feed or your profile page!`,
           Notification_Type_Enum.NewAchievement,
-        );
+        ).then((resp) => console.log(resp));
       }
     });
 
     if (objects.length) {
-      await insertAchievments(objects);
-
-      res.status(200).json({
-        status: 'Success',
-        data: `Added ${objects.length} new achievments for user ${user_id}. User are notified.`,
-      });
+      await insertAchievments(objects)
+        .then((resp) =>
+          res.status(200).json({
+            status: 'Success',
+            data: `Added ${objects.length} new achievments for user ${user_id}. User are notified.`,
+          }),
+        );
     } else {
       res.status(200).json({
         status: 'Success',
@@ -58,7 +59,7 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
     queryData.user?.user_achievement.forEach(async ({ achievement }: { achievement: AchievementFragmentFragment }) => {
       if (!isValidAchievment(achievement, queryData.user as UserScoreFragmentFragment)) {
         objects.push({ achievement, user_id });
-        await deleteAchievment(achievement.id, user_id);
+        await deleteAchievment(achievement.id, user_id).catch(async (resp) => console.error(resp));
       }
     });
 
@@ -86,8 +87,8 @@ async function deleteAchievment(achievement_id: number, user_id: string) {
     .then((response) => {
       return response;
     })
-    .catch((e) => {
-      throw new functions.https.HttpsError('invalid-argument', e.message);
+    .catch((reason) => {
+      throw new Error(`Failed to delete achievement in Hasura: ${reason}`);
     });
 }
 
@@ -108,15 +109,15 @@ async function insertAchievments(objects: NewAchievement[]) {
     .then((response) => {
       return response;
     })
-    .catch((e) => {
-      throw new functions.https.HttpsError('invalid-argument', e.message);
+    .catch((reason) => {
+      throw new Error(`Failed to insert achievement into Hasura: ${reason}`);
     });
 }
 
 function isValidAchievment(achievement: AchievementFragmentFragment, user: UserScoreFragmentFragment): boolean {
   switch (achievement.achievement_type) {
     case 'SCORE': {
-      if (user.totalScore >= achievement.rule.score) {
+      if (user.totalScore && user.totalScore >= achievement.rule.score) {
         return true;
       }
       break;
