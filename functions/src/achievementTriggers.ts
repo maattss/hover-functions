@@ -32,20 +32,19 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
         objects.push({ achievement, user_id });
         await notifyUser(
           user_id,
-          `You achieved a new achievement! Check it out in the feed or your profile page!`,
+          `You earned a new achievement! Check it out on your profile page.`,
           Notification_Type_Enum.NewAchievement,
         ).then((resp) => console.log(resp));
       }
     });
 
     if (objects.length) {
-      await insertAchievments(objects)
-        .then((resp) =>
-          res.status(200).json({
-            status: 'Success',
-            data: `Added ${objects.length} new achievments for user ${user_id}. User are notified.`,
-          }),
-        );
+      await insertAchievments(objects).then((resp) =>
+        res.status(200).json({
+          status: 'Success',
+          data: `Added ${objects.length} new achievments for user ${user_id}. User are notified.`,
+        }),
+      );
     } else {
       res.status(200).json({
         status: 'Success',

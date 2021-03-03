@@ -96,13 +96,13 @@ export const getNotificationTitle = (type: Notification_Type_Enum) => {
     case Notification_Type_Enum.ChallengeExpired:
       return 'Oh no...';
     case Notification_Type_Enum.ChallengeFinished:
-      return 'We have a winner ...';
+      return 'We have a winner!';
     case Notification_Type_Enum.ChallengeInvite:
-      return `You've been challenged!`;
+      return `You've been challenged`;
     case Notification_Type_Enum.ChallengeWon:
-      return 'Congratulation you won!';
+      return 'Congratulations, you won!';
     case Notification_Type_Enum.NewAchievement:
-      return 'Congratulation!';
+      return 'Congratulations!';
     case Notification_Type_Enum.ParticipantUpdate:
       return 'Someone responded to your challenge';
     case Notification_Type_Enum.TestNotification:
