@@ -75,7 +75,7 @@ exports.validateChallenge = functions.https.onRequest(async (req, res) => {
         });
       const notificationText: string = ` won the ${queryData.challenge_by_pk?.challenge_type
         .toLowerCase()
-        .replace('_', ' in ')} challenge! Check it out in the feed!`;
+        .replace('_', ' in ')} challenge! Check it out in the feed.`;
 
       let notificationCount = 0;
       queryData.challenge_by_pk?.challenge_participants.forEach(async (participant) => {
