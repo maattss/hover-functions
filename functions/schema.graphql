@@ -400,7 +400,7 @@ enum achievement_type_constraint {
 }
 
 enum achievement_type_enum {
-  # First activity on the app
+  # First activity in the app
   FIRST_ACTIVITY
   SCORE
   SCORE_IN_CATEGORY
@@ -2889,6 +2889,42 @@ type feed {
   feed_type: feed_type_enum!
   id: Int!
 
+  # An array relationship
+  likes(
+    # distinct select on columns
+    distinct_on: [likes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [likes_order_by!]
+
+    # filter the rows returned
+    where: likes_bool_exp
+  ): [likes!]!
+
+  # An aggregated array relationship
+  likes_aggregate(
+    # distinct select on columns
+    distinct_on: [likes_select_column!]
+
+    # limit the number of rows returned
+    limit: Int
+
+    # skip the first n rows. Use only with order_by
+    offset: Int
+
+    # sort the rows by one or more columns
+    order_by: [likes_order_by!]
+
+    # filter the rows returned
+    where: likes_bool_exp
+  ): likes_aggregate!
+
   # An object relationship
   user: users
 
@@ -2970,6 +3006,7 @@ input feed_bool_exp {
   feedTypeByFeedType: feed_type_bool_exp
   feed_type: feed_type_enum_comparison_exp
   id: Int_comparison_exp
+  likes: likes_bool_exp
   user: users_bool_exp
   user_achievement: user_achievement_bool_exp
   user_id: String_comparison_exp
@@ -3010,6 +3047,7 @@ input feed_insert_input {
   feedTypeByFeedType: feed_type_obj_rel_insert_input
   feed_type: feed_type_enum
   id: Int
+  likes: likes_arr_rel_insert_input
   user: users_obj_rel_insert_input
   user_achievement: user_achievement_obj_rel_insert_input
   user_id: String
@@ -3089,6 +3127,7 @@ input feed_order_by {
   feedTypeByFeedType: feed_type_order_by
   feed_type: order_by
   id: order_by
+  likes_aggregate: likes_aggregate_order_by
   user: users_order_by
   user_achievement: user_achievement_order_by
   user_id: order_by
@@ -4701,9 +4740,10 @@ input json_comparison_exp {
 
 # columns and relationships of "likes"
 type likes {
-  # An object relationship
-  activity: activities!
   created_at: timestamptz
+
+  # An object relationship
+  feed: feed!
   feed_id: Int!
   updated_at: timestamptz
 
@@ -4769,8 +4809,8 @@ input likes_bool_exp {
   _and: [likes_bool_exp]
   _not: likes_bool_exp
   _or: [likes_bool_exp]
-  activity: activities_bool_exp
   created_at: timestamptz_comparison_exp
+  feed: feed_bool_exp
   feed_id: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
   user: users_bool_exp
@@ -4780,10 +4820,10 @@ input likes_bool_exp {
 # unique or primary key constraints on table "likes"
 enum likes_constraint {
   # unique or primary key constraint
-  Likes_pkey
+  Likes_user_id_activity_id_key
 
   # unique or primary key constraint
-  Likes_user_id_activity_id_key
+  likes_pkey
 }
 
 # input type for incrementing integer column in table "likes"
@@ -4793,8 +4833,8 @@ input likes_inc_input {
 
 # input type for inserting data into table "likes"
 input likes_insert_input {
-  activity: activities_obj_rel_insert_input
   created_at: timestamptz
+  feed: feed_obj_rel_insert_input
   feed_id: Int
   updated_at: timestamptz
   user: users_obj_rel_insert_input
@@ -4857,8 +4897,8 @@ input likes_on_conflict {
 
 # ordering options when selecting data from "likes"
 input likes_order_by {
-  activity: activities_order_by
   created_at: order_by
+  feed: feed_order_by
   feed_id: order_by
   updated_at: order_by
   user: users_order_by
@@ -6020,8 +6060,14 @@ enum notification_type_enum {
   # Congratulation
   CHALLENGE_WON
 
+  # Message from developers
+  MESSAGE
+
   # Congratulation
   NEW_ACHIEVEMENT
+
+  # Someone reacted to your activity.
+  NEW_REACTION
 
   # Someone responded to your challenge
   PARTICIPANT_UPDATE
