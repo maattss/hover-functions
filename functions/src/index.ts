@@ -31,13 +31,10 @@ exports.registerUser = functions.https.onCall(async (data) => {
 
     await admin.auth().setCustomUserClaims(userRecord.uid, customClaims);
     const id = userRecord.uid;
-    await client
-      .CreateUser({ id, email, name, picture })
-      .then((res) => res)
-      .catch((e) => {
-        throw new functions.https.HttpsError('invalid-argument', e.message);
-      });
-    return userRecord.toJSON();
+    return await client.CreateUser({ id, email, name, picture }).catch((reason: { severity: string; message: string }) => {
+      console.error(reason);
+      throw new functions.https.HttpsError('internal', reason.message, JSON.stringify(reason));
+    });
   } catch (e) {
     let errorCode = 'unknown';
     let msg = 'Something went wrong, please try again later';
