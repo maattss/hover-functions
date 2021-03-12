@@ -25,9 +25,9 @@ export async function notifyUser(user_id: string, notificationText: string, noti
       if (response.insert_notifications_one?.user.push_token) {
         return await sendPushNotification(
           response.insert_notifications_one?.user.push_token,
-          getNotificationTitle(notificationType),
           notificationText,
           true,
+          getNotificationTitle(notificationType),
         )
           .then(() => {
             console.log(`Notification and push notification were sent to user ${user_id}`);
@@ -47,7 +47,7 @@ export async function notifyUser(user_id: string, notificationText: string, noti
     });
 }
 
-export const sendPushNotification = async (expoPushToken: string, title: string, body: string, sound: boolean) => {
+export const sendPushNotification = async (expoPushToken: string, body: string, sound: boolean, title?: string) => {
   const message: NotificationData = {
     to: expoPushToken,
     sound: sound ? 'default' : null,
@@ -106,7 +106,7 @@ export const getNotificationTitle = (type: Notification_Type_Enum) => {
     case Notification_Type_Enum.ParticipantUpdate:
       return 'Someone responded to your challenge';
     case Notification_Type_Enum.NewReaction:
-      return 'Someone reacted your activity';
+      return;
     case Notification_Type_Enum.Message:
       return 'New message from developers';
     default:

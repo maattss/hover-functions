@@ -1,0 +1,13 @@
+query GetLikeDetails($feed_id: Int!, $user_id: String!) {
+  feed: feed_by_pk(id: $feed_id) {
+    user {
+      id
+      name
+    }
+    feed_type
+  }
+  liked_by: user(id: $user_id) {
+    id
+    name
+  }
+}
