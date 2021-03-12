@@ -25,7 +25,7 @@ export type NewAchievement = {
 export type NotificationData = {
   to: string;
   sound: string | null;
-  title: string;
+  title?: string;
   body: string;
   openScreen: string;
 };

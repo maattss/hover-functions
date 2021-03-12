@@ -66,4 +66,5 @@ exports.processDelete = functions.auth.user().onDelete(async (user) => {
 
 exports.achievementTriggers = require('./achievementTriggers');
 exports.challengeTriggers = require('./challengeTriggers');
+exports.likeTrigger = require('./likeTriggers');
 exports.notificationTestTrigger = require('./notifyUser');
