@@ -2,22 +2,23 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { FunctionsErrorCode } from 'firebase-functions/lib/providers/https';
 import { client } from './client';
+import { UserRecord } from 'firebase-functions/lib/providers/auth';
 
 admin.initializeApp(functions.config().firebase);
 
 exports.registerUser = functions.https.onCall(async (data) => {
   const { email, password, name, picture } = data;
-
-  if (email === null || password === null) {
+  if (email === null || password === null || name === null) {
     // We are throwing an error if either the email or the password is missing
     // We should also ideally validate these on the frontend so the request is never made if those fields are missing
-    throw new functions.https.HttpsError('invalid-argument', 'Email and password are required fields');
+    throw new functions.https.HttpsError(
+      'invalid-argument',
+      'Missing fields: Username and password are required fields',
+    );
   }
-
   try {
     // We create our user using the firebase admin sdk
-    const userRecord = await admin.auth().createUser({ email, password });
-
+    const userRecord: UserRecord = await admin.auth().createUser({ email, password });
     // We set our user role and the x-hasura-user-id claims
     // Remember, the x-hasura-user-id is what Hasura uses to check
     // if the user is allow to read/update a record
@@ -28,13 +29,15 @@ exports.registerUser = functions.https.onCall(async (data) => {
         'x-hasura-user-id': userRecord.uid,
       },
     };
-
     await admin.auth().setCustomUserClaims(userRecord.uid, customClaims);
-    const id = userRecord.uid;
-    return await client.CreateUser({ id, email, name, picture }).catch((reason: { severity: string; message: string }) => {
-      console.error(reason);
-      throw new functions.https.HttpsError('internal', reason.message, JSON.stringify(reason));
-    });
+
+    await client
+      .CreateUser({ id: userRecord.uid, email, name, picture })
+      .catch((reason: { severity: string; message: string }) => {
+        console.error(reason);
+        throw new functions.https.HttpsError('internal', reason.message, JSON.stringify(reason));
+      });
+    return userRecord.toJSON();
   } catch (e) {
     let errorCode = 'unknown';
     let msg = 'Something went wrong, please try again later';
