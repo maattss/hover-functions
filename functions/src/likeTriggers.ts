@@ -31,8 +31,8 @@ exports.notifyOnNewLike = functions.https.onRequest(async (req, res) => {
         'post';
     }
 
-    if (queryData.feed?.user?.id !== user_id) {
-      await notifyUser(user_id, notificationText, Notification_Type_Enum.NewReaction);
+    if (queryData.feed?.user?.id && queryData.feed?.user?.id !== user_id) {
+      await notifyUser(queryData.feed?.user?.id, notificationText, Notification_Type_Enum.NewReaction);
       res.status(200).json({
         status: `Success: Notification sent to post owner.`,
       });
