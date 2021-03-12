@@ -7436,6 +7436,21 @@ export const GetChallengesParticipantsDocument = gql`
 }
     ${ChallengeFragmentFragmentDoc}
 ${BasicParticipantFragmentFragmentDoc}`;
+export const GetLikeDetailsDocument = gql`
+    query GetLikeDetails($feed_id: Int!, $user_id: String!) {
+  feed: feed_by_pk(id: $feed_id) {
+    user {
+      id
+      name
+    }
+    feed_type
+  }
+  liked_by: user(id: $user_id) {
+    id
+    name
+  }
+}
+    `;
 export const InsertAchievementsDocument = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -7524,6 +7539,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetChallengesParticipants(variables: GetChallengesParticipantsQueryVariables): Promise<GetChallengesParticipantsQuery> {
       return withWrapper(() => client.request<GetChallengesParticipantsQuery>(print(GetChallengesParticipantsDocument), variables));
+    },
+    GetLikeDetails(variables: GetLikeDetailsQueryVariables): Promise<GetLikeDetailsQuery> {
+      return withWrapper(() => client.request<GetLikeDetailsQuery>(print(GetLikeDetailsDocument), variables));
     },
     InsertAchievements(variables: InsertAchievementsMutationVariables): Promise<InsertAchievementsMutation> {
       return withWrapper(() => client.request<InsertAchievementsMutation>(print(InsertAchievementsDocument), variables));
@@ -11302,6 +11320,21 @@ export const GetChallengesParticipants = gql`
 }
     ${ChallengeFragment}
 ${BasicParticipantFragment}`;
+export const GetLikeDetails = gql`
+    query GetLikeDetails($feed_id: Int!, $user_id: String!) {
+  feed: feed_by_pk(id: $feed_id) {
+    user {
+      id
+      name
+    }
+    feed_type
+  }
+  liked_by: user(id: $user_id) {
+    id
+    name
+  }
+}
+    `;
 export const InsertAchievements = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -11598,6 +11631,27 @@ export type GetChallengesParticipantsQuery = (
       & BasicParticipantFragmentFragment
     )> }
     & ChallengeFragmentFragment
+  )> }
+);
+
+export type GetLikeDetailsQueryVariables = Exact<{
+  feed_id: Scalars['Int'];
+  user_id: Scalars['String'];
+}>;
+
+
+export type GetLikeDetailsQuery = (
+  { __typename?: 'query_root' }
+  & { feed?: Maybe<(
+    { __typename?: 'feed' }
+    & Pick<Feed, 'feed_type'>
+    & { user?: Maybe<(
+      { __typename?: 'users' }
+      & Pick<Users, 'id' | 'name'>
+    )> }
+  )>, liked_by?: Maybe<(
+    { __typename?: 'users' }
+    & Pick<Users, 'id' | 'name'>
   )> }
 );
 
