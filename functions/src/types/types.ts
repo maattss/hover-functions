@@ -1110,6 +1110,7 @@ export type Challenge = {
   end_date: Scalars['date'];
   feed?: Maybe<Feed>;
   id: Scalars['Int'];
+  participant_count?: Maybe<Scalars['bigint']>;
   rules: Scalars['json'];
   start_date: Scalars['date'];
   state: Challenge_State_Enum;
@@ -7404,11 +7405,13 @@ export const ExpireChallengesDocument = gql`
 }
     `;
 export const GetActivitiesAndChallengesDocument = gql`
-    query GetActivitiesAndChallenges($id: String) {
+    query GetActivitiesAndChallenges($id: String!) {
   activities(where: {user_id: {_eq: $id}}) {
     ...basicActivityFragment
   }
-  challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
+  challenge_participant(
+    where: {user_id: {_eq: $id}, state: {_neq: DECLINED}, challenge: {state: {_eq: ACTIVE}}}
+  ) {
     ...participantFragment
   }
 }
@@ -7531,7 +7534,7 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     ExpireChallenges(variables: ExpireChallengesMutationVariables): Promise<ExpireChallengesMutation> {
       return withWrapper(() => client.request<ExpireChallengesMutation>(print(ExpireChallengesDocument), variables));
     },
-    GetActivitiesAndChallenges(variables?: GetActivitiesAndChallengesQueryVariables): Promise<GetActivitiesAndChallengesQuery> {
+    GetActivitiesAndChallenges(variables: GetActivitiesAndChallengesQueryVariables): Promise<GetActivitiesAndChallengesQuery> {
       return withWrapper(() => client.request<GetActivitiesAndChallengesQuery>(print(GetActivitiesAndChallengesDocument), variables));
     },
     GetChallengeParticipantsAndActivities(variables: GetChallengeParticipantsAndActivitiesQueryVariables): Promise<GetChallengeParticipantsAndActivitiesQuery> {
@@ -9281,6 +9284,7 @@ export type ChallengeResolvers<ContextType = any, ParentType extends ResolversPa
   end_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
   feed?: Resolver<Maybe<ResolversTypes['feed']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  participant_count?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>;
   rules?: Resolver<ResolversTypes['json'], ParentType, ContextType, RequireFields<ChallengeRulesArgs, never>>;
   start_date?: Resolver<ResolversTypes['date'], ParentType, ContextType>;
   state?: Resolver<ResolversTypes['challenge_state_enum'], ParentType, ContextType>;
@@ -11288,11 +11292,13 @@ export const ExpireChallenges = gql`
 }
     `;
 export const GetActivitiesAndChallenges = gql`
-    query GetActivitiesAndChallenges($id: String) {
+    query GetActivitiesAndChallenges($id: String!) {
   activities(where: {user_id: {_eq: $id}}) {
     ...basicActivityFragment
   }
-  challenge_participant(where: {user_id: {_eq: $id}, state: {_neq: DECLINED}}) {
+  challenge_participant(
+    where: {user_id: {_eq: $id}, state: {_neq: DECLINED}, challenge: {state: {_eq: ACTIVE}}}
+  ) {
     ...participantFragment
   }
 }
@@ -11585,7 +11591,7 @@ export type UserScoreFragmentFragment = (
 );
 
 export type GetActivitiesAndChallengesQueryVariables = Exact<{
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 }>;
 
 
