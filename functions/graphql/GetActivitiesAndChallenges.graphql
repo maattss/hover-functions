@@ -1,8 +1,10 @@
-query GetActivitiesAndChallenges($id: String) {
+query GetActivitiesAndChallenges($id: String!) {
   activities(where: { user_id: { _eq: $id } }) {
     ...basicActivityFragment
   }
-  challenge_participant(where: { user_id: { _eq: $id }, state: { _neq: DECLINED } }) {
+  challenge_participant(
+    where: { user_id: { _eq: $id }, state: { _neq: DECLINED }, challenge: { state: { _eq: ACTIVE } } }
+  ) {
     ...participantFragment
   }
 }

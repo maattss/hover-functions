@@ -1343,6 +1343,9 @@ type challenge {
   # An object relationship
   feed: feed
   id: Int!
+
+  # A computed field, executes function "challenge_participant_count"
+  participant_count: bigint
   rules(
     # JSON select path
     path: String
