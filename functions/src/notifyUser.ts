@@ -14,6 +14,27 @@ exports.testNotification = functions.https.onRequest(async (req, res) => {
   return;
 });
 
+exports.infoNotification = functions.https.onRequest(async (req, res) => {
+  const { tokens, title, message }: { tokens: string[] , title:string, message:string} = req.body;
+
+  tokens.forEach(
+    async (push_token) =>
+      await sendPushNotification(push_token, message, true, title)
+        .then(() => {
+          console.log(`Notification and push notification were sent with push token ${push_token}`);
+          return `Notification and push notification were sent with push token ${push_token}`;
+        })
+        .catch((error) => {
+          console.log(`Failed to send push notification with push token ${push_token}.`);
+          return `Failed to send push notification with push token ${push_token}: ${error}`;
+        }),
+  );
+    res.status(200).json({
+      status: `Success: Push notifications sent`,
+    });
+  return;
+});
+
 export async function notifyUser(user_id: string, notificationText: string, notificationType: Notification_Type_Enum) {
   return await client
     .NotifyUser({
