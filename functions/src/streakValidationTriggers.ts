@@ -1,28 +1,37 @@
 import * as functions from 'firebase-functions';
 import moment = require('moment');
 import { client } from './client';
+import { BasicActivityFragmentFragment } from './types/types';
 
 exports.validateStreak = functions.https.onRequest(async (req, res) => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  const userStreaks = await client.GetStreaks();
 
-
-
-  
-  const data = await client
-    .ExpireChallenges({ date: today.toISOString() })
-    .then((response) => {
-      return response.update_challenge;
-    })
-    .catch((reason) => {
-      throw new Error(`Failed to expire challenge in Hasura: ${reason}`);
-    });
-  const updateCount = data?.affected_rows;
-  data?.returning.forEach(async (item) => {
-
-
+  userStreaks.users.forEach(async (user) => {
+    const new_streak = validateStreak(user.id, user.activities, today);
+    if (user.streak !== new_streak) {
+      await client.UpdateStreak({ id: user.id, streak: new_streak });
+    }
   });
+
   res.status(200).json({
-    status: `${updateCount} have expired and are set to CLOSED. Notification sent to challenge owner.`,
+    status: `Success: updated streaks.`,
   });
 });
+
+function validateStreak(user_id: string, activities: BasicActivityFragmentFragment[], today: Date): number {
+  let streak = 0;
+  let last_streak_day = today;
+  activities.forEach((activity) => {
+      console.log(moment(activity.started_at).diff(last_streak_day, 'days') );
+    if (false) {
+      streak++;
+      last_streak_day = new Date(activity.started_at);
+      last_streak_day.setHours(0, 0, 0, 0);
+    }
+    return;
+  });
+
+  return streak;
+}
