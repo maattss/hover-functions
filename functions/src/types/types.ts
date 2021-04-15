@@ -31,7 +31,6 @@ export type Scalars = {
   float8: any;
   interval: any;
   json: any;
-  timestamp: any;
   timestamptz: any;
 };
 
@@ -372,7 +371,8 @@ export enum Achievement_Type_Constraint {
 export enum Achievement_Type_Enum {
   FirstActivity = 'FIRST_ACTIVITY',
   Score = 'SCORE',
-  ScoreInCategory = 'SCORE_IN_CATEGORY'
+  ScoreInCategory = 'SCORE_IN_CATEGORY',
+  Streak = 'STREAK'
 }
 
 export type Achievement_Type_Enum_Comparison_Exp = {
@@ -2113,283 +2113,6 @@ export type Challenge_Variance_Fields = {
 
 export type Challenge_Variance_Order_By = {
   id?: Maybe<Order_By>;
-};
-
-export type Comments = {
-  __typename?: 'comments';
-  activity: Activities;
-  activity_id: Scalars['Int'];
-  comment_id: Scalars['Int'];
-  content: Scalars['String'];
-  created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
-  user: Users;
-  user_id: Scalars['String'];
-};
-
-export type Comments_Aggregate = {
-  __typename?: 'comments_aggregate';
-  aggregate?: Maybe<Comments_Aggregate_Fields>;
-  nodes: Array<Comments>;
-};
-
-export type Comments_Aggregate_Fields = {
-  __typename?: 'comments_aggregate_fields';
-  avg?: Maybe<Comments_Avg_Fields>;
-  count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Comments_Max_Fields>;
-  min?: Maybe<Comments_Min_Fields>;
-  stddev?: Maybe<Comments_Stddev_Fields>;
-  stddev_pop?: Maybe<Comments_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Comments_Stddev_Samp_Fields>;
-  sum?: Maybe<Comments_Sum_Fields>;
-  var_pop?: Maybe<Comments_Var_Pop_Fields>;
-  var_samp?: Maybe<Comments_Var_Samp_Fields>;
-  variance?: Maybe<Comments_Variance_Fields>;
-};
-
-
-export type Comments_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Comments_Select_Column>>;
-  distinct?: Maybe<Scalars['Boolean']>;
-};
-
-export type Comments_Aggregate_Order_By = {
-  avg?: Maybe<Comments_Avg_Order_By>;
-  count?: Maybe<Order_By>;
-  max?: Maybe<Comments_Max_Order_By>;
-  min?: Maybe<Comments_Min_Order_By>;
-  stddev?: Maybe<Comments_Stddev_Order_By>;
-  stddev_pop?: Maybe<Comments_Stddev_Pop_Order_By>;
-  stddev_samp?: Maybe<Comments_Stddev_Samp_Order_By>;
-  sum?: Maybe<Comments_Sum_Order_By>;
-  var_pop?: Maybe<Comments_Var_Pop_Order_By>;
-  var_samp?: Maybe<Comments_Var_Samp_Order_By>;
-  variance?: Maybe<Comments_Variance_Order_By>;
-};
-
-export type Comments_Arr_Rel_Insert_Input = {
-  data: Array<Comments_Insert_Input>;
-  on_conflict?: Maybe<Comments_On_Conflict>;
-};
-
-export type Comments_Avg_Fields = {
-  __typename?: 'comments_avg_fields';
-  activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
-};
-
-export type Comments_Avg_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-};
-
-export type Comments_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Comments_Bool_Exp>>>;
-  _not?: Maybe<Comments_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Comments_Bool_Exp>>>;
-  activity?: Maybe<Activities_Bool_Exp>;
-  activity_id?: Maybe<Int_Comparison_Exp>;
-  comment_id?: Maybe<Int_Comparison_Exp>;
-  content?: Maybe<String_Comparison_Exp>;
-  created_at?: Maybe<Timestamptz_Comparison_Exp>;
-  updated_at?: Maybe<Timestamp_Comparison_Exp>;
-  user?: Maybe<Users_Bool_Exp>;
-  user_id?: Maybe<String_Comparison_Exp>;
-};
-
-export enum Comments_Constraint {
-  CommentsPkey = 'Comments_pkey'
-}
-
-export type Comments_Inc_Input = {
-  activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-};
-
-export type Comments_Insert_Input = {
-  activity?: Maybe<Activities_Obj_Rel_Insert_Input>;
-  activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-  content?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
-  user?: Maybe<Users_Obj_Rel_Insert_Input>;
-  user_id?: Maybe<Scalars['String']>;
-};
-
-export type Comments_Max_Fields = {
-  __typename?: 'comments_max_fields';
-  activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-  content?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
-  user_id?: Maybe<Scalars['String']>;
-};
-
-export type Comments_Max_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-  content?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-  user_id?: Maybe<Order_By>;
-};
-
-export type Comments_Min_Fields = {
-  __typename?: 'comments_min_fields';
-  activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-  content?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
-  user_id?: Maybe<Scalars['String']>;
-};
-
-export type Comments_Min_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-  content?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-  user_id?: Maybe<Order_By>;
-};
-
-export type Comments_Mutation_Response = {
-  __typename?: 'comments_mutation_response';
-  affected_rows: Scalars['Int'];
-  returning: Array<Comments>;
-};
-
-export type Comments_Obj_Rel_Insert_Input = {
-  data: Comments_Insert_Input;
-  on_conflict?: Maybe<Comments_On_Conflict>;
-};
-
-export type Comments_On_Conflict = {
-  constraint: Comments_Constraint;
-  update_columns: Array<Comments_Update_Column>;
-  where?: Maybe<Comments_Bool_Exp>;
-};
-
-export type Comments_Order_By = {
-  activity?: Maybe<Activities_Order_By>;
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-  content?: Maybe<Order_By>;
-  created_at?: Maybe<Order_By>;
-  updated_at?: Maybe<Order_By>;
-  user?: Maybe<Users_Order_By>;
-  user_id?: Maybe<Order_By>;
-};
-
-export type Comments_Pk_Columns_Input = {
-  comment_id: Scalars['Int'];
-};
-
-export enum Comments_Select_Column {
-  ActivityId = 'activity_id',
-  CommentId = 'comment_id',
-  Content = 'content',
-  CreatedAt = 'created_at',
-  UpdatedAt = 'updated_at',
-  UserId = 'user_id'
-}
-
-export type Comments_Set_Input = {
-  activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-  content?: Maybe<Scalars['String']>;
-  created_at?: Maybe<Scalars['timestamptz']>;
-  updated_at?: Maybe<Scalars['timestamp']>;
-  user_id?: Maybe<Scalars['String']>;
-};
-
-export type Comments_Stddev_Fields = {
-  __typename?: 'comments_stddev_fields';
-  activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
-};
-
-export type Comments_Stddev_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-};
-
-export type Comments_Stddev_Pop_Fields = {
-  __typename?: 'comments_stddev_pop_fields';
-  activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
-};
-
-export type Comments_Stddev_Pop_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-};
-
-export type Comments_Stddev_Samp_Fields = {
-  __typename?: 'comments_stddev_samp_fields';
-  activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
-};
-
-export type Comments_Stddev_Samp_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-};
-
-export type Comments_Sum_Fields = {
-  __typename?: 'comments_sum_fields';
-  activity_id?: Maybe<Scalars['Int']>;
-  comment_id?: Maybe<Scalars['Int']>;
-};
-
-export type Comments_Sum_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-};
-
-export enum Comments_Update_Column {
-  ActivityId = 'activity_id',
-  CommentId = 'comment_id',
-  Content = 'content',
-  CreatedAt = 'created_at',
-  UpdatedAt = 'updated_at',
-  UserId = 'user_id'
-}
-
-export type Comments_Var_Pop_Fields = {
-  __typename?: 'comments_var_pop_fields';
-  activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
-};
-
-export type Comments_Var_Pop_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-};
-
-export type Comments_Var_Samp_Fields = {
-  __typename?: 'comments_var_samp_fields';
-  activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
-};
-
-export type Comments_Var_Samp_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
-};
-
-export type Comments_Variance_Fields = {
-  __typename?: 'comments_variance_fields';
-  activity_id?: Maybe<Scalars['Float']>;
-  comment_id?: Maybe<Scalars['Float']>;
-};
-
-export type Comments_Variance_Order_By = {
-  activity_id?: Maybe<Order_By>;
-  comment_id?: Maybe<Order_By>;
 };
 
 
@@ -4204,8 +3927,6 @@ export type Mutation_Root = {
   delete_challenge_state_by_pk?: Maybe<Challenge_State>;
   delete_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
   delete_challenge_type_by_pk?: Maybe<Challenge_Type>;
-  delete_comment?: Maybe<Comments>;
-  delete_comments?: Maybe<Comments_Mutation_Response>;
   delete_feed?: Maybe<Feed_Mutation_Response>;
   delete_feed_by_pk?: Maybe<Feed>;
   delete_feed_type?: Maybe<Feed_Type_Mutation_Response>;
@@ -4246,8 +3967,6 @@ export type Mutation_Root = {
   insert_challenge_state_one?: Maybe<Challenge_State>;
   insert_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
   insert_challenge_type_one?: Maybe<Challenge_Type>;
-  insert_comment?: Maybe<Comments>;
-  insert_comments?: Maybe<Comments_Mutation_Response>;
   insert_feed?: Maybe<Feed_Mutation_Response>;
   insert_feed_one?: Maybe<Feed>;
   insert_feed_type?: Maybe<Feed_Type_Mutation_Response>;
@@ -4288,8 +4007,6 @@ export type Mutation_Root = {
   update_challenge_state_by_pk?: Maybe<Challenge_State>;
   update_challenge_type?: Maybe<Challenge_Type_Mutation_Response>;
   update_challenge_type_by_pk?: Maybe<Challenge_Type>;
-  update_comment?: Maybe<Comments>;
-  update_comments?: Maybe<Comments_Mutation_Response>;
   update_feed?: Maybe<Feed_Mutation_Response>;
   update_feed_by_pk?: Maybe<Feed>;
   update_feed_type?: Maybe<Feed_Type_Mutation_Response>;
@@ -4403,16 +4120,6 @@ export type Mutation_RootDelete_Challenge_TypeArgs = {
 
 export type Mutation_RootDelete_Challenge_Type_By_PkArgs = {
   name: Scalars['String'];
-};
-
-
-export type Mutation_RootDelete_CommentArgs = {
-  comment_id: Scalars['Int'];
-};
-
-
-export type Mutation_RootDelete_CommentsArgs = {
-  where: Comments_Bool_Exp;
 };
 
 
@@ -4634,18 +4341,6 @@ export type Mutation_RootInsert_Challenge_TypeArgs = {
 export type Mutation_RootInsert_Challenge_Type_OneArgs = {
   object: Challenge_Type_Insert_Input;
   on_conflict?: Maybe<Challenge_Type_On_Conflict>;
-};
-
-
-export type Mutation_RootInsert_CommentArgs = {
-  object: Comments_Insert_Input;
-  on_conflict?: Maybe<Comments_On_Conflict>;
-};
-
-
-export type Mutation_RootInsert_CommentsArgs = {
-  objects: Array<Comments_Insert_Input>;
-  on_conflict?: Maybe<Comments_On_Conflict>;
 };
 
 
@@ -4899,20 +4594,6 @@ export type Mutation_RootUpdate_Challenge_Type_By_PkArgs = {
 };
 
 
-export type Mutation_RootUpdate_CommentArgs = {
-  _inc?: Maybe<Comments_Inc_Input>;
-  _set?: Maybe<Comments_Set_Input>;
-  pk_columns: Comments_Pk_Columns_Input;
-};
-
-
-export type Mutation_RootUpdate_CommentsArgs = {
-  _inc?: Maybe<Comments_Inc_Input>;
-  _set?: Maybe<Comments_Set_Input>;
-  where: Comments_Bool_Exp;
-};
-
-
 export type Mutation_RootUpdate_FeedArgs = {
   _inc?: Maybe<Feed_Inc_Input>;
   _set?: Maybe<Feed_Set_Input>;
@@ -5032,6 +4713,7 @@ export type Mutation_RootUpdate_Notifications_By_PkArgs = {
 
 
 export type Mutation_RootUpdate_UserArgs = {
+  _inc?: Maybe<Users_Inc_Input>;
   _set?: Maybe<Users_Set_Input>;
   pk_columns: Users_Pk_Columns_Input;
 };
@@ -5052,6 +4734,7 @@ export type Mutation_RootUpdate_User_Achievement_By_PkArgs = {
 
 
 export type Mutation_RootUpdate_UsersArgs = {
+  _inc?: Maybe<Users_Inc_Input>;
   _set?: Maybe<Users_Set_Input>;
   where: Users_Bool_Exp;
 };
@@ -5483,9 +5166,6 @@ export type Query_Root = {
   challenge_type: Array<Challenge_Type>;
   challenge_type_aggregate: Challenge_Type_Aggregate;
   challenge_type_by_pk?: Maybe<Challenge_Type>;
-  comment?: Maybe<Comments>;
-  comments: Array<Comments>;
-  comments_aggregate: Comments_Aggregate;
   feed: Array<Feed>;
   feed_aggregate: Feed_Aggregate;
   feed_by_pk?: Maybe<Feed>;
@@ -5729,29 +5409,6 @@ export type Query_RootChallenge_Type_AggregateArgs = {
 
 export type Query_RootChallenge_Type_By_PkArgs = {
   name: Scalars['String'];
-};
-
-
-export type Query_RootCommentArgs = {
-  comment_id: Scalars['Int'];
-};
-
-
-export type Query_RootCommentsArgs = {
-  distinct_on?: Maybe<Array<Comments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Comments_Order_By>>;
-  where?: Maybe<Comments_Bool_Exp>;
-};
-
-
-export type Query_RootComments_AggregateArgs = {
-  distinct_on?: Maybe<Array<Comments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Comments_Order_By>>;
-  where?: Maybe<Comments_Bool_Exp>;
 };
 
 
@@ -6077,9 +5734,6 @@ export type Subscription_Root = {
   challenge_type: Array<Challenge_Type>;
   challenge_type_aggregate: Challenge_Type_Aggregate;
   challenge_type_by_pk?: Maybe<Challenge_Type>;
-  comment?: Maybe<Comments>;
-  comments: Array<Comments>;
-  comments_aggregate: Comments_Aggregate;
   feed: Array<Feed>;
   feed_aggregate: Feed_Aggregate;
   feed_by_pk?: Maybe<Feed>;
@@ -6323,29 +5977,6 @@ export type Subscription_RootChallenge_Type_AggregateArgs = {
 
 export type Subscription_RootChallenge_Type_By_PkArgs = {
   name: Scalars['String'];
-};
-
-
-export type Subscription_RootCommentArgs = {
-  comment_id: Scalars['Int'];
-};
-
-
-export type Subscription_RootCommentsArgs = {
-  distinct_on?: Maybe<Array<Comments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Comments_Order_By>>;
-  where?: Maybe<Comments_Bool_Exp>;
-};
-
-
-export type Subscription_RootComments_AggregateArgs = {
-  distinct_on?: Maybe<Array<Comments_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Comments_Order_By>>;
-  where?: Maybe<Comments_Bool_Exp>;
 };
 
 
@@ -6625,19 +6256,6 @@ export type Subscription_RootUsers_AggregateArgs = {
 };
 
 
-export type Timestamp_Comparison_Exp = {
-  _eq?: Maybe<Scalars['timestamp']>;
-  _gt?: Maybe<Scalars['timestamp']>;
-  _gte?: Maybe<Scalars['timestamp']>;
-  _in?: Maybe<Array<Scalars['timestamp']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['timestamp']>;
-  _lte?: Maybe<Scalars['timestamp']>;
-  _neq?: Maybe<Scalars['timestamp']>;
-  _nin?: Maybe<Array<Scalars['timestamp']>>;
-};
-
-
 export type Timestamptz_Comparison_Exp = {
   _eq?: Maybe<Scalars['timestamptz']>;
   _gt?: Maybe<Scalars['timestamptz']>;
@@ -6903,6 +6521,7 @@ export type Users = {
   notifications_aggregate: Notifications_Aggregate;
   picture?: Maybe<Scalars['String']>;
   push_token?: Maybe<Scalars['String']>;
+  streak: Scalars['Int'];
   totalScore?: Maybe<Scalars['bigint']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_achievement: Array<User_Achievement>;
@@ -7043,9 +6662,17 @@ export type Users_Aggregate = {
 
 export type Users_Aggregate_Fields = {
   __typename?: 'users_aggregate_fields';
+  avg?: Maybe<Users_Avg_Fields>;
   count?: Maybe<Scalars['Int']>;
   max?: Maybe<Users_Max_Fields>;
   min?: Maybe<Users_Min_Fields>;
+  stddev?: Maybe<Users_Stddev_Fields>;
+  stddev_pop?: Maybe<Users_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Users_Stddev_Samp_Fields>;
+  sum?: Maybe<Users_Sum_Fields>;
+  var_pop?: Maybe<Users_Var_Pop_Fields>;
+  var_samp?: Maybe<Users_Var_Samp_Fields>;
+  variance?: Maybe<Users_Variance_Fields>;
 };
 
 
@@ -7055,14 +6682,31 @@ export type Users_Aggregate_FieldsCountArgs = {
 };
 
 export type Users_Aggregate_Order_By = {
+  avg?: Maybe<Users_Avg_Order_By>;
   count?: Maybe<Order_By>;
   max?: Maybe<Users_Max_Order_By>;
   min?: Maybe<Users_Min_Order_By>;
+  stddev?: Maybe<Users_Stddev_Order_By>;
+  stddev_pop?: Maybe<Users_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Users_Stddev_Samp_Order_By>;
+  sum?: Maybe<Users_Sum_Order_By>;
+  var_pop?: Maybe<Users_Var_Pop_Order_By>;
+  var_samp?: Maybe<Users_Var_Samp_Order_By>;
+  variance?: Maybe<Users_Variance_Order_By>;
 };
 
 export type Users_Arr_Rel_Insert_Input = {
   data: Array<Users_Insert_Input>;
   on_conflict?: Maybe<Users_On_Conflict>;
+};
+
+export type Users_Avg_Fields = {
+  __typename?: 'users_avg_fields';
+  streak?: Maybe<Scalars['Float']>;
+};
+
+export type Users_Avg_Order_By = {
+  streak?: Maybe<Order_By>;
 };
 
 export type Users_Bool_Exp = {
@@ -7082,6 +6726,7 @@ export type Users_Bool_Exp = {
   notifications?: Maybe<Notifications_Bool_Exp>;
   picture?: Maybe<String_Comparison_Exp>;
   push_token?: Maybe<String_Comparison_Exp>;
+  streak?: Maybe<Int_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
   user_achievement?: Maybe<User_Achievement_Bool_Exp>;
 };
@@ -7091,6 +6736,10 @@ export enum Users_Constraint {
   UsersIdKey = 'Users_id_key',
   UsersPkey = 'Users_pkey'
 }
+
+export type Users_Inc_Input = {
+  streak?: Maybe<Scalars['Int']>;
+};
 
 export type Users_Insert_Input = {
   activities?: Maybe<Activities_Arr_Rel_Insert_Input>;
@@ -7106,6 +6755,7 @@ export type Users_Insert_Input = {
   notifications?: Maybe<Notifications_Arr_Rel_Insert_Input>;
   picture?: Maybe<Scalars['String']>;
   push_token?: Maybe<Scalars['String']>;
+  streak?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_achievement?: Maybe<User_Achievement_Arr_Rel_Insert_Input>;
 };
@@ -7119,6 +6769,7 @@ export type Users_Max_Fields = {
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
   push_token?: Maybe<Scalars['String']>;
+  streak?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -7130,6 +6781,7 @@ export type Users_Max_Order_By = {
   name?: Maybe<Order_By>;
   picture?: Maybe<Order_By>;
   push_token?: Maybe<Order_By>;
+  streak?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -7142,6 +6794,7 @@ export type Users_Min_Fields = {
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
   push_token?: Maybe<Scalars['String']>;
+  streak?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -7153,6 +6806,7 @@ export type Users_Min_Order_By = {
   name?: Maybe<Order_By>;
   picture?: Maybe<Order_By>;
   push_token?: Maybe<Order_By>;
+  streak?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
 };
 
@@ -7187,6 +6841,7 @@ export type Users_Order_By = {
   notifications_aggregate?: Maybe<Notifications_Aggregate_Order_By>;
   picture?: Maybe<Order_By>;
   push_token?: Maybe<Order_By>;
+  streak?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;
   user_achievement_aggregate?: Maybe<User_Achievement_Aggregate_Order_By>;
 };
@@ -7203,6 +6858,7 @@ export enum Users_Select_Column {
   Name = 'name',
   Picture = 'picture',
   PushToken = 'push_token',
+  Streak = 'streak',
   UpdatedAt = 'updated_at'
 }
 
@@ -7214,7 +6870,44 @@ export type Users_Set_Input = {
   name?: Maybe<Scalars['String']>;
   picture?: Maybe<Scalars['String']>;
   push_token?: Maybe<Scalars['String']>;
+  streak?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+export type Users_Stddev_Fields = {
+  __typename?: 'users_stddev_fields';
+  streak?: Maybe<Scalars['Float']>;
+};
+
+export type Users_Stddev_Order_By = {
+  streak?: Maybe<Order_By>;
+};
+
+export type Users_Stddev_Pop_Fields = {
+  __typename?: 'users_stddev_pop_fields';
+  streak?: Maybe<Scalars['Float']>;
+};
+
+export type Users_Stddev_Pop_Order_By = {
+  streak?: Maybe<Order_By>;
+};
+
+export type Users_Stddev_Samp_Fields = {
+  __typename?: 'users_stddev_samp_fields';
+  streak?: Maybe<Scalars['Float']>;
+};
+
+export type Users_Stddev_Samp_Order_By = {
+  streak?: Maybe<Order_By>;
+};
+
+export type Users_Sum_Fields = {
+  __typename?: 'users_sum_fields';
+  streak?: Maybe<Scalars['Int']>;
+};
+
+export type Users_Sum_Order_By = {
+  streak?: Maybe<Order_By>;
 };
 
 export enum Users_Update_Column {
@@ -7225,8 +6918,36 @@ export enum Users_Update_Column {
   Name = 'name',
   Picture = 'picture',
   PushToken = 'push_token',
+  Streak = 'streak',
   UpdatedAt = 'updated_at'
 }
+
+export type Users_Var_Pop_Fields = {
+  __typename?: 'users_var_pop_fields';
+  streak?: Maybe<Scalars['Float']>;
+};
+
+export type Users_Var_Pop_Order_By = {
+  streak?: Maybe<Order_By>;
+};
+
+export type Users_Var_Samp_Fields = {
+  __typename?: 'users_var_samp_fields';
+  streak?: Maybe<Scalars['Float']>;
+};
+
+export type Users_Var_Samp_Order_By = {
+  streak?: Maybe<Order_By>;
+};
+
+export type Users_Variance_Fields = {
+  __typename?: 'users_variance_fields';
+  streak?: Maybe<Scalars['Float']>;
+};
+
+export type Users_Variance_Order_By = {
+  streak?: Maybe<Order_By>;
+};
 
 export const ChallengeFragmentFragmentDoc = gql`
     fragment challengeFragment on challenge {
@@ -7509,6 +7230,13 @@ export const UpdateChallengeParticipationProgressDocument = gql`
   }
 }
     `;
+export const UpdateStreakDocument = gql`
+    mutation UpdateStreak($id: String!, $streak: Int!) {
+  update_user(pk_columns: {id: $id}, _set: {streak: $streak}) {
+    streak
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 
@@ -7560,6 +7288,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     UpdateChallengeParticipationProgress(variables: UpdateChallengeParticipationProgressMutationVariables): Promise<UpdateChallengeParticipationProgressMutation> {
       return withWrapper(() => client.request<UpdateChallengeParticipationProgressMutation>(print(UpdateChallengeParticipationProgressDocument), variables));
+    },
+    UpdateStreak(variables: UpdateStreakMutationVariables): Promise<UpdateStreakMutation> {
+      return withWrapper(() => client.request<UpdateStreakMutation>(print(UpdateStreakDocument), variables));
     }
   };
 }
@@ -7921,43 +7652,6 @@ export type ResolversTypes = {
   challenge_var_samp_order_by: Challenge_Var_Samp_Order_By;
   challenge_variance_fields: ResolverTypeWrapper<Challenge_Variance_Fields>;
   challenge_variance_order_by: Challenge_Variance_Order_By;
-  comments: ResolverTypeWrapper<Comments>;
-  comments_aggregate: ResolverTypeWrapper<Comments_Aggregate>;
-  comments_aggregate_fields: ResolverTypeWrapper<Comments_Aggregate_Fields>;
-  comments_aggregate_order_by: Comments_Aggregate_Order_By;
-  comments_arr_rel_insert_input: Comments_Arr_Rel_Insert_Input;
-  comments_avg_fields: ResolverTypeWrapper<Comments_Avg_Fields>;
-  comments_avg_order_by: Comments_Avg_Order_By;
-  comments_bool_exp: Comments_Bool_Exp;
-  comments_constraint: Comments_Constraint;
-  comments_inc_input: Comments_Inc_Input;
-  comments_insert_input: Comments_Insert_Input;
-  comments_max_fields: ResolverTypeWrapper<Comments_Max_Fields>;
-  comments_max_order_by: Comments_Max_Order_By;
-  comments_min_fields: ResolverTypeWrapper<Comments_Min_Fields>;
-  comments_min_order_by: Comments_Min_Order_By;
-  comments_mutation_response: ResolverTypeWrapper<Comments_Mutation_Response>;
-  comments_obj_rel_insert_input: Comments_Obj_Rel_Insert_Input;
-  comments_on_conflict: Comments_On_Conflict;
-  comments_order_by: Comments_Order_By;
-  comments_pk_columns_input: Comments_Pk_Columns_Input;
-  comments_select_column: Comments_Select_Column;
-  comments_set_input: Comments_Set_Input;
-  comments_stddev_fields: ResolverTypeWrapper<Comments_Stddev_Fields>;
-  comments_stddev_order_by: Comments_Stddev_Order_By;
-  comments_stddev_pop_fields: ResolverTypeWrapper<Comments_Stddev_Pop_Fields>;
-  comments_stddev_pop_order_by: Comments_Stddev_Pop_Order_By;
-  comments_stddev_samp_fields: ResolverTypeWrapper<Comments_Stddev_Samp_Fields>;
-  comments_stddev_samp_order_by: Comments_Stddev_Samp_Order_By;
-  comments_sum_fields: ResolverTypeWrapper<Comments_Sum_Fields>;
-  comments_sum_order_by: Comments_Sum_Order_By;
-  comments_update_column: Comments_Update_Column;
-  comments_var_pop_fields: ResolverTypeWrapper<Comments_Var_Pop_Fields>;
-  comments_var_pop_order_by: Comments_Var_Pop_Order_By;
-  comments_var_samp_fields: ResolverTypeWrapper<Comments_Var_Samp_Fields>;
-  comments_var_samp_order_by: Comments_Var_Samp_Order_By;
-  comments_variance_fields: ResolverTypeWrapper<Comments_Variance_Fields>;
-  comments_variance_order_by: Comments_Variance_Order_By;
   date: ResolverTypeWrapper<Scalars['date']>;
   date_comparison_exp: Date_Comparison_Exp;
   feed: ResolverTypeWrapper<Feed>;
@@ -8243,8 +7937,6 @@ export type ResolversTypes = {
   query_root: ResolverTypeWrapper<{}>;
   String_comparison_exp: String_Comparison_Exp;
   subscription_root: ResolverTypeWrapper<{}>;
-  timestamp: ResolverTypeWrapper<Scalars['timestamp']>;
-  timestamp_comparison_exp: Timestamp_Comparison_Exp;
   timestamptz: ResolverTypeWrapper<Scalars['timestamptz']>;
   timestamptz_comparison_exp: Timestamptz_Comparison_Exp;
   unachievedachievements_args: Unachievedachievements_Args;
@@ -8290,8 +7982,11 @@ export type ResolversTypes = {
   users_aggregate_fields: ResolverTypeWrapper<Users_Aggregate_Fields>;
   users_aggregate_order_by: Users_Aggregate_Order_By;
   users_arr_rel_insert_input: Users_Arr_Rel_Insert_Input;
+  users_avg_fields: ResolverTypeWrapper<Users_Avg_Fields>;
+  users_avg_order_by: Users_Avg_Order_By;
   users_bool_exp: Users_Bool_Exp;
   users_constraint: Users_Constraint;
+  users_inc_input: Users_Inc_Input;
   users_insert_input: Users_Insert_Input;
   users_max_fields: ResolverTypeWrapper<Users_Max_Fields>;
   users_max_order_by: Users_Max_Order_By;
@@ -8304,7 +7999,21 @@ export type ResolversTypes = {
   users_pk_columns_input: Users_Pk_Columns_Input;
   users_select_column: Users_Select_Column;
   users_set_input: Users_Set_Input;
+  users_stddev_fields: ResolverTypeWrapper<Users_Stddev_Fields>;
+  users_stddev_order_by: Users_Stddev_Order_By;
+  users_stddev_pop_fields: ResolverTypeWrapper<Users_Stddev_Pop_Fields>;
+  users_stddev_pop_order_by: Users_Stddev_Pop_Order_By;
+  users_stddev_samp_fields: ResolverTypeWrapper<Users_Stddev_Samp_Fields>;
+  users_stddev_samp_order_by: Users_Stddev_Samp_Order_By;
+  users_sum_fields: ResolverTypeWrapper<Users_Sum_Fields>;
+  users_sum_order_by: Users_Sum_Order_By;
   users_update_column: Users_Update_Column;
+  users_var_pop_fields: ResolverTypeWrapper<Users_Var_Pop_Fields>;
+  users_var_pop_order_by: Users_Var_Pop_Order_By;
+  users_var_samp_fields: ResolverTypeWrapper<Users_Var_Samp_Fields>;
+  users_var_samp_order_by: Users_Var_Samp_Order_By;
+  users_variance_fields: ResolverTypeWrapper<Users_Variance_Fields>;
+  users_variance_order_by: Users_Variance_Order_By;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -8557,40 +8266,6 @@ export type ResolversParentTypes = {
   challenge_var_samp_order_by: Challenge_Var_Samp_Order_By;
   challenge_variance_fields: Challenge_Variance_Fields;
   challenge_variance_order_by: Challenge_Variance_Order_By;
-  comments: Comments;
-  comments_aggregate: Comments_Aggregate;
-  comments_aggregate_fields: Comments_Aggregate_Fields;
-  comments_aggregate_order_by: Comments_Aggregate_Order_By;
-  comments_arr_rel_insert_input: Comments_Arr_Rel_Insert_Input;
-  comments_avg_fields: Comments_Avg_Fields;
-  comments_avg_order_by: Comments_Avg_Order_By;
-  comments_bool_exp: Comments_Bool_Exp;
-  comments_inc_input: Comments_Inc_Input;
-  comments_insert_input: Comments_Insert_Input;
-  comments_max_fields: Comments_Max_Fields;
-  comments_max_order_by: Comments_Max_Order_By;
-  comments_min_fields: Comments_Min_Fields;
-  comments_min_order_by: Comments_Min_Order_By;
-  comments_mutation_response: Comments_Mutation_Response;
-  comments_obj_rel_insert_input: Comments_Obj_Rel_Insert_Input;
-  comments_on_conflict: Comments_On_Conflict;
-  comments_order_by: Comments_Order_By;
-  comments_pk_columns_input: Comments_Pk_Columns_Input;
-  comments_set_input: Comments_Set_Input;
-  comments_stddev_fields: Comments_Stddev_Fields;
-  comments_stddev_order_by: Comments_Stddev_Order_By;
-  comments_stddev_pop_fields: Comments_Stddev_Pop_Fields;
-  comments_stddev_pop_order_by: Comments_Stddev_Pop_Order_By;
-  comments_stddev_samp_fields: Comments_Stddev_Samp_Fields;
-  comments_stddev_samp_order_by: Comments_Stddev_Samp_Order_By;
-  comments_sum_fields: Comments_Sum_Fields;
-  comments_sum_order_by: Comments_Sum_Order_By;
-  comments_var_pop_fields: Comments_Var_Pop_Fields;
-  comments_var_pop_order_by: Comments_Var_Pop_Order_By;
-  comments_var_samp_fields: Comments_Var_Samp_Fields;
-  comments_var_samp_order_by: Comments_Var_Samp_Order_By;
-  comments_variance_fields: Comments_Variance_Fields;
-  comments_variance_order_by: Comments_Variance_Order_By;
   date: Scalars['date'];
   date_comparison_exp: Date_Comparison_Exp;
   feed: Feed;
@@ -8845,8 +8520,6 @@ export type ResolversParentTypes = {
   query_root: {};
   String_comparison_exp: String_Comparison_Exp;
   subscription_root: {};
-  timestamp: Scalars['timestamp'];
-  timestamp_comparison_exp: Timestamp_Comparison_Exp;
   timestamptz: Scalars['timestamptz'];
   timestamptz_comparison_exp: Timestamptz_Comparison_Exp;
   unachievedachievements_args: Unachievedachievements_Args;
@@ -8889,7 +8562,10 @@ export type ResolversParentTypes = {
   users_aggregate_fields: Users_Aggregate_Fields;
   users_aggregate_order_by: Users_Aggregate_Order_By;
   users_arr_rel_insert_input: Users_Arr_Rel_Insert_Input;
+  users_avg_fields: Users_Avg_Fields;
+  users_avg_order_by: Users_Avg_Order_By;
   users_bool_exp: Users_Bool_Exp;
+  users_inc_input: Users_Inc_Input;
   users_insert_input: Users_Insert_Input;
   users_max_fields: Users_Max_Fields;
   users_max_order_by: Users_Max_Order_By;
@@ -8901,6 +8577,20 @@ export type ResolversParentTypes = {
   users_order_by: Users_Order_By;
   users_pk_columns_input: Users_Pk_Columns_Input;
   users_set_input: Users_Set_Input;
+  users_stddev_fields: Users_Stddev_Fields;
+  users_stddev_order_by: Users_Stddev_Order_By;
+  users_stddev_pop_fields: Users_Stddev_Pop_Fields;
+  users_stddev_pop_order_by: Users_Stddev_Pop_Order_By;
+  users_stddev_samp_fields: Users_Stddev_Samp_Fields;
+  users_stddev_samp_order_by: Users_Stddev_Samp_Order_By;
+  users_sum_fields: Users_Sum_Fields;
+  users_sum_order_by: Users_Sum_Order_By;
+  users_var_pop_fields: Users_Var_Pop_Fields;
+  users_var_pop_order_by: Users_Var_Pop_Order_By;
+  users_var_samp_fields: Users_Var_Samp_Fields;
+  users_var_samp_order_by: Users_Var_Samp_Order_By;
+  users_variance_fields: Users_Variance_Fields;
+  users_variance_order_by: Users_Variance_Order_By;
 };
 
 export type AchievementResolvers<ContextType = any, ParentType extends ResolversParentTypes['achievement'] = ResolversParentTypes['achievement']> = {
@@ -9591,113 +9281,6 @@ export type Challenge_Variance_FieldsResolvers<ContextType = any, ParentType ext
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type CommentsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments'] = ResolversParentTypes['comments']> = {
-  activity?: Resolver<ResolversTypes['activities'], ParentType, ContextType>;
-  activity_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  comment_id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['timestamp']>, ParentType, ContextType>;
-  user?: Resolver<ResolversTypes['users'], ParentType, ContextType>;
-  user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_AggregateResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_aggregate'] = ResolversParentTypes['comments_aggregate']> = {
-  aggregate?: Resolver<Maybe<ResolversTypes['comments_aggregate_fields']>, ParentType, ContextType>;
-  nodes?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_aggregate_fields'] = ResolversParentTypes['comments_aggregate_fields']> = {
-  avg?: Resolver<Maybe<ResolversTypes['comments_avg_fields']>, ParentType, ContextType>;
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Comments_Aggregate_FieldsCountArgs, never>>;
-  max?: Resolver<Maybe<ResolversTypes['comments_max_fields']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['comments_min_fields']>, ParentType, ContextType>;
-  stddev?: Resolver<Maybe<ResolversTypes['comments_stddev_fields']>, ParentType, ContextType>;
-  stddev_pop?: Resolver<Maybe<ResolversTypes['comments_stddev_pop_fields']>, ParentType, ContextType>;
-  stddev_samp?: Resolver<Maybe<ResolversTypes['comments_stddev_samp_fields']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['comments_sum_fields']>, ParentType, ContextType>;
-  var_pop?: Resolver<Maybe<ResolversTypes['comments_var_pop_fields']>, ParentType, ContextType>;
-  var_samp?: Resolver<Maybe<ResolversTypes['comments_var_samp_fields']>, ParentType, ContextType>;
-  variance?: Resolver<Maybe<ResolversTypes['comments_variance_fields']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_avg_fields'] = ResolversParentTypes['comments_avg_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Max_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_max_fields'] = ResolversParentTypes['comments_max_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['timestamp']>, ParentType, ContextType>;
-  user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Min_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_min_fields'] = ResolversParentTypes['comments_min_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  created_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<ResolversTypes['timestamp']>, ParentType, ContextType>;
-  user_id?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_mutation_response'] = ResolversParentTypes['comments_mutation_response']> = {
-  affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  returning?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_stddev_fields'] = ResolversParentTypes['comments_stddev_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_stddev_pop_fields'] = ResolversParentTypes['comments_stddev_pop_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_stddev_samp_fields'] = ResolversParentTypes['comments_stddev_samp_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_sum_fields'] = ResolversParentTypes['comments_sum_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_var_pop_fields'] = ResolversParentTypes['comments_var_pop_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_var_samp_fields'] = ResolversParentTypes['comments_var_samp_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type Comments_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['comments_variance_fields'] = ResolversParentTypes['comments_variance_fields']> = {
-  activity_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  comment_id?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['date'], any> {
   name: 'date';
 }
@@ -10327,8 +9910,6 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   delete_challenge_state_by_pk?: Resolver<Maybe<ResolversTypes['challenge_state']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Challenge_State_By_PkArgs, 'state'>>;
   delete_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Challenge_TypeArgs, 'where'>>;
   delete_challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Challenge_Type_By_PkArgs, 'name'>>;
-  delete_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_CommentArgs, 'comment_id'>>;
-  delete_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_CommentsArgs, 'where'>>;
   delete_feed?: Resolver<Maybe<ResolversTypes['feed_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_FeedArgs, 'where'>>;
   delete_feed_by_pk?: Resolver<Maybe<ResolversTypes['feed']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Feed_By_PkArgs, 'id'>>;
   delete_feed_type?: Resolver<Maybe<ResolversTypes['feed_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootDelete_Feed_TypeArgs, 'where'>>;
@@ -10369,8 +9950,6 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   insert_challenge_state_one?: Resolver<Maybe<ResolversTypes['challenge_state']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Challenge_State_OneArgs, 'object'>>;
   insert_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Challenge_TypeArgs, 'objects'>>;
   insert_challenge_type_one?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Challenge_Type_OneArgs, 'object'>>;
-  insert_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_CommentArgs, 'object'>>;
-  insert_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_CommentsArgs, 'objects'>>;
   insert_feed?: Resolver<Maybe<ResolversTypes['feed_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_FeedArgs, 'objects'>>;
   insert_feed_one?: Resolver<Maybe<ResolversTypes['feed']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Feed_OneArgs, 'object'>>;
   insert_feed_type?: Resolver<Maybe<ResolversTypes['feed_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootInsert_Feed_TypeArgs, 'objects'>>;
@@ -10411,8 +9990,6 @@ export type Mutation_RootResolvers<ContextType = any, ParentType extends Resolve
   update_challenge_state_by_pk?: Resolver<Maybe<ResolversTypes['challenge_state']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Challenge_State_By_PkArgs, 'pk_columns'>>;
   update_challenge_type?: Resolver<Maybe<ResolversTypes['challenge_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Challenge_TypeArgs, 'where'>>;
   update_challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Challenge_Type_By_PkArgs, 'pk_columns'>>;
-  update_comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_CommentArgs, 'pk_columns'>>;
-  update_comments?: Resolver<Maybe<ResolversTypes['comments_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_CommentsArgs, 'where'>>;
   update_feed?: Resolver<Maybe<ResolversTypes['feed_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_FeedArgs, 'where'>>;
   update_feed_by_pk?: Resolver<Maybe<ResolversTypes['feed']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Feed_By_PkArgs, 'pk_columns'>>;
   update_feed_type?: Resolver<Maybe<ResolversTypes['feed_type_mutation_response']>, ParentType, ContextType, RequireFields<Mutation_RootUpdate_Feed_TypeArgs, 'where'>>;
@@ -10597,9 +10174,6 @@ export type Query_RootResolvers<ContextType = any, ParentType extends ResolversP
   challenge_type?: Resolver<Array<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Query_RootChallenge_TypeArgs, never>>;
   challenge_type_aggregate?: Resolver<ResolversTypes['challenge_type_aggregate'], ParentType, ContextType, RequireFields<Query_RootChallenge_Type_AggregateArgs, never>>;
   challenge_type_by_pk?: Resolver<Maybe<ResolversTypes['challenge_type']>, ParentType, ContextType, RequireFields<Query_RootChallenge_Type_By_PkArgs, 'name'>>;
-  comment?: Resolver<Maybe<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Query_RootCommentArgs, 'comment_id'>>;
-  comments?: Resolver<Array<ResolversTypes['comments']>, ParentType, ContextType, RequireFields<Query_RootCommentsArgs, never>>;
-  comments_aggregate?: Resolver<ResolversTypes['comments_aggregate'], ParentType, ContextType, RequireFields<Query_RootComments_AggregateArgs, never>>;
   feed?: Resolver<Array<ResolversTypes['feed']>, ParentType, ContextType, RequireFields<Query_RootFeedArgs, never>>;
   feed_aggregate?: Resolver<ResolversTypes['feed_aggregate'], ParentType, ContextType, RequireFields<Query_RootFeed_AggregateArgs, never>>;
   feed_by_pk?: Resolver<Maybe<ResolversTypes['feed']>, ParentType, ContextType, RequireFields<Query_RootFeed_By_PkArgs, 'id'>>;
@@ -10665,9 +10239,6 @@ export type Subscription_RootResolvers<ContextType = any, ParentType extends Res
   challenge_type?: SubscriptionResolver<Array<ResolversTypes['challenge_type']>, "challenge_type", ParentType, ContextType, RequireFields<Subscription_RootChallenge_TypeArgs, never>>;
   challenge_type_aggregate?: SubscriptionResolver<ResolversTypes['challenge_type_aggregate'], "challenge_type_aggregate", ParentType, ContextType, RequireFields<Subscription_RootChallenge_Type_AggregateArgs, never>>;
   challenge_type_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['challenge_type']>, "challenge_type_by_pk", ParentType, ContextType, RequireFields<Subscription_RootChallenge_Type_By_PkArgs, 'name'>>;
-  comment?: SubscriptionResolver<Maybe<ResolversTypes['comments']>, "comment", ParentType, ContextType, RequireFields<Subscription_RootCommentArgs, 'comment_id'>>;
-  comments?: SubscriptionResolver<Array<ResolversTypes['comments']>, "comments", ParentType, ContextType, RequireFields<Subscription_RootCommentsArgs, never>>;
-  comments_aggregate?: SubscriptionResolver<ResolversTypes['comments_aggregate'], "comments_aggregate", ParentType, ContextType, RequireFields<Subscription_RootComments_AggregateArgs, never>>;
   feed?: SubscriptionResolver<Array<ResolversTypes['feed']>, "feed", ParentType, ContextType, RequireFields<Subscription_RootFeedArgs, never>>;
   feed_aggregate?: SubscriptionResolver<ResolversTypes['feed_aggregate'], "feed_aggregate", ParentType, ContextType, RequireFields<Subscription_RootFeed_AggregateArgs, never>>;
   feed_by_pk?: SubscriptionResolver<Maybe<ResolversTypes['feed']>, "feed_by_pk", ParentType, ContextType, RequireFields<Subscription_RootFeed_By_PkArgs, 'id'>>;
@@ -10704,10 +10275,6 @@ export type Subscription_RootResolvers<ContextType = any, ParentType extends Res
   users?: SubscriptionResolver<Array<ResolversTypes['users']>, "users", ParentType, ContextType, RequireFields<Subscription_RootUsersArgs, never>>;
   users_aggregate?: SubscriptionResolver<ResolversTypes['users_aggregate'], "users_aggregate", ParentType, ContextType, RequireFields<Subscription_RootUsers_AggregateArgs, never>>;
 };
-
-export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['timestamp'], any> {
-  name: 'timestamp';
-}
 
 export interface TimestamptzScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['timestamptz'], any> {
   name: 'timestamptz';
@@ -10823,6 +10390,7 @@ export type UsersResolvers<ContextType = any, ParentType extends ResolversParent
   notifications_aggregate?: Resolver<ResolversTypes['notifications_aggregate'], ParentType, ContextType, RequireFields<UsersNotifications_AggregateArgs, never>>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   push_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  streak?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   totalScore?: Resolver<Maybe<ResolversTypes['bigint']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   user_achievement?: Resolver<Array<ResolversTypes['user_achievement']>, ParentType, ContextType, RequireFields<UsersUser_AchievementArgs, never>>;
@@ -10837,9 +10405,22 @@ export type Users_AggregateResolvers<ContextType = any, ParentType extends Resol
 };
 
 export type Users_Aggregate_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_aggregate_fields'] = ResolversParentTypes['users_aggregate_fields']> = {
+  avg?: Resolver<Maybe<ResolversTypes['users_avg_fields']>, ParentType, ContextType>;
   count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType, RequireFields<Users_Aggregate_FieldsCountArgs, never>>;
   max?: Resolver<Maybe<ResolversTypes['users_max_fields']>, ParentType, ContextType>;
   min?: Resolver<Maybe<ResolversTypes['users_min_fields']>, ParentType, ContextType>;
+  stddev?: Resolver<Maybe<ResolversTypes['users_stddev_fields']>, ParentType, ContextType>;
+  stddev_pop?: Resolver<Maybe<ResolversTypes['users_stddev_pop_fields']>, ParentType, ContextType>;
+  stddev_samp?: Resolver<Maybe<ResolversTypes['users_stddev_samp_fields']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['users_sum_fields']>, ParentType, ContextType>;
+  var_pop?: Resolver<Maybe<ResolversTypes['users_var_pop_fields']>, ParentType, ContextType>;
+  var_samp?: Resolver<Maybe<ResolversTypes['users_var_samp_fields']>, ParentType, ContextType>;
+  variance?: Resolver<Maybe<ResolversTypes['users_variance_fields']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Avg_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_avg_fields'] = ResolversParentTypes['users_avg_fields']> = {
+  streak?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10851,6 +10432,7 @@ export type Users_Max_FieldsResolvers<ContextType = any, ParentType extends Reso
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   push_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  streak?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -10863,6 +10445,7 @@ export type Users_Min_FieldsResolvers<ContextType = any, ParentType extends Reso
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   picture?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   push_token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  streak?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   updated_at?: Resolver<Maybe<ResolversTypes['timestamptz']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -10870,6 +10453,41 @@ export type Users_Min_FieldsResolvers<ContextType = any, ParentType extends Reso
 export type Users_Mutation_ResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_mutation_response'] = ResolversParentTypes['users_mutation_response']> = {
   affected_rows?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   returning?: Resolver<Array<ResolversTypes['users']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Stddev_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_stddev_fields'] = ResolversParentTypes['users_stddev_fields']> = {
+  streak?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Stddev_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_stddev_pop_fields'] = ResolversParentTypes['users_stddev_pop_fields']> = {
+  streak?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Stddev_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_stddev_samp_fields'] = ResolversParentTypes['users_stddev_samp_fields']> = {
+  streak?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Sum_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_sum_fields'] = ResolversParentTypes['users_sum_fields']> = {
+  streak?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Var_Pop_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_var_pop_fields'] = ResolversParentTypes['users_var_pop_fields']> = {
+  streak?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Var_Samp_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_var_samp_fields'] = ResolversParentTypes['users_var_samp_fields']> = {
+  streak?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Users_Variance_FieldsResolvers<ContextType = any, ParentType extends ResolversParentTypes['users_variance_fields'] = ResolversParentTypes['users_variance_fields']> = {
+  streak?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -10969,20 +10587,6 @@ export type Resolvers<ContextType = any> = {
   challenge_var_pop_fields?: Challenge_Var_Pop_FieldsResolvers<ContextType>;
   challenge_var_samp_fields?: Challenge_Var_Samp_FieldsResolvers<ContextType>;
   challenge_variance_fields?: Challenge_Variance_FieldsResolvers<ContextType>;
-  comments?: CommentsResolvers<ContextType>;
-  comments_aggregate?: Comments_AggregateResolvers<ContextType>;
-  comments_aggregate_fields?: Comments_Aggregate_FieldsResolvers<ContextType>;
-  comments_avg_fields?: Comments_Avg_FieldsResolvers<ContextType>;
-  comments_max_fields?: Comments_Max_FieldsResolvers<ContextType>;
-  comments_min_fields?: Comments_Min_FieldsResolvers<ContextType>;
-  comments_mutation_response?: Comments_Mutation_ResponseResolvers<ContextType>;
-  comments_stddev_fields?: Comments_Stddev_FieldsResolvers<ContextType>;
-  comments_stddev_pop_fields?: Comments_Stddev_Pop_FieldsResolvers<ContextType>;
-  comments_stddev_samp_fields?: Comments_Stddev_Samp_FieldsResolvers<ContextType>;
-  comments_sum_fields?: Comments_Sum_FieldsResolvers<ContextType>;
-  comments_var_pop_fields?: Comments_Var_Pop_FieldsResolvers<ContextType>;
-  comments_var_samp_fields?: Comments_Var_Samp_FieldsResolvers<ContextType>;
-  comments_variance_fields?: Comments_Variance_FieldsResolvers<ContextType>;
   date?: GraphQLScalarType;
   feed?: FeedResolvers<ContextType>;
   feed_aggregate?: Feed_AggregateResolvers<ContextType>;
@@ -11084,7 +10688,6 @@ export type Resolvers<ContextType = any> = {
   notifications_variance_fields?: Notifications_Variance_FieldsResolvers<ContextType>;
   query_root?: Query_RootResolvers<ContextType>;
   subscription_root?: Subscription_RootResolvers<ContextType>;
-  timestamp?: GraphQLScalarType;
   timestamptz?: GraphQLScalarType;
   user_achievement?: User_AchievementResolvers<ContextType>;
   user_achievement_aggregate?: User_Achievement_AggregateResolvers<ContextType>;
@@ -11103,9 +10706,17 @@ export type Resolvers<ContextType = any> = {
   users?: UsersResolvers<ContextType>;
   users_aggregate?: Users_AggregateResolvers<ContextType>;
   users_aggregate_fields?: Users_Aggregate_FieldsResolvers<ContextType>;
+  users_avg_fields?: Users_Avg_FieldsResolvers<ContextType>;
   users_max_fields?: Users_Max_FieldsResolvers<ContextType>;
   users_min_fields?: Users_Min_FieldsResolvers<ContextType>;
   users_mutation_response?: Users_Mutation_ResponseResolvers<ContextType>;
+  users_stddev_fields?: Users_Stddev_FieldsResolvers<ContextType>;
+  users_stddev_pop_fields?: Users_Stddev_Pop_FieldsResolvers<ContextType>;
+  users_stddev_samp_fields?: Users_Stddev_Samp_FieldsResolvers<ContextType>;
+  users_sum_fields?: Users_Sum_FieldsResolvers<ContextType>;
+  users_var_pop_fields?: Users_Var_Pop_FieldsResolvers<ContextType>;
+  users_var_samp_fields?: Users_Var_Samp_FieldsResolvers<ContextType>;
+  users_variance_fields?: Users_Variance_FieldsResolvers<ContextType>;
 };
 
 
@@ -11393,6 +11004,13 @@ export const UpdateChallengeParticipationProgress = gql`
     _set: {progress: $progress}
   ) {
     affected_rows
+  }
+}
+    `;
+export const UpdateStreak = gql`
+    mutation UpdateStreak($id: String!, $streak: Int!) {
+  update_user(pk_columns: {id: $id}, _set: {streak: $streak}) {
+    streak
   }
 }
     `;
@@ -11738,5 +11356,19 @@ export type UpdateChallengeParticipationProgressMutation = (
   & { update_challenge_participant?: Maybe<(
     { __typename?: 'challenge_participant_mutation_response' }
     & Pick<Challenge_Participant_Mutation_Response, 'affected_rows'>
+  )> }
+);
+
+export type UpdateStreakMutationVariables = Exact<{
+  id: Scalars['String'];
+  streak: Scalars['Int'];
+}>;
+
+
+export type UpdateStreakMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_user?: Maybe<(
+    { __typename?: 'users' }
+    & Pick<Users, 'streak'>
   )> }
 );

@@ -404,6 +404,7 @@ enum achievement_type_enum {
   FIRST_ACTIVITY
   SCORE
   SCORE_IN_CATEGORY
+  STREAK
 }
 
 # expression to compare columns of type achievement_type_enum. All fields are combined with logical 'AND'.
@@ -2531,329 +2532,6 @@ type challenge_variance_fields {
 # order by variance() on columns of table "challenge"
 input challenge_variance_order_by {
   id: order_by
-}
-
-# columns and relationships of "comments"
-type comments {
-  # An object relationship
-  activity: activities!
-  activity_id: Int!
-  comment_id: Int!
-  content: String!
-  created_at: timestamptz
-  updated_at: timestamp
-
-  # An object relationship
-  user: users!
-  user_id: String!
-}
-
-# aggregated selection of "comments"
-type comments_aggregate {
-  aggregate: comments_aggregate_fields
-  nodes: [comments!]!
-}
-
-# aggregate fields of "comments"
-type comments_aggregate_fields {
-  avg: comments_avg_fields
-  count(columns: [comments_select_column!], distinct: Boolean): Int
-  max: comments_max_fields
-  min: comments_min_fields
-  stddev: comments_stddev_fields
-  stddev_pop: comments_stddev_pop_fields
-  stddev_samp: comments_stddev_samp_fields
-  sum: comments_sum_fields
-  var_pop: comments_var_pop_fields
-  var_samp: comments_var_samp_fields
-  variance: comments_variance_fields
-}
-
-# order by aggregate values of table "comments"
-input comments_aggregate_order_by {
-  avg: comments_avg_order_by
-  count: order_by
-  max: comments_max_order_by
-  min: comments_min_order_by
-  stddev: comments_stddev_order_by
-  stddev_pop: comments_stddev_pop_order_by
-  stddev_samp: comments_stddev_samp_order_by
-  sum: comments_sum_order_by
-  var_pop: comments_var_pop_order_by
-  var_samp: comments_var_samp_order_by
-  variance: comments_variance_order_by
-}
-
-# input type for inserting array relation for remote table "comments"
-input comments_arr_rel_insert_input {
-  data: [comments_insert_input!]!
-  on_conflict: comments_on_conflict
-}
-
-# aggregate avg on columns
-type comments_avg_fields {
-  activity_id: Float
-  comment_id: Float
-}
-
-# order by avg() on columns of table "comments"
-input comments_avg_order_by {
-  activity_id: order_by
-  comment_id: order_by
-}
-
-# Boolean expression to filter rows from the table "comments". All fields are combined with a logical 'AND'.
-input comments_bool_exp {
-  _and: [comments_bool_exp]
-  _not: comments_bool_exp
-  _or: [comments_bool_exp]
-  activity: activities_bool_exp
-  activity_id: Int_comparison_exp
-  comment_id: Int_comparison_exp
-  content: String_comparison_exp
-  created_at: timestamptz_comparison_exp
-  updated_at: timestamp_comparison_exp
-  user: users_bool_exp
-  user_id: String_comparison_exp
-}
-
-# unique or primary key constraints on table "comments"
-enum comments_constraint {
-  # unique or primary key constraint
-  Comments_pkey
-}
-
-# input type for incrementing integer column in table "comments"
-input comments_inc_input {
-  activity_id: Int
-  comment_id: Int
-}
-
-# input type for inserting data into table "comments"
-input comments_insert_input {
-  activity: activities_obj_rel_insert_input
-  activity_id: Int
-  comment_id: Int
-  content: String
-  created_at: timestamptz
-  updated_at: timestamp
-  user: users_obj_rel_insert_input
-  user_id: String
-}
-
-# aggregate max on columns
-type comments_max_fields {
-  activity_id: Int
-  comment_id: Int
-  content: String
-  created_at: timestamptz
-  updated_at: timestamp
-  user_id: String
-}
-
-# order by max() on columns of table "comments"
-input comments_max_order_by {
-  activity_id: order_by
-  comment_id: order_by
-  content: order_by
-  created_at: order_by
-  updated_at: order_by
-  user_id: order_by
-}
-
-# aggregate min on columns
-type comments_min_fields {
-  activity_id: Int
-  comment_id: Int
-  content: String
-  created_at: timestamptz
-  updated_at: timestamp
-  user_id: String
-}
-
-# order by min() on columns of table "comments"
-input comments_min_order_by {
-  activity_id: order_by
-  comment_id: order_by
-  content: order_by
-  created_at: order_by
-  updated_at: order_by
-  user_id: order_by
-}
-
-# response of any mutation on the table "comments"
-type comments_mutation_response {
-  # number of affected rows by the mutation
-  affected_rows: Int!
-
-  # data of the affected rows by the mutation
-  returning: [comments!]!
-}
-
-# input type for inserting object relation for remote table "comments"
-input comments_obj_rel_insert_input {
-  data: comments_insert_input!
-  on_conflict: comments_on_conflict
-}
-
-# on conflict condition type for table "comments"
-input comments_on_conflict {
-  constraint: comments_constraint!
-  update_columns: [comments_update_column!]!
-  where: comments_bool_exp
-}
-
-# ordering options when selecting data from "comments"
-input comments_order_by {
-  activity: activities_order_by
-  activity_id: order_by
-  comment_id: order_by
-  content: order_by
-  created_at: order_by
-  updated_at: order_by
-  user: users_order_by
-  user_id: order_by
-}
-
-# primary key columns input for table: "comments"
-input comments_pk_columns_input {
-  comment_id: Int!
-}
-
-# select columns of table "comments"
-enum comments_select_column {
-  # column name
-  activity_id
-
-  # column name
-  comment_id
-
-  # column name
-  content
-
-  # column name
-  created_at
-
-  # column name
-  updated_at
-
-  # column name
-  user_id
-}
-
-# input type for updating data in table "comments"
-input comments_set_input {
-  activity_id: Int
-  comment_id: Int
-  content: String
-  created_at: timestamptz
-  updated_at: timestamp
-  user_id: String
-}
-
-# aggregate stddev on columns
-type comments_stddev_fields {
-  activity_id: Float
-  comment_id: Float
-}
-
-# order by stddev() on columns of table "comments"
-input comments_stddev_order_by {
-  activity_id: order_by
-  comment_id: order_by
-}
-
-# aggregate stddev_pop on columns
-type comments_stddev_pop_fields {
-  activity_id: Float
-  comment_id: Float
-}
-
-# order by stddev_pop() on columns of table "comments"
-input comments_stddev_pop_order_by {
-  activity_id: order_by
-  comment_id: order_by
-}
-
-# aggregate stddev_samp on columns
-type comments_stddev_samp_fields {
-  activity_id: Float
-  comment_id: Float
-}
-
-# order by stddev_samp() on columns of table "comments"
-input comments_stddev_samp_order_by {
-  activity_id: order_by
-  comment_id: order_by
-}
-
-# aggregate sum on columns
-type comments_sum_fields {
-  activity_id: Int
-  comment_id: Int
-}
-
-# order by sum() on columns of table "comments"
-input comments_sum_order_by {
-  activity_id: order_by
-  comment_id: order_by
-}
-
-# update columns of table "comments"
-enum comments_update_column {
-  # column name
-  activity_id
-
-  # column name
-  comment_id
-
-  # column name
-  content
-
-  # column name
-  created_at
-
-  # column name
-  updated_at
-
-  # column name
-  user_id
-}
-
-# aggregate var_pop on columns
-type comments_var_pop_fields {
-  activity_id: Float
-  comment_id: Float
-}
-
-# order by var_pop() on columns of table "comments"
-input comments_var_pop_order_by {
-  activity_id: order_by
-  comment_id: order_by
-}
-
-# aggregate var_samp on columns
-type comments_var_samp_fields {
-  activity_id: Float
-  comment_id: Float
-}
-
-# order by var_samp() on columns of table "comments"
-input comments_var_samp_order_by {
-  activity_id: order_by
-  comment_id: order_by
-}
-
-# aggregate variance on columns
-type comments_variance_fields {
-  activity_id: Float
-  comment_id: Float
-}
-
-# order by variance() on columns of table "comments"
-input comments_variance_order_by {
-  activity_id: order_by
-  comment_id: order_by
 }
 
 scalar date
@@ -5105,15 +4783,6 @@ type mutation_root {
   # delete single row from the table: "challenge_type"
   delete_challenge_type_by_pk(name: String!): challenge_type
 
-  # delete single row from the table: "comments"
-  delete_comment(comment_id: Int!): comments
-
-  # delete data from the table: "comments"
-  delete_comments(
-    # filter the rows which have to be deleted
-    where: comments_bool_exp!
-  ): comments_mutation_response
-
   # delete data from the table: "feed"
   delete_feed(
     # filter the rows which have to be deleted
@@ -5374,24 +5043,6 @@ type mutation_root {
     # on conflict condition
     on_conflict: challenge_type_on_conflict
   ): challenge_type
-
-  # insert a single row into the table: "comments"
-  insert_comment(
-    # the row to be inserted
-    object: comments_insert_input!
-
-    # on conflict condition
-    on_conflict: comments_on_conflict
-  ): comments
-
-  # insert data into the table: "comments"
-  insert_comments(
-    # the rows to be inserted
-    objects: [comments_insert_input!]!
-
-    # on conflict condition
-    on_conflict: comments_on_conflict
-  ): comments_mutation_response
 
   # insert data into the table: "feed"
   insert_feed(
@@ -5765,28 +5416,6 @@ type mutation_root {
     pk_columns: challenge_type_pk_columns_input!
   ): challenge_type
 
-  # update single row of the table: "comments"
-  update_comment(
-    # increments the integer columns with given value of the filtered values
-    _inc: comments_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: comments_set_input
-    pk_columns: comments_pk_columns_input!
-  ): comments
-
-  # update data of the table: "comments"
-  update_comments(
-    # increments the integer columns with given value of the filtered values
-    _inc: comments_inc_input
-
-    # sets the columns of the filtered rows to the given values
-    _set: comments_set_input
-
-    # filter the rows which have to be updated
-    where: comments_bool_exp!
-  ): comments_mutation_response
-
   # update data of the table: "feed"
   update_feed(
     # increments the integer columns with given value of the filtered values
@@ -5963,6 +5592,9 @@ type mutation_root {
 
   # update single row of the table: "users"
   update_user(
+    # increments the integer columns with given value of the filtered values
+    _inc: users_inc_input
+
     # sets the columns of the filtered rows to the given values
     _set: users_set_input
     pk_columns: users_pk_columns_input!
@@ -5992,6 +5624,9 @@ type mutation_root {
 
   # update data of the table: "users"
   update_users(
+    # increments the integer columns with given value of the filtered values
+    _inc: users_inc_input
+
     # sets the columns of the filtered rows to the given values
     _set: users_set_input
 
@@ -6848,45 +6483,6 @@ type query_root {
   # fetch data from the table: "challenge_type" using primary key columns
   challenge_type_by_pk(name: String!): challenge_type
 
-  # fetch data from the table: "comments" using primary key columns
-  comment(comment_id: Int!): comments
-
-  # fetch data from the table: "comments"
-  comments(
-    # distinct select on columns
-    distinct_on: [comments_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [comments_order_by!]
-
-    # filter the rows returned
-    where: comments_bool_exp
-  ): [comments!]!
-
-  # fetch aggregated fields from the table: "comments"
-  comments_aggregate(
-    # distinct select on columns
-    distinct_on: [comments_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [comments_order_by!]
-
-    # filter the rows returned
-    where: comments_bool_exp
-  ): comments_aggregate!
-
   # fetch data from the table: "feed"
   feed(
     # distinct select on columns
@@ -7731,45 +7327,6 @@ type subscription_root {
   # fetch data from the table: "challenge_type" using primary key columns
   challenge_type_by_pk(name: String!): challenge_type
 
-  # fetch data from the table: "comments" using primary key columns
-  comment(comment_id: Int!): comments
-
-  # fetch data from the table: "comments"
-  comments(
-    # distinct select on columns
-    distinct_on: [comments_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [comments_order_by!]
-
-    # filter the rows returned
-    where: comments_bool_exp
-  ): [comments!]!
-
-  # fetch aggregated fields from the table: "comments"
-  comments_aggregate(
-    # distinct select on columns
-    distinct_on: [comments_select_column!]
-
-    # limit the number of rows returned
-    limit: Int
-
-    # skip the first n rows. Use only with order_by
-    offset: Int
-
-    # sort the rows by one or more columns
-    order_by: [comments_order_by!]
-
-    # filter the rows returned
-    where: comments_bool_exp
-  ): comments_aggregate!
-
   # fetch data from the table: "feed"
   feed(
     # distinct select on columns
@@ -8240,21 +7797,6 @@ type subscription_root {
     # filter the rows returned
     where: users_bool_exp
   ): users_aggregate!
-}
-
-scalar timestamp
-
-# expression to compare columns of type timestamp. All fields are combined with logical 'AND'.
-input timestamp_comparison_exp {
-  _eq: timestamp
-  _gt: timestamp
-  _gte: timestamp
-  _in: [timestamp!]
-  _is_null: Boolean
-  _lt: timestamp
-  _lte: timestamp
-  _neq: timestamp
-  _nin: [timestamp!]
 }
 
 scalar timestamptz
@@ -8762,6 +8304,7 @@ type users {
   ): notifications_aggregate!
   picture: String
   push_token: String
+  streak: Int!
 
   # A computed field, executes function "totalscore"
   totalScore: bigint
@@ -8812,22 +8355,48 @@ type users_aggregate {
 
 # aggregate fields of "users"
 type users_aggregate_fields {
+  avg: users_avg_fields
   count(columns: [users_select_column!], distinct: Boolean): Int
   max: users_max_fields
   min: users_min_fields
+  stddev: users_stddev_fields
+  stddev_pop: users_stddev_pop_fields
+  stddev_samp: users_stddev_samp_fields
+  sum: users_sum_fields
+  var_pop: users_var_pop_fields
+  var_samp: users_var_samp_fields
+  variance: users_variance_fields
 }
 
 # order by aggregate values of table "users"
 input users_aggregate_order_by {
+  avg: users_avg_order_by
   count: order_by
   max: users_max_order_by
   min: users_min_order_by
+  stddev: users_stddev_order_by
+  stddev_pop: users_stddev_pop_order_by
+  stddev_samp: users_stddev_samp_order_by
+  sum: users_sum_order_by
+  var_pop: users_var_pop_order_by
+  var_samp: users_var_samp_order_by
+  variance: users_variance_order_by
 }
 
 # input type for inserting array relation for remote table "users"
 input users_arr_rel_insert_input {
   data: [users_insert_input!]!
   on_conflict: users_on_conflict
+}
+
+# aggregate avg on columns
+type users_avg_fields {
+  streak: Float
+}
+
+# order by avg() on columns of table "users"
+input users_avg_order_by {
+  streak: order_by
 }
 
 # Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'.
@@ -8848,6 +8417,7 @@ input users_bool_exp {
   notifications: notifications_bool_exp
   picture: String_comparison_exp
   push_token: String_comparison_exp
+  streak: Int_comparison_exp
   updated_at: timestamptz_comparison_exp
   user_achievement: user_achievement_bool_exp
 }
@@ -8862,6 +8432,11 @@ enum users_constraint {
 
   # unique or primary key constraint
   Users_pkey
+}
+
+# input type for incrementing integer column in table "users"
+input users_inc_input {
+  streak: Int
 }
 
 # input type for inserting data into table "users"
@@ -8879,6 +8454,7 @@ input users_insert_input {
   notifications: notifications_arr_rel_insert_input
   picture: String
   push_token: String
+  streak: Int
   updated_at: timestamptz
   user_achievement: user_achievement_arr_rel_insert_input
 }
@@ -8892,6 +8468,7 @@ type users_max_fields {
   name: String
   picture: String
   push_token: String
+  streak: Int
   updated_at: timestamptz
 }
 
@@ -8904,6 +8481,7 @@ input users_max_order_by {
   name: order_by
   picture: order_by
   push_token: order_by
+  streak: order_by
   updated_at: order_by
 }
 
@@ -8916,6 +8494,7 @@ type users_min_fields {
   name: String
   picture: String
   push_token: String
+  streak: Int
   updated_at: timestamptz
 }
 
@@ -8928,6 +8507,7 @@ input users_min_order_by {
   name: order_by
   picture: order_by
   push_token: order_by
+  streak: order_by
   updated_at: order_by
 }
 
@@ -8968,6 +8548,7 @@ input users_order_by {
   notifications_aggregate: notifications_aggregate_order_by
   picture: order_by
   push_token: order_by
+  streak: order_by
   updated_at: order_by
   user_achievement_aggregate: user_achievement_aggregate_order_by
 }
@@ -9001,6 +8582,9 @@ enum users_select_column {
   push_token
 
   # column name
+  streak
+
+  # column name
   updated_at
 }
 
@@ -9013,7 +8597,48 @@ input users_set_input {
   name: String
   picture: String
   push_token: String
+  streak: Int
   updated_at: timestamptz
+}
+
+# aggregate stddev on columns
+type users_stddev_fields {
+  streak: Float
+}
+
+# order by stddev() on columns of table "users"
+input users_stddev_order_by {
+  streak: order_by
+}
+
+# aggregate stddev_pop on columns
+type users_stddev_pop_fields {
+  streak: Float
+}
+
+# order by stddev_pop() on columns of table "users"
+input users_stddev_pop_order_by {
+  streak: order_by
+}
+
+# aggregate stddev_samp on columns
+type users_stddev_samp_fields {
+  streak: Float
+}
+
+# order by stddev_samp() on columns of table "users"
+input users_stddev_samp_order_by {
+  streak: order_by
+}
+
+# aggregate sum on columns
+type users_sum_fields {
+  streak: Int
+}
+
+# order by sum() on columns of table "users"
+input users_sum_order_by {
+  streak: order_by
 }
 
 # update columns of table "users"
@@ -9040,6 +8665,39 @@ enum users_update_column {
   push_token
 
   # column name
+  streak
+
+  # column name
   updated_at
+}
+
+# aggregate var_pop on columns
+type users_var_pop_fields {
+  streak: Float
+}
+
+# order by var_pop() on columns of table "users"
+input users_var_pop_order_by {
+  streak: order_by
+}
+
+# aggregate var_samp on columns
+type users_var_samp_fields {
+  streak: Float
+}
+
+# order by var_samp() on columns of table "users"
+input users_var_samp_order_by {
+  streak: order_by
+}
+
+# aggregate variance on columns
+type users_variance_fields {
+  streak: Float
+}
+
+# order by variance() on columns of table "users"
+input users_variance_order_by {
+  streak: order_by
 }
 
