@@ -1,0 +1,9 @@
+query GetStreaks {
+  users {
+    id
+    streak
+    activities {
+      created_at
+    }
+  }
+}
