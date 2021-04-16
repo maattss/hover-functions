@@ -22,15 +22,17 @@ exports.validateStreak = functions.https.onRequest(async (req, res) => {
 
 function validateStreak(user_id: string, activities: BasicActivityFragmentFragment[], today: Date): number {
   let streak = 0;
-  let last_streak_day = today;
-  activities.forEach((activity) => {
-      console.log(moment(last_streak_day).diff(moment(activity.started_at), 'days'));
-    if (moment(last_streak_day).diff(moment(activity.started_at), 'days') === 0) {
-      streak++;
-      last_streak_day = new Date(activity.started_at);
-      last_streak_day.setHours(0, 0, 0, 0);
+  let last_streak_day = moment(today);
+
+  activities.find((activity) => {
+    if (last_streak_day.isSame(moment(activity.started_at).add(1, 'days'), 'day')) {
+      if (!moment(activity.started_at).isSame(last_streak_day, 'days')) {
+        streak++;
+        last_streak_day = moment(activity.started_at);
+      }
+    } else {
+      return;
     }
   });
-
   return streak;
 }
