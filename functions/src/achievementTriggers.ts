@@ -56,7 +56,10 @@ exports.achievementValidation = functions.https.onRequest(async (req, res) => {
     const { user_id } = data.old;
     const queryData = await client.GetUserAndExistingAchievements({ user_id });
     queryData.user?.user_achievement.forEach(async ({ achievement }: { achievement: AchievementFragmentFragment }) => {
-      if (!isValidAchievment(achievement, queryData.user as UserScoreFragmentFragment)) {
+      if (
+        !isValidAchievment(achievement, queryData.user as UserScoreFragmentFragment) &&
+        achievement.achievement_type !== 'STREAK'
+      ) {
         objects.push({ achievement, user_id });
         await deleteAchievment(achievement.id, user_id).catch(async (resp) => console.error(resp));
       }
@@ -151,6 +154,9 @@ function isValidAchievment(achievement: AchievementFragmentFragment, user: UserS
         }
       }
       break;
+    }
+    case 'STREAK': {
+      if (user.streak >= achievement.rule.streak_count) return true;
     }
   }
   return false;
