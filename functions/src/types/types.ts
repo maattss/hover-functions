@@ -7176,6 +7176,17 @@ export const GetLikeDetailsDocument = gql`
   }
 }
     `;
+export const GetStreaksDocument = gql`
+    query GetStreaks {
+  users {
+    id
+    streak
+    activities(order_by: {created_at: desc}) {
+      ...basicActivityFragment
+    }
+  }
+}
+    ${BasicActivityFragmentFragmentDoc}`;
 export const InsertAchievementsDocument = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -7274,6 +7285,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetLikeDetails(variables: GetLikeDetailsQueryVariables): Promise<GetLikeDetailsQuery> {
       return withWrapper(() => client.request<GetLikeDetailsQuery>(print(GetLikeDetailsDocument), variables));
+    },
+    GetStreaks(variables?: GetStreaksQueryVariables): Promise<GetStreaksQuery> {
+      return withWrapper(() => client.request<GetStreaksQuery>(print(GetStreaksDocument), variables));
     },
     InsertAchievements(variables: InsertAchievementsMutationVariables): Promise<InsertAchievementsMutation> {
       return withWrapper(() => client.request<InsertAchievementsMutation>(print(InsertAchievementsDocument), variables));
@@ -10954,6 +10968,17 @@ export const GetLikeDetails = gql`
   }
 }
     `;
+export const GetStreaks = gql`
+    query GetStreaks {
+  users {
+    id
+    streak
+    activities(order_by: {created_at: desc}) {
+      ...basicActivityFragment
+    }
+  }
+}
+    ${BasicActivityFragment}`;
 export const InsertAchievements = gql`
     mutation InsertAchievements($feed_achievements: [feed_insert_input!]!) {
   insert_feed(objects: $feed_achievements) {
@@ -11278,6 +11303,21 @@ export type GetLikeDetailsQuery = (
   )>, liked_by?: Maybe<(
     { __typename?: 'users' }
     & Pick<Users, 'id' | 'name'>
+  )> }
+);
+
+export type GetStreaksQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetStreaksQuery = (
+  { __typename?: 'query_root' }
+  & { users: Array<(
+    { __typename?: 'users' }
+    & Pick<Users, 'id' | 'streak'>
+    & { activities: Array<(
+      { __typename?: 'activities' }
+      & BasicActivityFragmentFragment
+    )> }
   )> }
 );
 
