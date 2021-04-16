@@ -30,6 +30,9 @@ function validateStreak(user_id: string, activities: BasicActivityFragmentFragme
         streak++;
         last_streak_day = moment(activity.started_at);
       }
+    } else if (moment(activity.started_at).isSame(moment(today), 'days')) {
+      streak++;
+      last_streak_day = moment(activity.started_at);
     } else {
       return;
     }
