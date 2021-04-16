@@ -7020,6 +7020,7 @@ export const AchievementFragmentFragmentDoc = gql`
 export const UserScoreFragmentFragmentDoc = gql`
     fragment userScoreFragment on users {
   id
+  streak
   totalScore
   activity_count: activities_aggregate {
     aggregate {
@@ -10791,6 +10792,7 @@ export const AchievementFragment = gql`
 export const UserScoreFragment = gql`
     fragment userScoreFragment on users {
   id
+  streak
   totalScore
   activity_count: activities_aggregate {
     aggregate {
@@ -11150,7 +11152,7 @@ export type AchievementFragmentFragment = (
 
 export type UserScoreFragmentFragment = (
   { __typename?: 'users' }
-  & Pick<Users, 'id' | 'totalScore'>
+  & Pick<Users, 'id' | 'streak' | 'totalScore'>
   & { activity_count: (
     { __typename?: 'activities_aggregate' }
     & { aggregate?: Maybe<(

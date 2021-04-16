@@ -61,6 +61,7 @@ fragment achievementFragment on achievement {
 
 fragment userScoreFragment on users {
   id
+  streak
   totalScore
   activity_count: activities_aggregate {
     aggregate {
