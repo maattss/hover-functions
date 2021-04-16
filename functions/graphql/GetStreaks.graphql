@@ -1,0 +1,9 @@
+query GetStreaks {
+  users {
+    id
+    streak
+    activities(order_by: { created_at: desc }) {
+      ...basicActivityFragment
+    }
+  }
+}

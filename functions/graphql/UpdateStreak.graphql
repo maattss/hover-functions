@@ -1,0 +1,5 @@
+mutation UpdateStreak($id: String!, $streak: Int!) {
+  update_user(pk_columns: { id: $id }, _set: { streak: $streak }) {
+    streak
+  }
+}

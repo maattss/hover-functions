@@ -68,3 +68,4 @@ exports.achievementTriggers = require('./achievementTriggers');
 exports.challengeTriggers = require('./challengeTriggers');
 exports.likeTrigger = require('./likeTriggers');
 exports.notificationTestTrigger = require('./notifyUser');
+exports.streakValidationTrigger = require('./streakValidationTriggers');
